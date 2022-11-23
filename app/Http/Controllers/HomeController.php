@@ -31,6 +31,7 @@ class HomeController extends Controller
         } elseif (Auth::user()->role_id == 1) {
             return view('pages.dashboard.dashboarddosen');
         } else {
+            // return Auth::user();
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }

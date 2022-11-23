@@ -83,7 +83,7 @@
 
                             <div class="col-lg-3">
                                 <label for="form-control">Semester saat ini</label>
-                                <input type="text" class="form-control" name="semester_awal" value="{{$mahasiswa['semester_awal']}}">
+                                <input type="number" class="form-control" min="0" max="100" name="semester_awal" value="{{$mahasiswa['semester_awal']}}">
                                 @if($errors->has('semester_awal'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('semester_awal') }}
