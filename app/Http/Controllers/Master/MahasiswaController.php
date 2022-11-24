@@ -226,6 +226,7 @@ class MahasiswaController extends Controller
                                 'semester_awal' => $val[5],
                                 'status_mahasiswa' => $val[6],
                                 'status' => 0,
+                                'semester_berjalan' => $val[8]
                             ]);
                         } else {
                             MahasiswaModel::create([
@@ -237,6 +238,7 @@ class MahasiswaController extends Controller
                                 'semester_awal' => $val[5],
                                 'status_mahasiswa' => $val[6],
                                 'status' => 0,
+                                'semester_berjalan' => $val[8]
                             ]);
                         }
                     } else if ($val[7] == 'AKTIF') {
@@ -250,6 +252,7 @@ class MahasiswaController extends Controller
                                 'semester_awal' => $val[5],
                                 'status_mahasiswa' => $val[6],
                                 'status' => 1,
+                                'semester_berjalan' => $val[8]
                             ]);
                         } else {
                             MahasiswaModel::create([
@@ -261,6 +264,7 @@ class MahasiswaController extends Controller
                                 'semester_awal' => $val[5],
                                 'status_mahasiswa' => $val[6],
                                 'status' => 1,
+                                'semester_berjalan' => $val[8]
                             ]);
                         }
                     } else {
@@ -274,6 +278,7 @@ class MahasiswaController extends Controller
                                 'semester_awal' => $val[5],
                                 'status_mahasiswa' => $val[6],
                                 'status' => 2,
+                                'semester_berjalan' => $val[8]
                             ]);
                         } else {
                             MahasiswaModel::create([
@@ -285,6 +290,7 @@ class MahasiswaController extends Controller
                                 'semester_awal' => $val[5],
                                 'status_mahasiswa' => $val[6],
                                 'status' => 2,
+                                'semester_berjalan' => $val[8]
                             ]);
                         }
                     }

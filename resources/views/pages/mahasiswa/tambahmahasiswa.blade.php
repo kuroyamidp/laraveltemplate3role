@@ -72,8 +72,8 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <label for="form-control">Semester saat ini</label>
-                                <input type="number" min="0" max="100" class="form-control" name="semester_awal">
+                                <label for="form-control">Semester awal</label>
+                                <input type="text" class="form-control" name="semester_awal">
                                 @if($errors->has('semester_awal'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('semester_awal') }}
