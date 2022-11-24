@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <label for="form-control">Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="form-control">
                                     <option value="">Pilih salah satu</option>
@@ -81,12 +81,21 @@
                                 @endif
                             </div>
 
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 <label for="form-control">Semester awal</label>
                                 <input type="text" class="form-control" name="semester_awal" value="{{$mahasiswa['semester_awal']}}">
                                 @if($errors->has('semester_awal'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('semester_awal') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-2">
+                                <label for="form-control">Semester saat ini</label>
+                                <input type="number" min="0" max="20" class="form-control" name="semester_berjalan" value="{{$mahasiswa['semester_berjalan']}}">
+                                @if($errors->has('semester_berjalan'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('semester_berjalan') }}
                                 </div>
                                 @endif
                             </div>

@@ -55,6 +55,7 @@ class MahasiswaController extends Controller
                     'semester_awal' => 'required',
                     'status_awal' => 'required',
                     'status' => 'required',
+                    'semester_berjalan' => 'required|min:1|max:20',
                     'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
                 ]);
 
@@ -77,6 +78,7 @@ class MahasiswaController extends Controller
                     'status_mahasiswa' => $request->status_awal,
                     'status' => $request->status,
                     'image' => $filename,
+                    'semester_berjalan' => $request->semester_berjalan,
                 ]);
                 return redirect('/mahasiswa')->with('success', 'Berhasil edit data');
             } else {
@@ -89,6 +91,7 @@ class MahasiswaController extends Controller
                     'semester_awal' => 'required',
                     'status_awal' => 'required',
                     'status' => 'required',
+                    'semester_berjalan' => 'required|min:1|max:20',
                 ]);
                 if ($validator->fails()) {
                     return Redirect::back()->withErrors($validator);
@@ -103,6 +106,7 @@ class MahasiswaController extends Controller
                     'semester_awal' => $request->semester_awal,
                     'status_mahasiswa' => $request->status_awal,
                     'status' => $request->status,
+                    'semester_berjalan' => $request->semester_berjalan,
                 ]);
                 return redirect('/mahasiswa')->with('success', 'Berhasil edit data');
             }
@@ -117,6 +121,7 @@ class MahasiswaController extends Controller
                 'status_awal' => 'required',
                 'status' => 'required',
                 'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'semester_berjalan' => 'required|min:1|max:20',
             ]);
 
             // response error validation
@@ -140,6 +145,7 @@ class MahasiswaController extends Controller
                     'status_mahasiswa' => $request->status_awal,
                     'status' => $request->status,
                     'image' => $filename,
+                    'semester_berjalan' => $request->semester_berjalan,
                 ]);
                 return redirect('/mahasiswa')->with('success', 'Berhasil tambah data');
             } else {
@@ -153,6 +159,7 @@ class MahasiswaController extends Controller
                     'semester_awal' => $request->semester_awal,
                     'status_mahasiswa' => $request->status_awal,
                     'status' => $request->status,
+                    'semester_berjalan' => $request->semester_berjalan,
                 ]);
                 return redirect('/mahasiswa')->with('success', 'Berhasil tambah data');
             }

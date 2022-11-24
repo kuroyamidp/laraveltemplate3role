@@ -29,8 +29,12 @@
 
                         <div class="">
                             <ul class="contacts-block list-unstyled">
-                                <li class="contacts-block__item">Semester saat ini {{Auth::user()->mahasiswa['semester_awal']}}</li>
-                                <li class="contacts-block__item">{{Auth::user()->mahasiswa['perguruan_tinggi']}}</li>
+                                @if( Auth::user()->mahasiswa['progdi'] != null)
+                                <li class="contacts-block__item">{{Auth::user()->mahasiswa['progdi']}}</li>
+                                @else
+                                <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
+                                @endif
+                                <li class="contacts-block__item">Semester {{Auth::user()->mahasiswa['semester_berjalan']}}</li>
                                 @if(Auth::user()->mahasiswa['status'] == 0)
                                 <li class="contacts-block__item"><span class="badge badge-danger">Mahasiswa non aktif</span></li>
                                 @elseif(Auth::user()->mahasiswa['status'] == 1)
