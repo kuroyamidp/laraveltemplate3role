@@ -21,6 +21,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 <link href="{{asset('admin/assets/css/users/user-profile.css')}}" rel="stylesheet" type="text/css" />
 
+<script src="{{asset('admin/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
 
 <style>
     .layout-px-spacing {
