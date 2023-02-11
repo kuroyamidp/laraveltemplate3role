@@ -9,6 +9,7 @@ use App\Http\Controllers\Master\ProgdiController;
 use App\Http\Controllers\Master\RuangkelasController;
 use App\Http\Controllers\Master\UserMahasiswaController;
 use App\Http\Controllers\Public\KrsController;
+use App\Http\Controllers\Public\ProfilemhsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,6 +32,7 @@ Route::post('/importkelas', [RuangkelasController::class, 'importkelas'])->name(
 Route::get('/getkelas', [DaftarkelasController::class, 'getkelas'])->name('getkelas')->middleware(['auth', 'is_admin']);
 
 Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa']);
+Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 
 
 
