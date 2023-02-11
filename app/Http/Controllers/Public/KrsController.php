@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\JadwalkelasModel;
+use App\Models\Master\KrsModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class KrsController extends Controller
 {
@@ -15,7 +19,12 @@ class KrsController extends Controller
      */
     public function index()
     {
-        return view('pages.krs.krs');
+		$data['krs'] = KrsModel::where('mahasiswa_id',Auth::user()->mahasiswa->id)->orderBy('semester','desc')->get();
+		foreach ($data['krs'] as $k => $v) {
+			$jid = json_decode($v->jadwal_id);
+			$v->jadwal = JadwalkelasModel::whereIn('id',$jid)->get();
+		}
+        return view('pages.krs.krs',$data);
     }
 
     /**
@@ -25,12 +34,21 @@ class KrsController extends Controller
      */
     public function create()
     {
-        $jdw = JadwalkelasModel::get();
+		$mhs = Auth::user()->mahasiswa;
+		$smt_gangen = $mhs->semester_berjalan%2;
+		$krs = KrsModel::where('mahasiswa_id',Auth::user()->mahasiswa->id)->get();
+		$hstJdw = [];
+		foreach ($krs as $k => $v) {
+			$jdw = json_decode($v->jadwal_id);
+			$hstJdw = array_merge($hstJdw,$jdw);
+		}
+        $jdw = JadwalkelasModel::whereRaw('semester%2<>'.$smt_gangen)->whereNotIn('id',$hstJdw)->get();
         $check = [];
         foreach ($jdw as $key => $value) {
-            $check[$value->hari][] = $value;
+			if ($value->matkul->progdi_id == Auth::user()->mahasiswa->progdi_id || !Auth::user()->mahasiswa->progdi_id) {
+				$check[$value->hari][] = $value;
+			}
         }
-        // return $check;
         $data['jdw'] = $check;
         return view('pages.krs.tambahkrs', $data);
     }
@@ -43,7 +61,21 @@ class KrsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+		$validator = Validator::make($request->all(), [
+			'jadwal_id' => 'required',
+			'hdn_semester' => 'required',
+		]);
+
+		KrsModel::UpdateOrCreate([
+			'semester'=>$request->hdn_semester,
+			'mahasiswa_id'=>Auth::user()->mahasiswa->id,
+		],[
+			'uid'=>Str::orderedUuid(),
+			'semester'=>$request->hdn_semester,
+			'mahasiswa_id'=>Auth::user()->mahasiswa->id,
+			'jadwal_id'=>json_encode($request->jadwal_id),
+		]);
+		return redirect('/krs');
     }
 
     /**

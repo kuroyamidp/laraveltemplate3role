@@ -24,6 +24,7 @@
 <link href="{{asset('admin/assets/css/users/account-setting.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="{{asset('admin/plugins/dropify/dropify.min.css')}}">
 
+<script src="{{asset('admin/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
 
 <style>
     .layout-px-spacing {
