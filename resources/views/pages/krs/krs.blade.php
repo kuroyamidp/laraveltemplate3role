@@ -9,11 +9,12 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+					<a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Kirim</a>
                 </div>
                 <div class="card-body">
 					<table class="table table-bordered">
 						<thead>
-							<tr>
+							<tr style="text-align: center;">
 								<th>Semester</th>
 								<th>Jumlah Makul</th>
 								<th>Aksi</th>
@@ -21,14 +22,21 @@
 						</thead>
 						<tbody>
 							@foreach ($krs as $v)
-							<tr>
+							<tr style="text-align: center;">
 								<td>{{$v->semester}}</td>
 								<td>{{count(json_decode($v->jadwal_id))}}</td>
 								<td>
-									<button type="button" onclick="openClassListModal('{{json_encode($v->jadwal)}}')" class="btn btn-info"><i class="bx bx-list-ol"></i></button>
-									@if (Auth::user()->mahasiswa->semester_berjalan < $v->semester)
-										<button type="button" class="btn btn-warning"><i class="bx bx-edit"></i></button>
-										<button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button>
+										<form action="{{ route('krs.destroy', $v->uid) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
+												<button type="button" onclick="openClassListModal('{{json_encode($v->jadwal)}}')" class="btn btn-info"><i class="bx bx-list-ol"></i></button>
+												@if (Auth::user()->mahasiswa->semester_berjalan < $v->semester)
+												<a href="{{ route('krs.show', $v->uid) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
+                                            </form>
+										
+											
+										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
 									@endif	
 								</td>
 							</tr>

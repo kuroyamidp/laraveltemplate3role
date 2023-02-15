@@ -31,7 +31,7 @@ class HomeController extends Controller
         } elseif (Auth::user()->role_id == 1) {
             return view('pages.dashboard.dashboarddosen');
         } else {
-            // return Auth::user();
+            //  return Auth::user()->mahasiswa['semester_berjalan'];
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }
