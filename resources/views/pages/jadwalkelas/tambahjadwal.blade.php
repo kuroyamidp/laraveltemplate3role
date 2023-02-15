@@ -16,7 +16,7 @@
                         <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Periode</label>
-                                <input type="month" name="periode" class="form-control">
+                                <input type="month" name="periode" class="form-control" placeholder="dd-mm-yyyy" >
                                 @if($errors->has('periode'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('periode') }}
@@ -75,6 +75,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
+                                
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
                             </div>
                         </div>

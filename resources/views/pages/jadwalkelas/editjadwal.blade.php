@@ -17,7 +17,7 @@
                         <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Periode</label>
-                                <input type="month" name="periode" class="form-control" value="{{ \Carbon\Carbon::parse($jdwl['periode'])->format('Y-m') }}">
+                                <input type="month" name="periode" class="form-control" value="{{ \Carbon\Carbon::parse($jdwl['periode'])->format('d-m-Y') }}">
                                 @if($errors->has('periode'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('periode') }}
