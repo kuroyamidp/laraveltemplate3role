@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\DaftarkelasController;
 use App\Http\Controllers\Master\DosenController;
 use App\Http\Controllers\Master\JadwalkelasController;
@@ -34,6 +35,7 @@ Route::post('/importkelas', [RuangkelasController::class, 'importkelas'])->name(
 Route::get('/getkelas', [DaftarkelasController::class, 'getkelas'])->name('getkelas')->middleware(['auth', 'is_admin']);
 
 Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa']);
+Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 
 

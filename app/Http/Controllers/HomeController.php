@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Master\KrsModel;
+use App\Models\Master\MahasiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +29,13 @@ class HomeController extends Controller
         // return view('home');
 
         if (Auth::user()->role_id == 0) {
-            return view('pages.dashboard.dashboardadmin');
+            // $data['krs'] = KrsModel::with('mahasiswa')->get();
+            $data['krs'] = KrsModel::all();
+            $data['mhs'] = MahasiswaModel::all();
+            $data['krs'] = KrsModel::join('mahasiswa', 'krs.mahasiswa_id', '=', 'mahasiswa.id')
+            ->select('krs.*', 'mahasiswa.nama')
+            ->get();
+            return view('pages.dashboard.dashboardadmin', $data);
         } elseif (Auth::user()->role_id == 1) {
             return view('pages.dashboard.dashboarddosen');
         } else {
@@ -35,4 +43,11 @@ class HomeController extends Controller
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }
+    public function destroy($id)
+    {
+        KrsModel::where('uid', $id)->delete();
+        return redirect('/krs');
+    }
+
 }
+

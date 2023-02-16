@@ -75,18 +75,27 @@
             </tr>
           </thead>
           <tbody>
-           
-              <tr>
-            <td></td>
-            <td></td>
-            <td style="text-align: center;">
-              <form action="" method="post">
-                <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
-                <button type="button" onclick="openClassListModal" class="btn btn-info"><i class="bx bx-list-ol"></i></button>
-                <a href="" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
-              </form>
+            @foreach($krs as $key => $value)
+            <tr>
+
+              <td>{{$value->mahasiswa_id}}</td>
+              <td>{{$value->jadwal_id}}</td>
+              <td style="text-align: center;">
+                <form action="{{ route('home.destroy', $value->uid) }}" method="post">
+                  @method('DELETE')
+                  @csrf
+                  <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
+
+                  <a href="" class="btn btn-primary" data-toggle="tooltip" title='Update'><i class="bx bx-envelope"></i></a>
+                </form>
+
+
+                <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
+
+            </tr>
+            @endforeach
           </tbody>
-     
+
         </table>
 
       </div>

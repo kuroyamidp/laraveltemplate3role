@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
+use App\Models\Master\MahasiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use PDF;
+use Illuminate\Support\PDF;
 
 class KrsController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -123,9 +126,9 @@ class KrsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+         
     }
 
     /**
@@ -163,4 +166,11 @@ class KrsController extends Controller
         KrsModel::where('uid', $id)->delete();
         return redirect('/krs');
     }
+
+    public function mahasiswa()
+{
+    return $this->belongsTo(MahasiswaModel::class, 'mahasiswa_id', 'uid');
+}
+
+
 }
