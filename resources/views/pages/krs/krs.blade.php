@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Tambah</a>
-					<a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Kirim</a>
+					<a href="/cetakkrs" class="btn btn-primary btn-sm">Print</a>
                 </div>
                 <div class="card-body">
 					<table class="table table-bordered">

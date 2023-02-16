@@ -36,7 +36,8 @@ Route::get('/getkelas', [DaftarkelasController::class, 'getkelas'])->name('getke
 Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 
-
+//cetak krs
+Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();

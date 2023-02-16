@@ -116,6 +116,83 @@
 						</div>
 					</a>
 				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle">
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16">
+								<path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+							  </svg>
+							</svg>
+							<span>Jadwal Kuliah</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle">
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+								<path fill="none" d="M0 0h24v24H0z"/>
+								<path d="M17 4h-2V2h-3v2H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zM8 18v-2h8v2H8zm0-4v-2h8v2H8zm0-4V8h8v2H8zm6-8v2h-4V2h4z"/>
+							</svg>
+							<span>Jadwal Ujian</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle">
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+								<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+								<polyline points="9 22 9 12 15 12 15 22"></polyline>
+							</svg>
+							<span>Daftar Wisuda</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle">
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+								<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+								<polyline points="9 22 9 12 15 12 15 22"></polyline>
+							</svg>
+							<span>Cetak Daftar Wisuda</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle">
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+								<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+								<polyline points="9 22 9 12 15 12 15 22"></polyline>
+							</svg>
+							<span>KHS</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle">
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+								<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+								<polyline points="9 22 9 12 15 12 15 22"></polyline>
+							</svg>
+							<span>Daftar Sidang</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu">
+					<a href="" aria-expanded="false" class="dropdown-toggle" >
+						<div class="">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+								<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+								<polyline points="9 22 9 12 15 12 15 22"></polyline>
+							</svg>
+							<span>Transkip Nilai</span>
+						</div>
+					</a>
+				</li>
 				@endIsMahasiswa
 			</ul>
 		</nav>

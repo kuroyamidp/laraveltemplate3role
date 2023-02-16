@@ -27,6 +27,15 @@ class KrsController extends Controller
 		}
         return view('pages.krs.krs',$data);
     }
+    
+    public function cetakkrs()
+    {
+        $data = KrsModel::all();
+
+        view()->share('data', $data);
+        $pdf= PDF::loadview('pages.krs.cetakkrs-pdf');
+        return $pdf->download('krs.pdf');
+    }
 
     /**
      * Show the form for creating a new resource.
