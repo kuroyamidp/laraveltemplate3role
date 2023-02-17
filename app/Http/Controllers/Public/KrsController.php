@@ -5,17 +5,14 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
-use App\Models\Master\MahasiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Support\PDF;
+use PDF;
 
 class KrsController extends Controller
 {
-
-    
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +26,15 @@ class KrsController extends Controller
 			$v->jadwal = JadwalkelasModel::whereIn('id',$jid)->get();
 		}
         return view('pages.krs.krs',$data);
+    }
+    
+    public function cetakkrs()
+    {
+        $data = KrsModel::all();
+
+        view()->share('data', $data);
+        $pdf= PDF::loadview('pages.krs.cetakkrs-pdf');
+        return $pdf->download('krs.pdf');
     }
 
     /**
@@ -126,12 +132,14 @@ class KrsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-         
+        //
     }
 
     /**
+     * 
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -166,11 +174,4 @@ class KrsController extends Controller
         KrsModel::where('uid', $id)->delete();
         return redirect('/krs');
     }
-
-    public function mahasiswa()
-{
-    return $this->belongsTo(MahasiswaModel::class, 'mahasiswa_id', 'uid');
-}
-
-
 }

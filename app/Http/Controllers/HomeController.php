@@ -43,10 +43,30 @@ class HomeController extends Controller
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }
+
+public function updateHome(Request $request, $id) {
+        // Validasi input dari form
+        $request->validate([
+            'jadwal_id' =>'required',
+            'kode_mk' => 'required',
+        ]);
+    
+        // Ambil data KRS yang ingin diubah
+        $krs = KrsModel::find($id);
+    
+        // Update data KRS
+        $krs->mata_kuliah = $request->input('jadwal_id');
+        $krs->save();
+    
+        // Redirect ke halaman KRS
+        return redirect('/krs');
+    }
     public function destroy($id)
     {
-        KrsModel::where('uid', $id)->delete();
-        return redirect('/krs');
+        $krs = KrsModel::find($id);
+        $krs->delete();
+        return redirect('/dashboard');
+
     }
 
 }

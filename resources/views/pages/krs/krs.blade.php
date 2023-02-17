@@ -9,7 +9,8 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Tambah</a>
-					<a href="{{route('krs.create')}}" class="btn btn-secondary btn-sm">Print</a>
+					<a href="/cetakkrs" class="btn btn-success btn-sm print-button" disabled>Print</a>
+
                 </div>
                 <div class="card-body">
 					<table class="table table-bordered">
@@ -30,14 +31,13 @@
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
-												<!-- <button type="button" onclick="openClassListModal('{{json_encode($v->jadwal)}}')" class="btn btn-info"><i class="bx bx-list-ol"></i></button>
-												@if (Auth::user()->mahasiswa->semester_berjalan < $v->semester) -->
+												
 												<a href="{{ route('krs.show', $v->uid) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
                                             </form>
 										
 											
 										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
-									@endif	
+								
 								</td>
 							</tr>
 							@endforeach
@@ -47,10 +47,26 @@
             </div>
         </div>
     </div>
-	<script>
+
+<script>
+    const printButton = document.querySelector('.print-button');
+    if (printButton.disabled) {
+        printButton.remove();
+    }
+</script>
+
+	<!-- <script>
+		const printButton = document.querySelector('.print-button');
+		const updateButtonClicked = sessionStorage.getItem('updateButtonClicked');
+		if (updateButtonClicked) {
+			printButton.disabled = true;
+		}
 		function openClassListModal(jadJsn) {
 			console.log(JSON.parse(jadJsn))
 		}
-	</script>
+		
+	
+
+	</script> -->
 </div>
 @endsection
