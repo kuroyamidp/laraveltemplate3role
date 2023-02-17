@@ -69,27 +69,38 @@
               <th colspan="4" class="text-center text-uppercase"></th>
             </tr>
             <tr>
-              <th>Nama Mahasiswa</th>
+              <th>Id Mahasiswa</th>
               <th>Jumlah Matkul</th>
               <th style="text-align: center;">Action</th>
             </tr>
           </thead>
           <tbody>
-           
-              <tr>
-            <td></td>
-            <td></td>
-            <td style="text-align: center;">
-              <form action="" method="post">
-                <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
-                <button type="button" onclick="openClassListModal" class="btn btn-info"><i class="bx bx-list-ol"></i></button>
-                <a href="" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
-              </form>
+            @foreach($krs as $key => $value)
+            <tr>
+
+              <td>{{$value->mahasiswa_id}}</td>
+              <td>{{$value->jadwal_id}}</td>
+              <td style="text-align: center;">
+
+                  <a href="" class="btn btn-primary" data-toggle="tooltip" title='Update'><i class="bx bx-envelope"></i></a>
+                </form>
+
+
+                <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
+
+            </tr>
+            @endforeach
           </tbody>
-     
+
         </table>
 
       </div>
+      <script>
+    const updateButton = document.querySelector('.update-button');
+    updateButton.addEventListener('click', function() {
+        sessionStorage.setItem('updateButtonClicked', 'true');
+    });
+</script>
     </div>
     <br>
     @endsection

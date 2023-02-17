@@ -39,5 +39,11 @@ Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
+//lihat krs
+Route::get('/lihatkrs', [KrsController::class, 'lihatkrs'])->name('lihatkrs')->middleware(['auth','is_mahasiswa']);
+
+//lihat seluruh matkul
+Route::resource('lihatmatkul', MatakuliahController::class)->middleware(['auth', 'is_mahasiswa']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();
