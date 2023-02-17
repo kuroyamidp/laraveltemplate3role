@@ -9,8 +9,12 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+<<<<<<< HEAD
 					<a href="/cetakkrs" class="btn btn-success btn-sm print-button" disabled>Print</a>
 
+=======
+					<a href="/cetakkrs" class="btn btn-primary btn-sm">Print</a>
+>>>>>>> b03faadea5fddbc769f203810dacd18f289acec7
                 </div>
                 <div class="card-body">
 					<table class="table table-bordered">

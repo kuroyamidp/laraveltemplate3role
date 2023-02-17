@@ -38,7 +38,10 @@ Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa'
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b03faadea5fddbc769f203810dacd18f289acec7
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
