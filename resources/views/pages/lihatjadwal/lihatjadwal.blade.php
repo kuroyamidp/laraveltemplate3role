@@ -8,11 +8,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('matakuliah.create')}}" class="btn btn-primary btn-sm">Tambah</a>
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
-                        Import
-                    </button>
+
+             
 
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -61,36 +59,26 @@
                                         <th>No</th>
                                         <th>Mata kuliah</th>
                                         <th>Rincian mata kuliah</th>
-                                        <th>Aksi</th>
+                                
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($matkul as $key => $value)
-                                    <tr>
-                                        <td width="1%">{{$key + 1}}</td>
-                                        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
-                                        <td>
-                                            <li>SKS : {{$value->sks}}</li>
-                                            <li>Mutu : {{$value->mutu}}</li>
-                                            <li>Bobot :{{$value->bobot}} </li>
+                               <tbody>
+        @foreach($matkul as $key => $value)
+      
+                <tr style="text-align: center;">
+                    <td width="1%">{{$key + 1}}</td>
+                    <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
+                    <td>
+                        <li>SKS : {{$value->sks}}</li>
+                        <li>Mutu : {{$value->mutu}}</li>
+                        <li>Bobot :{{$value->bobot}} </li>
+                       
+                    </td>
+                </tr>
+               
+        @endforeach
+    </tbody>
 
-                                        </td>
-                                        <td class="text-center" style="display: flex; justify-content: center;">
-
-                                            <a href="{{ route('matakuliah.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
-
-
-
-                                            <form action="{{ route('matakuliah.destroy', $value->uid) }}" method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash bx-sm"></i></button>
-                                            </form>
-
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>

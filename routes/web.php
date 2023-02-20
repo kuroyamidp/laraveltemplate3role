@@ -4,10 +4,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Master\DaftarkelasController;
 use App\Http\Controllers\Master\DosenController;
 use App\Http\Controllers\Master\JadwalkelasController;
+use App\Http\Controllers\Master\LihatJadwalController;
 use App\Http\Controllers\Master\MahasiswaController;
 use App\Http\Controllers\Master\MatakuliahController;
 use App\Http\Controllers\Master\ProgdiController;
 use App\Http\Controllers\Master\RuangkelasController;
+use App\Http\Controllers\Master\SemesterIniController;
 use App\Http\Controllers\Master\UserMahasiswaController;
 use App\Http\Controllers\Public\KrsController;
 use App\Http\Controllers\Public\ProfilemhsController;
@@ -19,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::resource('matakuliah', MatakuliahController::class)->middleware(['auth', 'is_admin']);
-Route::resource('matakuliah', MatakuliahController::class)->middleware(['auth', 'is_mahasiswa']);
+
 Route::resource('ruangkelas', RuangkelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('progdi', ProgdiController::class)->middleware(['auth', 'is_admin']);
 Route::resource('dosen', DosenController::class)->middleware(['auth', 'is_admin']);
@@ -37,7 +39,8 @@ Route::get('/getkelas', [DaftarkelasController::class, 'getkelas'])->name('getke
 Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
-
+Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
+Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 

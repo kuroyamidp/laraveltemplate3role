@@ -9,12 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('krs.create')}}" class="btn btn-primary btn-sm">Tambah</a>
-<<<<<<< HEAD
-					<a href="/cetakkrs" class="btn btn-success btn-sm print-button" disabled>Print</a>
-
-=======
-					<a href="/cetakkrs" class="btn btn-primary btn-sm">Print</a>
->>>>>>> b03faadea5fddbc769f203810dacd18f289acec7
+					<a href="/cetakkrs" class="btn btn-success btn-sm" disabled>Print</a>
                 </div>
                 <div class="card-body">
 					<table class="table table-bordered">
@@ -51,26 +46,10 @@
             </div>
         </div>
     </div>
-
-<script>
-    const printButton = document.querySelector('.print-button');
-    if (printButton.disabled) {
-        printButton.remove();
-    }
-</script>
-
-	<!-- <script>
-		const printButton = document.querySelector('.print-button');
-		const updateButtonClicked = sessionStorage.getItem('updateButtonClicked');
-		if (updateButtonClicked) {
-			printButton.disabled = true;
-		}
+	<script>
 		function openClassListModal(jadJsn) {
 			console.log(JSON.parse(jadJsn))
 		}
-		
-	
-
-	</script> -->
+	</script>
 </div>
 @endsection
