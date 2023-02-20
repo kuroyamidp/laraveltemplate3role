@@ -29,15 +29,14 @@
 										<form action="{{ route('krs.destroy', $v->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
-												<button type="button" onclick="openClassListModal('{{json_encode($v->jadwal)}}')" class="btn btn-info"><i class="bx bx-list-ol"></i></button>
+                                                <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>	
 												@if (Auth::user()->mahasiswa->semester_berjalan < $v->semester)
 												<a href="{{ route('krs.show', $v->uid) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
                                             </form>
 										
 											
 										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
-									@endif	
+									@endif
 								</td>
 							</tr>
 							@endforeach
