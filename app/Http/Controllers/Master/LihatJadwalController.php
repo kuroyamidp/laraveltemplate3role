@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+<<<<<<< HEAD
 use PDF;
+=======
+>>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 
 class LihatJadwalController extends Controller
 {
@@ -25,6 +28,7 @@ class LihatJadwalController extends Controller
         $data['matkul'] = MatakuliahModel::get();
         return view('pages.lihatjadwal.lihatjadwal', $data);
     }
+<<<<<<< HEAD
     public function cetaklihatjadwal()
     {
         $data = MatakuliahModel::all();
@@ -33,6 +37,8 @@ class LihatJadwalController extends Controller
         $pdf= PDF::loadview('pages.lihatjadwal.cetakjadwal');
         return $pdf->download('Seluruh Mata Kuliah.pdf');
     }
+=======
+>>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 
     /**
      * Show the form for creating a new resource.

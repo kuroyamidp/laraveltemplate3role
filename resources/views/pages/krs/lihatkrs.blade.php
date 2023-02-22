@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('krs.store') }}">
+<form method="POST" action="{{ route('krs.create') }}">
   @csrf
   <table>
       <thead>

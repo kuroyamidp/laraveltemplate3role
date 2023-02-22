@@ -24,7 +24,6 @@
                                             <li>SKS : {{$value->sks}}</li>
                                             <li>Mutu : {{$value->mutu}}</li>
                                             <li>Bobot :{{$value->bobot}} </li>
-
                                         </td>
                                     </tr>
                                     @endforeach

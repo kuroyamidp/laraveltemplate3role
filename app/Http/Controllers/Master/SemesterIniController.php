@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+<<<<<<< HEAD
 use PDF;
+=======
+>>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 
 class SemesterIniController extends Controller
 {
@@ -42,6 +45,7 @@ class SemesterIniController extends Controller
         $data['jdw'] = $check;
         return view('pages.semesterini.semesterini', $data);
     }
+<<<<<<< HEAD
     public function cetakjadwalsemester()
     {
         $data = JadwalkelasModel::all();
@@ -50,6 +54,8 @@ class SemesterIniController extends Controller
         $pdf= PDF::loadview('pages.semesterini.cektaksemesterini');
         return $pdf->download('Seluruh Mata Kuliah Semester Ini.pdf');
     }
+=======
+>>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 
     /**
      * Show the form for creating a new resource.

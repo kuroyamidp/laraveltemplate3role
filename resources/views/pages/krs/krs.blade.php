@@ -29,14 +29,23 @@
 										<form action="{{ route('krs.destroy', $v->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
+<<<<<<< HEAD
                                                 <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
 												
+=======
+                                                <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>	
+												@if (Auth::user()->mahasiswa->semester_berjalan < $v->semester)
+>>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 												<a href="{{ route('krs.show', $v->uid) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
                                             </form>
 										
 											
 										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
+<<<<<<< HEAD
 								
+=======
+									@endif
+>>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 								</td>
 							</tr>
 							@endforeach
