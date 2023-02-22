@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AccKrsController;
 use App\Http\Controllers\Master\DaftarkelasController;
 use App\Http\Controllers\Master\DosenController;
 use App\Http\Controllers\Master\JadwalkelasController;
@@ -42,8 +43,14 @@ Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
+
+//aprove krs admin
+Route::resource('acckrs', AccKrsController::class)->middleware(['auth', 'is_admin']);
+
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
+//cetak semua jadwal
+Route::get('/cetakjadwal', [LihatJadwalController::class, 'cetakjadwal'])->name('cetakjadwal')->middleware(['auth','is_mahasiswa']);
 
 //daftar sidang mahasiswa   
 Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['auth', 'is_mahasiswa']);

@@ -24,7 +24,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-
+                    <a href="" class="btn btn-success btn-sm">Print</a>
                     <div class="row">
                         <div class="col-lg-12">
                             <table class="table table-bordered" id="default-ordering">

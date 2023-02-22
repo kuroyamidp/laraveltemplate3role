@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class LihatJadwalController extends Controller
 {
@@ -157,5 +158,13 @@ class LihatJadwalController extends Controller
             }
         }
         return redirect('/matakuliah')->with('success', 'Berhasil upload data mata kuliah');
+    }
+    public function cetakjadwal()
+    {
+        $data = MatakuliahModel::all();
+
+        view()->share('data', $data);
+        $pdf= PDF::loadview('pages.lihatjadwal.cetakjadwal');
+        return $pdf->download('jadwalkeseluruhan.pdf');
     }
 }
