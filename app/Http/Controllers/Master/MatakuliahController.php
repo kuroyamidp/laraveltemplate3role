@@ -25,6 +25,17 @@ class MatakuliahController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lihatmatkul()
+    {
+        $data['lihatmatkul'] = MatakuliahModel::get();
+        return view('pages.matakuliah.lihatmatkul', $data);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

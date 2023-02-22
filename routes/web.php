@@ -52,5 +52,11 @@ Route::get('/cetakdaftarsidang', [DaftarsidangController::class, 'cetakdaftarsid
 Route::get('/cetaklihatjadwal', [LihatJadwalController::class, 'cetaklihatjadwal'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakjadwalsemester', [SemesterIniController::class, 'cetakjadwalsemester'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
+//lihat krs
+Route::get('/lihatkrs', [KrsController::class, 'lihatkrs'])->name('lihatkrs')->middleware(['auth','is_mahasiswa']);
+
+//lihat seluruh matkul
+Route::resource('lihatmatkul', MatakuliahController::class)->middleware(['auth', 'is_mahasiswa']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();

@@ -36,7 +36,7 @@ class KrsController extends Controller
         $pdf= PDF::loadview('pages.krs.cetakkrs-pdf');
         return $pdf->download('krs.pdf');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
