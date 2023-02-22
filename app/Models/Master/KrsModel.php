@@ -17,4 +17,8 @@ class KrsModel extends Model
         'jadwal_id',
         'semester',
     ];
+    public function matkul()
+    {
+        return $this->belongsTo(MatakuliahModel::class, 'uid');
+    }
 }

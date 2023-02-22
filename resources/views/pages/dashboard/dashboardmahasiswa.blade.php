@@ -1,6 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.custom-file-container__image-preview {
+    max-width: 250px;
+    max-height: 100%; /* or any other height you want to set */
+}
+</style>
 
 <div class="layout-px-spacing">
 
@@ -17,11 +26,12 @@
                             </svg></a>
                     </div>
                     <div class="text-center user-info">
-                        @if(Auth::user()->mahasiswa['image'] != null)
-                        <img src="/Image/{{Auth::user()->mahasiswa['image']}}" alt="{{Auth::user()->mahasiswa['nama']}}">
-                        @else
-                        <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar">
-                        @endif
+                    @if(Auth::user()->mahasiswa['image'] != null)
+    <img src="/Image/{{Auth::user()->mahasiswa['image']}}" alt="{{Auth::user()->mahasiswa['nama']}}" class="custom-file-container__image-preview">
+@else
+    <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar" class="custom-file-container__image-preview">
+@endif
+
                         <p class="">{{Auth::user()->mahasiswa['nama']}}</p>
                         <small class="badge badge-info">{{Auth::user()->mahasiswa['nim']}}</small>
                     </div>

@@ -70,3 +70,4 @@ public function updateHome(Request $request, $id) {
         return redirect('/dashboard');
 
     }
+}

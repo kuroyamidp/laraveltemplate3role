@@ -28,12 +28,36 @@ class KrsController extends Controller
         return view('pages.krs.krs',$data);
     }
     
-    public function cetakkrs()
+    public function cetakkrs(Request $request)
     {
-        $data = KrsModel::all();
+        
+        // $coba
+        $krs = KrsModel:: select("*","mahasiswa.nim","mahasiswa.nama")->leftJoin("mahasiswa","mahasiswa.id","=","krs.mahasiswa_id")->get();
+       
+       
+                        
 
-        view()->share('data', $data);
-        $pdf= PDF::loadview('pages.krs.cetakkrs-pdf');
+        $data = [];
+        foreach ($krs as $item) {
+            // $coba=explode(",", $item->jadwal_id);
+            $coba= json_decode($item->jadwal_id);
+
+            // return $coba;
+
+            $item->daftar_jadwal=JadwalkelasModel::whereIn("id",$coba)->get();
+            // $data[] = [
+            //     'mahasiswa_id' => $item->mahasiswa_id,
+            //     'nama' => $item->matkul ? $item->matkul->nama : '',
+            //     'sks' => $item->matkul ? $item->matkul->sks : '',
+            //     'semester' => $item->semester,
+            // ];
+        }
+        $data = [
+            "krs" => $krs
+        ];
+        // return $data;
+        // view()->share('data', $data);
+        $pdf = PDF::loadview('pages.krs.cetakkrs-pdf',$data);
         return $pdf->download('krs.pdf');
     }
     

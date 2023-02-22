@@ -43,4 +43,8 @@ class JadwalkelasModel extends Model
 
         return null;
     }
+    public function matkul()
+    {
+        return $this->belongsTo(MatkulModel::class, 'id');
+    }
 }

@@ -33,13 +33,19 @@
 <table id="customers">
   <tr>
     <th>Mahasiswa ID</th>
-    <th>Jadwal ID</th>
+    <th>Nama Mahasiswa</th>
+    <th>Nama Matkul</th>
     <th>Semester</th>
   </tr>
-  @foreach ($data as $v)
+  @foreach ($krs as $v)
   <tr>
     <td>{{$v->mahasiswa_id}}</td>
-    <td>{{($v->jadwal_id)}}</td>
+    <td>{{($v->nama)}}</td>
+    <td>
+      @foreach($v->daftar_jadwal as $d)
+      <li>{{$d->matkul["matkul"]}}</li>
+      @endforeach
+    </td>
     <td>{{$v->semester}}</td>
   </tr>
   @endforeach
