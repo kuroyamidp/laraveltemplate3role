@@ -77,7 +77,7 @@ class MatakuliahController extends Controller
      */
     public function show($id)
     {
-        $data['matakuliah'] = MatakuliahModel::where('nama', $id)->first();
+        $data['matakuliah'] = MatakuliahModel::where('uid', $id)->first();
         return view('pages.matakuliah.editmatkul', $data);
     }
 

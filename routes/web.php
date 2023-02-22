@@ -46,18 +46,15 @@ Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
-<<<<<<< HEAD
+
 Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['auth', 'is_mahasiswa']);
-=======
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
+
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakdaftarsidang', [DaftarsidangController::class, 'cetakdaftarsidang'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetaklihatjadwal', [LihatJadwalController::class, 'cetaklihatjadwal'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakjadwalsemester', [SemesterIniController::class, 'cetakjadwalsemester'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
-//daftar sidang mahasiswa   
-Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['auth', 'is_mahasiswa']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();

@@ -14,9 +14,18 @@
 
   <div class="row layout-top-spacing">
     <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+
       <div class="widget widget-content-area">
   <div class="row mb-1">
       <div class="col-lg-12">
+
+      <div class="widget widget-content-area 
+  <div class="row mb-1">
+      <div class="col-lg-12">
+        <div class="card-header d-flex justify-content-left">
+          <a href="/home" class="btn btn-dark btn-sm">Kembali</a>
+      </div>
+
         <table class="table table-bordered table-hover table-striped ">
           <thead>
             <tr>

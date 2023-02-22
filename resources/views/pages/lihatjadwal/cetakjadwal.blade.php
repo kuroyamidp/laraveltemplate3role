@@ -28,27 +28,25 @@
 </head>
 <body>
 
-<h1 align="center">Seluruh Matakuliah</h1>
+<h1 align="center">Keseluruhan Jadwal Mahasiswa</h1>
 
 <table id="customers">
   <tr>
-  <th>No</th>
-    <th>Mata Kuliah</th>
-    <th>Rincian Mata Kuliah</th>
+    <th>No</th>
+    <th>Mata kuliah</th>
+    <th>Rincian mata kuliah</th>
   </tr>
-  @foreach($data as $key => $value)
-      
-      <tr style="text-align: center;">
-          <td width="1%">{{$key + 1}}</td>
-          <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
-          <td>
-              <li>SKS : {{$value->sks}}</li>
-              <li>Mutu : {{$value->mutu}}</li>
-              <li >Bobot :{{$value->bobot}} </li>
-             
-          </td>
-      </tr>
-     
+@foreach($data as $key => $value)
+    <tr>
+        <td width="1%">{{$key + 1}}</td>
+        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
+        <td style="text-align: center;">
+            <li>SKS : {{$value->sks}}</li>
+            <li>Mutu : {{$value->mutu}}</li>
+            <li>Bobot :{{$value->bobot}} </li>
+        </td>
+    </tr>
+                    
 @endforeach
 </table>
 

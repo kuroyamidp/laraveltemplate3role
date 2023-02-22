@@ -76,8 +76,8 @@ class DaftarsidangController extends Controller
      */
     public function show($id)
     {
-        $data['daftarsidangs'] = DaftarSidangModel::get();
-        return view('pages.daftarsidang.daftarsidang', $data);
+        $data['daftarsidangs'] = DaftarsidangModel::where('nama', $id)->first();
+        return view('pages.daftarsidang.editsidang', $data);
     }
 
     /**
@@ -132,6 +132,7 @@ class DaftarsidangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DaftarsidangModel::where('nama', $id)->delete();
+        return redirect('/daftarsidang');
     }
 }

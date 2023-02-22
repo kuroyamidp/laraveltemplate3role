@@ -19,12 +19,13 @@
         <div class="card text-center">
           <i class="fa fa-database fa-5x mt-3"></i>
           <div class="card-body">
+
             <h5 class="card-title">Menu Approve Daftar Wisuda</h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam tenetur, odio dolor nam cum possimus aspernatur ducimus
               rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
             </p>
             <div class="card-header d-flex justify-content-end" style="background-color: white;">
-              <a href="{{route('user-mahasiswa.index')}}" class="btn btn-dark btn-sm">Rincian</a>
+              <a href="/mahasiswa" class="btn btn-dark btn-sm">Rincian</a>
               <!-- {{route('user-admin.index')}} -->
             </div>
           </div>
@@ -39,7 +40,7 @@
               rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
             </p>
             <div class="card-header d-flex justify-content-end" style="background-color: white;">
-              <a href="{{route('user-admin.index')}}" class="btn btn-dark btn-sm">Rincian</a>
+              <a href="/matakuliah" class="btn btn-dark btn-sm">Rincian</a>
               <!-- {{route('user-admin.index')}} -->
             </div>
           </div>
@@ -49,6 +50,7 @@
         <div class="card text-center">
           <i class="fa fa-code fa-5x mt-3"></i>
           <div class="card-body">
+
             <h5 class="card-title" class="bi bi-archive">Menu Aprove KRS</h5>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam tenetur, odio dolor nam cum possimus aspernatur ducimus
               rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
@@ -61,7 +63,6 @@
         </div>
       </div>
     </div>
-   
       </div>
       <script>
     const updateButton = document.querySelector('.update-button');
