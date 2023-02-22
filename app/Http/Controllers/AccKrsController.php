@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
 use App\Models\Master\MahasiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class AccKrsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -36,12 +35,11 @@ class HomeController extends Controller
             $data['krs'] = KrsModel::join('mahasiswa', 'krs.mahasiswa_id', '=', 'mahasiswa.id')
             ->select('krs.*', 'mahasiswa.nama')
             ->get();
-            return view('pages.dashboard.dashboardadmin', $data);
+            return view('pages.acckrs.acckrs', $data);
         } elseif (Auth::user()->role_id == 1) {
-            return view('pages.dashboard.dashboarddosen');
+            return view('pages.acckrs.acckrs');
         } else {
             //  return Auth::user()->mahasiswa['semester_berjalan'];
-            $data['krs'] = KrsModel::all();
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }

@@ -7,11 +7,8 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-
-
-             
-
+            <div class="card-header" style="background-color: white;">
+                    <a href="/cetaklihatjadwal" class="btn btn-success btn-sm">Print</a>
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -59,25 +56,25 @@
                                         <th>No</th>
                                         <th>Mata kuliah</th>
                                         <th>Rincian mata kuliah</th>
-                                
+
                                     </tr>
                                 </thead>
-                               <tbody>
-        @foreach($matkul as $key => $value)
-      
-                <tr style="text-align: center;">
-                    <td width="1%">{{$key + 1}}</td>
-                    <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
-                    <td>
-                        <li>SKS : {{$value->sks}}</li>
-                        <li>Mutu : {{$value->mutu}}</li>
-                        <li>Bobot :{{$value->bobot}} </li>
-                       
-                    </td>
-                </tr>
-               
-        @endforeach
-    </tbody>
+                                <tbody>
+                                    @foreach($matkul as $key => $value)
+
+                                    <tr style="text-align: center;">
+                                        <td width="1%">{{$key + 1}}</td>
+                                        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
+                                        <td>
+                                            <li>SKS : {{$value->sks}}</li>
+                                            <li>Mutu : {{$value->mutu}}</li>
+                                            <li>Bobot :{{$value->bobot}} </li>
+
+                                        </td>
+                                    </tr>
+
+                                    @endforeach
+                                </tbody>
 
                             </table>
                         </div>
@@ -86,6 +83,7 @@
             </div>
         </div>
     </div>
+</div>
 
 </div>
 @endsection

@@ -10,6 +10,7 @@
                 <div class="row mb-1 mt-1">
                     <div class="col-lg-3">
 
+
                     </div>
 
                 </div>
@@ -24,6 +25,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="card-header" style="background-color: white;">
+                        <a href="/cetakjadwalsemester" class="btn btn-success btn-sm">Print</a>
+                    </div>
+
 
                     <div class="row">
                         <div class="col-lg-12">
@@ -40,13 +45,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($value as $ky => $val)
+                                    @php
+                                    $i = 1; // Inisialisasi variabel $i dengan nilai 1
+                                    @endphp
+                                    @foreach($value as $val)
                                     @if($val->semester == 5)
                                     <tr>
-                                        <td class="text-center" width="1%">{{$ky + 1}}</td>
-                                        <td>{{$val->matkul['matkul']}} - <b> SEMESTER {{$val->semester}}</b></td>
-                                        <td class="text-center">{{$val->jam}}</td>
+                                        <td class="text-center">{{ $i }}</td>
+                                        <td>{{ $val->matkul['matkul'] }} - <b>SEMESTER {{ $val->semester }}</b></td>
+                                        <td class="text-center">{{ $val->jam }}</td>
                                     </tr>
+                                    @php
+                                    $i++; // Tambah nilai variabel $i setiap kali data semester 5 ditampilkan
+                                    @endphp
                                     @endif
                                     @endforeach
                                 </tbody>

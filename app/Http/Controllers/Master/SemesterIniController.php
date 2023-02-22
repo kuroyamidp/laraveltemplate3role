@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use PDF;
 
 class SemesterIniController extends Controller
 {
@@ -40,6 +41,14 @@ class SemesterIniController extends Controller
         // return $check;
         $data['jdw'] = $check;
         return view('pages.semesterini.semesterini', $data);
+    }
+    public function cetakjadwalsemester()
+    {
+        $data = JadwalkelasModel::all();
+ 
+        view()->share('data', $data);
+        $pdf= PDF::loadview('pages.semesterini.cektaksemesterini');
+        return $pdf->download('Seluruh Mata Kuliah Semester Ini.pdf');
     }
 
     /**
