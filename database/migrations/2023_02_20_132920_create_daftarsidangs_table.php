@@ -11,13 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up()    
     {
         Schema::create('daftarsidangs', function (Blueprint $table) {
             $table->id();
             $table->text('nama');
             $table->string('npm');
             $table->date('tanggal_sidang');
+            $table->time('jam');
             $table->timestamps();
         });
     }

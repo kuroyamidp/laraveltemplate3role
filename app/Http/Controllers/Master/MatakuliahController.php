@@ -24,16 +24,6 @@ class MatakuliahController extends Controller
         return view('pages.matakuliah.matkul', $data);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function lihatmatkul()
-    {
-        $data['lihatmatkul'] = MatakuliahModel::get();
-        return view('pages.matakuliah.lihatmatkul', $data);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -87,7 +77,7 @@ class MatakuliahController extends Controller
      */
     public function show($id)
     {
-        $data['matakuliah'] = MatakuliahModel::where('uid', $id)->first();
+        $data['matakuliah'] = MatakuliahModel::where('nama', $id)->first();
         return view('pages.matakuliah.editmatkul', $data);
     }
 
