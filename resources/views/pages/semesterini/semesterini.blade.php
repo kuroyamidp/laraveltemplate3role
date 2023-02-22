@@ -24,7 +24,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="" class="btn btn-success btn-sm">Print</a>
+                    <div class="card-header" style="background-color: white;">
+                        <a href="/cetakjadwalsemester" class="btn btn-success btn-sm">Print</a>
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <table class="table table-bordered" id="default-ordering">
@@ -41,15 +44,19 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $no=1;
-                                    @endphp    
-                                    @foreach($value as $ky => $val)
+
+                                    $i = 1; // Inisialisasi variabel $i dengan nilai 1
+                                    @endphp
+                                    @foreach($value as $val)
                                     @if($val->semester == 5)
                                     <tr>
-                                        <td class="text-center" width="1%">{{$no++}}</td>
-                                        <td>{{$val->matkul['matkul']}} - <b> SEMESTER {{$val->semester}}</b></td>
-                                        <td class="text-center">{{$val->jam}}</td>
+                                        <td class="text-center">{{ $i }}</td>
+                                        <td>{{ $val->matkul['matkul'] }} - <b>SEMESTER {{ $val->semester }}</b></td>
+                                        <td class="text-center">{{ $val->jam }}</td>
                                     </tr>
+                                    @php
+                                    $i++; // Tambah nilai variabel $i setiap kali data semester 5 ditampilkan
+                                    @endphp
                                     @endif
                                     @endforeach
                                 </tbody>

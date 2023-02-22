@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
+
 class LihatJadwalController extends Controller
 {
     /**
@@ -25,6 +26,16 @@ class LihatJadwalController extends Controller
         $data['matkul'] = MatakuliahModel::get();
         return view('pages.lihatjadwal.lihatjadwal', $data);
     }
+
+    public function cetaklihatjadwal()
+    {
+        $data = MatakuliahModel::all();
+ 
+        view()->share('data', $data);
+        $pdf= PDF::loadview('pages.lihatjadwal.cetakjadwal');
+        return $pdf->download('Seluruh Mata Kuliah.pdf');
+    }
+
 
     /**
      * Show the form for creating a new resource.

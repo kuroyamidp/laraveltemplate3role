@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
 use App\Models\Master\MahasiswaModel;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class HomeController extends Controller
             return view('pages.dashboard.dashboarddosen');
         } else {
             //  return Auth::user()->mahasiswa['semester_berjalan'];
+            $data['krs'] = KrsModel::all();
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }
@@ -68,5 +70,4 @@ public function updateHome(Request $request, $id) {
         return redirect('/dashboard');
 
     }
-
 }

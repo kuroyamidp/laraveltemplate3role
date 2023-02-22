@@ -7,8 +7,9 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="/cetakjadwal" class="btn btn-success btn-sm">Print</a>     
+
+            <div class="card-header" style="background-color: white;">
+                    <a href="/cetaklihatjadwal" class="btn btn-success btn-sm">Print</a>
 
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -57,10 +58,12 @@
                                         <th>No</th>
                                         <th>Mata kuliah</th>
                                         <th>Rincian mata kuliah</th>
-                                
+
+
                                     </tr>
                                 </thead>
-                               <tbody>
+                                <tbody>
+
                 @foreach($matkul as $key => $value)
             
                         <tr style="text-align: center;">
@@ -84,6 +87,12 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+    </div>
+
+</div>
+
 
         </div>
 @endsection

@@ -28,25 +28,21 @@
 </head>
 <body>
 
-<h1 align="center">KRS Mahasiswa</h1>
+<h1 align="center">Daftar Sidang Mahasiswa</h1>
 
 <table id="customers">
   <tr>
     <th>Mahasiswa ID</th>
-    <th>Nama Mahasiswa</th>
-    <th>Nama Matkul</th>
+    <th>Jadwal ID</th>
+    <th>Semester</th>
     <th>Semester</th>
   </tr>
-  @foreach ($krs as $v)
+  @foreach ($data as $v)
   <tr>
-    <td>{{$v->mahasiswa_id}}</td>
-    <td>{{($v->nama)}}</td>
-    <td>
-      @foreach($v->daftar_jadwal as $d)
-      <li>{{$d->matkul["matkul"]}}</li>
-      @endforeach
-    </td>
-    <td>{{$v->semester}}</td>
+    <td>{{$v->nama}}</td>
+    <td>{{($v->npm)}}</td>
+    <td>{{$v->tanggal_sidang}}</td>
+    <td>{{$v->jam}}</td>
   </tr>
   @endforeach
 </table>
