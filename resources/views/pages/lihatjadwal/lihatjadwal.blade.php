@@ -7,16 +7,8 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-<<<<<<< HEAD
             <div class="card-header" style="background-color: white;">
                     <a href="/cetaklihatjadwal" class="btn btn-success btn-sm">Print</a>
-=======
-                <div class="card-header">
-
-
-             
-
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -61,10 +53,11 @@
                             <table class="table table-hover" id="default-ordering">
                                 <thead>
                                     <tr class="text-center">
-                                        <th>No</th>
+                                        <th>Kode Mata Kuliah</th>
                                         <th>Mata kuliah</th>
-                                        <th>Rincian mata kuliah</th>
-<<<<<<< HEAD
+                                        <th>Sks</th>
+                                        <th>Mutu</th>
+                                        <th>Bobot</th>
 
                                     </tr>
                                 </thead>
@@ -72,39 +65,16 @@
                                     @foreach($matkul as $key => $value)
 
                                     <tr style="text-align: center;">
-                                        <td width="1%">{{$key + 1}}</td>
-                                        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
-                                        <td>
-                                            <li>SKS : {{$value->sks}}</li>
-                                            <li>Mutu : {{$value->mutu}}</li>
-                                            <li>Bobot :{{$value->bobot}} </li>
-
-                                        </td>
+                                        
+                                        <td>{{$value->kode_mk}}</td>
+                                        <td>{{$value->nama}}</td>
+                                        <td>{{$value->sks}}</td>
+                                        <td>{{$value->mutu}}</td>
+                                        <td>{{$value->bobot}}</td>
                                     </tr>
 
                                     @endforeach
                                 </tbody>
-=======
-                                
-                                    </tr>
-                                </thead>
-                               <tbody>
-        @foreach($matkul as $key => $value)
-      
-                <tr style="text-align: center;">
-                    <td width="1%">{{$key + 1}}</td>
-                    <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
-                    <td>
-                        <li>SKS : {{$value->sks}}</li>
-                        <li>Mutu : {{$value->mutu}}</li>
-                        <li>Bobot :{{$value->bobot}} </li>
-                       
-                    </td>
-                </tr>
-               
-        @endforeach
-    </tbody>
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 
                             </table>
                         </div>
@@ -113,10 +83,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </div>
-=======
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 
 </div>
 @endsection

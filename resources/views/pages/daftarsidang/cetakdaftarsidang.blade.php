@@ -24,18 +24,39 @@
   background-color: #0444aa;
   color: white;
 }
-</style>
-</head>
-<body>
+.header {
+  display: flex;
+  justify-content: space-between;
+}
 
+h5 {
+  text-align: left;
+  margin-top: -50px;
+  margin-left: 100px;
+}
+
+img {
+  margin-top: -50px;
+}
+
+
+     
+    </style>
+</head>
+
+<body>
+<div class="header">
+  <img src="image/LOGO ROBOT.jpg" width="100px">
+</div>
+<h5>Universitas PGRI Semarang<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
 <h1 align="center">Daftar Sidang Mahasiswa</h1>
 
 <table id="customers">
   <tr>
-    <th>Mahasiswa ID</th>
-    <th>Jadwal ID</th>
-    <th>Semester</th>
-    <th>Semester</th>
+    <th>Nama Mahasiswa</th>
+    <th>Mahasiswa NISN</th>
+    <th>Tanggal Sidang</th>
+    <th>Jam</th>
   </tr>
   @foreach ($data as $v)
   <tr>

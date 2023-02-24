@@ -9,13 +9,7 @@
                 @csrf
                 <div class="row mb-1 mt-1">
                     <div class="col-lg-3">
-
-<<<<<<< HEAD
-
-=======
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
@@ -28,14 +22,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-<<<<<<< HEAD
                     <div class="card-header" style="background-color: white;">
                         <a href="/cetakjadwalsemester" class="btn btn-success btn-sm">Print</a>
                     </div>
-
-=======
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
-
                     <div class="row">
                         <div class="col-lg-12">
                             <table class="table table-bordered" id="default-ordering">
@@ -44,7 +33,7 @@
                                     <tr>
                                         <th colspan="4" class="text-center text-uppercase">{{$key}}</th>
                                     </tr>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th class="text-center">No</th>
                                         <th>Mata kuliah</th>
                                         <th class="text-center">Jam</th>
@@ -52,30 +41,18 @@
                                 </thead>
                                 <tbody>
                                     @php
-<<<<<<< HEAD
                                     $i = 1; // Inisialisasi variabel $i dengan nilai 1
                                     @endphp
                                     @foreach($value as $val)
                                     @if($val->semester == 5)
-                                    <tr>
-                                        <td class="text-center">{{ $i }}</td>
+                                    <tr class="text-center">
+                                        <td>{{ $i }}</td>
                                         <td>{{ $val->matkul['matkul'] }} - <b>SEMESTER {{ $val->semester }}</b></td>
-                                        <td class="text-center">{{ $val->jam }}</td>
+                                        <td>{{ $val->hari }}-{{ $val->jam }} <b></b></td>
                                     </tr>
                                     @php
                                     $i++; // Tambah nilai variabel $i setiap kali data semester 5 ditampilkan
                                     @endphp
-=======
-                                        $no=1;
-                                    @endphp    
-                                    @foreach($value as $ky => $val)
-                                    @if($val->semester == 5)
-                                    <tr>
-                                        <td class="text-center" width="1%">{{$no++}}</td>
-                                        <td>{{$val->matkul['matkul']}} - <b> SEMESTER {{$val->semester}}</b></td>
-                                        <td class="text-center">{{$val->jam}}</td>
-                                    </tr>
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
                                     @endif
                                     @endforeach
                                 </tbody>

@@ -30,20 +30,41 @@
             background-color: #0444aa;
             color: white;
         }
+        .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+h5 {
+  text-align: left;
+  margin-top: -50px;
+  margin-left: 100px;
+}
+
+img {
+  margin-top: -50px;
+}
+
+
+     
     </style>
 </head>
 
 <body>
+<div class="header">
+  <img src="image/LOGO ROBOT.jpg" width="100px">
+</div>
+<h5>Universitas PGRI Semarang<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
 
-    <h1 align="center">Matakuliah Semester Ini</h1>
+
+    <h1 style="text-align: center;">Matakuliah Semester Ini</h1>
 
     <table id="customers">
         <tr style="text-align: center;">
             <th>No</th>
             <th style="text-align: center;">Mata Kuliah</th>
             <th style="text-align: center;">Semester</th>
-            <th style="text-align: center;">Jam</th>
-            <th style="text-align: center;">Hari</th>
+            <th style="text-align: center;">Waktu</th>
         </tr>
         @php
         $i = 1; // Inisialisasi variabel $i dengan nilai 1
@@ -55,8 +76,7 @@
             <td width="1%">{{ $i }}</td>
             <td>{{ $value->matkul['matkul'] }}</td>
             <td> SEMESTER {{ $value->semester }}</td>
-            <td>{{ $value->jam }}</td>
-            <td class="text-center">HARI {{ $value->hari }}</td>
+            <td>{{ucfirst($value->hari) }}|{{ $value->jam }}</td>
         </tr>
         @php
         $i++; // Tambah nilai variabel $i setiap kali data semester 5 ditampilkan

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use PDF;
+use DateTime;
 
 class DaftarsidangController extends Controller
 {
@@ -21,11 +22,19 @@ class DaftarsidangController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-   public function index()
-   {
-       $data['daftarsidangs'] = DaftarsidangModel::get();
-       return view('pages.daftarsidang.daftarsidang', $data);
-   }
+    public function index()
+    {
+       $now = new DateTime();
+       $month = $now->format('m'); // mengambil nilai bulan saat ini
+    
+       if (in_array($month, ['02', '03', '04'])) {  // jika bulan saat ini Februari
+           $data['daftarsidangs'] = DaftarsidangModel::get();
+           return view('pages.daftarsidang.daftarsidang', $data);
+       } else {
+           return redirect()->route('home')->with('error', 'Maaf, belum waktunya.'); // atau redirect ke halaman lain dengan alert
+       }
+    }
+    
    public function cetakdaftarsidang()
    {
        $data = DaftarSidangModel::all();
@@ -40,10 +49,18 @@ class DaftarsidangController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-   public function create()
-   {
+    public function create()
+    {
+       $count = DaftarsidangModel::count();
+       $limit = 1;
+    
+       if ($count >= $limit) {
+           return redirect()->back()->with('error', 'Maaf, sudah mencapai batas maksimum.');
+       }
+    
        return view('pages.daftarsidang.tambahdaftarsidang');
-   }
+    }
+    
 
    /**
     * Store a newly created resource in storage.
@@ -58,6 +75,7 @@ class DaftarsidangController extends Controller
            'nama' => 'required',
            'tanggal_sidang' => 'required',
            'jam' =>'required',
+           'file' =>'required',
 
        ]);
 
@@ -71,6 +89,7 @@ class DaftarsidangController extends Controller
            'npm' => $request->npm,
            'tanggal_sidang' => Carbon::parse($request->tanggal_sidang)->format('Y-m-d'),
            'jam' => $request->jam,
+           'file' => $request->file,
        ]);
 
        return redirect('/daftarsidang')->with('success', 'Berhasil tambah data');
@@ -113,6 +132,7 @@ class DaftarsidangController extends Controller
            'npm' => 'required',
            'tanggal_sidang' => 'required',
            'jam' => 'required',
+           'file' => 'required',
 
        ]);
 
@@ -126,6 +146,7 @@ class DaftarsidangController extends Controller
            'npm' => $request->npm,
            'tanggal_sidang' => $request->tanggal_sidang,
            'jam' => $request->jam,
+           'file' => $request->file,
        ]);
 
        return redirect('/daftarsidang')->with('success', 'Berhasil update data');
