@@ -135,18 +135,12 @@
 					</div>
 				</a>
 				<ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
-<<<<<<< HEAD
 				<li>
 						<a href="/lihatjadwal"> Semua Mata Kuliah </a>
 					</li>
 					<li>
 						<a href="/semesterini"> Mata Kuliah Semester Ini </a>
 					</li>
-=======
-					<li><a href="/lihatjadwal"> Keseluruhan</a></li>
-					<li><a href="/semesterini"> Semester Ini</a></li>
-
->>>>>>> d0bb44b6ecfe5fd9194fc65b7d3d92ae909e78b8
 				</ul>
 			</li>
 			<li class="menu">

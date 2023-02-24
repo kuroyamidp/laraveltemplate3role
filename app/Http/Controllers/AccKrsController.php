@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Master\KrsModel;
 use App\Models\Master\MahasiswaModel;
+use App\Models\Master\JadwalkelasModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,11 +31,26 @@ class AccKrsController extends Controller
 
         if (Auth::user()->role_id == 0) {
             // $data['krs'] = KrsModel::with('mahasiswa')->get();
-            $data['krs'] = KrsModel::all();
-            $data['mhs'] = MahasiswaModel::all();
-            $data['krs'] = KrsModel::join('mahasiswa', 'krs.mahasiswa_id', '=', 'mahasiswa.id')
-            ->select('krs.*', 'mahasiswa.nama')
-            ->get();
+            $krs = KrsModel:: select("*","mahasiswa.nim","mahasiswa.nama")->leftJoin("mahasiswa","mahasiswa.id","=","krs.mahasiswa_id")->get();
+       
+         $data = [];
+         foreach ($krs as $item) {
+             // $coba=explode(",", $item->jadwal_id);
+             $coba= json_decode($item->jadwal_id);
+ 
+            
+ 
+             $item->daftar_jadwal=JadwalkelasModel::whereIn("id",$coba)->get();
+             // $data[] = [
+             //     'mahasiswa_id' => $item->mahasiswa_id,
+             //     'nama' => $item->matkul ? $item->matkul->nama : '',
+             //     'sks' => $item->matkul ? $item->matkul->sks : '',
+             //     'semester' => $item->semester,
+             // ];
+         }
+         $data = [
+             "krs" => $krs
+         ];
             return view('pages.acckrs.acckrs', $data);
         } elseif (Auth::user()->role_id == 1) {
             return view('pages.acckrs.acckrs');

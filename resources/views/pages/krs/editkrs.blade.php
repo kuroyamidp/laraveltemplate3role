@@ -80,15 +80,15 @@
         </div>
     </div>
 	<script>
-		function checkCheckboxJadwal(id){
-			var elm = $('input[checkbox-jadwal-id="'+id+'"');
-			var strTime = timeTo24HoursSecond(elm.attr('time-start'));
-			var endTime = timeTo24HoursSecond(elm.attr('time-end'));
-			if (elm.prop('checked')) {
-				elm.prop('checked', false).trigger('change');
-			} else {
-				elm.prop('checked', true).trigger('change');
-			}
+		function checkCheckboxJadwal(id) {
+    var elm = $('input[checkbox-jadwal-id="' + id + '"');
+    var strTime = timeTo24HoursSecond(elm.attr('time-start'));
+    var endTime = timeTo24HoursSecond(elm.attr('time-end'));
+    if (elm.prop('checked')) {
+        elm.prop('checked', false).trigger('change');
+    } else {
+        elm.prop('checked', true).trigger('change');
+    }
 		}
 
 		function timeTo24HoursSecond(time) {
@@ -121,22 +121,22 @@
 						}
 					});
 				} else {
-					$('tr.makulrow').each(function (index, element) {
-						var ths = $(this);
-						var h = true;
-						var s = timeTo24HoursSecond(ths.attr('time-start'));
-						var e = timeTo24HoursSecond(ths.attr('time-end'));
-						var d = ths.attr('row-jadwal-id');
+                    $('tr.makulrow').each(function (index, element) {
+        var ths = $(this);
+        var h = true;
+        var s = timeTo24HoursSecond(ths.attr('time-start'));
+        var e = timeTo24HoursSecond(ths.attr('time-end'));
+        var d = ths.attr('row-jadwal-id');
 
-						if (((s>=strTime&&s<=endTime)||(e>=strTime&&e<=endTime) || (strTime>=s&&strTime<=e)||(endTime>=s&&endTime<=e) && ths.attr('jadwal-day')==elm.attr('jadwal-day'))) {
-							h=true;
-						}
+        if (((s >= strTime && s <= endTime) || (e >= strTime && e <= endTime) || (strTime >= s && strTime <= e) || (endTime >= s && endTime <= e) && ths.attr('jadwal-day') == elm.attr('jadwal-day'))) {
+            h = false;
+        }
 
-						if (h) {
-							ths.show();
-						}
-					});
-				}
+        if (h) {
+            ths.show();
+        }
+    });
+}
 			});
 		});
 	</script>

@@ -15,5 +15,6 @@ class DaftarsidangModel extends Model
         'npm',
         'tanggal_sidang',
         'jam',
+        'file',
     ];
 }

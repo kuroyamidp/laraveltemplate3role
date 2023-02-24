@@ -24,24 +24,45 @@
   background-color: #0444aa;
   color: white;
 }
-</style>
-</head>
-<body>
+.header {
+  display: flex;
+  justify-content: space-between;
+}
 
+h5 {
+  text-align: left;
+  margin-top: -50px;
+  margin-left: 100px;
+}
+
+img {
+  margin-top: -50px;
+}
+
+
+     
+    </style>
+</head>
+
+<body>
+<div class="header">
+  <img src="image/LOGO ROBOT.jpg" width="100px">
+</div>
+<h5>Universitas PGRI Semarang<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
 <h1 align="center">KRS Mahasiswa</h1>
 
 <table id="customers">
   <tr>
-    <th>Mahasiswa ID</th>
+  <th>Mahasiswa NISN</th>
     <th>Nama Mahasiswa</th>
     <th>Nama Matkul</th>
     <th>Semester</th>
   </tr>
   @foreach ($krs as $v)
   <tr>
-    <td>{{$v->mahasiswa_id}}</td>
+    <td>{{$v->nim}}</td>
     <td>{{($v->nama)}}</td>
-    <td>
+    <td style="text-align: justify;">
       @foreach($v->daftar_jadwal as $d)
       <li>{{$d->matkul["matkul"]}}</li>
       @endforeach

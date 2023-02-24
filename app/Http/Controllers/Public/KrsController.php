@@ -42,7 +42,7 @@ class KrsController extends Controller
             // $coba=explode(",", $item->jadwal_id);
             $coba= json_decode($item->jadwal_id);
 
-            // return $coba;
+           
 
             $item->daftar_jadwal=JadwalkelasModel::whereIn("id",$coba)->get();
             // $data[] = [
@@ -68,6 +68,12 @@ class KrsController extends Controller
      */
     public function create()
     {
+        $count = KrsModel::count();
+        $limit = 1;
+     
+        if ($count >= $limit) {
+            return redirect()->back()->with('error', 'Maaf, sudah mencapai batas maksimum.');
+        }
 		$mhs = Auth::user()->mahasiswa;
 		$smt_gangen = $mhs->semester_berjalan%2;
 		$krs = KrsModel::where('mahasiswa_id',Auth::user()->mahasiswa->id)->get();
@@ -120,7 +126,7 @@ class KrsController extends Controller
      */
     public function show($id)
     {
-        KrsModel::where('uid', $id)->delete();
+
         $mhs = Auth::user()->mahasiswa;
 		$smt_gangen = $mhs->semester_berjalan%2;
 		$krs = KrsModel::where('mahasiswa_id',Auth::user()->mahasiswa->id)->get();
@@ -128,14 +134,16 @@ class KrsController extends Controller
 		foreach ($krs as $k => $v) {
 			$jdw = json_decode($v->jadwal_id);
 			$hstJdw = array_merge($hstJdw,$jdw);
+       
 		}
-        $jdw = JadwalkelasModel::whereRaw('semester%2<>'.$smt_gangen)->whereNotIn('id',$hstJdw)->get();
+        $jdw = JadwalkelasModel::whereRaw('semester%2<>'.$smt_gangen)->get();
         $check = [];
         foreach ($jdw as $key => $value) {
 			if ($value->matkul->progdi_id == Auth::user()->mahasiswa->progdi_id || !Auth::user()->mahasiswa->progdi_id) {
 				$check[$value->hari][] = $value;
 			}
         }
+        
         $data['jdw'] = $check;
         return view('pages.krs.tambahkrs', $data);
         // $data['krs'] = KrsModel::where('uid', $id)->first();

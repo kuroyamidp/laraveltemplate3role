@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('npm');
             $table->date('tanggal_sidang');
             $table->time('jam');
+            $table->text('file');
             $table->timestamps();
         });
     }

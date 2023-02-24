@@ -37,7 +37,7 @@
 
                                             <a href=" {{ route('daftarsidang.show', $value->id) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
 
-                                            <form action="" method="post">
+                                            <form action="{{ route('daftarsidang.destroy', $value->id) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash bx-sm"></i></button>

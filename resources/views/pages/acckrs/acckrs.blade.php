@@ -12,58 +12,56 @@
         </div>
       </div>
 
-  <div class="row layout-top-spacing">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+      <div class="row layout-top-spacing">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
+          <div class="widget widget-content-area">
+            <div class="row mb-1">
+              <div class="col-lg-12">
+                <table class="table table-bordered table-hover table-striped ">
+                  <thead>
+                    <tr>
+                      <th colspan="6" class="text-center text-uppercase"></th>
+                    </tr>
+                    <tr>
+                      <th>Mahasiswa NISN</th>
+                      <th>Nama Mahasiswa</th>
+                      <th>Nama Matkul</th>
+                      <th>Semester</th>
+                      <th style="text-align: center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($krs as $v)
+                    <tr>
+                      <td>{{$v->nim}}</td>
+                      <td>{{($v->nama)}}</td>
+                      <td style="text-align: justify;">
+                        @foreach($v->daftar_jadwal as $d)
+                        <li>{{$d->matkul["matkul"]}}</li>
+                        @endforeach
+                      </td>
+                      <td>{{$v->semester}}</td>
+                      <td >
 
-      <div class="widget widget-content-area">
-  <div class="row mb-1">
-      <div class="col-lg-12">
-
-      <div class="widget widget-content-area 
-  <div class="row mb-1">
-      <div class="col-lg-12">
-        <div class="card-header d-flex justify-content-left">
-          <a href="/home" class="btn btn-dark btn-sm">Kembali</a>
-      </div>
-
-        <table class="table table-bordered table-hover table-striped ">
-          <thead>
-            <tr>
-              <th colspan="4" class="text-center text-uppercase"></th>
-            </tr>
-            <tr>
-              <th>Id Mahasiswa</th>
-              <th>Jumlah Matkul</th>
-              <th style="text-align: center;">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($krs as $key => $value)
-            <tr>
-
-              <td>{{$value->mahasiswa_id}}</td>
-              <td>{{$value->jadwal_id}}</td>
-              <td style="text-align: center;">
-
-                  <a href="" class="btn btn-primary" data-toggle="tooltip" title='Update'><i class="bx bx-envelope"></i></a>
-                </form>
+                        <a href="" class="btn btn-primary" data-toggle="tooltip" title='Update'><i class="bx bx-envelope"></i></a>
+                        </form>
 
 
-                <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
+                        <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
 
-            </tr>
-            @endforeach
-          </tbody>
+                    </tr>
+                    @endforeach
+                  </tbody>
 
-        </table>
+                </table>
 
-      </div>
-      <script>
-    const updateButton = document.querySelector('.update-button');
-    updateButton.addEventListener('click', function() {
-        sessionStorage.setItem('updateButtonClicked', 'true');
-    });
-</script>
-    </div>
-    <br>
-    @endsection
+              </div>
+              <script>
+                const updateButton = document.querySelector('.update-button');
+                updateButton.addEventListener('click', function() {
+                  sessionStorage.setItem('updateButtonClicked', 'true');
+                });
+              </script>
+            </div>
+            <br>
+            @endsection

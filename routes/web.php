@@ -16,7 +16,6 @@ use App\Http\Controllers\Master\SemesterIniController;
 use App\Http\Controllers\Master\UserMahasiswaController;
 use App\Http\Controllers\Public\KrsController;
 use App\Http\Controllers\Public\ProfilemhsController;
-use App\Http\Controllers\Master\DaftarsidangController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,7 +45,6 @@ Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
-
 Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['auth', 'is_mahasiswa']);
 
 //cetak krs
