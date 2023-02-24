@@ -55,9 +55,7 @@
                                     <tr class="text-center">
                                         <th>Kode Mata Kuliah</th>
                                         <th>Mata kuliah</th>
-                                        <th>Sks</th>
-                                        <th>Mutu</th>
-                                        <th>Bobot</th>
+                                        <th>Rincian mata kuliah</th>
 
                                     </tr>
                                 </thead>
@@ -65,12 +63,14 @@
                                     @foreach($matkul as $key => $value)
 
                                     <tr style="text-align: center;">
-                                        
-                                        <td>{{$value->kode_mk}}</td>
-                                        <td>{{$value->nama}}</td>
-                                        <td>{{$value->sks}}</td>
-                                        <td>{{$value->mutu}}</td>
-                                        <td>{{$value->bobot}}</td>
+                                        <td width="1%">{{$key + 1}}</td>
+                                        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
+                                        <td>
+                                            <li>SKS : {{$value->sks}}</li>
+                                            <li>Mutu : {{$value->mutu}}</li>
+                                            <li>Bobot :{{$value->bobot}} </li>
+
+                                        </td>
                                     </tr>
 
                                     @endforeach
@@ -85,5 +85,5 @@
     </div>
 </div>
 
-</div>
+        </div>
 @endsection

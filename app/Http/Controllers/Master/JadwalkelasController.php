@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
+
 class JadwalkelasController extends Controller
 {
     /**
@@ -157,4 +158,6 @@ class JadwalkelasController extends Controller
         JadwalkelasModel::where('uid', $id)->delete();
         return redirect('/jadwal-kelas');
     }
+
 }
+
