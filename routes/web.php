@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccKrsController;
+use App\Http\Controllers\AccSidangController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DaftarsidangController;
 use App\Http\Controllers\HomeController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Master\SemesterIniController;
 use App\Http\Controllers\Master\UserMahasiswaController;
 use App\Http\Controllers\Public\KrsController;
 use App\Http\Controllers\Public\ProfilemhsController;
+use App\Http\Controllers\JadwalujianController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,6 +36,8 @@ Route::resource('jadwal-kelas', JadwalkelasController::class)->middleware(['auth
 Route::resource('user-mahasiswa', UserMahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-admin', AdminController::class)->middleware(['auth', 'is_admin']);
 Route::resource('acckrs', AccKrsController ::class)->middleware(['auth', 'is_admin']);
+Route::resource('accsidang', AccSidangController ::class)->middleware(['auth', 'is_admin']);
+Route::resource('jadwalujian', JadwalujianController::class)->middleware(['auth', 'is_admin']);
 Route::post('/importdosen', [DosenController::class, 'importdatadosen'])->name('importdatadosen')->middleware(['auth', 'is_admin']);
 Route::post('/importmahasiswa', [MahasiswaController::class, 'importdatamahasiswa'])->name('importdatamahasiswa')->middleware(['auth', 'is_admin']);
 Route::post('/importdatamatkul', [MatakuliahController::class, 'importdatamatkul'])->name('importdatamatkul')->middleware(['auth', 'is_admin']);

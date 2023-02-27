@@ -41,7 +41,8 @@
                         @endforeach
                       </td>
                       <td>{{$v->semester}}</td>
-                      <td >
+                      <td>
+                        <form style="text-align: center;">
 
                         <a href="" class="btn btn-primary" data-toggle="tooltip" title='Update'><i class="bx bx-envelope"></i></a>
                         </form>

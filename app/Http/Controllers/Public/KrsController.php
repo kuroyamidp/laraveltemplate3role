@@ -35,7 +35,7 @@ class KrsController extends Controller
         $krs = KrsModel:: select("*","mahasiswa.nim","mahasiswa.nama")->leftJoin("mahasiswa","mahasiswa.id","=","krs.mahasiswa_id")->get();
        
        
-                        
+        
 
         $data = [];
         foreach ($krs as $item) {

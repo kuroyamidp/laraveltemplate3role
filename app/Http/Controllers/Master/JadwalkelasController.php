@@ -160,4 +160,3 @@ class JadwalkelasController extends Controller
     }
 
 }
-
