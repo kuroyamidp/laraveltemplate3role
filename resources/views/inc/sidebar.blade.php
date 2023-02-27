@@ -72,7 +72,10 @@
 						<a href="/jadwal-kelas"> Jadwal kelas </a>
 					</li>
 					<li>
-						<a href=""> Jadwal Ujian </a>
+						<a href="/jadwalujian"> Jadwal Ujian </a>
+					</li>
+					<li>
+						<a href="/nilaiujian"> Nilai Ujian </a>
 					</li>
 				</ul>
 			</li>

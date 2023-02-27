@@ -40,7 +40,7 @@
               rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
             </p>
             <div class="card-header d-flex justify-content-end" style="background-color: white;">
-              <a href="/matakuliah" class="btn btn-dark btn-sm">Rincian</a>
+              <a href="{{route('accsidang.index')}}" class="btn btn-dark btn-sm">Rincian</a>
               <!-- {{route('user-admin.index')}} -->
             </div>
           </div>

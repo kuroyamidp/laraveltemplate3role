@@ -8,8 +8,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{Route('daftarsidang.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                    <a href="{{Route('nilaiujian.create')}}" class="btn btn-primary btn-sm">Tambah</a>
                     <a href="/cetakdaftarsidang" class="btn btn-success btn-sm">Print</a>
+                </div>
+                <div class="card-header">
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -18,34 +20,29 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>NPM</th>
-                                        <th>Tanggal Ajukan Sidang</th>
-                                        <th>Jam</th>
-                                        <th>Document-1</th>
+                                        <th>Mahasiswa ID</th>
+                                        <th>Mata Kuliah ID</th>
+                                        <th>Nilai Ujian</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($daftarsidangs as $key => $value)
+
                                     <tr>
-                                        <td width="1%">{{$key + 1}}</td>
-                                        <td class="text-center">{{$value->nama}}</td>
-                                        <td class="text-center">{{$value->npm}}</td>
-                                        <td class="text-center">{{$value->tanggal_sidang}}</td>
-                                        <td class="text-center">{{$value->jam}}</td>
-                                        <td class="text-center">{{$value->file}}</td>
+                                        <td width="1%"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
 
-                                            <a href=" {{ route('daftarsidang.show', $value->id) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
+                                            <a href=" " class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
 
-                                            <form action="{{ route('daftarsidang.destroy', $value->id) }}" method="post">
+                                            <form action="" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash bx-sm"></i></button>
-                                            </form> 
+                                            </form>
                                     </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -56,4 +53,4 @@
     </div>
 
 </div>
-@endsection 
+@endsection

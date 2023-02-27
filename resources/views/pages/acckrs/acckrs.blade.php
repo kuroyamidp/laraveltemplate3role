@@ -25,6 +25,7 @@
                     <tr>
                       <th>Mahasiswa NISN</th>
                       <th>Nama Mahasiswa</th>
+                      <th>Status</th>
                       <th>Nama Matkul</th>
                       <th>Semester</th>
                       <th style="text-align: center;">Action</th>
@@ -35,15 +36,18 @@
                     <tr>
                       <td>{{$v->nim}}</td>
                       <td>{{($v->nama)}}</td>
+                      <td>{{($v->status)}}</td>
                       <td style="text-align: justify;">
                         @foreach($v->daftar_jadwal as $d)
                         <li>{{$d->matkul["matkul"]}}</li>
                         @endforeach
                       </td>
                       <td>{{$v->semester}}</td>
-                      <td >
+                      <td>
+                        <form style="text-align: center;">
 
-                        <a href="" class="btn btn-primary" data-toggle="tooltip" title='Update'><i class="bx bx-envelope"></i></a>
+                        <a href="{{route('acckrs.create')}}" class="btn btn-success btn-sm" data-toggle="tooltip">Add Status</a>  
+                        <a href="{{ route('acckrs.destroy', $v->id) }}" class="btn btn-success btn-sm show_confirm" data-toggle="tooltip">Print</a>
                         </form>
 
 
@@ -54,14 +58,18 @@
                   </tbody>
 
                 </table>
-
-              </div>
-              <script>
-                const updateButton = document.querySelector('.update-button');
-                updateButton.addEventListener('click', function() {
-                  sessionStorage.setItem('updateButtonClicked', 'true');
-                });
-              </script>
-            </div>
-            <br>
-            @endsection
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+      <script>
+    const updateButton = document.querySelector('.update-button');
+    updateButton.addEventListener('click', function() {
+        sessionStorage.setItem('updateButtonClicked', 'true');
+    });
+</script>
+    </div>
+    <br>
+    @endsection
