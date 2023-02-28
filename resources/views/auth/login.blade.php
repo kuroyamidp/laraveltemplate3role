@@ -43,7 +43,7 @@
                                 @enderror
                             </div>
 
-                            <div class="row mb-1">
+                            <!-- <div class="row mb-1">
                                 <div class="col-lg-12 d-flex justify-content-center">
                                     {!! NoCaptcha::display() !!}
                                     {!! NoCaptcha::renderJs() !!}
@@ -57,7 +57,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="d-sm-flex justify-content-between">
 
                                 <div class="field-wrapper toggle-pass">
@@ -88,6 +88,11 @@
 
                         </div>
                     </form>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <br>
                     <br>
                     <br>
