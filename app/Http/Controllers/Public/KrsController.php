@@ -110,12 +110,6 @@ class KrsController extends Controller
      */
     public function create()
     {
-        $count = KrsModel::count();
-        $limit = 1;
-
-        if ($count >= $limit) {
-            return redirect()->back()->with('error', 'Maaf, sudah mencapai batas maksimum.');
-        }
         $mhs = Auth::user()->mahasiswa;
         $smt_gangen = $mhs->semester_berjalan % 2;
         $krs = KrsModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();

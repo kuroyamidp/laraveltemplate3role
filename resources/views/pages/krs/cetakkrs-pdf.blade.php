@@ -58,7 +58,6 @@ img {
   <th>Nisn Mahasiswa</th>
     <th>Nama Mahasiswa</th>
     <th>Nama Matkul</th>
-    <th>Jam</th>
     <th>Semester</th>
   </tr>
   @foreach ($krs as $v)
@@ -67,8 +66,7 @@ img {
     <td>{{($v->nama)}}</td>
     <td style="text-align: justify;">
       @foreach($v->daftar_jadwal as $d)
-      <li>{{$d->matkul["matkul"]}}</li>
-      <td>{{$d->jam}}</td>
+      <li>{{$d->matkul["matkul"]}}|{{$d->jam}}</li>
       @endforeach
     </td>
     
