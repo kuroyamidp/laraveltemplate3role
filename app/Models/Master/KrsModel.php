@@ -16,6 +16,7 @@ class KrsModel extends Model
         'mahasiswa_id',
         'jadwal_id',
         'semester',
+        'status',
     ];
     public function matkul()
     {

@@ -37,6 +37,8 @@ h5 {
 
 img {
   margin-top: -50px;
+  width: 100px;
+  margin-top: 10px;
 }
 
 
@@ -46,16 +48,17 @@ img {
 
 <body>
 <div class="header">
-  <img src="image/LOGO ROBOT.jpg" width="100px">
+  <img src="image/LOGO ROBOT.jpg">
 </div>
-<h5>Universitas PGRI Semarang<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
+<h5>STMIK-AKI-PATI<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
 <h1 align="center">KRS Mahasiswa</h1>
 
 <table id="customers">
   <tr>
-  <th>Mahasiswa NISN</th>
+  <th>Nisn Mahasiswa</th>
     <th>Nama Mahasiswa</th>
     <th>Nama Matkul</th>
+    <th>Jam</th>
     <th>Semester</th>
   </tr>
   @foreach ($krs as $v)
@@ -65,8 +68,10 @@ img {
     <td style="text-align: justify;">
       @foreach($v->daftar_jadwal as $d)
       <li>{{$d->matkul["matkul"]}}</li>
+      <td>{{$d->jam}}</td>
       @endforeach
     </td>
+    
     <td>{{$v->semester}}</td>
   </tr>
   @endforeach
