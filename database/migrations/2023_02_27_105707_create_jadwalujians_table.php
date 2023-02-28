@@ -22,11 +22,9 @@ return new class extends Migration
             $table->time('jam');
             $table->timestamps();
 
-            $table->foreign('progdi_id')->references('id')->on('progdi');
             $table->foreign('matkul_id')->references('id')->on('mata_kuliah');
             $table->foreign('dosen_id')->references('id')->on('dosen');
             $table->foreign('ruang_id')->references('id')->on('ruang');
-            $table->index('tanggal');
         });
     }
 

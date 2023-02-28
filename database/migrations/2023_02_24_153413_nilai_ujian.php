@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()    
+    public function up()
     {
         Schema::create('nilai_ujian', function (Blueprint $table) {
             $table->id();
@@ -20,10 +20,8 @@ return new class extends Migration
             $table->integer('nilai');
             $table->timestamps();
             $table->softDeletes();
-
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->foreign('matkul_id')->references('id')->on('mata_kuliah');
-
         });
     }
 
