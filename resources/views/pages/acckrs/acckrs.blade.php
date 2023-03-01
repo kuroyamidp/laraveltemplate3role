@@ -53,11 +53,17 @@
 
 
                       <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
+                      <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
 
                   </tr>
                   @endforeach
                 </tbody>
+                  </tr>
+                  @endforeach
+                </tbody>
 
+              </table>
+            </div>
               </table>
             </div>
           </div>
