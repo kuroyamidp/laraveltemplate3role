@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('nilaiujian.index')}}" class="btn btn-dark btn-sm">Kembali</a>
+                    <a href="/nilaiujian" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
                     <form action="{{route('nilaiujian.store')}}" method="post">
@@ -16,38 +16,38 @@
                         <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Nama Mahasiswa</label>
-                                <select class="selectpicker" data-live-search="true" name="mahasiswa_id">
+                                <select class="selectpicker" data-live-search="true" name="mahasiswa">
                                     <option value="">Pilih salah satu</option>
-                                    @foreach($mhs as $key => $value)
+                                    @foreach($mahasiswa as $key => $value)
                                     <option value="{{$value->id}}">{{$value->nama}}</option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('mahasiswa_id'))
+                                @if($errors->has('mahasiswa'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('mahasiswa_id') }}
+                                    {{ $errors->first('mahasiswa') }}
                                 </div>
                                 @endif
                             </div>
                             <div class="col-lg-4">
                                 <label for="form-control">Nama Mata Kuliah</label>
-                                <select class="selectpicker" data-live-search="true" name="matkul_id">
+                                <select class="selectpicker" data-live-search="true" name="mata_kuliah">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($matkul as $key => $value)
                                     <option value="{{$value->id}}">{{$value->nama}}</option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('matkul_id'))
+                                @if($errors->has('mata_kuliah'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('matkul_id') }}
+                                    {{ $errors->first('mata_kuliah') }}
                                 </div>
                                 @endif
                             </div>
                             <div class="col-lg-4">
                                 <label for="form-control">Nilai</label>
-                                <input type="number" min="0" max="100" class="form-control" name="nilai_ujian">
-                                @if($errors->has('nilai_ujian'))
+                                <input type="number" min="0" max="100" class="form-control" name="nilai">
+                                @if($errors->has('nilai'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('nilai_ujian') }}
+                                    {{ $errors->first('nilai') }}
                                 </div>
                                 @endif
                             </div>

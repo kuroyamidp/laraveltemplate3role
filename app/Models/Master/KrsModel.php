@@ -18,8 +18,4 @@ class KrsModel extends Model
         'semester',
         'status',
     ];
-    public function matkul()
-    {
-        return $this->belongsTo(MatakuliahModel::class, 'uid');
-    }
 }

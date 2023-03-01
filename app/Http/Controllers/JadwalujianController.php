@@ -85,7 +85,7 @@ class JadwalujianController extends Controller
         $data['dosen'] = DosenModel::get();
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
-        $data['jadwalujians'] = JadwalujianModel::where('jam', $id)->first();
+        $data['jadwalujians'] = JadwalujianModel::where('id', $id)->first();
         return view('pages.jadwalujian.editjadwalujian', $data);
     }
 
@@ -97,7 +97,8 @@ class JadwalujianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['jadwalujians'] = JadwalujianModel::get();
+        return view('pages.lihatjadwalujian.lihatjadwalujian',$data);
     }
 
     /**
@@ -122,7 +123,7 @@ class JadwalujianController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        JadwalujianModel::where('jam', $id)->update([
+        JadwalujianModel::where('id', $id)->update([
             'matkul_id' => $request->mata_kuliah,
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
@@ -140,6 +141,7 @@ class JadwalujianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        JadwalujianModel::where('id', $id)->delete();
+        return redirect('/jadwalujian');
     }
 }

@@ -31,7 +31,6 @@ class SemesterIniController extends Controller
             }
             // return $check;
             $data['jdw'] = $check;
-            return view('pages.semesterini.semesterini', $data);
         }
         $jdw = JadwalkelasModel::get();
         $check = [];

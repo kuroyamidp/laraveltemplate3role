@@ -20,7 +20,6 @@ return new class extends Migration
             $table->json('jadwal_id');
             $table->integer('semester');
             $table->integer('status')->default(0);
-            ;
             $table->timestamps();
             $table->softDeletes();
 

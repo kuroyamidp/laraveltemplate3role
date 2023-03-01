@@ -254,17 +254,7 @@ class KrsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function status(Request $request)
-    {
-        if ($request->has('id')) {
-            $krs = KrsModel::find($request->input('id'));
-            if ($krs) {
-                $krs->status = 1;
-                $krs->update();
-            }
-            return redirect('/krs');
-        }
-    }
+   
 
     public function destroy($id)
     {
