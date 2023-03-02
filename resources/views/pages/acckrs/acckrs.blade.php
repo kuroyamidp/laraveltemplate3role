@@ -48,6 +48,7 @@
 
                         {{-- <a href="{{route('acckrs.create')}}" class="btn btn-success btn-sm" data-toggle="tooltip">Add Status</a> --}}
                         <a href="{{route('acckrs.destroy', $v->uid) }}" class="btn btn-success btn-sm " data-toggle="tooltip">Acc KRS</a>
+
                       </form>
 
 
@@ -72,3 +73,4 @@
     sessionStorage.setItem('updateButtonClicked', 'true');
   });
 </script> 
+

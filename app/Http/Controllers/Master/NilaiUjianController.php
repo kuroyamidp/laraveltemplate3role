@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\Http\Controllers\Master;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\MatakuliahModel;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
+
 class NilaiUjianController extends Controller
 {
     /**
@@ -20,7 +23,30 @@ class NilaiUjianController extends Controller
      */
     public function index()
     {
-        
+
+          // $coba
+        //   $nilai = NilaiUjianModel:: select("*","mahasiswa.nim","mahasiswa.nama")->leftJoin("mahasiswa","mahasiswa.id","=","nilai_ujian_models.id")->get();
+            
+        //   $data = [];
+         
+        //   foreach ($nilai as $item) {
+        //       // $coba=explode(",", $item->jadwal_id);
+        //       $coba= json_decode($item->jadwal_id);
+  
+             
+  
+        //       $item->daftar_jadwal=MatakuliahModel::whereIn("id",$coba)->get();
+        //       // $data[] = [
+        //       //     'mahasiswa_id' => $item->mahasiswa_id,
+        //       //     'nama' => $item->matkul ? $item->matkul->nama : '',
+        //       //     'sks' => $item->matkul ? $item->matkul->sks : '',
+        //       //     'semester' => $item->semester,
+        //       // ];
+        //   }
+        //   $data = [
+        //       "krs" => $nilai
+        //   ];
+        //   return $nilai;
         $data['nilaiujian'] = NilaiUjianModel::get();
         return view('pages.nilaiujian.nilaiujian', $data);
     }
@@ -32,9 +58,9 @@ class NilaiUjianController extends Controller
      */
     public function create()
     {
-
         $data['mahasiswa'] = MahasiswaModel::get();
         $data['matkul'] = MatakuliahModel::get();
+
         return view('pages.nilaiujian.tambahnilaiujian', $data);
     }
 
@@ -77,6 +103,7 @@ class NilaiUjianController extends Controller
         $data['mahasiswa'] = MahasiswaModel::get();
         $data['nilaiujian'] = NilaiUjianModel::where('id', $id)->first();
         return view('pages.nilaiujian.editnilaiujian', $data);
+
     }
 
     /**
@@ -109,7 +136,6 @@ class NilaiUjianController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-
         NilaiUjianModel::where('id', $id)->update([
             'mahasiswa_id' => $request->mahasiswa,
             'matkul_id' => $request->mata_kuliah,
@@ -130,3 +156,4 @@ class NilaiUjianController extends Controller
         return redirect('/nilaiujian');
     }
 }
+

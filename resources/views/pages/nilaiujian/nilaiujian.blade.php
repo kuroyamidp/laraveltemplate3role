@@ -10,6 +10,7 @@
                 <div class="card-header">
                     <a href="{{route('nilaiujian.create')}}" class="btn btn-primary btn-sm">Tambah</a>
                     {{-- <a href="/cetakdaftarsidang" class="btn btn-success btn-sm">Print</a> --}}
+
                 </div>
                 <div class="card-header">
                 </div>
@@ -47,6 +48,7 @@
                                             </form>
                                     </tr>
                                 @endforeach
+
                                 </tbody>
                             </table>
                         </div>

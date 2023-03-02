@@ -11,7 +11,6 @@
                     <a href="/nilaiujian" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
-
                     <form action="{{route('nilaiujian.store')}}" method="post">
                         @csrf
                         <div class="row mb-1">

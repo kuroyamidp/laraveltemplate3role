@@ -68,7 +68,7 @@ class JadwalujianController extends Controller
             'matkul_id' => $request->mata_kuliah,
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
-            'jam' => $request->jam,
+            'jam' => $request->jam, 
             'tanggal'=>$request->tanggal,
         ]);
         return redirect('/jadwalujian')->with('success', 'Berhasil tambah data');
@@ -85,6 +85,7 @@ class JadwalujianController extends Controller
         $data['dosen'] = DosenModel::get();
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
+
         $data['jadwalujians'] = JadwalujianModel::where('id', $id)->first();
         return view('pages.jadwalujian.editjadwalujian', $data);
     }
