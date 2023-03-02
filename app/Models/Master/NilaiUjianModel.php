@@ -1,28 +1,26 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Master;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class JadwalujianModel extends Model
+class NilaiUjianModel extends Model
 {
     use HasFactory;
-    protected $table = "jadwalujians";
+    protected $table = "nilai_ujian";
     protected $fillable = [
+        'mahasiswa_id',
         'matkul_id',
-        'dosen_id',
-        'ruang_id',
-        'tanggal',
-        'jam',
+        'nilai',
     ];
 
     public function matkul()
     {
         return $this->belongsTo(MatakuliahModel::class, 'uid');
     }
-    protected $appends = ['matkul', 'dosen', 'ruang'];
+    protected $appends = ['matkul', 'mahasiswa'];
 
 
     public function getMatkulAttribute()
@@ -37,22 +35,10 @@ class JadwalujianModel extends Model
         return null;
     }
 
-    public function getDosenAttribute()
+    public function getMahasiswaAttribute()
     {
-        if (array_key_exists('dosen_id', $this->attributes)) {
-            $kat = DB::table('dosen')->select('nama')->where('id', $this->attributes['dosen_id'])->first();
-            if ($kat) {
-                return $kat->nama;
-            }
-        }
-
-        return null;
-    }
-
-    public function getRuangAttribute()
-    {
-        if (array_key_exists('ruang_id', $this->attributes)) {
-            $kat = DB::table('ruang')->select('nama')->where('id', $this->attributes['ruang_id'])->first();
+        if (array_key_exists('mahasiswa_id', $this->attributes)) {
+            $kat = DB::table('mahasiswa')->select('nama')->where('id', $this->attributes['mahasiswa_id'])->first();
             if ($kat) {
                 return $kat->nama;
             }
@@ -61,4 +47,3 @@ class JadwalujianModel extends Model
         return null;
     }
 }
-

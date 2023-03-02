@@ -37,9 +37,9 @@
                                         <td>{{$v->dosen}}</td>
                                         <td>{{$v->jam}}</td>
                                         <td>{{$v->tanggal}}</td>
-                                        <td>
-                                            <a href="{{ route('jadwalujian.show', $v->jam) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
-                                                <form action="" method="post">
+                                        <td class="text-center" style="display: flex; justify-content: center;">
+                                            <a href="{{ route('jadwalujian.show', $v->id) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
+                                                <form action="{{ route('jadwalujian.destroy', $v->id) }}" method="post">
                                                         @method('DELETE')
                                                         @csrf
                                                         <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>

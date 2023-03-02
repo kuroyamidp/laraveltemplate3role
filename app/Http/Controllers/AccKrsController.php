@@ -60,6 +60,18 @@ class AccKrsController extends Controller
         }
     }
 
+    public function show($id)
+        {
+            $krs = KrsModel::find($id);
+            // dd($krs);
+
+            if ($krs) {
+                $krs->update(['status' => 1]);
+            }
+
+            return redirect('/acckrs');
+        }
+
 public function updateHome(Request $request, $id) {
         // Validasi input dari form
         $request->validate([
@@ -80,9 +92,12 @@ public function updateHome(Request $request, $id) {
     public function destroy($id)
     {
         $krs = KrsModel::find($id);
-        $krs->delete();
+    
+        if ($krs) {
+            $krs->update(['status' => 1]);
+        }
+    
         return redirect('/dashboard');
-
     }
 }
 
