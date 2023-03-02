@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\master;
+
+namespace App\Http\Controllers\Master;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\MatakuliahModel;
@@ -9,6 +11,8 @@ use App\Models\Master\MahasiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
+
 
 class NilaiUjianController extends Controller
 {
@@ -19,6 +23,7 @@ class NilaiUjianController extends Controller
      */
     public function index()
     {
+
           // $coba
         //   $nilai = NilaiUjianModel:: select("*","mahasiswa.nim","mahasiswa.nama")->leftJoin("mahasiswa","mahasiswa.id","=","nilai_ujian_models.id")->get();
             
@@ -53,11 +58,9 @@ class NilaiUjianController extends Controller
      */
     public function create()
     {
-
-    
+        $data['mahasiswa'] = MahasiswaModel::get();
         $data['matkul'] = MatakuliahModel::get();
-        $data['mhs'] = MahasiswaModel::get();
-    
+
         return view('pages.nilaiujian.tambahnilaiujian', $data);
     }
 
@@ -70,7 +73,7 @@ class NilaiUjianController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'mahasiswa_id' => 'required',
+            'mahasiswa' => 'required',
             'mata_kuliah' => 'required',
             'nilai' => 'required',
         ]);
@@ -81,7 +84,7 @@ class NilaiUjianController extends Controller
         }
 
         NilaiUjianModel::create([
-            'mahasiswa_id' => $request->mahasiswa_id,
+            'mahasiswa_id' => $request->mahasiswa,
             'matkul_id' => $request->mata_kuliah,
             'nilai' => $request->nilai,
         ]);
@@ -96,7 +99,11 @@ class NilaiUjianController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['matkul'] = MatakuliahModel::get();
+        $data['mahasiswa'] = MahasiswaModel::get();
+        $data['nilaiujian'] = NilaiUjianModel::where('id', $id)->first();
+        return view('pages.nilaiujian.editnilaiujian', $data);
+
     }
 
     /**
@@ -120,7 +127,7 @@ class NilaiUjianController extends Controller
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
-            'mahasiswa_id' => 'required',
+            'mahasiswa' => 'required',
             'mata_kuliah' => 'required',
             'nilai' => 'required',
         ]);
@@ -129,13 +136,12 @@ class NilaiUjianController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-
-        NilaiUjianModel::where('uid', $id)->update([
-            'mahasiswa_id' => $request->mahasiswa_id,
+        NilaiUjianModel::where('id', $id)->update([
+            'mahasiswa_id' => $request->mahasiswa,
             'matkul_id' => $request->mata_kuliah,
             'nilai' => $request->nilai,
         ]);
-        return redirect('/nilaiujian')->with('success', 'Berhasil tambah data');
+        return redirect('/nilaiujian')->with('success', 'Berhasil Update data');
     }
 
     /**
@@ -146,6 +152,8 @@ class NilaiUjianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        NilaiUjianModel::where('id', $id)->delete();
+        return redirect('/nilaiujian');
     }
 }
+

@@ -44,19 +44,26 @@
                     </td>
                     <td>{{$v->semester}}</td>
                     <td>
-                      <form style="text-align: center;">
-
-                        <a href="{{route('acckrs.create')}}" class="btn btn-success btn-sm" data-toggle="tooltip">Add Status</a>
-                        <a href="{{ route('acckrs.destroy', $v->id) }}" class="btn btn-success btn-sm show_confirm" data-toggle="tooltip">Print</a>
+                      <form method="POST" action="{{ route('status') }}">
+                        @csrf
+                        <input type="hidden" name="id" value="123">
+                        <button class="btn btn-success btn-sm" data-toggle="tooltip" type="submit">Kirim</button>
                       </form>
 
 
+
+                      <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
                       <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
 
                   </tr>
                   @endforeach
                 </tbody>
+                  </tr>
+                  @endforeach
+                </tbody>
 
+              </table>
+            </div>
               </table>
             </div>
           </div>

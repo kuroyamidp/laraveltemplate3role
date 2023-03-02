@@ -15,6 +15,8 @@ use App\Http\Controllers\Master\MahasiswaController;
 use App\Http\Controllers\Master\MatakuliahController;
 use App\Http\Controllers\master\NilaiUjianController;
 use App\Http\Controllers\Master\ProgdiController;
+use App\Http\Controllers\LihatJadwalujianController;
+use App\Http\Controllers\KhsController;
 use App\Http\Controllers\Master\RuangkelasController;
 use App\Http\Controllers\Master\SemesterIniController;
 use App\Http\Controllers\Master\UserMahasiswaController;
@@ -46,16 +48,16 @@ Route::post('/importmahasiswa', [MahasiswaController::class, 'importdatamahasisw
 Route::post('/importdatamatkul', [MatakuliahController::class, 'importdatamatkul'])->name('importdatamatkul')->middleware(['auth', 'is_admin']);
 Route::post('/importkelas', [RuangkelasController::class, 'importkelas'])->name('importkelas')->middleware(['auth', 'is_admin']);
 Route::get('/getkelas', [DaftarkelasController::class, 'getkelas'])->name('getkelas')->middleware(['auth', 'is_admin']);
-Route::post('/krs-status', [KrsController::class, 'status'])->name('status')->middleware(['auth', 'is_mahasiswa']);
-
-
+Route::post('/status', [AccKrsController::class, 'status'])->name('status')->middleware(['auth', 'is_mahasiswa']);
 
 Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa']);
+Route::resource('lihatjadwalujian', LihatJadwalujianController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['auth', 'is_mahasiswa']);
+Route::resource('khs', KhsController::class)->middleware(['auth', 'is_mahasiswa']);
 
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);

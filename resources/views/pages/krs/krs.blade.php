@@ -46,6 +46,40 @@
 										@endforeach
 									</td>
 									<td>
+					<div class="table-responsive">
+						<table class="table table-bordered" id="default-ordering">
+							<thead>
+								<tr style="text-align: center;">
+									<th>No</th>
+									<th>Tanggal pengajuan</th>
+									<th>Semester</th>
+									<th>Status</th>
+									<th>Jadwal mata kuliah</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($krs as $key => $v)
+								<tr style="text-align: center;">
+									<td width="1%">{{$key + 1}}</td>
+									<td>{{ \Carbon\Carbon::parse($v->created_at)->format('Y-m-d') }}</td>
+									<td>{{$v->semester}}</td>
+									<td>
+										@if($v->status == 0)
+										<span class="badge badge-info">Menunggu konfirmasi</span>
+										@elseif($v->status == 1)
+										<span class="badge badge-info">KRS di terima</span>
+										@else
+										<span class="badge badge-danger">KRS di tolak</span>
+										@endif
+									</td>
+									<td>
+										@foreach($v->jadwal as $ky => $val)
+										<li>Mata kuliah : {{$val->matkul['matkul']}}</li>
+										<li>Dosen : <b>{{$val->matkul['dosen']}}</b></li>
+										@endforeach
+									</td>
+									<td>
 
 										<form action="{{ route('krs.destroy', $v->uid) }}" method="post">
 											@method('DELETE')
@@ -53,15 +87,28 @@
 											<button class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash"></i></button>
 											<a href="{{ route('krs.show', $v->uid) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
 											<a href="{{ route('krs.edit', $v->uid) }}" class="btn btn-secondary" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
-											@if($v->status == 0 || $v->status == 1)
-											<a href="/cetakkrs" class="btn btn-success" data-toggle="tooltip"><i class="bx bx-printer"></i></a>
+											@if($v->status == 0 || $v->status <= 1)
+											<a href="/cetakkrs" class="btn btn-success" data-toggle="tooltip" ><i class="bx bx-printer"></i></a>
 											@endif
+											<!-- style="display:none" -->
 
+										</form>
 										</form>
 
 
 										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
+										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
 
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 									</td>
 								</tr>
 								@endforeach

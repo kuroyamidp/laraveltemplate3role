@@ -61,7 +61,7 @@ class AccKrsController extends Controller
             return view('pages.dashboard.dashboardmahasiswa');
         }
     }
-    public function aprove(Request $request)
+    public function status(Request $request)
     {
         $krs_id = $request->input('id');
 
@@ -71,8 +71,8 @@ class AccKrsController extends Controller
             $krs->status = 0;
             $krs->save();
 
-            // Lanjutkan proses cetak KRS...
         }
+        return redirect('/acckrs');
     }
     public function create()
     {
@@ -164,15 +164,10 @@ class AccKrsController extends Controller
         // Redirect ke halaman KRS
         return redirect('/krs');
     }
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        if ($request->has('id')) {
-            $krs = KrsModel::find($request->input('id'));
-            if ($krs) {
-                $krs->status = 0;
-                $krs->save();
-            }
-        }
+        KrsModel::where('uid', $id)->delete();
         return redirect('/acckrs');
+
     }
 }
