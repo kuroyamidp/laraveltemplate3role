@@ -66,7 +66,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($ruang as $key => $value)
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
                                         <td>{{$value->kode_ruang}}</td>
                                         <td>{{$value->nama}}</td>

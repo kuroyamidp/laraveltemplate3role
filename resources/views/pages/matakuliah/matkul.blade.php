@@ -66,7 +66,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($matkul as $key => $value)
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
                                         <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
                                         <td>

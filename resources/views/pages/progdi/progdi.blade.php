@@ -24,7 +24,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($progdi as $key => $value)
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
                                         <td>{{$value->kode_progdi}}</td>
                                         <td>{{$value->nama_studi}} [ {{$value->jenjang_studi}} ] <b>{{$value->singkatan_studi}}</b> </td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Master\NilaiUjianModel;
+use Illuminate\Support\Facades\Auth;
 
 class KhsController extends Controller
 {
@@ -14,7 +15,8 @@ class KhsController extends Controller
      */
     public function index()
     {
-        $data['nilaiujian'] = NilaiUjianModel::get();
+        $mhs = Auth::user()->mahasiswa;
+        $data['nilaiujian'] = NilaiUjianModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
         return view('pages.lihatkhs.lihatkhs', $data);
     }
 
