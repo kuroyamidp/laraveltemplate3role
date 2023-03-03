@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class SemesterIniController extends Controller
@@ -21,6 +22,8 @@ class SemesterIniController extends Controller
      */
     public function index(Request $request)
     {
+        // Auth::user()->mahasiswa;
+        // $jdw = JadwalkelasModel::where('semester', Auth::user()->mahasiswa->id)->get();
         if ($request->bulan && $request->tingkat) {
             // return "hello";
             // return Carbon::parse($request->bulan)->format('m');

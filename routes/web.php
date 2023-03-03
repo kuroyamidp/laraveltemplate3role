@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalujianController as ControllersJadwalujianController;
 use App\Http\Controllers\Master\DaftarkelasController;
 use App\Http\Controllers\Master\DosenController;
+use App\Http\Controllers\DaftarWisudaController;
 use App\Http\Controllers\JadwalujianController;
 use App\Http\Controllers\Master\JadwalkelasController;
 use App\Http\Controllers\Master\LihatJadwalController;
@@ -57,6 +58,7 @@ Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasisw
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['auth', 'is_mahasiswa']);
+Route::resource('daftarwisuda', DaftarWisudaController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('khs', KhsController::class)->middleware(['auth', 'is_mahasiswa']);
 
 //cetak krs

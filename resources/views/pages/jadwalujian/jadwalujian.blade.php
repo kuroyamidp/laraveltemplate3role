@@ -38,13 +38,14 @@
                                         <td>{{$v->jam}}</td>
                                         <td>{{$v->tanggal}}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
-                                            <a href="{{ route('jadwalujian.show', $v->id) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
+                                            <a href="{{ route('jadwalujian.show', $v->id) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
                                                 <form action="{{ route('jadwalujian.destroy', $v->id) }}" method="post">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button type="button" class="btn btn-danger show_confirm"><i class="bx bx-trash"></i></button>
+                                                        <button type="button" class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm"><i class="bx bx-trash"></i></button>
                                                         
                                                     </form>
+                                                   
                                                 
                                                     
                                                 <!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->

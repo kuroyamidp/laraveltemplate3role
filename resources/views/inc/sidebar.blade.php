@@ -168,7 +168,7 @@
 					</div>
 				</a>
 			</li>
-			<li class="menu">
+			<!-- <li class="menu">
 				<a href="" aria-expanded="false" class="dropdown-toggle">
 					<div class="">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
@@ -177,7 +177,7 @@
 						<span>Transkip Nilai</span>
 					</div>
 				</a>
-			</li>
+			</li> -->
 			<li class="menu">
 				<a href="/daftarsidang" aria-expanded="false" class="dropdown-toggle">
 					<div class="">
@@ -192,7 +192,7 @@
 			</li>
 		
 			<li class="menu">
-				<a href="" aria-expanded="false" class="dropdown-toggle">
+				<a href="/daftarwisuda" aria-expanded="false" class="dropdown-toggle">
 					<div class="">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
 							<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />

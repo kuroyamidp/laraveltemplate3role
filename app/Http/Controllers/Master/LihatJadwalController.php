@@ -28,7 +28,6 @@ class LihatJadwalController extends Controller
     public function cetaklihatjadwal()
     {
         $data = MatakuliahModel::all();
- 
         view()->share('data', $data);
         $pdf= PDF::loadview('pages.lihatjadwal.cetakjadwal');
         return $pdf->download('Seluruh Mata Kuliah.pdf');

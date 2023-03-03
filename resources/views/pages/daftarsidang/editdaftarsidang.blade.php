@@ -55,16 +55,16 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                        <div class="col-lg-6">
-                        <label for="form-control">File yang Akan Dirubah -> {{$daftarsidangs['file']}}</label>
-                        <input type="file" class="form-control" name="file">
-                        @if($errors->has('file'))
-                        <div class="error" style="color: red; display:block;">
-                            {{ $errors->first('file') }}
+                            <div class="col-lg-6">
+                                <label for="form-control">File yang Akan Dirubah -> {{$daftarsidangs['file']}}</label>
+                                <input type="file" class="form-control" name="file">
+                                @if($errors->has('file'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('file') }}
+                                </div>
+                                @endif
+                            </div>
                         </div>
-                        @endif
-                        </div>
-                    </div>
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>

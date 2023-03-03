@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Master\DaftarSidangModel;
 use App\Http\Controllers\Controller;
-use App\Models\Master\JadwalkelasModel;
+use App\Models\Master\DaftarWisudaModel;
 use App\Models\Master\KrsModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -15,31 +14,26 @@ use Carbon\Carbon;
 use PDF;
 use DateTime;
 
-class DaftarsidangController extends Controller
+class DaftarWisudaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $now = new DateTime();
         $month = $now->format('m'); // mengambil nilai bulan saat ini
 
         if (in_array($month, ['02', '03', '04'])) {  // jika bulan saat ini Februari
-            $data['daftarsidangs'] = DaftarsidangModel::get();
-            return view('pages.daftarsidang.daftarsidang', $data);
+            $data['daftarwisuda'] = DaftarWisudaModel::get();
+            return view('pages.daftarwisuda.daftarwisuda', $data);
         } else {
             return redirect()->route('home')->with('error', 'Maaf, belum waktunya.'); // atau redirect ke halaman lain dengan alert
         }
     }
 
-    public function cetakdaftarsidang()
+    public function cetakdaftarwisuda()
     {
         $data = DaftarSidangModel::all();
         view()->share('data', $data);
-        $pdf = PDF::loadview('pages.daftarsidang.cetakdaftarsidang');
+        $pdf = PDF::loadview('pages.daftarwisuda.cetakdaftarsidang');
         return $pdf->download('daftarsidang.pdf');
     }
 
@@ -50,7 +44,7 @@ class DaftarsidangController extends Controller
      */
     public function create()
     {
-        return view('pages.daftarsidang.tambahdaftarsidang');
+        return view('pages.daftarwisuda.tambahdaftarwisuda');
     }
 
 
@@ -152,6 +146,7 @@ class DaftarsidangController extends Controller
                'tanggal_sidang' => 'required',
                'jam' =>'required',
                'file' =>'required',
+               'doc' =>'required',
 
            ]);
 
@@ -160,15 +155,16 @@ class DaftarsidangController extends Controller
                return Redirect::back()->withErrors($validator);
            }
 
-           DaftarSidangModel::create([
+           DaftarWisudaModel::create([
                'nama' => $request->nama,
                'npm' => $request->npm,
                'tanggal_sidang' => Carbon::parse($request->tanggal_sidang)->format('Y-m-d'),
                'jam' => $request->jam,
                'file' => $request->file,
+               'doc' => $request->doc,
            ]);
 
-           return redirect('/daftarsidang')->with('success', 'Berhasil tambah data');
+           return redirect('/daftarwisuda')->with('success', 'Berhasil tambah data');
         // $directory = public_path('excel');
         // if (!is_dir($directory)) {
         //     mkdir($directory, 0755, true);
@@ -217,10 +213,10 @@ class DaftarsidangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nama)
+    public function show($id)
     {
-        $data['daftarsidangs'] = DaftarSidangModel::where('id', $nama)->first();
-        return view('pages.daftarsidang.editdaftarsidang', $data);
+        $data['daftarwisuda'] = DaftarWisudaModel::where('id', $id)->first();
+        return view('pages.daftarwisuda.editdaftarwisuda', $data);
     }
 
     /**
@@ -249,6 +245,7 @@ class DaftarsidangController extends Controller
             'tanggal_sidang' => 'required',
             'jam' => 'required',
             'file' => 'required',
+            'doc' => 'required',
 
         ]);
 
@@ -257,15 +254,16 @@ class DaftarsidangController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        DaftarsidangModel::where('nama', $id)->update([
+        DaftarWisudaModel::where('nama', $id)->update([
             'nama' => $request->nama,
             'npm' => $request->npm,
             'tanggal_sidang' => $request->tanggal_sidang,
             'jam' => $request->jam,
             'file' => $request->file,
+            'doc' => $request->doc,
         ]);
 
-        return redirect('/daftarsidang')->with('success', 'Berhasil update data');
+        return redirect('/daftarwisuda')->with('success', 'Berhasil update data');
     }
 
 
@@ -277,7 +275,7 @@ class DaftarsidangController extends Controller
      */
     public function destroy($id)
     {
-        DaftarSidangModel::where('id', $id)->delete();
-        return redirect('/daftarsidang');
+        DaftarWisudaModel::where('id', $id)->delete();
+        return redirect('/daftarwisuda');
     }
 }
