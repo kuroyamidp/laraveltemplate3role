@@ -20,6 +20,7 @@ use App\Http\Controllers\LihatJadwalujianController;
 use App\Http\Controllers\KhsController;
 use App\Http\Controllers\Master\RuangkelasController;
 use App\Http\Controllers\Master\SemesterIniController;
+use App\Http\Controllers\master\UserDosenController;
 use App\Http\Controllers\Master\UserMahasiswaController;
 use App\Http\Controllers\Public\KrsController;
 use App\Http\Controllers\Public\ProfilemhsController;
@@ -39,6 +40,7 @@ Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'i
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('jadwal-kelas', JadwalkelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-mahasiswa', UserMahasiswaController::class)->middleware(['auth', 'is_admin']);
+Route::resource('user-dosen', UserDosenController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-admin', AdminController::class)->middleware(['auth', 'is_admin']);
 Route::resource('acckrs', AccKrsController ::class)->middleware(['auth', 'is_admin']);
 Route::resource('accsidang', AccSidangController ::class)->middleware(['auth', 'is_admin']);

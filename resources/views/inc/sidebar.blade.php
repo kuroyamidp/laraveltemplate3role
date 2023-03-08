@@ -106,8 +106,9 @@
 					<li>
 						<a href="/user-mahasiswa"> User mahasiswa </a>
 					</li>
-
-				</ul>
+					<li>
+						<a href="/user-dosen"> User Dosen </a>
+					</li>
 			</li>
 			@endIsAdmin
 			@IsMahasiswa

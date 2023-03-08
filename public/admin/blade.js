@@ -127,4 +127,9 @@ function getnamemahasiswa() {
     $("#username").val(datamahasiswa.nama)
     // console.log(datamahasiswa.nama)
 }
+function getnamedosen() {
+    var datadosen = JSON.parse( $("#dsn").val())
+    $("#username").val(datadosen.nama)
+    // console.log(datamahasiswa.nama)
+}
 
