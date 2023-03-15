@@ -17,7 +17,9 @@ use App\Http\Controllers\Master\MatakuliahController;
 use App\Http\Controllers\master\NilaiUjianController;
 use App\Http\Controllers\Master\ProgdiController;
 use App\Http\Controllers\LihatJadwalujianController;
+use App\Http\Controllers\Master\LihatJadwalDosenController;
 use App\Http\Controllers\KhsController;
+use App\Http\Controllers\master\LihatJadwalUjianDosenController;
 use App\Http\Controllers\Master\RuangkelasController;
 use App\Http\Controllers\Master\SemesterIniController;
 use App\Http\Controllers\master\UserDosenController;
@@ -63,6 +65,7 @@ Route::resource('daftarsidang', DaftarsidangController::class)->middleware(['aut
 Route::resource('daftarwisuda', DaftarWisudaController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('khs', KhsController::class)->middleware(['auth', 'is_mahasiswa']);
 
+Route::resource('lihatjadwaldosen', LihatJadwalDosenController::class)->middleware(['auth', 'is_dosen']);
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakdaftarsidang', [DaftarsidangController::class, 'cetakdaftarsidang'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
