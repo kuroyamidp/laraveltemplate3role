@@ -29,9 +29,9 @@
                     <td>{{$v->nim}}</td>
                     <td>{{($v->nama)}}</td>
                     <td>
-                      @if($v->status == 0)
+                      @if($v->status == 1)
                       <span class="badge badge-info">Menunggu konfirmasi</span>
-                      @elseif($v->status == 1)
+                      @elseif($v->status == 0)
                       <span class="badge badge-info">KRS di terima</span>
                       @else
                       <span class="badge badge-danger">KRS di tolak</span>

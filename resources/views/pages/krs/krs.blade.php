@@ -46,22 +46,21 @@
 										@endforeach
 									</td>
 									<td>
-
 										<form action="{{ route('krs.destroy', $v->uid) }}" method="post">
 											@method('DELETE')
 											@csrf
 											<button class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash"></i></button>
 											<a href="{{ route('krs.show', $v->uid) }}" class="btn btn-warning" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
-											<a href="{{ route('krs.edit', $v->uid) }}" class="btn btn-primary" data-toggle="tooltip" title='Show'><i class="bx bx-list-ul"></i></a>
-											@if($v->status == 0 || $v->status == 1)
-											<a href="/cetakkrs" class="btn btn-success" data-toggle="tooltip" title='Print'><i class="bx bx-printer"></i></a>
+											<a href="{{ route('krs.edit', $v->uid) }}" class="btn btn-secondary" data-toggle="tooltip" title='Update'><i class="bx bx-edit"></i></a>
+											@if($v->status == 0 || $v->status <= 1)
+											<a href="/cetakkrs" class="btn btn-success" data-toggle="tooltip" ><i class="bx bx-printer"></i></a>
 											@endif
+											<!-- style="display:none" -->
 
 										</form>
 
 
 										<!-- <button type="button" class="btn btn-danger"><i class="bx bx-trash"></i></button> -->
-
 									</td>
 								</tr>
 								@endforeach

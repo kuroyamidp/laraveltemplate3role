@@ -44,15 +44,15 @@
                                             <th colspan="3" class="text-center text-uppercase">{{$key}}</th>
                                         </tr>
                                         <tr class="text-center">
-                                            <th>Mata kuliah</th>
-                                            <th>Jam</th>
+                                            <th style="text-align: left;">Mata kuliah</th>
+                                            <th style="text-align: right;">Jam</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($value as $ky => $val)
                                         <tr class="text-center makulrow" onclick="checkCheckboxJadwal({{$val->id}})" jadwal-day="{{$key}}" row-jadwal-id="{{$val->id}}" time-start="{{$val->matkul->start}}" time-end="{{$val->matkul->end}}">
-                                            <td>{{$val->matkul['matkul']}} - <b> SEMESTER {{$val->semester}}</b></td>
-                                            <td>{{$val->jam}}</td>
+                                            <td style="text-align: left;">{{$val->matkul['matkul']}} - <b> SEMESTER {{$val->semester}}</b></td>
+                                            <td style="text-align: right;">{{$val->jam}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

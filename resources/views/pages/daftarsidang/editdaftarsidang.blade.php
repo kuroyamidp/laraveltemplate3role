@@ -11,13 +11,13 @@
                     <a href="{{route('daftarsidang.index')}}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('daftarsidang.update', $daftarsidangs['nama'])}}" method="post">
+                    <form action="{{route('daftarsidang.update', $daftarsidangs['id'])}}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row mb-1">
                             <div class="col-lg-6">
                                 <label for="form-control">NPM</label>
-                                <input type="text" class="form-control" name="npm" value="{{$daftarsidangs['npm']}}">
+                                <input type="text" readonly class="form-control" name="npm" value="{{$daftarsidangs['npm']}}">
                                 @if($errors->has('npm'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('npm') }}
@@ -26,10 +26,19 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="form-control">Nama</label>
-                                <input type="text" class="form-control" name="nama" value="{{$daftarsidangs['nama']}}">
-                                @if($errors->has('nama'))
+                                <select class="selectpicker" data-live-search="true" name="mahasiswa">
+                                <option value="">Pilih salah satu</option>
+                                    @foreach($mahasiswa as $key => $value)
+                                    @if($daftarsidangs['mahasiswa_id'] == $value->id)
+                                    <option value="{{$value->id}}" selected>{{$value->nama}}</option>
+                                    @else
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endif
+                                    @endforeach
+                                </select> 
+                                @if($errors->has('mahasiswa'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('nama') }}
+                                    {{ $errors->first('mahasiswa') }}
                                 </div>
                                 @endif
                             </div>
@@ -50,6 +59,17 @@
                                 @if($errors->has('tanggal_sidang'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('tanggal_sidang') }}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-lg-6">
+                                <label for="form-control">File yang Akan Dirubah -> {{$daftarsidangs['file']}}</label>
+                                <input type="file" class="form-control" name="file">
+                                @if($errors->has('file'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('file') }}
                                 </div>
                                 @endif
                             </div>

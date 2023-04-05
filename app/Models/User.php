@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Master\MahasiswaModel;
+use App\Models\Master\DosenModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -32,6 +33,18 @@ class User extends Authenticatable
     {
         if (array_key_exists('id', $this->attributes)) {
             $kat = MahasiswaModel::where('user_id',  $this->attributes['id'])->first();
+
+            if ($kat) {
+                return $kat;
+            }
+        }
+
+        return null;
+    }
+    public function getDosenAttribute()
+    {
+        if (array_key_exists('id', $this->attributes)) {
+            $kat = DosenModel::where('user_id',  $this->attributes['id'])->first();
 
             if ($kat) {
                 return $kat;

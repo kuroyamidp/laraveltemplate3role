@@ -70,7 +70,7 @@ img {
         $i = 1; // Inisialisasi variabel $i dengan nilai 1
         @endphp
         @foreach($data as $key => $value)
-        @if($value->semester == 5)
+        @if($value->semester == Auth::user()->mahasiswa['semester_berjalan'])
 
         <tr style="text-align: center;">
             <td width="1%">{{ $i }}</td>

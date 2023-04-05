@@ -49,21 +49,20 @@ img {
   <img src="image/LOGO ROBOT.jpg" width="100px">
 </div>
 <h5>STMIK-AKI-PATI<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
-<h1 align="center">Daftar Sidang Mahasiswa</h1>
+<h1 align="center">Daftar Wisuda Mahasiswa</h1>
 
 <table id="customers">
-  <tr>
-    <th>Nama Mahasiswa</th>
-    <th>Mahasiswa NISN</th>
-    <th>Tanggal Sidang</th>
+    <th>Nama</th>
+    <th>NPM</th>
+    <th>Tanggal Ajukan Wisuda</th>
     <th>Jam</th>
-  </tr>
+</tr>
   @foreach ($data as $v)
   <tr>
-    <td>{{$v->nama}}</td>
-    <td>{{($v->npm)}}</td>
+    <td>{{$v->mahasiswa}}</td>
+    <td>{{$v->npm}}</td>
     <td>{{$v->tanggal_sidang}}</td>
-    <td>{{$v->jam}}</td>
+    <td>{{$v->jam}}</td>  
   </tr>
   @endforeach
 </table>

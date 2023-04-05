@@ -8,33 +8,33 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('progdi.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                    <a href="{{route('user-dosen.create')}}" class="btn btn-primary btn-sm">Tambah</a>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <table class="table table-hover" id="default-ordering">
+                            <table class="table table-bordered" id="default-ordering">
                                 <thead>
-                                    <tr class="text-center">
+                                    <tr>
                                         <th>No</th>
-                                        <th>Kode progdi</th>
-                                        <th>Nama studi</th>
-                                        <th>Aksi</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Dosen</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($progdi as $key => $value)
-                                    <tr style="text-align: center;">
-                                        <td width="1%">{{$key + 1}}</td>
-                                        <td>{{$value->kode_progdi}}</td>
-                                        <td>{{$value->nama_studi}} [ {{$value->jenjang_studi}} ] <b>{{$value->singkatan_studi}}</b> </td>
-                                        <td class="text-center" style="display: flex; justify-content: center;">
+                                    @foreach($user_dsn as $ky => $value)
+                                    <tr>
+                                        <td width="1%">{{$ky + 1}}</td>
+                                        <td>{{$value->name}}</td>
+                                        <td>{{$value->email}}</td>
+                                        <td>{{$value->dosen['nama']}} - {{$value->dosen['nidn']}}</td>
+                                        <td style="display: flex; justify-content: center;">
 
-                                            <a href="{{ route('progdi.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
+                                            <a href="{{ route('user-dosen.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
 
-
-
-                                            <form action="{{ route('progdi.destroy', $value->uid) }}" method="post">
+                                            <form action="{{ route('user-dosen.destroy', $value->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash bx-sm"></i></button>

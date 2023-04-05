@@ -44,7 +44,7 @@
                                     $i = 1; // Inisialisasi variabel $i dengan nilai 1
                                     @endphp
                                     @foreach($value as $val)
-                                    @if($val->semester == 5)
+                                    @if($val->semester == Auth::user()->mahasiswa['semester_berjalan'])
                                     <tr class="text-center">
                                         <td>{{ $i }}</td>
                                         <td>{{ $val->matkul['matkul'] }} - <b>SEMESTER {{ $val->semester }}</b></td>

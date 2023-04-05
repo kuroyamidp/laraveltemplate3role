@@ -16,7 +16,7 @@
                         <div class="row mb-1">
                             <div class="col-lg-6">
                                 <label for="form-control">NPM</label>
-                                <input type="numbert" class="form-control" name="npm">
+                                    <input type="text" readonly class="form-control" name="npm" value="{{Auth::user()->mahasiswa['nim']}}">
                                 @if($errors->has('npm'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('npm') }}
@@ -25,10 +25,15 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="form-control">Nama</label>
-                                <input type="text" class="form-control" name="nama">
-                                @if($errors->has('nama'))
+                                <select class="selectpicker" data-live-search="true" name="mahasiswa">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($mahasiswa as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endforeach
+                                </select> 
+                                @if($errors->has('mahasiswa'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('nama') }}
+                                    {{ $errors->first('mahasiswa') }}
                                 </div>
                                 @endif
                             </div>

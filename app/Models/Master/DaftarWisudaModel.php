@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\master;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class DaftarSidangModel extends Model
+class DaftarWisudaModel extends Model
 {
     use HasFactory;
-    protected $table = "daftarsidangs";
+
+    protected $table = "daftar_wisuda";
     protected $fillable = [
         'mahasiswa_id',
         'npm',
         'tanggal_sidang',
         'jam',
         'file',
+        'doc',
     ];
     protected $appends = ['mahasiswa'];
 

@@ -70,7 +70,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($mahasiswa as $key => $value)
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
                                         <td>{{$value->nim}}</td>
                                         <td>{{$value->nama}}</td>
