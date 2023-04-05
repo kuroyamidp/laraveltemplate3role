@@ -263,7 +263,7 @@
 						<span>Data Mahasiswa</span>
 					</div>
 				</a>
-				@EndIsDosen
+				@endIsDosen
 	</nav>
 
 </div>

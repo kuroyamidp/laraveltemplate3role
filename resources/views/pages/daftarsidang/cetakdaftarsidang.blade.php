@@ -60,7 +60,7 @@ img {
   </tr>
   @foreach ($data as $v)
   <tr>
-    <td>{{$v->nama}}</td>
+    <td>{{$v->mahasiswa}}</td>
     <td>{{($v->npm)}}</td>
     <td>{{$v->tanggal_sidang}}</td>
     <td>{{$v->jam}}</td>
