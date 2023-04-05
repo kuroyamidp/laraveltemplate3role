@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+
 class DaftarWisudaModel extends Model
 {
     use HasFactory;
@@ -19,6 +20,7 @@ class DaftarWisudaModel extends Model
         'file',
         'doc',
     ];
+
     protected $appends = ['mahasiswa'];
 
     public function getMahasiswaAttribute()
@@ -32,4 +34,5 @@ class DaftarWisudaModel extends Model
 
         return null;
     }
+
 }

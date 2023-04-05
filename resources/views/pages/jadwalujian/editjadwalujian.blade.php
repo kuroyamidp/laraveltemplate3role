@@ -13,7 +13,6 @@
                 <div class="card-body">
 
                     <form action="{{route('jadwalujian.update', $jadwalujians['id'])}}" method="post">
-
                         @csrf
                         @method('PUT')
                         <div class="row mb-1">
@@ -23,7 +22,6 @@
                                     <option value="">Pilih salah satu</option>
                                     @foreach($matkul as $key => $value)
                                     @if($jadwalujians['matkul_id'] == $value->id)
-
                                     <option value="{{$value->id}}" selected>{{$value->nama}}</option>
                                     @else
                                     <option value="{{$value->id}}">{{$value->nama}}</option>
@@ -79,6 +77,7 @@
                                 <label for="form-control">Tanggal</label>
                                 <input type="date" name="tanggal" value="{{$jadwalujians['tanggal']}}" class="form-control" placeholder="dd-mm-yyyy" >
 
+
                                 @if($errors->has('tanggal'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('tanggal') }}
@@ -88,7 +87,6 @@
                             <div class="col-lg-4">
                                 <label for="form-control">Jam</label>
                                 <input type="time" name="jam" value="{{$jadwalujians['jam']}}" class="form-control">
-
                                 @if($errors->has('jam'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('jam') }}

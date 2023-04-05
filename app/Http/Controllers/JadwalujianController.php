@@ -85,7 +85,6 @@ class JadwalujianController extends Controller
         $data['dosen'] = DosenModel::get();
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
-
         $data['jadwalujians'] = JadwalujianModel::where('id', $id)->first();
         return view('pages.jadwalujian.editjadwalujian', $data);
     }
@@ -98,7 +97,8 @@ class JadwalujianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['jadwalujians'] = JadwalujianModel::get();
+        return view('pages.lihatjadwalujian.lihatjadwalujian',$data);
     }
 
     /**

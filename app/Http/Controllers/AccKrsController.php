@@ -166,7 +166,9 @@ class AccKrsController extends Controller
     }
     public function destroy($id)
     {
-        KrsModel::where('uid', $id)->update(['status' => 1]);
+
+        KrsModel::where('uid', $id)->delete();
+
         return redirect('/acckrs');
 
     }

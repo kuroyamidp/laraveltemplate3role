@@ -28,7 +28,9 @@ class DaftarSidangController extends Controller
         $month = $now->format('m'); // mengambil nilai bulan saat ini
 
         if (in_array($month, ['02', '03', '04'])) {  // jika bulan saat ini Februari
+
             $data['daftarsidangs'] = DaftarsidangModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
+
             return view('pages.daftarsidang.daftarsidang', $data);
         } else {
             return redirect()->route('home')->with('error', 'Maaf, belum waktunya.'); // atau redirect ke halaman lain dengan alert
@@ -37,7 +39,9 @@ class DaftarSidangController extends Controller
 
     public function cetakdaftarsidang()
     {
+
         $data = DaftarSidangModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
+
         view()->share('data', $data);
         $pdf = PDF::loadview('pages.daftarsidang.cetakdaftarsidang');
         return $pdf->download('daftarsidang.pdf');
@@ -50,8 +54,10 @@ class DaftarSidangController extends Controller
      */
     public function create()
     {
+
         $data['mahasiswa'] = MahasiswaModel::where('user_id', Auth::user()->id)->get();
         return view('pages.daftarsidang.tambahdaftarsidang',$data);
+
     }
 
 
@@ -148,8 +154,10 @@ class DaftarSidangController extends Controller
         // }
 
            $validator = Validator::make($request->all(), [
+
                 'mahasiswa' => 'required',
                'npm' => 'required',
+
                'tanggal_sidang' => 'required',
                'jam' =>'required',
                'file' =>'required',
@@ -162,7 +170,9 @@ class DaftarSidangController extends Controller
            }
 
            DaftarSidangModel::create([
+
                 'mahasiswa_id' => $request->mahasiswa,
+
                'npm' => $request->npm,
                'tanggal_sidang' => Carbon::parse($request->tanggal_sidang)->format('Y-m-d'),
                'jam' => $request->jam,
@@ -218,6 +228,7 @@ class DaftarSidangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $data['mahasiswa'] = MahasiswaModel::where('user_id', Auth::user()->id)->get();
@@ -247,6 +258,7 @@ class DaftarSidangController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'mahasiswa' => 'required',
+
             'npm' => 'required',
             'tanggal_sidang' => 'required',
             'jam' => 'required',
@@ -261,6 +273,7 @@ class DaftarSidangController extends Controller
 
         DaftarsidangModel::where('id', $id)->update([
             'mahasiswa_id' => $request->mahasiswa,
+
             'npm' => $request->npm,
             'tanggal_sidang' => $request->tanggal_sidang,
             'jam' => $request->jam,
@@ -283,3 +296,4 @@ class DaftarSidangController extends Controller
         return redirect('/daftarsidang');
     }
 }
+

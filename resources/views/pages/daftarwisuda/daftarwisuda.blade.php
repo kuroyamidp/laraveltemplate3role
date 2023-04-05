@@ -32,6 +32,7 @@
                                     <tr>
                                         <td width="1%">{{$key + 1}}</td>
                                         <td class="text-center">{{$value->mahasiswa}}</td>
+
                                         <td class="text-center">{{$value->npm}}</td>
                                         <td class="text-center">{{$value->tanggal_sidang}}</td>
                                         <td class="text-center">{{$value->jam}}</td>

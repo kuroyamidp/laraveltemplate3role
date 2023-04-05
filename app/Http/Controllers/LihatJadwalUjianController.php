@@ -12,4 +12,6 @@ class LihatJadwalUjianController extends Controller
         $data['jadwalujians'] = JadwalujianModel::get();
         return view('pages.lihatjadwalujian.lihatjadwalujian',$data);
     }
+
 }
+

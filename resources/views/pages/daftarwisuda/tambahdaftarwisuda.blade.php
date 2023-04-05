@@ -17,6 +17,7 @@
                             <div class="col-lg-6">
                                 <label for="form-control">NPM</label>
                                 <input type="numbert" readonly class="form-control" name="npm" value="{{Auth::user()->mahasiswa['nim']}}">
+
                                 @if($errors->has('npm'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('npm') }}
@@ -34,6 +35,7 @@
                                 @if($errors->has('mahasiswa'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('mahasiswa') }}
+
                                 </div>
                                 @endif
                             </div>

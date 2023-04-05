@@ -1,10 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
+use App\Http\Controllers\Controller;
+use App\Imports\DataMatkulImport;
+use App\Models\Master\MatakuliahModel;
 use Illuminate\Http\Request;
+use App\Models\Master\MahasiswaModel;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
-class uprovekrs extends Controller
+class LihatJadwalUjianDosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +22,10 @@ class uprovekrs extends Controller
      */
     public function index()
     {
-        //
+        {
+            $data['matkul'] = MatakuliahModel::get();
+            return view('pages.lihatjadwaldsn.lihatjadwaldsn', $data);
+        }
     }
 
     /**
