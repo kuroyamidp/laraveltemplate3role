@@ -45,8 +45,6 @@
 
     img {
       margin-top: -50px;
-      width: 100px;
-      margin-top: 10px;
     }
   </style>
 </head>
@@ -55,32 +53,33 @@
   <div class="header">
     <img src="image/LOGO ROBOT.jpg" width="100px">
   </div>
-  <h5>STMIK-AKI-PATI<br><small>{{Auth::user()->mahasiswa['progdi']}} |  
-    Jl. Kamandowo No. 13, Pati Kidul, Kec. Pati, Kab. Pati, Jawa Tengah </small></h5>
-  <h1 align="center">Seluruh Matakuliah</h1>
+  <h5>Universitas PGRI Semarang<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
+  <h1 align="center">Jadwal Ujian</h1>
 
   <table id="customers">
     <tr style="text-align: center;">
-      <th>Kode Mata Kuliah</th>
+      <th>No</th>
       <th>Mata kuliah</th>
-      <th>Sks</th>
-      <th>Mutu</th>
-      <th>Bobot</th>
+      <th>Ruang</th>
+      <th>Dosen</th>
+      <th>Jam</th>
+      <th>Tanggal Ujian</th>
 
     </tr>
     </thead>
     <tbody>
-      @foreach($data as $key => $value)
-
-      <tr style="text-align: center;">
-
-        <td>{{$value->kode_mk}}</td>
-        <td>{{$value->nama}}</td>
-        <td>{{$value->sks}}</td>
-        <td>{{$value->mutu}}</td>
-        <td>{{$value->bobot}}</td>
-      </tr>
-
+      @php
+        $no=1
+      @endphp
+      @foreach ($data as $v)
+        <tr style="text-align: left;">
+            <td width="1%">{{$no++}}</td>
+            <td>{{$v->matkul}}</td>
+            <td>{{$v->ruang}}</td>
+            <td>{{$v->dosen}}</td>
+            <td>{{$v->jam}}</td>
+            <td>{{$v->tanggal}}</td>
+        </tr>
       @endforeach
   </table>
 

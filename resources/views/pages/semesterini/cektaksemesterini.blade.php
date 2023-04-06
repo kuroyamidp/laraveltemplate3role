@@ -42,7 +42,9 @@ h5 {
 }
 
 img {
-  margin-top: -50px;
+    margin-top: -50px;
+  width: 100px;
+  margin-top: 10px;
 }
 
 
@@ -54,7 +56,8 @@ img {
 <div class="header">
   <img src="image/LOGO ROBOT.jpg" width="100px">
 </div>
-<h5>Universitas PGRI Semarang<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
+<h5>STMIK-AKI-PATI<br><small>{{Auth::user()->mahasiswa['progdi']}} |  
+    Jl. Kamandowo No. 13, Pati Kidul, Kec. Pati, Kab. Pati, Jawa Tengah </small></h5>
 
 
     <h1 style="text-align: center;">Matakuliah Semester Ini</h1>

@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('jadwalujian.create')}}" class="btn btn-primary btn-sm">Print</a>
+                    <a href="/cetakjadwalujian" class="btn btn-primary btn-sm">Print</a>
                 </div>
                 <div class="card-body">
                     <div class="row">

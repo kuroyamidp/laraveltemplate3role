@@ -73,7 +73,7 @@ Route::get('/cetaknilaiujian', [KhsController::class, 'cetaknilaiujian'])->name(
 Route::get('/cetakdaftarwisuda', [DaftarWisudaController::class, 'cetakdaftarwisuda'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetaklihatjadwal', [LihatJadwalController::class, 'cetaklihatjadwal'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakjadwalsemester', [SemesterIniController::class, 'cetakjadwalsemester'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
-
+Route::get('/cetakjadwalujian', [LihatJadwalujianController::class, 'cetakjadwalujian'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();

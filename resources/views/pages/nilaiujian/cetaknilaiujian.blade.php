@@ -37,6 +37,8 @@ h5 {
 
 img {
   margin-top: -50px;
+  width: 100px;
+  margin-top: 10px;
 }
 
 
@@ -48,7 +50,8 @@ img {
 <div class="header">
   <img src="image/LOGO ROBOT.jpg" width="100px">
 </div>
-<h5>STMIK-AKI-PATI<br><small>Informatika | Rekayasa Perangkat Lunak</small></h5>
+<h5>STMIK-AKI-PATI<br><small>{{Auth::user()->mahasiswa['progdi']}} |  
+  Jl. Kamandowo No. 13, Pati Kidul, Kec. Pati, Kab. Pati, Jawa Tengah </small></h5>
 <h1 align="center">KHS</h1>
 
 <table id="customers">
