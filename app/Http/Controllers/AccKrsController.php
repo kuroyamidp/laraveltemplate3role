@@ -162,11 +162,13 @@ class AccKrsController extends Controller
         $krs->save();
 
         // Redirect ke halaman KRS
-        return redirect('/krs');
+        return redirect('/krs');    
     }
     public function destroy($id)
     {
+
         KrsModel::where('uid', $id)->delete();
+
         return redirect('/acckrs');
 
     }

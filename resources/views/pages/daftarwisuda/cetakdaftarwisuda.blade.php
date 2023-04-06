@@ -48,34 +48,29 @@ img {
 
 <body>
 <div class="header">
-  <img src="image/LOGO ROBOT.jpg">
+  <img src="image/LOGO ROBOT.jpg" width="100px">
 </div>
 <h5>STMIK-AKI-PATI<br><small>{{Auth::user()->mahasiswa['progdi']}} |  
   Jl. Kamandowo No. 13, Pati Kidul, Kec. Pati, Kab. Pati, Jawa Tengah </small></h5>
-<h1 align="center">KRS Mahasiswa</h1>
+<h1 align="center">Daftar Wisuda Mahasiswa</h1>
 
 <table id="customers">
+    <th>Nama</th>
+    <th>NPM</th>
+    <th>Tanggal Ajukan Wisuda</th>
+    <th>Jam</th>
+</tr>
+  @foreach ($data as $v)
   <tr>
-  <th>Nisn Mahasiswa</th>
-    <th>Nama Mahasiswa</th>
-    <th>Nama Matkul</th>
-    <th>Semester</th>
-  </tr>
-  @foreach ($krs as $v)
-  <tr>
-    <td>{{$v->nim}}</td>
-    <td>{{($v->nama)}}</td>
-    <td style="text-align: justify;">
-      @foreach($v->daftar_jadwal as $d)
-      <li>{{$d->matkul["matkul"]}}|{{$d->jam}}</li>
-      @endforeach
-    </td>
-    
-    <td>{{$v->semester}}</td>
+    <td>{{$v->mahasiswa}}</td>
+    <td>{{$v->npm}}</td>
+    <td>{{$v->tanggal_sidang}}</td>
+    <td>{{$v->jam}}</td>  
   </tr>
   @endforeach
 </table>
 
 </body>
 </html>
+
 

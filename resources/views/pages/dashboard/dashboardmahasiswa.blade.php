@@ -55,7 +55,8 @@
                         <div class="widget-content widget-content-area">
                             <div class="d-flex justify-content-end">
                                 <!-- <h3 class="">Profile</h3> -->
-                                <a href="/profile" class="mt-2 edit-profile ml-1 mr-1"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
+                                <a href="/profile" class="mt-2 edit-profile ml-1 mr-1" data-toggle="tooltip" title='Update'> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
+
                                         <path d="M12 20h9"></path>
                                         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                                     </svg></a>
@@ -114,20 +115,49 @@
                                                 <tr>
                                                     <td width="1%">No</td>
                                                     <td>Mata kuliah</td>
-                                                    <td>Jam</td>
+
+                                                    <td class="text-center">Jam</td>
+
                                                     <td>Dosen</td>
                                                     <td>Ruang</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                <?php $nomor = 1; ?>
+                                            @foreach($jdw as $key => $value)
+                                                @foreach($value as $ky => $val)
+                                                @if($val->semester == Auth::user()->mahasiswa['semester_berjalan'])
+                                                {{-- <?php
+                                                $currentDay = \Carbon\Carbon::now()->format('l'); // mengambil hari sekarang dalam bahasa Inggris
+                                                $daysInIndonesian = [
+                                                    'Monday' => 'senin',
+                                                    'Tuesday' => 'selasa',
+                                                    'Wednesday' => 'rabu',
+                                                    'Thursday' => 'kamis',
+                                                    'Friday' => 'jumat',
+                                                    'Saturday' => 'sabtu',
+                                                    'Sunday' => 'minggu'
+                                                ];
+                                                $currentDayInIndonesian = $daysInIndonesian[\Carbon\Carbon::now()->format('l')]; 
+                                                $tanggal = \Carbon\Carbon::parse($key)->format('Y-m-d');
+                                                $data = App\Models\JadwalkelasModel::where('semester', 5)
+                                                            ->whereDate('tanggal', $tanggal)
+                                                            ->get();
+                                                ?>
+                                                @foreach($data as $item) --}}
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td class="text-center" width="1%"><?php echo $nomor++; ?></td>
+                                                    <td>{{$val->matkul['matkul']}}</td>
+                                                    <td class="text-center">{{$val->jam}}</td>
+                                                    <td>{{$val->matkul['dosen']}}</td>
+                                                    <td>{{$val->matkul['ruang']}}</td>
                                                 </tr>
+                                                @endif
+                                                @endforeach
+                                                
+                                            @endforeach
+                                            {{-- @endforeach --}}
+
                                             </tbody>
                                         </table>
                                     </div>

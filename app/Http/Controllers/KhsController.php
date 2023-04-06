@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Master\NilaiUjianModel;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+
 
 class KhsController extends Controller
 {
@@ -16,9 +18,22 @@ class KhsController extends Controller
     public function index()
     {
         $mhs = Auth::user()->mahasiswa;
+        // return $mhs;
+
         $data['nilaiujian'] = NilaiUjianModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
         return view('pages.lihatkhs.lihatkhs', $data);
     }
+
+
+    public function cetaknilaiujian()
+    {
+        $data = NilaiUjianModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
+        // return $data;
+        view()->share('data', $data);
+        $pdf = PDF::loadview('pages.nilaiujian.cetaknilaiujian');
+        return $pdf->download('KHS.pdf');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -85,4 +100,6 @@ class KhsController extends Controller
     {
         //
     }
+
 }
+

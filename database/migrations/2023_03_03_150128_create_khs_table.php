@@ -13,17 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('krs', function (Blueprint $table) {
+        Schema::create('khs', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uid');
-            $table->unsignedBigInteger('mahasiswa_id');
-            $table->json('jadwal_id');
-            $table->integer('semester');
-            $table->integer('status')->default(0);
             $table->timestamps();
-            $table->softDeletes();
-
-            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
         });
     }
 
@@ -34,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('krs');
+        Schema::dropIfExists('khs');
     }
 };

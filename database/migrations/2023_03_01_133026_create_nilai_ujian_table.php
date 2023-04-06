@@ -13,19 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('krs', function (Blueprint $table) {
+        Schema::create('nilai_ujian', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uid');
             $table->unsignedBigInteger('mahasiswa_id');
-            $table->json('jadwal_id');
-            $table->integer('semester');
-            $table->integer('status')->default(0);
+            $table->unsignedBigInteger('matkul_id');
+            $table->integer('nilai');
             $table->timestamps();
             $table->softDeletes();
-
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
+            $table->foreign('matkul_id')->references('id')->on('mata_kuliah');
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('krs');
+        //
     }
 };

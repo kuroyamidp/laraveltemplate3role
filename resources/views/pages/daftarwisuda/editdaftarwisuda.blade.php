@@ -17,7 +17,8 @@
                         <div class="row mb-1">
                             <div class="col-lg-6">
                                 <label for="form-control">NPM</label>
-                                <input type="numbert" class="form-control" name="npm" value="{{$daftarwisuda['npm']}}">
+                                <input type="numbert" readonly class="form-control" name="npm" value="{{$daftarwisuda['npm']}}">
+
                                 @if($errors->has('npm'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('npm') }}
@@ -26,10 +27,20 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="form-control">Nama</label>
-                                <input type="text" class="form-control" name="nama" value="{{$daftarwisuda['nama']}}">
-                                @if($errors->has('nama'))
+                                <select class="selectpicker" data-live-search="true" name="mahasiswa">
+                                <option value="">Pilih salah satu</option>
+                                    @foreach($mahasiswa as $key => $value)
+                                    @if($daftarwisuda['mahasiswa_id'] == $value->id)
+                                    <option value="{{$value->id}}" selected>{{$value->nama}}</option>
+                                    @else
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endif
+                                    @endforeach
+                                </select> 
+                                @if($errors->has('mahasiswa'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('nama') }}
+                                    {{ $errors->first('mahasiswa') }}
+
                                 </div>
                                 @endif
                             </div>
@@ -46,7 +57,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="form-control">Tanggal Sidang</label>
-                                <input type="date" name="tanggal_sidang" class="form-control" placeholder="dd-mm-yyyy" value="{{$daftarwisuda['tanggal']}}">
+                                <input type="date" name="tanggal_sidang" class="form-control" placeholder="dd-mm-yyyy" value="{{$daftarwisuda['tanggal_sidang']}}">
                                 @if($errors->has('tanggal_sidang'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('tanggal_sidang') }}

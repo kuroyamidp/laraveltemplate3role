@@ -166,4 +166,4 @@ class LihatJadwalController extends Controller
         }
         return redirect('/matakuliah')->with('success', 'Berhasil upload data mata kuliah');
     }
-}
+}   

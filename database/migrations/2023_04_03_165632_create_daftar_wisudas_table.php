@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()    
     {
-        Schema::create('daftarsidangs', function (Blueprint $table) {
+        Schema::create('daftar_wisuda', function (Blueprint $table) {
             $table->id();
-            $table->text('nama');
+            $table->unsignedBigInteger('mahasiswa_id');
             $table->string('npm');
             $table->date('tanggal_sidang');
             $table->time('jam');
             $table->text('file');
+            $table->text('doc');
             $table->timestamps();
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daftarsidangs');
+        Schema::dropIfExists('daftar_wisuda_models');
     }
 };

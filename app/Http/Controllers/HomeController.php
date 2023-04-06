@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
-use App\Models\Master\MahasiswaModel;
+use App\Models\Master\DaftarkelasModel;
+use App\Models\Master\DosenModel;
+use App\Models\Master\MahasiswaModel; 
+use App\Models\Master\MatakuliahModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use DateTime;
 
 class HomeController extends Controller
 {
@@ -40,13 +46,21 @@ class HomeController extends Controller
         } elseif (Auth::user()->role_id == 1) {
             return view('pages.dashboard.dashboarddosen');
         } else {
-            //  return Auth::user()->mahasiswa['semester_berjalan'];
-            $data['krs'] = KrsModel::all();
-            return view('pages.dashboard.dashboardmahasiswa');
+            
+            
+            $jdw = JadwalkelasModel::get();
+            $check = [];
+            foreach ($jdw as $key => $value) {
+                $check[$value->hari][] = $value;
+            }
+            // return $check;
+            $data['jdw'] = $check;
+            // return $data;
+            return view('pages.dashboard.dashboardmahasiswa',$data);
         }
     }
 
-public function updateHome(Request $request, $id) {
+    public function updateHome(Request $request, $id) {
         // Validasi input dari form
         $request->validate([
             'jadwal_id' =>'required',

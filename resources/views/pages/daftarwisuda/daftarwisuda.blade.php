@@ -20,7 +20,7 @@
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>NPM</th>
-                                        <th>Tanggal Ajukan Sidang</th>
+                                        <th>Tanggal Ajukan Wisuda</th>
                                         <th>Jam</th>
                                         <th>Document-1</th>
                                         <th>Document-2</th>
@@ -31,7 +31,8 @@
                                     @foreach($daftarwisuda as $key => $value)
                                     <tr>
                                         <td width="1%">{{$key + 1}}</td>
-                                        <td class="text-center">{{$value->nama}}</td>
+                                        <td class="text-center">{{$value->mahasiswa}}</td>
+
                                         <td class="text-center">{{$value->npm}}</td>
                                         <td class="text-center">{{$value->tanggal_sidang}}</td>
                                         <td class="text-center">{{$value->jam}}</td>

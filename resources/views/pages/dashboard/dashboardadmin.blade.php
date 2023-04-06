@@ -3,8 +3,10 @@
 @section('content')
 
 <div class="layout-px-spacing">
+  
   <!-- Navbar -->
-  <div class="row layout-top-spacing">
+  <div class="row layout-top-spacing justify-content-center">
+    <h4 class="badge badge-success">Selamat datang Admin</h4>
     <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
       <div class="container">
         <div class="row">
@@ -12,10 +14,8 @@
             <div class="card text-center">
               <i class="fa fa-database fa-5x mt-3"></i>
               <div class="card-body">
-
-                <h5 class="card-title">Menu Approve Daftar Wisuda</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam tenetur, odio dolor nam cum possimus aspernatur ducimus
-                  rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
+                <h5 class="card-title">Data Mahasiswa</h5>
+                <p class="card-text">Data Mahasiswa yang telah terdaftar di STIMIK AKI PATI
                 </p>
                 <div class="card-header d-flex justify-content-end" style="background-color: white;">
                   <a href="/mahasiswa" class="btn btn-dark btn-sm">Rincian</a>
@@ -27,12 +27,11 @@
             <div class="card text-center">
               <i class="fa fa-cogs fa-5x mt-3"></i>
               <div class="card-body">
-                <h5 class="card-title">Menu Approve Daftar Sidang</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam tenetur, odio dolor nam cum possimus aspernatur ducimus
-                  rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
+                <h5 class="card-title">Data Dosen</h5>
+                <p class="card-text">Data Dosen yang telah terdaftar di STIMIK AKI PATI
                 </p>
                 <div class="card-header d-flex justify-content-end" style="background-color: white;">
-                  <a href="{{route('accsidang.index')}}" class="btn btn-dark btn-sm">Rincian</a>
+                  <a href="/dosen" class="btn btn-dark btn-sm">Rincian</a>
                 </div>
               </div>
             </div>
@@ -43,8 +42,7 @@
               <div class="card-body">
 
                 <h5 class="card-title" class="bi bi-archive">Menu Aprove KRS</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam tenetur, odio dolor nam cum possimus aspernatur ducimus
-                  rerum architecto iusto nesciunt sequi aut provident. Nostrum sunt illo quidem corporis esse!
+                <p class="card-text">Data Krs yang telah diisi oleh Mahasiswa
                 </p>
                 <div class="card-header d-flex justify-content-end" style="background-color: white;">
                   <a href="{{route('acckrs.index')}}" class="btn btn-dark btn-sm">Rincian</a>
@@ -63,4 +61,5 @@
     sessionStorage.setItem('updateButtonClicked', 'true');
   });
 </script>
-@endsection
+@endsection 
+

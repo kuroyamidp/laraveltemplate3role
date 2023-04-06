@@ -6,15 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class DaftarsidangModel extends Model
+class DaftarSidangModel extends Model
 {
     use HasFactory;
     protected $table = "daftarsidangs";
     protected $fillable = [
-        'nama',
+        'mahasiswa_id',
         'npm',
         'tanggal_sidang',
         'jam',
         'file',
     ];
+    protected $appends = ['mahasiswa'];
+
+    public function getMahasiswaAttribute()
+    {
+        if (array_key_exists('mahasiswa_id', $this->attributes)) {
+            $kat = DB::table('mahasiswa')->select('nama')->where('id', $this->attributes['mahasiswa_id'])->first();
+            if ($kat) {
+                return $kat->nama;
+            }
+        }
+
+        return null;
+    }
 }

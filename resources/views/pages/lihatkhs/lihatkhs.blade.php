@@ -8,7 +8,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="/cetakdaftarsidang" class="btn btn-success btn-sm">Print</a>
+                    <a href="/cetaknilaiujian" class="btn btn-success btn-sm">Print</a>
+
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -18,7 +19,7 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Mahasiswa</th>
-                                        <th>Mata Kuliah ID</th>
+                                        <th>Mata Kuliah</th>
                                         <th>Nilai Ujian</th>
                                     </tr>
                                 </thead>

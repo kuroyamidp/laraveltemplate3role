@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Master\DaftarWisudaModel;
 use App\Models\Master\KrsModel;
+use App\Models\Master\MahasiswaModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,7 @@ class DaftarWisudaController extends Controller
         $month = $now->format('m'); // mengambil nilai bulan saat ini
 
         if (in_array($month, ['02', '03', '04'])) {  // jika bulan saat ini Februari
-            $data['daftarwisuda'] = DaftarWisudaModel::get();
+            $data['daftarwisuda'] = DaftarWisudaModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
             return view('pages.daftarwisuda.daftarwisuda', $data);
         } else {
             return redirect()->route('home')->with('error', 'Maaf, belum waktunya.'); // atau redirect ke halaman lain dengan alert
@@ -31,10 +32,10 @@ class DaftarWisudaController extends Controller
 
     public function cetakdaftarwisuda()
     {
-        $data = DaftarSidangModel::all();
+        $data = DaftarWisudaModel::where('mahasiswa_id', Auth::user()->mahasiswa->id)->get();
         view()->share('data', $data);
-        $pdf = PDF::loadview('pages.daftarwisuda.cetakdaftarsidang');
-        return $pdf->download('daftarsidang.pdf');
+        $pdf = PDF::loadview('pages.daftarwisuda.cetakdaftarwisuda');
+        return $pdf->download('Daftar_Wisuda.pdf');
     }
 
     /**
@@ -44,7 +45,9 @@ class DaftarWisudaController extends Controller
      */
     public function create()
     {
-        return view('pages.daftarwisuda.tambahdaftarwisuda');
+        $data['mahasiswa'] = MahasiswaModel::where('user_id', Auth::user()->id)->get();
+        // return $data;
+        return view('pages.daftarwisuda.tambahdaftarwisuda', $data);
     }
 
 
@@ -141,8 +144,8 @@ class DaftarWisudaController extends Controller
         // }
 
            $validator = Validator::make($request->all(), [
+                'mahasiswa' => 'required',
                'npm' => 'required',
-               'nama' => 'required',
                'tanggal_sidang' => 'required',
                'jam' =>'required',
                'file' =>'required',
@@ -156,7 +159,7 @@ class DaftarWisudaController extends Controller
            }
 
            DaftarWisudaModel::create([
-               'nama' => $request->nama,
+                'mahasiswa_id' => $request->mahasiswa,
                'npm' => $request->npm,
                'tanggal_sidang' => Carbon::parse($request->tanggal_sidang)->format('Y-m-d'),
                'jam' => $request->jam,
@@ -215,6 +218,7 @@ class DaftarWisudaController extends Controller
      */
     public function show($id)
     {
+        $data['mahasiswa'] = MahasiswaModel::where('user_id', Auth::user()->id)->get();
         $data['daftarwisuda'] = DaftarWisudaModel::where('id', $id)->first();
         return view('pages.daftarwisuda.editdaftarwisuda', $data);
     }
@@ -238,9 +242,9 @@ class DaftarWisudaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    { 
         $validator = Validator::make($request->all(), [
-            'nama' => 'required',
+            'mahasiswa' => 'required',
             'npm' => 'required',
             'tanggal_sidang' => 'required',
             'jam' => 'required',
@@ -254,8 +258,8 @@ class DaftarWisudaController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        DaftarWisudaModel::where('nama', $id)->update([
-            'nama' => $request->nama,
+        DaftarWisudaModel::where('id', $id)->update([
+            'mahasiswa_id' => $request->mahasiswa,
             'npm' => $request->npm,
             'tanggal_sidang' => $request->tanggal_sidang,
             'jam' => $request->jam,

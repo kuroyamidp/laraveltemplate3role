@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Master\JadwalujianModel;
+use App\Models\JadwalujianModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Master\DaftarkelasModel;
@@ -24,10 +24,10 @@ class JadwalujianController extends Controller
     public function index()
     {
         $data['jadwalujians'] = JadwalujianModel::get();
-        return view('pages.jadwalujian.jadwalujian', $data);
+        return view('pages.jadwalujian.jadwalujian',$data);
     }
 
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -39,6 +39,7 @@ class JadwalujianController extends Controller
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
         return view('pages.jadwalujian.tambahjadwalujian', $data);
+    
     }
 
     /**
@@ -67,8 +68,8 @@ class JadwalujianController extends Controller
             'matkul_id' => $request->mata_kuliah,
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
-            'jam' => $request->jam,
-            'tanggal' => $request->tanggal,
+            'jam' => $request->jam, 
+            'tanggal'=>$request->tanggal,
         ]);
         return redirect('/jadwalujian')->with('success', 'Berhasil tambah data');
     }
@@ -127,7 +128,7 @@ class JadwalujianController extends Controller
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
             'jam' => $request->jam,
-            'tanggal' => $request->tanggal,
+            'tanggal'=>$request->tanggal,
         ]);
         return redirect('/jadwalujian')->with('success', 'Berhasil update data');
     }

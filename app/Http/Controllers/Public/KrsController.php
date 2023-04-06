@@ -260,6 +260,6 @@ class KrsController extends Controller
     {
 
         KrsModel::where('uid', $id)->delete();
-        return redirect('/krs');
+        return redirect('/krs'); 
     }
 }

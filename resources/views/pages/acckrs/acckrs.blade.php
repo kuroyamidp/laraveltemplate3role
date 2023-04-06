@@ -29,9 +29,9 @@
                     <td>{{$v->nim}}</td>
                     <td>{{($v->nama)}}</td>
                     <td>
-                      @if($v->status == 0)
+                      @if($v->status == 1)
                       <span class="badge badge-info">Menunggu konfirmasi</span>
-                      @elseif($v->status == 1)
+                      @elseif($v->status == 0)
                       <span class="badge badge-info">KRS di terima</span>
                       @else
                       <span class="badge badge-danger">KRS di tolak</span>
@@ -44,10 +44,12 @@
                     </td>
                     <td>{{$v->semester}}</td>
                     <td>
-                      <form method="POST" action="{{ route('status') }}">
-                        @csrf
-                        <input type="hidden" name="id" value="123">
-                        <button class="btn btn-success btn-sm" data-toggle="tooltip" type="submit">Kirim</button>
+                      <form style="text-align: center;">
+
+                        {{-- <a href="{{route('acckrs.create')}}" class="btn btn-success btn-sm" data-toggle="tooltip">Add Status</a> --}}
+                        <a href="{{route('acckrs.destroy', $v->uid) }}" class="btn btn-success btn-sm " data-toggle="tooltip">Acc KRS</a>
+
+
                       </form>
 
 
@@ -76,4 +78,5 @@
   updateButton.addEventListener('click', function() {
     sessionStorage.setItem('updateButtonClicked', 'true');
   });
-</script>
+</script> 
+

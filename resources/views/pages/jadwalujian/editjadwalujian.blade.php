@@ -75,7 +75,9 @@
                         <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Tanggal</label>
-                                <input type="date" name="tanggal" class="form-control" value="{{$jadwalujians['tanggal']}}" >
+                                <input type="date" name="tanggal" value="{{$jadwalujians['tanggal']}}" class="form-control" placeholder="dd-mm-yyyy" >
+
+
                                 @if($errors->has('tanggal'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('tanggal') }}
@@ -84,7 +86,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label for="form-control">Jam</label>
-                                <input type="time" class="form-control" name="jam" value="{{$jadwalujians['jam']}}">
+                                <input type="time" name="jam" value="{{$jadwalujians['jam']}}" class="form-control">
                                 @if($errors->has('jam'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('jam') }}
@@ -98,8 +100,6 @@
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
