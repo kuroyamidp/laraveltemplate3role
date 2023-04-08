@@ -7,6 +7,7 @@ use App\Imports\DataMahasiswaImport;
 use App\Models\Master\MahasiswaModel;
 use App\Models\Master\ProgdiModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -21,8 +22,9 @@ class ProfilemhsController extends Controller
      */
     public function index()
     {
-        $data['mahasiswa'] = MahasiswaModel::get();
-        return view('pages.mahasiswa.mahasiswa', $data);
+        $user = Auth::user();
+        $data['mahasiswa'] = MahasiswaModel::where('user_id', $user->id)->get();
+        return view('pages.mahasiswa.profile.profileuser', $data);
     }
 
     /**

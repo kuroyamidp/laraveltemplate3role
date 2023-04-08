@@ -6,120 +6,164 @@
 
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
-            <ul class="nav nav-tabs" id="border-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="border-home-tab" data-toggle="tab" href="#border-home" role="tab" aria-controls="border-home" aria-selected="true"> Data pribadi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="border-profile-tab" data-toggle="tab" href="#border-profile" role="tab" aria-controls="border-profile" aria-selected="false"> Dokumen identitas</a>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="border-contact-tab" data-toggle="tab" href="#border-contact" role="tab" aria-controls="border-contact" aria-selected="false"> Data orang tua </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="border-contact-tab" data-toggle="tab" href="#border-sekolah" role="tab" aria-controls="border-contact" aria-selected="false"> Asal sekolah </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
             <div class="card">
+                <div class="card-header d-flex justify-content-end">
+                    <a href="{{route('mahasiswa.index')}}" class="btn btn-dark btn-sm">Kembali</a>
+                </div>
                 <div class="card-body">
-                    <div class="tab-content mb-4" id="border-tabsContent">
-                        <div class="tab-pane fade show active" id="border-home" role="tabpanel" aria-labelledby="border-home-tab">
-                            <div class="row mb-2">
-                                <div class="col-sm-4">
-                                    <label for="fullName">Nama</label>
-                                    <input type="text" readonly class="form-control" id="fullName" placeholder="Full Name" value="{{Auth::user()->mahasiswa['nama']}}">
+                    <form action="{{route('mahasiswa.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row mb-1">
+                            <div class="col-lg-3">
+                                <label for="form-control">NIM</label>
+                                <input type="text" class="form-control" name="nim" value="{{$mahasiswa['nim']}}">
+                                <input type="hidden" class="form-control" name="uid" value="{{$mahasiswa['uid']}}">
+                                @if($errors->has('nim'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('nim') }}
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="form-control">Tempat tinggal</label>
-                                    <input type="text" class="form-control" name="tempat_tinggal">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="form-control">Tanggal lahir</label>
-                                    <input type="date" class="form-control" name="tanggal_lahir">
-                                </div>
+                                @endif
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-lg-4">
-                                    <label for="form-control">Warga negara</label>
-                                    <select name="warga_negara" class="form-control">
-                                        <option value="">Pilih salah satu</option>
-                                        <option value="1">WNI</option>
-                                        <option value="2">WNA</option>
-                                    </select>
+                            <div class="col-lg-3">
+                                <label for="form-control">Nama</label>
+                                <input type="text" class="form-control" name="nama" value="{{$mahasiswa['nama']}}">
+                                @if($errors->has('nama'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('nama') }}
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="form-control">No. KTP</label>
-                                    <input type="text" class="form-control" name="nomor_ktp">
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="form-control">NISN</label>
-                                    <input type="text" class="form-control" name="nisn">
-                                </div>
+                                @endif
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-lg-4">
-                                    <label for="form-control">Jenis kelamin</label>
-                                    <select class="form-control" disabled>
-                                        @if(Auth::user()->mahasiswa['jenis_kelamin'] == 1)
-                                        <option value="" selected>Laki-laki</option>
-                                        @else
-                                        <option value="" selected>Perempuan</option>
+                            <div class="col-lg-3">
+                                <label for="form-control">Progdi</label>
+                                <select name="progdi" class="form-control">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($progdi as $key => $value)
+                                    @if($mahasiswa['progdi_id'] == $value->id)
+                                    <option value="{{$value->id}}" selected>{{$value->nama_studi}} [ {{$value->jenjang_studi}} ] </option>
+                                    @else
+                                    <option value="{{$value->id}}">{{$value->nama_studi}} [ {{$value->jenjang_studi}} ] </option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @if($errors->has('progdi'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('progdi') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="form-control">Perguruan tinggi</label>
+                                <input type="text" class="form-control" name="perguruan_tinggi" value="{{$mahasiswa['perguruan_tinggi']}}">
+                                @if($errors->has('perguruan_tinggi'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('perguruan_tinggi') }}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-lg-2">
+                                <label for="form-control">Jenis kelamin</label>
+                                <select name="jenis_kelamin" class="form-control">
+                                    <option value="">Pilih salah satu</option>
+                                    @if($mahasiswa['jenis_kelamin'] == 1)
+                                    <option value="1" selected>Laki-laki</option>
+                                    <option value="2">Perempuan</option>
+                                    @else
+                                    <option value="1">Laki-laki</option>
+                                    <option value="2" selected>Perempuan</option>
+                                    @endif
+                                </select>
+                                @if($errors->has('jenis_kelamin'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('jenis_kelamin') }}
+                                </div>
+                                @endif
+                            </div>
 
-                                        @endif
-                                    </select>
+                            <div class="col-lg-2">
+                                <label for="form-control">Semester awal</label>
+                                <input type="text" class="form-control" name="semester_awal" value="{{$mahasiswa['semester_awal']}}">
+                                @if($errors->has('semester_awal'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('semester_awal') }}
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="form-control">Agama</label>
-                                    <select name="agama" class="form-control">
-                                        <option value="">Pilih salah satu</option>
-                                        <option value="islam">Islam</option>
-                                        <option value="hindu">Hindhu</option>
-                                        <option value="budha">Budha</option>
-                                        <option value="nasrani">Nasrani</option>
-                                        <option value="katolik">Katolik</option>
-                                    </select>
+                                @endif
+                            </div>
+                            <div class="col-lg-2">
+                                <label for="form-control">Semester saat ini</label>
+                                <input type="number" min="0" max="20" class="form-control" name="semester_berjalan" value="{{$mahasiswa['semester_berjalan']}}">
+                                @if($errors->has('semester_berjalan'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('semester_berjalan') }}
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="form-control">Gol. darah</label>
-                                    <select name="agama" class="form-control">
-                                        <option value="">Pilih salah satu</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="AB">AB</option>
-                                        <option value="0">O</option>
-                                    </select>
+                                @endif
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="form-control">Status Awal Mahasiswa</label>
+                                <input type="text" class="form-control" name="status_awal" value="{{$mahasiswa['status_mahasiswa']}}">
+                                @if($errors->has('status_awal'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('status_awal') }}
                                 </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="form-control">Status mahasiswa saat ini</label>
+                                <select name="status" class="form-control">
+                                    <option value="">Pilih salah satu</option>
+                                    @if($mahasiswa['status'] == 0)
+                                    <option value="0" selected>Tidak aktif</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="2">Lulus</option>
+                                    @elseif($mahasiswa['status'] == 1)
+                                    <option value="0">Tidak aktif</option>
+                                    <option value="1" selected>Aktif</option>
+                                    <option value="2">Lulus</option>
+                                    @else
+                                    <option value="0">Tidak aktif</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="2" selected>Lulus</option>
+                                    @endif
+                                </select>
+                                @if($errors->has('status'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('status') }}
+                                </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="border-profile" role="tabpanel" aria-labelledby="border-profile-tab">
-                        <div class="media">
-                            <img class="meta-usr-img mr-3" src="assets/img/90x90.jpg" alt="Generic placeholder image">
-                            <div class="media-body">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <div class="row mb-1">
+                            <div class="col-lg-6">
+                                <div class="custom-file-container" data-upload-id="myFirstImage">
+                                    <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                    <label class="custom-file-container__custom-file">
+                                        <input type="file" class="custom-file-container__custom-file__custom-file-input" name="foto" accept="image/*">
+                                        <!-- <input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> -->
+                                        <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                    </label>
+                                    <div class="custom-file-container__image-preview"></div>
+                                </div>
+                                @if($errors->has('foto'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('foto') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                                <img src="/Image/{{$mahasiswa['image']}}" style="width: 300px; height: 300px !important" class="img-thumbnail" alt="Image-{{$mahasiswa['nama']}}">
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="border-contact" role="tabpanel" aria-labelledby="border-contact-tab">
-                        <p class="dropcap  dc-outline-primary">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
+                        <div class="row">
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 @endsection

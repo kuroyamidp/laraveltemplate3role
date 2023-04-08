@@ -126,25 +126,8 @@
                                                 <?php $nomor = 1; ?>
                                             @foreach($jdw as $key => $value)
                                                 @foreach($value as $ky => $val)
-                                                @if($val->semester == Auth::user()->mahasiswa['semester_berjalan'])
-                                                {{-- <?php
-                                                $currentDay = \Carbon\Carbon::now()->format('l'); // mengambil hari sekarang dalam bahasa Inggris
-                                                $daysInIndonesian = [
-                                                    'Monday' => 'senin',
-                                                    'Tuesday' => 'selasa',
-                                                    'Wednesday' => 'rabu',
-                                                    'Thursday' => 'kamis',
-                                                    'Friday' => 'jumat',
-                                                    'Saturday' => 'sabtu',
-                                                    'Sunday' => 'minggu'
-                                                ];
-                                                $currentDayInIndonesian = $daysInIndonesian[\Carbon\Carbon::now()->format('l')]; 
-                                                $tanggal = \Carbon\Carbon::parse($key)->format('Y-m-d');
-                                                $data = App\Models\JadwalkelasModel::where('semester', 5)
-                                                            ->whereDate('tanggal', $tanggal)
-                                                            ->get();
-                                                ?>
-                                                @foreach($data as $item) --}}
+                                                @if($val->semester == Auth::user()->mahasiswa['semester_berjalan'] && ucfirst(strtolower($val->hari)) == \Carbon\Carbon::now()->isoFormat('dddd') )
+                                                
                                                 <tr>
                                                     <td class="text-center" width="1%"><?php echo $nomor++; ?></td>
                                                     <td>{{$val->matkul['matkul']}}</td>
@@ -156,7 +139,7 @@
                                                 @endforeach
                                                 
                                             @endforeach
-                                            {{-- @endforeach --}}
+                                            
 
                                             </tbody>
                                         </table>
