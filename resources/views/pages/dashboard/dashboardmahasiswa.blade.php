@@ -12,11 +12,15 @@
 
     <head>
         <style>
+            .bg{
+                background-color: F1EAFF;
+            }
             .custom-file-container__image-preview {
                 box-shadow: none;
                 max-width: 250px;
                 max-height: 400px;
                 margin-top: -43px;
+                background-color: transparent;
 
                 /* or any other height you want to set */
             }
@@ -45,7 +49,7 @@
                 /* your CSS styles for extra large devices here */
             }
         </style>
-
+<div class="bg">
         <div class="layout-px-spacing">
 
             <div class="row layout-top-spacing">
@@ -103,7 +107,7 @@
                         <div class="card-header d-flex justify-content-center">
                             <b>Jadwal perkulihan hari {{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</b>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
@@ -116,7 +120,7 @@
                                                     <td width="1%">No</td>
                                                     <td>Mata kuliah</td>
 
-                                                    <td class="text-center">Jam</td>
+                                                    <td>Jam</td>
 
                                                     <td>Dosen</td>
                                                     <td>Ruang</td>
@@ -224,5 +228,6 @@
             </div>
 
 
+        </div>
         </div>
         @endsection

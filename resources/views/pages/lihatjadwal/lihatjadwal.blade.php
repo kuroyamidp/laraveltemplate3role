@@ -6,7 +6,7 @@
 
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
-            <div class="card">
+        <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); background-color: #ffffff;">
             <div class="card-header" style="background-color: white;">
                     <a href="/cetaklihatjadwal" class="btn btn-success btn-sm">Print</a>
                     <!-- Modal -->

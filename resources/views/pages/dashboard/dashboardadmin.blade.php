@@ -42,7 +42,7 @@
               <div class="card-body">
 
                 <h5 class="card-title" class="bi bi-archive">Menu Aprove KRS</h5>
-                <p class="card-text">Data Krs yang telah diisi oleh Mahasiswa
+                <p class="card-text">Data Krs yang sebelumnya telah diisi oleh Mahasiswa
                 </p>
                 <div class="card-header d-flex justify-content-end" style="background-color: white;">
                   <a href="{{route('acckrs.index')}}" class="btn btn-dark btn-sm">Rincian</a>

@@ -1,12 +1,16 @@
 @extends('layouts.main')
 
 @section('content')
-
+<style>
+    .bg3 {
+        background-color: red;
+    }
+</style>
 <div class="layout-px-spacing">
 
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
-            <div class="card">
+        <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); background-color: #ffffff;">
                 <div class="card-header">
                     <a href="/cetakjadwalujian" class="btn btn-primary btn-sm">Print</a>
                 </div>

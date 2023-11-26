@@ -1,48 +1,26 @@
-    <!--  BEGIN NAVBAR  -->
-    <div class="header-container fixed-top">
-        <header class="header navbar navbar-expand-sm">
 
-            <ul class="navbar-item theme-brand flex-row  text-center">
-                <li class="nav-item theme-logo">
-                    <a href="index.html">
-                        <img src="{{asset('admin/assets/img/90x90.jpg')}}" class="navbar-logo" alt="logo">
-                    </a>
-                </li>
-                <li class="nav-item theme-text">
-                    <a href="/home" class="nav-link"> SISFO STIMIK AKI PATI </a>
-                </li>
-            </ul>
-
-            <ul class="navbar-item flex-row ml-md-auto">
-
-                <li class="nav-item dropdown user-profile-dropdown">
-                    @if(Auth::user()->mahasiswa != null)
-                    @if(Auth::user()->mahasiswa['image'] != null)
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="/Image/{{Auth::user()->mahasiswa['image']}}" alt="avatar">
-                    </a>
-                    @else
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar">
-                    </a>
-                    @endif
-                    @else
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar">
-                    </a>
-                    @endif
-                    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                        <div class="">
-                            @IsMahasiswa
-                            <div class="dropdown-item">
-                                <a class="/profile" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>Profile</a>
-                            </div>
-                            @endIsMahasiswa
-                            <div class="dropdown-item">
-                                <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <div class="navbar-toggle">
+          <button type="button" class="navbar-toggler">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </button>
+        </div>
+        <div></div>
+        <a class="navbar-brand" href="/home">NAMA USER</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                         <polyline points="16 17 21 12 16 7"></polyline>
@@ -52,32 +30,8 @@
                                         @csrf
                                     </form>
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                </li>
-            </ul>
-        </header>
+        <!-- ... Sisipkan konten lainnya ... -->
+      </div>
     </div>
-
-    <div class="sub-header-container">
-        <header class="header navbar navbar-expand-sm">
-            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg></a>
-
-            <!-- <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <div class="page-title">
-                            <h3>Blank Page</h3>
-                        </div>
-                    </div>
-                </li>
-            </ul> -->
-        </header>
-    </div>
-    <!--  END NAVBAR  -->
+  </nav>
+</div>
