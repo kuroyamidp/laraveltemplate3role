@@ -56,170 +56,106 @@ margin-top: -15px;
 					<div class="sidebar-wrapper">
 						<!--MENUsidebar-->
 						<ul class="nav">
-							<li class="menu1 ">
+							<li class="menu ">
 								<a href="/home">
 									<i class="nc-icon nc-bank"></i>
-									<p>Dashboard</p>
+									<span>Dashboard</span>
 								</a>
 							</li>
-							<li>
-								<a href="/krs">
-									<i class="bi bi-journal-bookmark"></i>
-									<p>Ruang Kelas</p>
+							<li class="menu">
+								<a href="#components" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+									<div class="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
+											<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+											<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+											<line x1="12" y1="22.08" x2="12" y2="12"></line>
+										</svg>
+										<span>Master data</span>
+									</div>
+									<div>
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+											<polyline points="9 18 15 12 9 6"></polyline>
+										</svg>
+									</div>
 								</a>
-							</li>
-							<li>
-								<a href="/lihatjadwal">
-									<i class="bi bi-bookmark-plus"></i>
-									<p>Prodi</p>
-								</a>
-							</li>
-							<li>
-								<a href="/semesterini">
-								<i class="bi bi-subtract"></i>
-									<p>Dosen</p>
-								</a>
-							</li>
-							<li>
-								<a href="/lihatjadwalujian">
-								<i class="bi bi-subtract"></i>
-									<p>Mahasiswa</p>
-								</a>
-							</li>
-							<li>
-								<a href="/khs">
-								<i class="bi bi-sign-yield"></i>
-									<p>Jadwal Kelas</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarsidang">
-								<i class="bi bi-calendar2-range"></i>
-									<p>Jadwal Ujian</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarwisuda">
-								<i class="bi bi-mortarboard"></i>
-									<p>Daftar Ujian</p>
-								</a>
-							</li>
-							<li>
-								<a href="/khs">
-								<i class="bi bi-sign-yield"></i>
-									<p>Nilai Ujian</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarsidang">
-								<i class="bi bi-calendar2-range"></i>
-									<p>Data Dosen</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarwisuda">
-								<i class="bi bi-mortarboard"></i>
-									<p>Data Mahasiswa</p>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!-- <li class="menu">
-				<a href="#components" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<div class="">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
-							<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-							<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-							<line x1="12" y1="22.08" x2="12" y2="12"></line>
-						</svg>
-						<span>Master data</span>
-					</div>
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-							<polyline points="9 18 15 12 9 6"></polyline>
-						</svg>
-					</div>
-				</a>
-				<ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
-					<li><a href="/matakuliah"> Mata kuliah</a></li>
-					<li><a href="/ruangkelas"> Ruang kelas</a></li>
-					<li><a href="/progdi"> Progdi </a></li>
-					<li><a href="/dosen"> Dosen </a></li>
-					<li><a href="/mahasiswa"> Mahasiswa </a></li>
+								<ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
+									<li><a href="/matakuliah"> Mata kuliah</a></li>
+									<li><a href="/ruangkelas"> Ruang kelas</a></li>
+									<li><a href="/progdi"> Progdi </a></li>
+									<li><a href="/dosen"> Dosen </a></li>
+									<li><a href="/mahasiswa"> Mahasiswa </a></li>
 
-				</ul>
-			</li>
-			<li class="menu">
-				<a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<div class="">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
-							<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-							<rect x="9" y="9" width="6" height="6"></rect>
-							<line x1="9" y1="1" x2="9" y2="4"></line>
-							<line x1="15" y1="1" x2="15" y2="4"></line>
-							<line x1="9" y1="20" x2="9" y2="23"></line>
-							<line x1="15" y1="20" x2="15" y2="23"></line>
-							<line x1="20" y1="9" x2="23" y2="9"></line>
-							<line x1="20" y1="14" x2="23" y2="14"></line>
-							<line x1="1" y1="9" x2="4" y2="9"></line>
-							<line x1="1" y1="14" x2="4" y2="14"></line>
-						</svg>
-						<span>Kelas</span>
-					</div>
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-							<polyline points="9 18 15 12 9 6"></polyline>
-						</svg>
-					</div>
-				</a>
-				<ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
-					<li>
-						<a href="/daftar-kelas"> Semua kelas </a>
-					</li>
-					<li>
-						<a href="/jadwal-kelas"> Jadwal kelas </a>
-					</li>
-					<li>
-						<a href="/jadwalujian"> Jadwal Ujian </a>
-					</li>
-					<li>
-						<a href="/nilaiujian"> Nilai Ujian </a>
-					</li>
-				</ul>
-			</li>
-			<li class="menu">
-				<a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					<div class="">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
-							<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-							<rect x="9" y="9" width="6" height="6"></rect>
-							<line x1="9" y1="1" x2="9" y2="4"></line>
-							<line x1="15" y1="1" x2="15" y2="4"></line>
-							<line x1="9" y1="20" x2="9" y2="23"></line>
-							<line x1="15" y1="20" x2="15" y2="23"></line>
-							<line x1="20" y1="9" x2="23" y2="9"></line>
-							<line x1="20" y1="14" x2="23" y2="14"></line>
-							<line x1="1" y1="9" x2="4" y2="9"></line>
-							<line x1="1" y1="14" x2="4" y2="14"></line>
-						</svg>
-						<span>Data pengguna</span>
-					</div>
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-							<polyline points="9 18 15 12 9 6"></polyline>
-						</svg>
-					</div>
-				</a>
-				<ul class="collapse submenu list-unstyled" id="users" data-parent="#accordionExample">
-					<li>
-						<a href="/user-mahasiswa"> User mahasiswa </a>
-					</li>
-					<li>
-						<a href="/user-dosen"> User Dosen </a>
-					</li>
-			</li> -->
+								</ul>
+							</li>
+							<li class="menu">
+								<a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+									<div class="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
+											<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+											<rect x="9" y="9" width="6" height="6"></rect>
+											<line x1="9" y1="1" x2="9" y2="4"></line>
+											<line x1="15" y1="1" x2="15" y2="4"></line>
+											<line x1="9" y1="20" x2="9" y2="23"></line>
+											<line x1="15" y1="20" x2="15" y2="23"></line>
+											<line x1="20" y1="9" x2="23" y2="9"></line>
+											<line x1="20" y1="14" x2="23" y2="14"></line>
+											<line x1="1" y1="9" x2="4" y2="9"></line>
+											<line x1="1" y1="14" x2="4" y2="14"></line>
+										</svg>
+										<span>Kelas</span>
+									</div>
+									<div>
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+											<polyline points="9 18 15 12 9 6"></polyline>
+										</svg>
+									</div>
+								</a>
+								<ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
+									<li>
+										<a href="/daftar-kelas"> Semua kelas </a>
+									</li>
+									<li>
+										<a href="/jadwal-kelas"> Jadwal kelas </a>
+									</li>
+									<li>
+										<a href="/jadwalujian"> Jadwal Ujian </a>
+									</li>
+									<li>
+										<a href="/nilaiujian"> Nilai Ujian </a>
+									</li>
+								</ul>
+							</li>
+							<li class="menu">
+								<a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+									<div class="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
+											<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+											<rect x="9" y="9" width="6" height="6"></rect>
+											<line x1="9" y1="1" x2="9" y2="4"></line>
+											<line x1="15" y1="1" x2="15" y2="4"></line>
+											<line x1="9" y1="20" x2="9" y2="23"></line>
+											<line x1="15" y1="20" x2="15" y2="23"></line>
+											<line x1="20" y1="9" x2="23" y2="9"></line>
+											<line x1="20" y1="14" x2="23" y2="14"></line>
+											<line x1="1" y1="9" x2="4" y2="9"></line>
+											<line x1="1" y1="14" x2="4" y2="14"></line>
+										</svg>
+										<span>Data pengguna</span>
+									</div>
+									<div>
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+											<polyline points="9 18 15 12 9 6"></polyline>
+										</svg>
+									</div>
+								</a>
+								<ul class="collapse submenu list-unstyled" id="users" data-parent="#accordionExample">
+									<li>
+										<a href="/user-mahasiswa"> User mahasiswa </a>
+									</li>
+									<li>
+										<a href="/user-dosen"> User Dosen </a>
+									</li>
+							</li>
 			@endIsAdmin
 			@IsMahasiswa
 			<div class="wrapper">
@@ -261,31 +197,31 @@ margin-top: -15px;
 							</li>
 							<li>
 								<a href="/semesterini">
-								<i class="bi bi-subtract"></i>
+									<i class="bi bi-subtract"></i>
 									<p>Jadwal semester ini</p>
 								</a>
 							</li>
 							<li>
 								<a href="/lihatjadwalujian">
-								<i class="bi bi-subtract"></i>
+									<i class="bi bi-subtract"></i>
 									<p>jadwal ujian</p>
 								</a>
 							</li>
 							<li>
 								<a href="/khs">
-								<i class="bi bi-sign-yield"></i>
+									<i class="bi bi-sign-yield"></i>
 									<p>KHS</p>
 								</a>
 							</li>
 							<li>
 								<a href="/daftarsidang">
-								<i class="bi bi-calendar2-range"></i>
+									<i class="bi bi-calendar2-range"></i>
 									<p>sidang</p>
 								</a>
 							</li>
 							<li>
 								<a href="/daftarwisuda">
-								<i class="bi bi-mortarboard"></i>
+									<i class="bi bi-mortarboard"></i>
 									<p>wisuda</p>
 								</a>
 							</li>
