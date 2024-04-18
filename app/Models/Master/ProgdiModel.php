@@ -13,7 +13,6 @@ class ProgdiModel extends Model
     protected $fillable = [
         'uid',
         'kode_progdi',
-        'jenjang_studi',
         'nama_studi',
         'singkatan_studi',
     ];

@@ -156,6 +156,9 @@ nav .navbar-brand {
     font-weight: 600;
     line-height: 23px;
 }
+.card-body {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Menambahkan bayangan dengan blur radius 4px, spread radius 6px, dan warna hitam dengan opacity 0.5 */
+}
 
 /*
     Article Section

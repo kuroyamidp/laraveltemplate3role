@@ -46,9 +46,6 @@ class MatakuliahController extends Controller
         $validator = Validator::make($request->all(), [
             'kode' => 'required',
             'mata_kuliah' => 'required',
-            'sks' => 'required|numeric',
-            'bobot' => 'required|numeric',
-            'mutu' => 'required|numeric',
 
         ]);
 
@@ -61,9 +58,6 @@ class MatakuliahController extends Controller
             'uid' => Str::uuid(),
             'kode_mk' => $request->kode,
             'nama' => $request->mata_kuliah,
-            'sks' => $request->sks,
-            'bobot' => $request->bobot,
-            'mutu' => $request->mutu,
         ]);
 
         return redirect('/matakuliah')->with('success', 'Berhasil tambah data');
@@ -104,9 +98,6 @@ class MatakuliahController extends Controller
         $validator = Validator::make($request->all(), [
             'kode' => 'required',
             'mata_kuliah' => 'required',
-            'sks' => 'required|numeric',
-            'bobot' => 'required|numeric',
-            'mutu' => 'required|numeric',
 
         ]);
 
@@ -118,9 +109,6 @@ class MatakuliahController extends Controller
         MatakuliahModel::where('uid', $id)->update([
             'kode_mk' => $request->kode,
             'nama' => $request->mata_kuliah,
-            'sks' => $request->sks,
-            'bobot' => $request->bobot,
-            'mutu' => $request->mutu,
         ]);
 
         return redirect('/matakuliah')->with('success', 'Berhasil update data');
@@ -149,9 +137,6 @@ class MatakuliahController extends Controller
                         'uid' => Str::uuid(),
                         'kode_mk' => $val[1],
                         'nama' => $val[2],
-                        'sks' => $val[3],
-                        'bobot' => $val[4],
-                        'mutu' => $val[3] * $val[4],
                     ]);
                 }
             }

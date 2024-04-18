@@ -1,20 +1,25 @@
 @extends('layouts.main')
 
 @section('content')
+<style>
+    .card-body {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan dengan blur radius 4px, spread radius 6px, dan warna hitam dengan opacity 0.5 */
+}
 
+</style>
 <div class="layout-px-spacing">
 
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-end">
+                <div class="card-header">
                     <a href="{{route('progdi.index')}}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
                     <form action="{{route('progdi.store')}}" method="post">
                         @csrf
                         <div class="row mb-1">
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="form-control">Kode progdi</label>
                                 <input type="text" class="form-control" name="kode">
                                 @if($errors->has('kode'))
@@ -23,7 +28,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="form-control">Nama studi</label>
                                 <input type="text" class="form-control" name="studi">
                                 @if($errors->has('studi'))
@@ -32,16 +37,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-3">
-                                <label for="form-control">Jenjang studi</label>
-                                <input type="text" class="form-control" name="jenjang_studi">
-                                @if($errors->has('jenjang_studi'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('jenjang_studi') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="form-control">Singkatan studi</label>
                                 <input type="text" class="form-control" name="singkatan_studi">
                                 @if($errors->has('singkatan_studi'))

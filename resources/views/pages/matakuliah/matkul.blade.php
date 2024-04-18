@@ -60,7 +60,6 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Mata kuliah</th>
-                                        <th>Rincian mata kuliah</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -69,12 +68,6 @@
                                     <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
                                         <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
-                                        <td>
-                                            <li>SKS : {{$value->sks}}</li>
-                                            <li>Mutu : {{$value->mutu}}</li>
-                                            <li>Bobot :{{$value->bobot}} </li>
-
-                                        </td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
 
                                             <a href="{{ route('matakuliah.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>

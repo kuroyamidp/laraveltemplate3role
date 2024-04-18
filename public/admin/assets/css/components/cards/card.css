@@ -19,6 +19,10 @@
   box-shadow: 4px 6px 10px -3px #bfc9d4; }
   .component-card_1 .card-body {
     padding: 28px 25px; }
+    .card-body {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Menambahkan bayangan dengan blur radius 4px, spread radius 6px, dan warna hitam dengan opacity 0.5 */
+  }
+  
   .component-card_1 .icon-svg {
     margin-bottom: 20px;
     display: inline-block;

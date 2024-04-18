@@ -43,7 +43,6 @@ class ProgdiController extends Controller
         $validator = Validator::make($request->all(), [
             'kode' => 'required',
             'studi' => 'required',
-            'jenjang_studi' => 'required',
             'singkatan_studi' => 'required',
 
         ]);
@@ -56,7 +55,6 @@ class ProgdiController extends Controller
         ProgdiModel::create([
             'uid' => Str::uuid(),
             'kode_progdi' => $request->kode,
-            'jenjang_studi' => $request->jenjang_studi,
             'nama_studi' => $request->studi,
             'singkatan_studi' => $request->singkatan_studi,
         ]);
@@ -99,7 +97,6 @@ class ProgdiController extends Controller
         $validator = Validator::make($request->all(), [
             'kode' => 'required',
             'studi' => 'required',
-            'jenjang_studi' => 'required',
             'singkatan_studi' => 'required',
 
         ]);
@@ -111,7 +108,6 @@ class ProgdiController extends Controller
 
         ProgdiModel::where('uid', $id)->update([
             'kode_progdi' => $request->kode,
-            'jenjang_studi' => $request->jenjang_studi,
             'nama_studi' => $request->studi,
             'singkatan_studi' => $request->singkatan_studi,
         ]);

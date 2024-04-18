@@ -1,131 +1,124 @@
-<!--  BEGIN SIDEBAR  -->
-<!-- <style>
-	.logo a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+<style>
+  .nav .active {
+    background-color: rgba(0, 0, 0, 0.3); /* Warna latar belakang untuk item aktif dengan opasitas 50% */
+  }
+  .nav .nav-item.active .nav-link {
+  transition: background-color 1s ease; /* Atur transisi untuk background-color */
 }
+</style>
 
-.logo-text {
-  margin: 10; 
-}
-.sidebar .menu1 .logo a.logo-normal {
-
-margin-top: -15px;
-
-}
-.sidebar-wrapper {
-  margin: 100; /* Mengurangi atau menghilangkan margin */
-  padding: 1000; /* Mengurangi atau menghilangkan padding */
-}
-
-</style> -->
 <div class="sidebar-wrapper1 sidebar-theme">
 
-	<nav id="sidebar">
-		<div class="shadow-bottom"></div>
-		<ul class="list-unstyled menu-categories" id="accordionExample">
-			<li class="menu">
-				<a href="/home" aria-expanded="false" class="dropdown-toggle">
-					<div class="">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-							<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-							<polyline points="9 22 9 12 15 12 15 22"></polyline>
-						</svg>
-						<span>Dashboard</span>
-					</div>
-				</a>
-			</li>
-			@IsAdmin
-			<div class="wrapper">
-				<div class="sidebar" data-color="white" data-active-color="danger">
-					<div class="logo">
-						<a href="https://www.creative-tim.com" class="simple-text logo-mini">
-							<div class="logo-image-small">
-								<img src="../assets/img/logo-small.png">
-							</div>
-							<!-- <p>CT</p> -->
-						</a>
-						<a href="/home" class="simple-text logo-normal">
-							LOGO+SINGKATAN
-							<!-- <div class="logo-image-big">
-          <img src="../assets/img/logo-big.png">
-        </div> -->
-						</a>
-					</div>
-					<div class="sidebar-wrapper">
-						<!--MENUsidebar-->
-						<ul class="nav">
-							<li class="menu1 ">
-								<a href="/home">
-									<i class="nc-icon nc-bank"></i>
-									<p>Dashboard</p>
-								</a>
-							</li>
-							<li>
-								<a href="/krs">
-									<i class="bi bi-journal-bookmark"></i>
-									<p>Ruang Kelas</p>
-								</a>
-							</li>
-							<li>
-								<a href="/lihatjadwal">
-									<i class="bi bi-bookmark-plus"></i>
-									<p>Prodi</p>
-								</a>
-							</li>
-							<li>
-								<a href="/semesterini">
-								<i class="bi bi-subtract"></i>
-									<p>Dosen</p>
-								</a>
-							</li>
-							<li>
-								<a href="/lihatjadwalujian">
-								<i class="bi bi-subtract"></i>
-									<p>Mahasiswa</p>
-								</a>
-							</li>
-							<li>
-								<a href="/khs">
-								<i class="bi bi-sign-yield"></i>
-									<p>Jadwal Kelas</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarsidang">
-								<i class="bi bi-calendar2-range"></i>
-									<p>Jadwal Ujian</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarwisuda">
-								<i class="bi bi-mortarboard"></i>
-									<p>Daftar Ujian</p>
-								</a>
-							</li>
-							<li>
-								<a href="/khs">
-								<i class="bi bi-sign-yield"></i>
-									<p>Nilai Ujian</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarsidang">
-								<i class="bi bi-calendar2-range"></i>
-									<p>Data Dosen</p>
-								</a>
-							</li>
-							<li>
-								<a href="/daftarwisuda">
-								<i class="bi bi-mortarboard"></i>
-									<p>Data Mahasiswa</p>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+<nav id="sidebar">
+  <div class="shadow-bottom"></div>
+  <ul class="list-unstyled menu-categories" id="accordionExample">
+	<li class="menu">
+	  <a href="/home" aria-expanded="false" class="dropdown-toggle">
+		<div class="">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+			stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+			class="feather feather-home">
+			<path
+			  d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+			<polyline points="9 22 9 12 15 12 15 22"></polyline>
+		  </svg>
+		  <span>Dashboard</span>
+		</div>
+	  </a>
+	</li>
+	@IsAdmin
+	<div class="wrapper">
+	  <div class="sidebar" data-color="white" data-active-color="danger">
+		<div class="logo">
+		  <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+			<div class="logo-image-small">
+			  <img src="../assets/img/logo-small.png">
 			</div>
+			<!-- <p>CT</p> -->
+		  </a>
+		  <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+			SISKEMA
+			<!-- <div class="logo-image-big">
+	  <img src="../assets/img/logo-big.png">
+	</div> -->
+		  </a>
+		</div>
+		<div class="sidebar-wrapper">
+		  <!--MENUsidebar-->
+		  <ul class="nav">
+			<li class="menu1 nav-item">
+			  <a href="/home" class="nav-link">
+				<i class="nc-icon nc-bank"></i>
+				<p>Dashboard</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/ruangkelas" class="nav-link">
+				<i class="bi bi-journal-bookmark"></i>
+				<p>Ruang Kelas</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/progdi" class="nav-link">
+				<i class="bi bi-bookmark-plus"></i>
+				<p>Jurusan</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/matakuliah" class="nav-link">
+				<i class="bi bi-journal-bookmark"></i>
+				<p>MaPel</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="dosen/" class="nav-link">
+				<i class="bi bi-subtract"></i>
+				<p>Dosen</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/mahasiswa" class="nav-link">
+				<i class="bi bi-subtract"></i>
+				<p>Mahasiswa</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/jadwal-kelas" class="nav-link">
+				<i class="bi bi-sign-yield"></i>
+				<p>Jadwal Kelas</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/jadwalujian" class="nav-link">
+				<i class="bi bi-calendar2-range"></i>
+				<p>Jadwal Ujian</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/nilaiujian" class="nav-link">
+				<i class="bi bi-sign-yield"></i>
+				<p>Nilai Ujian</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/user-dosen" class="nav-link">
+				<i class="bi bi-calendar2-range"></i>
+				<p>Data Dosen</p>
+			  </a>
+			</li>
+			<li class="nav-item">
+			  <a href="/user-mahasiswa" class="nav-link">
+				<i class="bi bi-mortarboard"></i>
+				<p>Data Mahasiswa</p>
+			  </a>
+			</li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+
+
+
 			<!-- <li class="menu">
 				<a href="#components" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					<div class="">
@@ -508,7 +501,38 @@ margin-top: -15px;
 					</div>
 				</div>
 			</div>
+<!-- Bootstrap JavaScript dan dependensinya -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+  <!-- Skrip JavaScript untuk menangani perubahan status aktif -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Temukan semua elemen sidebar yang dapat diklik
+      var sidebarItems = document.querySelectorAll('.nav-item');
+
+      // Tambahkan event listener untuk setiap item
+      sidebarItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+          // Hapus kelas 'active' dari semua item sebelumnya
+          sidebarItems.forEach(function(el) {
+            el.classList.remove('active');
+          });
+          // Tambahkan kelas 'active' pada item yang diklik
+          this.classList.add('active');
+        });
+      });
+
+      // Tetapkan item sidebar yang aktif pada saat halaman dimuat
+      var activePage = window.location.pathname;
+      sidebarItems.forEach(function(item) {
+        if (item.querySelector('a').getAttribute('href') === activePage) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
 			@endIsDosen
 	</nav>
 

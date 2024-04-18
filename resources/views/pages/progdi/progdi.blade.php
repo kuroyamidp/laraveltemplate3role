@@ -18,7 +18,7 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Kode progdi</th>
-                                        <th>Nama studi</th>
+                                        <th>Nama dan Singkatan studi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -27,19 +27,14 @@
                                     <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
                                         <td>{{$value->kode_progdi}}</td>
-                                        <td>{{$value->nama_studi}} [ {{$value->jenjang_studi}} ] <b>{{$value->singkatan_studi}}</b> </td>
+                                        <td>{{$value->nama_studi}} | <b>{{$value->singkatan_studi}}</b> </td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
-
                                             <a href="{{ route('progdi.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
-
-
-
                                             <form action="{{ route('progdi.destroy', $value->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title='Delete' type="submit"><i class="bx bx-trash bx-sm"></i></button>
                                             </form>
-
                                         </td>
                                     </tr>
                                     @endforeach

@@ -16,8 +16,5 @@ class MatakuliahModel extends Model
         'uid',
         'kode_mk',
         'nama',
-        'sks',
-        'bobot',
-        'mutu',
     ];
 }
