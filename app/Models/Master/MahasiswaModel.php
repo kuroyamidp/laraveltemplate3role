@@ -19,11 +19,9 @@ class MahasiswaModel extends Model
         'nama',
         'jenis_kelamin',
         'perguruan_tinggi',
-        'semester_awal',
         'status_mahasiswa',
         'status',
         'image',
-        'semester_berjalan',
     ];
     protected $appends = ['progdi'];
     public function getProgdiAttribute()

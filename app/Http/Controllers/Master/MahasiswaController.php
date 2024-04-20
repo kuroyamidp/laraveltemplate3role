@@ -45,124 +45,76 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         if ($request->uid) {
-            if ($request->hasFile('foto')) {
-                $validator = Validator::make($request->all(), [
-                    'progdi' => 'required',
-                    'nama' => 'required',
-                    'nim' => 'required',
-                    'jenis_kelamin' => 'required',
-                    'perguruan_tinggi' => 'required',
-                    'semester_awal' => 'required',
-                    'status_awal' => 'required',
-                    'status' => 'required',
-                    'semester_berjalan' => 'required|min:1|max:20',
-                    'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-                ]);
-
-                // response error validation
-                if ($validator->fails()) {
-                    return Redirect::back()->withErrors($validator);
-                }
-                $name = $request->file('foto')->getClientOriginalName();
-                $filename = time() . '-' . $name;
-                $file = $request->file('foto');
-                $file->move(public_path('Image'), $filename);
-
-                MahasiswaModel::where('uid', $request->uid)->update([
-                    'progdi_id' => $request->progdi,
-                    'nim' => $request->nim,
-                    'nama' => $request->nama,
-                    'jenis_kelamin' => $request->jenis_kelamin,
-                    'perguruan_tinggi' => $request->perguruan_tinggi,
-                    'semester_awal' => $request->semester_awal,
-                    'status_mahasiswa' => $request->status_awal,
-                    'status' => $request->status,
-                    'image' => $filename,
-                    'semester_berjalan' => $request->semester_berjalan,
-                ]);
-                return redirect('/mahasiswa')->with('success', 'Berhasil edit data');
-            } else {
-                $validator = Validator::make($request->all(), [
-                    'progdi' => 'required',
-                    'nama' => 'required',
-                    'nim' => 'required',
-                    'jenis_kelamin' => 'required',
-                    'perguruan_tinggi' => 'required',
-                    'semester_awal' => 'required',
-                    'status_awal' => 'required',
-                    'status' => 'required',
-                    'semester_berjalan' => 'required|min:1|max:20',
-                ]);
-                if ($validator->fails()) {
-                    return Redirect::back()->withErrors($validator);
-                }
-
-                MahasiswaModel::where('uid', $request->uid)->update([
-                    'progdi_id' => $request->progdi,
-                    'nim' => $request->nim,
-                    'nama' => $request->nama,
-                    'jenis_kelamin' => $request->jenis_kelamin,
-                    'perguruan_tinggi' => $request->perguruan_tinggi,
-                    'semester_awal' => $request->semester_awal,
-                    'status_mahasiswa' => $request->status_awal,
-                    'status' => $request->status,
-                    'semester_berjalan' => $request->semester_berjalan,
-                ]);
-                return redirect('/mahasiswa')->with('success', 'Berhasil edit data');
-            }
-        } else {
             $validator = Validator::make($request->all(), [
                 'progdi' => 'required',
                 'nama' => 'required',
                 'nim' => 'required',
                 'jenis_kelamin' => 'required',
-                'perguruan_tinggi' => 'required',
-                'semester_awal' => 'required',
                 'status_awal' => 'required',
                 'status' => 'required',
                 'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
-                'semester_berjalan' => 'required|min:1|max:20',
             ]);
 
             // response error validation
             if ($validator->fails()) {
                 return Redirect::back()->withErrors($validator);
             }
+
+            // Check if there is a file uploaded
             if ($request->hasFile('foto')) {
                 $name = $request->file('foto')->getClientOriginalName();
                 $filename = time() . '-' . $name;
                 $file = $request->file('foto');
                 $file->move(public_path('Image'), $filename);
-
-                MahasiswaModel::create([
-                    'uid' => Str::uuid(),
-                    'progdi_id' => $request->progdi,
-                    'nim' => $request->nim,
-                    'nama' => $request->nama,
-                    'jenis_kelamin' => $request->jenis_kelamin,
-                    'perguruan_tinggi' => $request->perguruan_tinggi,
-                    'semester_awal' => $request->semester_awal,
-                    'status_mahasiswa' => $request->status_awal,
-                    'status' => $request->status,
-                    'image' => $filename,
-                    'semester_berjalan' => $request->semester_berjalan,
-                ]);
-                return redirect('/mahasiswa')->with('success', 'Berhasil tambah data');
-            } else {
-                MahasiswaModel::create([
-                    'uid' => Str::uuid(),
-                    'progdi_id' => $request->progdi,
-                    'nim' => $request->nim,
-                    'nama' => $request->nama,
-                    'jenis_kelamin' => $request->jenis_kelamin,
-                    'perguruan_tinggi' => $request->perguruan_tinggi,
-                    'semester_awal' => $request->semester_awal,
-                    'status_mahasiswa' => $request->status_awal,
-                    'status' => $request->status,
-                    'semester_berjalan' => $request->semester_berjalan,
-                ]);
-                return redirect('/mahasiswa')->with('success', 'Berhasil tambah data');
             }
+
+            MahasiswaModel::where('uid', $request->uid)->update([
+                'progdi_id' => $request->progdi,
+                'nim' => $request->nim,
+                'nama' => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'perguruan_tinggi' => 'SMK N 5 KENDAL', // Assign fixed value here
+                'status_mahasiswa' => $request->status_awal,
+                'status' => $request->status,
+                'image' => isset($filename) ? $filename : null,
+            ]);
+            return redirect('/mahasiswa')->with('success', 'Berhasil edit data');
+        } else {
+            $validator = Validator::make($request->all(), [
+                'progdi' => 'required',
+                'nama' => 'required',
+                'nim' => 'required',
+                'jenis_kelamin' => 'required',
+                'status_awal' => 'required',
+                'status' => 'required',
+                'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            // response error validation
+            if ($validator->fails()) {
+                return Redirect::back()->withErrors($validator);
+            }
+
+            // Check if there is a file uploaded
+            if ($request->hasFile('foto')) {
+                $name = $request->file('foto')->getClientOriginalName();
+                $filename = time() . '-' . $name;
+                $file = $request->file('foto');
+                $file->move(public_path('Image'), $filename);
+            }
+
+            MahasiswaModel::create([
+                'uid' => Str::uuid(),
+                'progdi_id' => $request->progdi,
+                'nim' => $request->nim,
+                'nama' => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'perguruan_tinggi' => 'SMK N 5 KENDAL', // Assign fixed value here
+                'status_mahasiswa' => $request->status_awal,
+                'status' => $request->status,
+                'image' => isset($filename) ? $filename : null,
+            ]);
+            return redirect('/mahasiswa')->with('success', 'Berhasil tambah data');
         }
     }
 

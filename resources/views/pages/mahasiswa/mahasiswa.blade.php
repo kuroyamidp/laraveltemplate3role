@@ -62,9 +62,9 @@
                                         <th>NIM</th>
                                         <th>Mahasiswa</th>
                                         <th>Progdi</th>
-                                        <th>Semester awal</th>
                                         <th>Status awal mahasiswa</th>
                                         <th>Status</th>
+                                        <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -81,7 +81,6 @@
                                             <span class="badge badge-success">{{$value->progdi}}</span>
                                             @endif
                                         </td>
-                                        <td>{{$value->semester_awal}}</td>
                                         <td>{{$value->status_mahasiswa}}</td>
                                         <td>
                                             @if($value->status == 0)
@@ -93,6 +92,7 @@
 
                                             @endif
                                         </td>
+                                        <td>{{$value->foto}}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
 
                                             <a href="{{ route('mahasiswa.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>

@@ -2,7 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>SISFO STIMIK AKI PATI </title>
+<title>SMK NEGRI 5 KENDAL</title>
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <link href="{{asset('admin/assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
 <script src="{{asset('admin/assets/js/loader.js')}}"></script>
@@ -43,33 +43,49 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Skrip JavaScript untuk menangani perubahan status aktif -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Temukan semua elemen sidebar yang dapat diklik
-  var sidebarItems = document.querySelectorAll('.nav-item');
-
-  // Tambahkan event listener untuk setiap item
-  sidebarItems.forEach(function(item) {
-	item.addEventListener('click', function() {
-	  // Hapus kelas 'active' dari semua item sebelumnya
-	  sidebarItems.forEach(function(el) {
-		el.classList.remove('active');
-	  });
-	  // Tambahkan kelas 'active' pada item yang diklik
-	  this.classList.add('active');
-	});
-  });
-
-  // Tetapkan item sidebar yang aktif pada saat halaman dimuat
-  var activePage = window.location.pathname;
-  sidebarItems.forEach(function(item) {
-	if (item.querySelector('a').getAttribute('href') === activePage) {
-	  item.classList.add('active');
-	}
-  });
+ const fileNameDisplay = document.getElementById('fileName');
+input.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        fileNameDisplay.textContent = file.name;
+    } else {
+        fileNameDisplay.textContent = "Tidak ada file yang dipilih";
+    }
 });
+
+</script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// Temukan semua elemen sidebar yang dapat diklik
+		var sidebarItems = document.querySelectorAll('.nav-item');
+
+		// Tambahkan event listener untuk setiap item
+		sidebarItems.forEach(function(item) {
+			item.addEventListener('click', function() {
+				// Hapus kelas 'active' dari semua item sebelumnya
+				sidebarItems.forEach(function(el) {
+					el.classList.remove('active');
+				});
+				// Tambahkan kelas 'active' pada item yang diklik
+				this.classList.add('active');
+			});
+		});
+
+		// Tetapkan item sidebar yang aktif pada saat halaman dimuat
+		var activePage = window.location.pathname;
+		sidebarItems.forEach(function(item) {
+			if (item.querySelector('a').getAttribute('href') === activePage) {
+				item.classList.add('active');
+			}
+		});
+	});
 </script>
 
 <style>

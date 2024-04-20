@@ -6,7 +6,7 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-end">
+                <div class="card-header d-flex justify-content">
                     <a href="{{route('dosen.index')}}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
@@ -18,7 +18,7 @@
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
-                                    <option value="{{$value->id}}">{{$value->nama_studi}} [ {{$value->jenjang_studi}} ] <b>{{$value->singkatan_studi}}</b></option>
+                                    <option value="{{$value->id}}">{{$value->nama_studi}} | <b>{{$value->singkatan_studi}}</b></option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('progdi'))
@@ -28,7 +28,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">NIDN</label>
+                                <label for="form-control">NUPTK</label>
                                 <input type="text" class="form-control" name="nidn">
                                 @if($errors->has('nidn'))
                                 <div class="error" style="color: red; display:block;">
@@ -37,7 +37,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Nama dosen</label>
+                                <label for="form-control">Nama Guru</label>
                                 <input type="text" class="form-control" name="dosen">
                                 @if($errors->has('dosen'))
                                 <div class="error" style="color: red; display:block;">
@@ -109,8 +109,9 @@
                                     <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                     <label class="custom-file-container__custom-file">
                                         <input type="file" class="custom-file-container__custom-file__custom-file-input" name="foto" accept="image/*">
-                                        <!-- <input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> -->
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                         <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                        <span class="custom-file-container__custom-file__custom-file-control custom-file-container__custom-file__custom-file-control--browse">Browse</span>
                                     </label>
                                     <div class="custom-file-container__image-preview"></div>
                                 </div>
@@ -121,6 +122,7 @@
                                 @endif
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
