@@ -61,29 +61,33 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Perguruan tinggi</label>
-                                <input type="text" class="form-control" name="perguruan_tinggi">
-                                @if($errors->has('perguruan_tinggi'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('perguruan_tinggi') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
                                 <label for="form-control">Jabatan fungsional</label>
                                 <input type="text" class="form-control" name="jabatan_fungsional">
                             </div>
-                        </div>
-                        <div class="row mb-1">
                             <div class="col-lg-4">
-                                <label for="form-control">Pendidikan tertinggi</label>
-                                <input type="text" class="form-control" name="pendidikan_tertinggi">
+                                <label for="pendidikan_tertinggi">Pendidikan tertinggi</label>
+                                <select class="form-control" name="pendidikan_tertinggi">
+                                    <option value="">Pilih pendidikan tertinggi</option>
+                                    <option value="SD">Tamatan SD</option>
+                                    <option value="SMP">Tamatan SMP</option>
+                                    <option value="SMA/SMK">Tamatan SMA/SMK</option>
+                                    <option value="D1">Diploma 1 (D1)</option>
+                                    <option value="D2">Diploma 2 (D2)</option>
+                                    <option value="D3">Diploma 3 (D3)</option>
+                                    <option value="D4">Diploma 4 (D4)</option>
+                                    <option value="S1">Sarjana (S1)</option>
+                                    <option value="S2">Magister (S2)</option>
+                                    <option value="S3">Doktor (S3)</option>
+                                </select>
                                 @if($errors->has('pendidikan_tertinggi'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('pendidikan_tertinggi') }}
                                 </div>
                                 @endif
                             </div>
+
+                        </div>
+                        <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Ikatan kerja</label>
                                 <input type="text" class="form-control" name="ikatan_kerja">
@@ -109,11 +113,13 @@
                                     <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                     <label class="custom-file-container__custom-file">
                                         <input type="file" class="custom-file-container__custom-file__custom-file-input" name="foto" accept="image/*">
-                                        <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                        <!-- <input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> -->
                                         <span class="custom-file-container__custom-file__custom-file-control"></span>
                                         <span class="custom-file-container__custom-file__custom-file-control custom-file-container__custom-file__custom-file-control--browse">Browse</span>
                                     </label>
-                                    <div class="custom-file-container__image-preview"></div>
+                                    <div class="custom-file-container__image-preview" id="imagePreview">
+                                        <p>Nama File: <span id="fileName">Tidak ada file yang dipilih</span></p>
+                                    </div>
                                 </div>
                                 @if($errors->has('foto'))
                                 <div class="error" style="color: red; display:block;">
@@ -122,7 +128,6 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>

@@ -7,7 +7,7 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-end">
+                <div class="card-header d-flex justify-content">
                     <a href="{{route('daftar-kelas.index')}}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
@@ -25,30 +25,20 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Mata kuliah</label>
-                                <select class="selectpicker" data-live-search="true" name=" mata_kuliah">
-                                    <option value="">Pilih salah satu</option>
-                                    @foreach($matkul as $key => $value)
-                                    <option value="{{$value->id}}">{{$value->nama}}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('mata_kuliah'))
+                                <label for="form-control">Jam mulai kelas</label>
+                                <input type="time" name="mulai" class="form-control">
+                                @if($errors->has('mulai'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('mata_kuliah') }}
+                                    {{ $errors->first('mulai') }}
                                 </div>
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Ruang kelas</label>
-                                <select class="selectpicker" data-live-search="true" name="ruang_kelas">
-                                    <option value="">Pilih salah satu</option>
-                                    @foreach($ruang as $key => $value)
-                                    <option value="{{$value->id}}">{{$value->nama}}</option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('ruang_kelas'))
+                                <label for="form-control">Jam selesai kelas</label>
+                                <input type="time" name="selesai" class="form-control">
+                                @if($errors->has('selesai'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('ruang_kelas') }}
+                                    {{ $errors->first('selesai') }}
                                 </div>
                                 @endif
                             </div>
@@ -103,39 +93,40 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-4">
-                                <label for="form-control">Jam mulai kelas</label>
-                                <input type="time" name="mulai" class="form-control">
-                                @if($errors->has('mulai'))
+                        <div class="col-lg-4">
+                                <label for="form-control">Mata kuliah</label>
+                                <select class="selectpicker" data-live-search="true" name=" mata_kuliah">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($matkul as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('mata_kuliah'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('mulai') }}
+                                    {{ $errors->first('mata_kuliah') }}
                                 </div>
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Jam selesai kelas</label>
-                                <input type="time" name="selesai" class="form-control">
-                                @if($errors->has('selesai'))
+                                <label for="form-control">Ruang kelas</label>
+                                <select class="selectpicker" data-live-search="true" name="ruang_kelas">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($ruang as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('ruang_kelas'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('selesai') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Limit mahasiswa</label>
-                                <input type="number" min="0" max="100" class="form-control" name="limit_mahasiswa">
-                                @if($errors->has('limit_mahasiswa'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('limit_mahasiswa') }}
+                                    {{ $errors->first('ruang_kelas') }}
                                 </div>
                                 @endif
                             </div>
                         </div>
-
-                        <div class="row">
+                      <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
                             </div>
+                        </div>
                         </div>
 
                     </form>

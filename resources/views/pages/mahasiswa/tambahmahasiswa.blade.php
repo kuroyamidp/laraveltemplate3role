@@ -37,7 +37,7 @@
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
-                                    <option value="{{$value->id}}">{{$value->nama_studi}} [ {{$value->jenjang_studi}} ]</option>
+                                    <option value="{{$value->id}}">{{$value->nama_studi}} [ {{$value->singkatan_studi}} ]</option>
                                     @endforeach
                                 </select>
                                 @error('progdi')
@@ -98,7 +98,6 @@
                                     <div class="custom-file-container__image-preview" id="imagePreview">
                                         <p>Nama File: <span id="fileName">Tidak ada file yang dipilih</span></p>
                                     </div>
-
                                 </div>
                                 @if($errors->has('foto'))
                                 <div class="error" style="color: red; display:block;">
@@ -112,6 +111,7 @@
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

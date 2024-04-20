@@ -50,43 +50,56 @@
 
 <!-- Skrip JavaScript untuk menangani perubahan status aktif -->
 <script>
- const fileNameDisplay = document.getElementById('fileName');
-input.addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-        fileNameDisplay.textContent = file.name;
-    } else {
-        fileNameDisplay.textContent = "Tidak ada file yang dipilih";
-    }
-});
+    document.addEventListener("DOMContentLoaded", function() {
+        const fileNameDisplay = document.getElementById('fileName');
+        const imagePreview = document.getElementById('imagePreview');
+        const input = document.querySelector('input[type="file"]'); // Menemukan elemen input file
+        const imagePreviewImg = document.createElement('img'); // Membuat elemen img untuk pratinjau gambar
 
+        // Tambahkan elemen img ke dalam elemen dengan ID imagePreview
+        imagePreview.appendChild(imagePreviewImg);
+
+        input.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                fileNameDisplay.textContent = file.name;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        // Hitung skala untuk mengatur ukuran gambar menjadi 3x3 cm
+                        const scaleFactor = 300 / Math.max(img.width, img.height);
+                        canvas.width = img.width * scaleFactor;
+                        canvas.height = img.height * scaleFactor;
+
+                        // Gambar gambar di atas kanvas dengan ukuran yang diubah
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        // Ubah elemen img pratinjau menjadi gambar yang telah dimanipulasi
+                        imagePreviewImg.src = canvas.toDataURL('image/jpeg');
+
+                        // Tampilkan elemen pratinjau gambar
+                        imagePreview.style.display = 'block';
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                fileNameDisplay.textContent = "Tidak ada file yang dipilih";
+                // Sembunyikan elemen pratinjau gambar jika tidak ada file yang dipilih
+                imagePreview.style.display = 'none';
+            }
+        });
+    });
 </script>
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		// Temukan semua elemen sidebar yang dapat diklik
-		var sidebarItems = document.querySelectorAll('.nav-item');
 
-		// Tambahkan event listener untuk setiap item
-		sidebarItems.forEach(function(item) {
-			item.addEventListener('click', function() {
-				// Hapus kelas 'active' dari semua item sebelumnya
-				sidebarItems.forEach(function(el) {
-					el.classList.remove('active');
-				});
-				// Tambahkan kelas 'active' pada item yang diklik
-				this.classList.add('active');
-			});
-		});
 
-		// Tetapkan item sidebar yang aktif pada saat halaman dimuat
-		var activePage = window.location.pathname;
-		sidebarItems.forEach(function(item) {
-			if (item.querySelector('a').getAttribute('href') === activePage) {
-				item.classList.add('active');
-			}
-		});
-	});
-</script>
+
+
 
 <style>
     .layout-px-spacing {
