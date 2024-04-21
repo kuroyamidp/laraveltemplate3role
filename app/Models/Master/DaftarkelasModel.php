@@ -19,7 +19,6 @@ class DaftarkelasModel extends Model
         'ruang_id',
         'start',
         'end',
-        'limit_mahasiswa',
         'semester',
         'kode_kelas',
     ];

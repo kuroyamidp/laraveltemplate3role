@@ -60,7 +60,6 @@ class DaftarkelasController extends Controller
             'semester' => 'required',
             'mulai' => 'required',
             'selesai' => 'required|after:' . $request->mulai,
-            'limit_mahasiswa' => 'required|numeric|min:0|max:100',
         ]);
 
         // response error validation
@@ -77,7 +76,6 @@ class DaftarkelasController extends Controller
             'ruang_id' => $request->ruang_kelas,
             'start' => $request->mulai,
             'end' => $request->selesai,
-            'limit_mahasiswa' => $request->limit_mahasiswa,
             'semester' => $request->semester,
         ]);
         return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');

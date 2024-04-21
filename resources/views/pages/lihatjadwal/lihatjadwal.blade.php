@@ -55,9 +55,6 @@
                                     <tr class="text-center">
                                         <th>Kode Mata Kuliah</th>
                                         <th>Mata kuliah</th>
-                                        <th>Sks</th>
-                                        <th>Mutu</th>
-                                        <th>Bobot</th>
 
                                     </tr>
                                 </thead>
@@ -68,9 +65,6 @@
                                         
                                         <td>{{$value->kode_mk}}</td>
                                         <td>{{$value->nama}}</td>
-                                        <td>{{$value->sks}}</td>
-                                        <td>{{$value->mutu}}</td>
-                                        <td>{{$value->bobot}}</td>
                                     </tr>
 
                                     @endforeach

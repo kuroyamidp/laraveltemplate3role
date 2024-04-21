@@ -45,7 +45,7 @@ Route::resource('user-mahasiswa', UserMahasiswaController::class)->middleware(['
 Route::resource('user-dosen', UserDosenController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-admin', AdminController::class)->middleware(['auth', 'is_admin']);
 Route::resource('acckrs', AccKrsController ::class)->middleware(['auth', 'is_admin']);
-Route::resource('accsidang', AccSidangController ::class)->middleware(['auth', 'is_admin']);
+// Route::resource('accsidang', AccSidangController ::class)->middleware(['auth', 'is_admin']);
 Route::resource('jadwalujian', JadwalujianController::class)->middleware(['auth', 'is_admin']);
 Route::resource('nilaiujian', NilaiUjianController ::class)->middleware(['auth', 'is_admin']);
 Route::post('/importdosen', [DosenController::class, 'importdatadosen'])->name('importdatadosen')->middleware(['auth', 'is_admin']);
@@ -59,12 +59,14 @@ Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa'
 Route::resource('lihatjadwalujian', LihatJadwalujianController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
+
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
+
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarsidang', DaftarSidangController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarwisuda', DaftarWisudaController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('khs', KhsController::class)->middleware(['auth', 'is_mahasiswa']);
-Route::resource('lihatjadwaldosen', LihatJadwalDosenController::class)->middleware(['auth', 'is_dosen']);
+// Route::resource('lihatjadwaldosen', LihatJadwalDosenController::class)->middleware(['auth', 'is_dosen']);
 
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);

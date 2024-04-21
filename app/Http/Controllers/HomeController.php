@@ -48,15 +48,16 @@ class HomeController extends Controller
         } else {
             
             
-            $jdw = JadwalkelasModel::get();
-            $check = [];
-            foreach ($jdw as $key => $value) {
-                $check[$value->hari][] = $value;
-            }
-            // return $check;
-            $data['jdw'] = $check;
-            // return $data;
-            return view('pages.dashboard.dashboardmahasiswa',$data);
+            $mahasiswaProgdiId = Auth::user()->mahasiswa['progdi_id'];
+
+            // Mengambil daftar kelas berdasarkan progdi mahasiswa
+            $jdw = DaftarkelasModel::join('mahasiswa', 'daftar_kelas.progdi_id', '=', 'mahasiswa.progdi_id')
+                ->where('mahasiswa.progdi_id', $mahasiswaProgdiId)
+                ->distinct() // Hanya ambil hasil unik
+                ->get();
+
+            $data['jdw'] = $jdw;
+            return view('pages.dashboard.dashboardmahasiswa', $data);
         }
     }
 

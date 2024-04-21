@@ -190,7 +190,7 @@
 									</a>
 									<ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
 										<li>
-											<a href="/lihatjadwal"> Semua Mata Kuliah </a>
+										<a href="/lihatjadwal">Semua Mata Kuliah</a>
 										</li>
 										<li>
 											<a href="/semesterini"> Mata Kuliah Semester Ini </a>
