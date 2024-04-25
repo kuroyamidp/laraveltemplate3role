@@ -15,7 +15,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row mb-1">
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="form-control">Kode progdi</label>
                                 <input type="text" class="form-control" name="kode" value="{{$progdi['kode_progdi']}}">
                                 @if($errors->has('kode'))
@@ -24,7 +24,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="form-control">Nama studi</label>
                                 <input type="text" class="form-control" name="studi" value="{{$progdi['nama_studi']}}">
                                 @if($errors->has('studi'))
@@ -33,16 +33,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-3">
-                                <label for="form-control">Jenjang studi</label>
-                                <input type="text" class="form-control" name="jenjang_studi" value="{{$progdi['jenjang_studi']}}">
-                                @if($errors->has('jenjang_studi'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('jenjang_studi') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="form-control">Singkatan studi</label>
                                 <input type="text" class="form-control" name="singkatan_studi" value="{{$progdi['singkatan_studi']}}">
                                 @if($errors->has('singkatan_studi'))

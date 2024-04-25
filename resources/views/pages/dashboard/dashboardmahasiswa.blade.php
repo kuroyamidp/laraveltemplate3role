@@ -20,7 +20,7 @@
                 box-shadow: none;
                 max-width: 250px;
                 max-height: 400px;
-                margin-top: -43px;
+                margin-top: -10px;
                 background-color: transparent;
 
                 /* or any other height you want to set */
@@ -73,28 +73,27 @@
                                     @else
                                     <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar" class="custom-file-container__image-preview">
                                     @endif
-                                    <div class="user-info">
-                                        <p class="">{{Auth::user()->mahasiswa['nama']}}</p>
-                                        <small class="badge badge-info">{{Auth::user()->mahasiswa['nim']}}</small>
-                                    </div>
                                 </div>
                                 <div class="user-info-list d-flex justify-content-center text-center">
                                     <div class="text-center">
                                         <ul class="contacts-block list-unstyled">
+                                        <li class="contacts-block__item">{{Auth::user()->mahasiswa['nama']}}</li>
+                                        <li class="badge badge-info">NIM : {{Auth::user()->mahasiswa['nim']}}</li>
                                             @if( Auth::user()->mahasiswa['progdi'] != null)
                                             <li class="contacts-block__item">{{Auth::user()->mahasiswa['progdi']}}</li>
                                             @else
                                             <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
                                             @endif
-                                            <li class="contacts-block__item">Semester {{Auth::user()->mahasiswa['semester_berjalan']}}</li>
+                                            <li class="contacts-block__item">Kelas : {{Auth::user()->mahasiswa['kelas']}}</li>
                                             @if(Auth::user()->mahasiswa['status'] == 0)
-                                            <li class="contacts-block__item"><span class="badge badge-danger">Mahasiswa non aktif</span></li>
+                                            <li class="contacts-block__item"><span class="badge badge-danger">Siswa non aktif</span></li>
                                             @elseif(Auth::user()->mahasiswa['status'] == 1)
-                                            <li class="contacts-block__item"><span class="badge badge-primary">Mahasiswa aktif</span></li>
+                                            <li class="contacts-block__item"><span class="badge badge-primary">Siswa aktif</span></li>
                                             @else
-                                            <li class="contacts-block__item"><span class="badge badge-success">Mahasiswa lulus</span></li>
+                                            <li class="contacts-block__item"><span class="badge badge-success">Siswa lulus</span></li>
                                             @endif
                                             <li class="contacts-block__item">{{Auth::user()->email}}</li>
+                                            <li class="contacts-block__item">{{Auth::user()->perguruan_tinggi}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -121,8 +120,8 @@
                                                         <td width="1%">No</td>
                                                         <td>Mata kuliah</td>
                                                         <td>Jam</td>
-                                                        <td>Prodi</td>
-                                                        <td>Dosen</td>
+                                                        <td>Jurusan</td>
+                                                        <td>Guru</td>
                                                         <td>Ruang</td>
                                                     </tr>
                                                 </thead>

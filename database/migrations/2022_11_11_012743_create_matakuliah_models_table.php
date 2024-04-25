@@ -18,9 +18,6 @@ return new class extends Migration
             $table->uuid('uid');
             $table->string('kode_mk');
             $table->string('nama')->comment('nama_mata_kuliah');
-            $table->double('sks')->default(0);
-            $table->double('bobot')->default(0);
-            $table->double('mutu')->default(0)->comment('sks * bobot');
             $table->timestamps();
             $table->softDeletes();
             $table->index('uid');

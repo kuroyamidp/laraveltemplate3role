@@ -95,6 +95,28 @@
             }
         });
     });
+    function previewImage() {
+    var fileInput = document.querySelector('.custom-file-container__custom-file__custom-file-input');
+    var browseText = document.getElementById('browseText');
+    var fileName = document.getElementById('fileName');
+    var preview = document.getElementById('imagePreview');
+
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
+            fileName.textContent = 'Nama File: ' + fileInput.files[0].name;
+            browseText.textContent = 'Ubah Gambar';
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    } else {
+        preview.innerHTML = '';
+        fileName.textContent = 'Tidak ada file yang dipilih';
+        browseText.textContent = 'Browse';
+    }
+}
 </script>
 
 

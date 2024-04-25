@@ -18,11 +18,11 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>Kode kelas</th>
-                                        <th>Mata kuliah</th>
+                                        <th>Mapel</th>
                                         <th>Ruang</th>
-                                        <th>Dosen</th>
+                                        <th>Gurur</th>
                                         <th>Waktu</th>
-                                        <th>Semesater</th>
+                                        <th>Kelas</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,7 +36,7 @@
                                         <td>{{$value->ruang}}</td>
                                         <td>{{$value->dosen}}</td>
                                         <td>{{$value->start}} - {{$value->end}}</td>
-                                        <td><b>SEMESTER </b> {{$value->semester}}</td>
+                                        <td><b>KELAS </b> {{$value->kelas}}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('daftar-kelas.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
                                             <form action="{{ route('daftar-kelas.destroy', $value->uid) }}" method="post">

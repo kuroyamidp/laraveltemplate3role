@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\DataMahasiswaImport;
 use App\Models\Master\MahasiswaModel;
 use App\Models\Master\ProgdiModel;
+use App\Models\Master\KelasModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -33,6 +34,7 @@ class MahasiswaController extends Controller
     public function create()
     {
         $data['progdi'] = ProgdiModel::get();
+        $data['kelas'] = KelasModel::get();
         return view('pages.mahasiswa.tambahmahasiswa', $data);
     }
 
@@ -52,6 +54,7 @@ class MahasiswaController extends Controller
                 'jenis_kelamin' => 'required',
                 'status_awal' => 'required',
                 'status' => 'required',
+                'kelas' => 'required',
                 'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -76,6 +79,7 @@ class MahasiswaController extends Controller
                 'perguruan_tinggi' => 'SMK N 5 KENDAL', // Assign fixed value here
                 'status_mahasiswa' => $request->status_awal,
                 'status' => $request->status,
+                'semester_id' => $request->kelas,
                 'image' => isset($filename) ? $filename : null,
             ]);
             return redirect('/mahasiswa')->with('success', 'Berhasil edit data');
@@ -87,6 +91,7 @@ class MahasiswaController extends Controller
                 'jenis_kelamin' => 'required',
                 'status_awal' => 'required',
                 'status' => 'required',
+                'kelas' => 'required',
                 'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -112,6 +117,7 @@ class MahasiswaController extends Controller
                 'perguruan_tinggi' => 'SMK N 5 KENDAL', // Assign fixed value here
                 'status_mahasiswa' => $request->status_awal,
                 'status' => $request->status,
+                'semester_id' => $request->kelas,
                 'image' => isset($filename) ? $filename : null,
             ]);
             return redirect('/mahasiswa')->with('success', 'Berhasil tambah data');
@@ -126,6 +132,7 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
+        $data['kelas'] = KelasModel::get();
         $data['mahasiswa'] = MahasiswaModel::where('uid', $id)->first();
         $data['progdi'] = ProgdiModel::get();
         return view('pages.mahasiswa.editmahasiswa', $data);

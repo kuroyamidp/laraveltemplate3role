@@ -8,6 +8,7 @@ use App\Models\Master\DosenModel;
 use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\MatakuliahModel;
 use App\Models\Master\ProgdiModel;
+use App\Models\Master\KelasModel;
 use App\Models\Master\RuangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -39,6 +40,7 @@ class DaftarkelasController extends Controller
         $data['dosen'] = DosenModel::get();
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
+        $data['kelas'] = KelasModel::get();
         return view('pages.daftarkelas.tambahkelas', $data);
     }
 
@@ -57,7 +59,7 @@ class DaftarkelasController extends Controller
             'ruang_kelas' => 'required',
             'progdi' => 'required',
             'dosen' => 'required',
-            'semester' => 'required',
+            'kelas' => 'required',
             'mulai' => 'required',
             'selesai' => 'required|after:' . $request->mulai,
         ]);
@@ -74,9 +76,9 @@ class DaftarkelasController extends Controller
             'makul_id' => $request->mata_kuliah,
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
+            'semester' => $request->kelas,
             'start' => $request->mulai,
             'end' => $request->selesai,
-            'semester' => $request->semester,
         ]);
         return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
     }
@@ -122,8 +124,8 @@ class DaftarkelasController extends Controller
             'mata_kuliah' => 'required',
             'ruang_kelas' => 'required',
             'progdi' => 'required',
+            'kelas' => 'required',
             'dosen' => 'required',
-            'semester' => 'required',
             'mulai' => 'required',
             'selesai' => 'required|after:' . $request->mulai,
             'limit_mahasiswa' => 'required|numeric|min:0|max:100',
@@ -143,7 +145,7 @@ class DaftarkelasController extends Controller
             'start' => $request->mulai,
             'end' => $request->selesai,
             'limit_mahasiswa' => $request->limit_mahasiswa,
-            'semester' => $request->semester,
+            'semester' => $request->kelas,
         ]);
         return redirect('/daftar-kelas')->with('success', 'Berhasil update data');
     }

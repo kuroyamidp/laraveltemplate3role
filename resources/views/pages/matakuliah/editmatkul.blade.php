@@ -34,35 +34,6 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="row mb-1">
-                            <div class="col-lg-4">
-                                <label for="form-control">SKS</label>
-                                <input type="number" min="0" max="100" id="skstambah" class="form-control" name="sks" value="{{$matakuliah['sks']}}">
-                                @if($errors->has('sks'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('sks') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Bobot</label>
-                                <input type="number" min="0" max="100" id="bobottambah" class="form-control" name="bobot" onchange="calculatemutu()" value="{{$matakuliah['bobot']}}">
-                                @if($errors->has('bobot'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('bobot') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Mutu</label>
-                                <input type="number" readonly min="0" max="100" id="mututambah" class="form-control" name="mutu" value="{{$matakuliah['mutu']}}">
-                                @if($errors->has('mutu'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('mutu') }}
-                                </div>
-                                @endif
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <button class="btn btn-primary btn-sm" type="submit">Simpan</button>

@@ -114,15 +114,14 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-6">
+                        <div class="col-lg-12">
                                 <div class="custom-file-container" data-upload-id="myFirstImage">
                                     <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                     <label class="custom-file-container__custom-file">
                                         <input type="file" class="custom-file-container__custom-file__custom-file-input" name="foto" accept="image/*">
-                                        <!-- <input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> -->
-                                        <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                        <span class="custom-file-container__custom-file__custom-file-control custom-file-container__custom-file__custom-file-control--browse">Browse</span>
                                     </label>
-                                    <div class="custom-file-container__image-preview"></div>
+                                    <p>Nama File : {{$dosen['image']}}</p>
                                 </div>
                                 @if($errors->has('foto'))
                                 <div class="error" style="color: red; display:block;">
@@ -130,7 +129,8 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                        </div>
+                            <div class="col-lg-4 d-flex align-items-center justify-content-center">
                                 <img src="/Image/{{$dosen['image']}}" style="width: 300px; height: 300px !important" class="img-thumbnail" alt="Image-{{$dosen['nama']}}">
                             </div>
                         </div>

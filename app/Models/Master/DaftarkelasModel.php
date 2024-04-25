@@ -23,7 +23,7 @@ class DaftarkelasModel extends Model
         'kode_kelas',
     ];
 
-    protected $appends = ['progdi', 'matkul', 'dosen', 'ruang'];
+    protected $appends = ['progdi', 'matkul', 'dosen', 'ruang', 'kelas'];
     public function getProgdiAttribute()
     {
         if (array_key_exists('progdi_id', $this->attributes)) {
@@ -61,6 +61,17 @@ class DaftarkelasModel extends Model
     {
         if (array_key_exists('ruang_id', $this->attributes)) {
             $kat = DB::table('ruang')->select('nama')->where('id', $this->attributes['ruang_id'])->first();
+            if ($kat) {
+                return $kat->nama;
+            }
+        }
+
+        return null;
+    }
+    public function getKelasAttribute()
+    {
+        if (array_key_exists('semester', $this->attributes)) {
+            $kat = DB::table('kelas')->select('nama')->where('id', $this->attributes['semester'])->first();
             if ($kat) {
                 return $kat->nama;
             }

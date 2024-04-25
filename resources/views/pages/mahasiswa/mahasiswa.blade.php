@@ -62,7 +62,8 @@
                                         <th>NIM</th>
                                         <th>Mahasiswa</th>
                                         <th>Progdi</th>
-                                        <th>Status awal mahasiswa</th>
+                                        <th>Kelas</th>
+                                        <th>Status Awal Siswa</th>
                                         <th>Status</th>
                                         <th>Foto</th>
                                         <th>Aksi</th>
@@ -81,6 +82,7 @@
                                             <span class="badge badge-success">{{$value->progdi}}</span>
                                             @endif
                                         </td>
+                                        <td>{{$value->kelas}}</td>
                                         <td>{{$value->status_mahasiswa}}</td>
                                         <td>
                                             @if($value->status == 0)

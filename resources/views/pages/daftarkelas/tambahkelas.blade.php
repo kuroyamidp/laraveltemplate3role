@@ -45,7 +45,7 @@
                         </div>
                         <div class="row mb-1">
                             <div class="col-lg-4">
-                                <label for="form-control">Progdi</label>
+                                <label for="form-control">Jurusan</label>
                                 <select class="selectpicker" data-live-search="true" name="progdi">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
@@ -59,7 +59,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Dosen</label>
+                                <label for="form-control">Guru</label>
                                 <select class="selectpicker" data-live-search="true" name="dosen">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($dosen as $key => $value)
@@ -73,23 +73,18 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Semester</label>
-                                <select class="selectpicker" data-live-search="true" name="semester">
+                                <label for="form-control">kelas</label>
+                                <select class="selectpicker" data-live-search="true" name="kelas">
                                     <option value="">Pilih salah satu</option>
-                                    <option value="1">Semester 1</option>
-                                    <option value="2">Semester 2</option>
-                                    <option value="3">Semester 3</option>
-                                    <option value="4">Semester 4</option>
-                                    <option value="5">Semester 5</option>
-                                    <option value="6">Semester 6</option>
-                                    <option value="7">Semester 7</option>
-                                    <option value="8">Semester 8</option>
+                                    @foreach($kelas as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endforeach
                                 </select>
-                                @if($errors->has('semester'))
+                                @error('kelas')
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('semester') }}
+                                    {{ $message }}
                                 </div>
-                                @endif
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-1">

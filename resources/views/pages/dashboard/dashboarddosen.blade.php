@@ -107,7 +107,7 @@
                                                     <td width="1%">No</td>
                                                     <td>Mata kuliah</td>
                                                     <td>Jam</td>
-                                                    <td>Dosen</td>
+                                                    <td>Guru</td>
                                                     <td>Ruang</td>
                                                 </tr>
                                             </thead>

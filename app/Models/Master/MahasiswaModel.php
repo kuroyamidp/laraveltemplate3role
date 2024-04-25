@@ -20,16 +20,28 @@ class MahasiswaModel extends Model
         'jenis_kelamin',
         'perguruan_tinggi',
         'status_mahasiswa',
+        'semester_id',
         'status',
         'image',
     ];
-    protected $appends = ['progdi'];
+    protected $appends = ['progdi','kelas'];
     public function getProgdiAttribute()
     {
         if (array_key_exists('progdi_id', $this->attributes)) {
             $kat = DB::table('progdi')->select('nama_studi')->where('id', $this->attributes['progdi_id'])->first();
             if ($kat) {
                 return $kat->nama_studi;
+            }
+        }
+
+        return null;
+    }
+    public function getKelasAttribute()
+    {
+        if (array_key_exists('semester_id', $this->attributes)) {
+            $kat = DB::table('kelas')->select('nama')->where('id', $this->attributes['semester_id'])->first();
+            if ($kat) {
+                return $kat->nama;
             }
         }
 

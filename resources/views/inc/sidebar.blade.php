@@ -57,11 +57,12 @@
 								</div>
 							</a>
 							<ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
-								<li><a href="/matakuliah"> Mata kuliah</a></li>
+								<li><a href="/matakuliah"> Mapel</a></li>
+								<li><a href="/kelas"> Kelas</a></li>
 								<li><a href="/ruangkelas"> Ruang kelas</a></li>
-								<li><a href="/progdi"> Progdi </a></li>
-								<li><a href="/dosen"> Dosen </a></li>
-								<li><a href="/mahasiswa"> Mahasiswa </a></li>
+								<li><a href="/progdi"> Jurusan </a></li>
+								<li><a href="/dosen"> Guru </a></li>
+								<li><a href="/mahasiswa"> Siswa </a></li>
 
 							</ul>
 						</li>
@@ -80,7 +81,7 @@
 										<line x1="1" y1="9" x2="4" y2="9"></line>
 										<line x1="1" y1="14" x2="4" y2="14"></line>
 									</svg>
-									<span>Kelas</span>
+									<span>Penjadwalan</span>
 								</div>
 								<div>
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
@@ -90,9 +91,9 @@
 							</a>
 							<ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
 								<li>
-									<a href="/daftar-kelas"> Semua kelas </a>
+									<a href="/daftar-kelas"> Jadwal Kelas </a>
 								</li>
-								<li>
+								<!-- <li>
 									<a href="/jadwal-kelas"> Jadwal kelas </a>
 								</li>
 								<li>
@@ -100,7 +101,7 @@
 								</li>
 								<li>
 									<a href="/nilaiujian"> Nilai Ujian </a>
-								</li>
+								</li> -->
 							</ul>
 						</li>
 						<li class="menu">
@@ -128,10 +129,10 @@
 							</a>
 							<ul class="collapse submenu list-unstyled" id="users" data-parent="#accordionExample">
 								<li>
-									<a href="/user-mahasiswa"> User mahasiswa </a>
+									<a href="/user-mahasiswa"> User Siswa </a>
 								</li>
 								<li>
-									<a href="/user-dosen"> User Dosen </a>
+									<a href="/user-dosen"> User Guru </a>
 								</li>
 						</li>
 					</div>
@@ -162,7 +163,7 @@
 										</div>
 									</a>
 								</li>
-								<li class="menu">
+								<!-- <li class="menu">
 									<a href="/krs" aria-expanded="false" class="dropdown-toggle">
 										<div class="">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
@@ -252,7 +253,7 @@
 											<span>Daftar Wisuda</span>
 										</div>
 									</a>
-								</li>
+								</li> -->
 								@endIsMahasiswa
 								@IsDosen
 								<div class="wrapper">
@@ -280,7 +281,7 @@
 													</div>
 												</a>
 											</li>
-											<li class="menu">
+											<!-- <li class="menu">
 												<a href="/lihatjadwal" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 													<div class="">
 														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-event" viewBox="0 0 16 16">
@@ -337,8 +338,7 @@
 														</svg>
 														<span>Data Mahasiswa</span>
 													</div>
-												</a>
+												</a> -->
 												@endIsDosen
 	</nav>
-
 </div>

@@ -14,7 +14,7 @@
                     <form action="{{route('mahasiswa.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-1">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label for="form-control">NIM</label>
                                 <input type="text" class="form-control" name="nim">
                                 @error('nim')
@@ -23,7 +23,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label for="form-control">Nama</label>
                                 <input type="text" class="form-control" name="nama">
                                 @error('nama')
@@ -32,7 +32,21 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
+                                <label for="form-control">kelas</label>
+                                <select name="kelas" class="form-control">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($kelas as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endforeach
+                                </select>
+                                @error('kelas')
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-3">
                                 <label for="form-control">Jurusan</label>
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
