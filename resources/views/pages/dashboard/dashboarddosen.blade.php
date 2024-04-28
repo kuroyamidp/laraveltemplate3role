@@ -67,21 +67,25 @@
                                 @else
                                 <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar" class="custom-file-container__image-preview">
                                 @endif
-                                <div class="user-info">
-                                    <p class="">{{Auth::user()->dosen['nama']}}</p>
-                                    <small class="badge badge-info">{{Auth::user()->dosen['nim']}}</small>
-                                </div>
-                            </div>
-                            <div class="user-info-list d-flex justify-content-center text-center">
+                              
+                                    
+                                <div class="user-info-list d-flex justify-content-center text-center">
                                 <div class="text-center">
-                                    <ul class="contacts-block list-unstyled">
-                                        @if( Auth::user()->dosen['progdi'] != null)
-                                        <li class="contacts-block__item">{{Auth::user()->dosen['progdi']}}</li>
-                                        @else
-                                        <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
-                                        @endif
-                                        <li class="contacts-block__item">{{Auth::user()->email}}</li>
-                                    </ul>
+                                        <ul class="contacts-block list-unstyled">
+                                            <li class="contacts-block__item">{{Auth::user()->dosen['nama']}}</li>
+                                            <li class="badge badge-info">NIM : {{Auth::user()->dosen['nidn']}}</li>
+                                            @if( Auth::user()->dosen['progdi'] != null)
+                                            <li class="contacts-block__item">{{Auth::user()->dosen['progdi']}}</li>
+                                            @else
+                                            <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
+                                            @endif
+                                            <li class="contacts-block__item">Sebagai : {{Auth::user()->dosen['status']}}</li>
+                                            <li class="contacts-block__item">Ikatan Kerja : {{Auth::user()->dosen['ikatan_kerja']}}</li>
+                                            <li class="contacts-block__item">jabatan : {{Auth::user()->dosen['jabatan_fungsional']}}</li>
+                                            <li class="contacts-block__item">{{Auth::user()->email}}</li>
+                                            <li class="contacts-block__item">{{Auth::user()->perguruan_tinggi}}</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,25 +105,29 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="5" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
+                                                    <th colspan="6" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
                                                 </tr>
-                                                <tr>
-                                                    <td width="1%">No</td>
-                                                    <td>Mata kuliah</td>
-                                                    <td>Jam</td>
-                                                    <td>Guru</td>
-                                                    <td>Ruang</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                                                <tr class="text-center">
+                                                        <td width="1%">No</td>
+                                                        <td>Mata kuliah</td>
+                                                        <td>Jam</td>
+                                                        <td>Jurusan</td>
+                                                        <td>Guru</td>
+                                                        <td>Ruang</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="text-center">
+                                                    <?php $nomor = 1; ?>
+                                                    @foreach($dos as $val)
+                                                    <tr>
+                                                        <td class="text-center" width="1%"><?php echo $nomor++; ?></td>
+                                                        <td>{{$val->matkul}}</td>
+                                                        <td class="text-center">{{$val->start}}-{{$val->end}}</td>
+                                                        <td>{{$val->progdi}}</td>
+                                                        <td>{{$val->dosen}}</td>
+                                                        <td>{{$val->ruang}}</td>
+                                                    </tr>
+                                                    @endforeach
                                             </tbody>
                                         </table>
                                     </div>

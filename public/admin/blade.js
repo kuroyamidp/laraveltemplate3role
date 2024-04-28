@@ -116,11 +116,12 @@ function getkelas() {
     
     
 }
-function rest() {
-    $('#configform')[0].reset();
-    // location.reload()
-    $(window.location)[0].replace("/jadwal-kelas");
+function reset() {
+    $('#configform')[0].reset(); // Reset the form fields
+    // Reload the initial data by redirecting to the index route
+    window.location.href = "{{ route('daftar-kelas.index') }}";
 }
+
 
 function getnamemahasiswa() {
     var datamahasiswa = JSON.parse( $("#mhs").val())

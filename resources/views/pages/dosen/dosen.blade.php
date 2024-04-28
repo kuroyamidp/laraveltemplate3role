@@ -10,9 +10,9 @@
                     <a href="{{route('dosen.create')}}" class="btn btn-primary btn-sm">Tambah</a>
 
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
+                    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
                         Import
-                    </button>
+                    </button> -->
 
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -59,9 +59,9 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Nidn</th>
-                                        <th>Dosen</th>
-                                        <th>Progdi</th>
+                                        <th>NUPTK</th>
+                                        <th>Guru</th>
+                                        <th>Jurusan</th>
                                         <th>Ikatan kerja</th>
                                         <th>Status</th>
                                         <th>Aksi</th>

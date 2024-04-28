@@ -63,16 +63,12 @@ class DosenController extends Controller
                     return Redirect::back()->withErrors($validator);
                 }
 
-                $img = DosenModel::where('uid', $request->uid)->first();
-                if ($img['image'] != null) {
-                    $image_path = public_path() . '/Image/' . $img['image'];
-                    unlink($image_path);
+                if ($request->hasFile('foto')) {
+                    $name = $request->file('foto')->getClientOriginalName();
+                    $filename = time() . '-' . $name;
+                    $file = $request->file('foto');
+                    $file->move(public_path('Image'), $filename);
                 }
-
-                $name = $request->file('foto')->getClientOriginalName();
-                $filename = time() . '-' . $name;
-                $file = $request->file('foto');
-                $file->move(public_path('Image'), $filename);
 
                 DosenModel::where('uid', $request->uid)->update([
                     'progdi_id' => $request->progdi,
@@ -84,7 +80,7 @@ class DosenController extends Controller
                     'pendidikan_tertinggi' => $request->pendidikan_tertinggi,
                     'ikatan_kerja' => $request->ikatan_kerja,
                     'status' => $request->status,
-                    'image' => $filename,
+                    'image' => isset($filename) ? $filename : null,
                 ]);
                 return redirect('dosen')->with('success', 'Berhasil tambah data');
             } else {
@@ -96,12 +92,20 @@ class DosenController extends Controller
                     'pendidikan_tertinggi' => 'required',
                     'ikatan_kerja' => 'required',
                     'status' => 'required',
-                    // 'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+                    'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
                 ]);
 
                 // response error validation
                 if ($validator->fails()) {
                     return Redirect::back()->withErrors($validator);
+                }
+    
+                // Check if there is a file uploaded
+                if ($request->hasFile('foto')) {
+                    $name = $request->file('foto')->getClientOriginalName();
+                    $filename = time() . '-' . $name;
+                    $file = $request->file('foto');
+                    $file->move(public_path('Image'), $filename);
                 }
 
                 DosenModel::where('uid', $request->uid)->update([
@@ -152,7 +156,7 @@ class DosenController extends Controller
                 'pendidikan_tertinggi' => $request->pendidikan_tertinggi,
                 'ikatan_kerja' => $request->ikatan_kerja,
                 'status' => $request->status,
-                'image' => $filename,
+                'image' => isset($filename) ? $filename : null,
             ]);
             return redirect('dosen')->with('success', 'Berhasil tambah data');
         }

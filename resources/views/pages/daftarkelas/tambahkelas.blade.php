@@ -15,7 +15,7 @@
                     <form action="{{route('daftar-kelas.store')}}" method="post">
                         @csrf
                         <div class="row mb-1">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label for="form-control">Kode kelas</label>
                                 <input type="text" class="form-control" name="kode_kelas">
                                 @if($errors->has('kode_kelas'))
@@ -24,7 +24,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label for="form-control">Jam mulai kelas</label>
                                 <input type="time" name="mulai" class="form-control">
                                 @if($errors->has('mulai'))
@@ -33,12 +33,30 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label for="form-control">Jam selesai kelas</label>
                                 <input type="time" name="selesai" class="form-control">
                                 @if($errors->has('selesai'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('selesai') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="hari">Hari</label>
+                                <select name="hari" class="form-control">
+                                    <option value="">Pilih Hari</option>
+                                    <option value="Senin">Senin</option>
+                                    <option value="Selasa">Selasa</option>
+                                    <option value="Rabu">Rabu</option>
+                                    <option value="Kamis">Kamis</option>
+                                    <option value="Jumat">Jumat</option>
+                                    <option value="Sabtu">Sabtu</option>
+                                    <option value="Minggu">Minggu</option>
+                                </select>
+                                @if($errors->has('hari'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('hari') }}
                                 </div>
                                 @endif
                             </div>

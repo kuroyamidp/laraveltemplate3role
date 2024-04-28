@@ -14,7 +14,7 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-4">
-                                <label for="form-control">Progdi</label>
+                                <label for="form-control">Jurusan</label>
                                 <input type="hidden" name="uid" value="{{$dosen['uid']}}">
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
@@ -33,7 +33,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">NIDN</label>
+                                <label for="form-control">NUPTK</label>
                                 <input type="text" class="form-control" name="nidn" value="{{$dosen['nidn']}}">
                                 @if($errors->has('nidn'))
                                 <div class="error" style="color: red; display:block;">
@@ -42,7 +42,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Nama dosen</label>
+                                <label for="form-control">Nama Guru</label>
                                 <input type="text" class="form-control" name="dosen" value="{{$dosen['nama']}}">
                                 @if($errors->has('dosen'))
                                 <div class="error" style="color: red; display:block;">

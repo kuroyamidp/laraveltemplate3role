@@ -10,9 +10,9 @@
                 <div class="card-header">
                     <a href="{{route('matakuliah.create')}}" class="btn btn-primary btn-sm">Tambah</a>
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
+                    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
                         Import
-                    </button>
+                    </button> -->
 
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -59,7 +59,8 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Mata kuliah</th>
+                                        <th>Kode Mapel</th>
+                                        <th>Mata Pelajaran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,7 +68,8 @@
                                     @foreach($matkul as $key => $value)
                                     <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
-                                        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
+                                        <td>{{$value->kode_mk}}</td>
+                                        <td>{{$value->nama}}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
 
                                             <a href="{{ route('matakuliah.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>

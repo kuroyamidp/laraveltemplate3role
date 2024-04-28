@@ -10,9 +10,9 @@
                 <div class="card-header">
                     <a href="{{route('mahasiswa.create')}}" class="btn btn-primary btn-sm">Tambah</a>
 
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
+                    <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
                         Import
-                    </button>
+                    </button> -->
 
                     <!-- Modal -->
                     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

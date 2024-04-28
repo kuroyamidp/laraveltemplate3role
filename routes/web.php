@@ -41,6 +41,9 @@ Route::resource('progdi', ProgdiController::class)->middleware(['auth', 'is_admi
 Route::resource('dosen', DosenController::class)->middleware(['auth', 'is_admin']);
 Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);
+Route::get('/search-kelas-matkul', [DaftarKelasController::class, 'searchByMatkul'])
+    ->name('search-kelas-matkul')
+    ->middleware(['auth', 'is_admin']);
 Route::resource('jadwal-kelas', JadwalkelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-mahasiswa', UserMahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-dosen', UserDosenController::class)->middleware(['auth', 'is_admin']);

@@ -17,6 +17,7 @@ class DaftarkelasModel extends Model
         'makul_id',
         'dosen_id',
         'ruang_id',
+        'hari',
         'start',
         'end',
         'semester',

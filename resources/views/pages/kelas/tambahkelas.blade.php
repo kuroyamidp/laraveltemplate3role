@@ -15,7 +15,7 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-6">
-                                <label for="form-control">Kode Kelas</label>
+                                <label for="form-control">Kelas</label>
                                 <input type="text" class="form-control" name="kode">
                                 @if($errors->has('kode'))
                                 <div class="error" style="color: red; display:block;">

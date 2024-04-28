@@ -77,8 +77,8 @@
                                 <div class="user-info-list d-flex justify-content-center text-center">
                                     <div class="text-center">
                                         <ul class="contacts-block list-unstyled">
-                                        <li class="contacts-block__item">{{Auth::user()->mahasiswa['nama']}}</li>
-                                        <li class="badge badge-info">NIM : {{Auth::user()->mahasiswa['nim']}}</li>
+                                            <li class="contacts-block__item">{{Auth::user()->mahasiswa['nama']}}</li>
+                                            <li class="badge badge-info">NIM : {{Auth::user()->mahasiswa['nim']}}</li>
                                             @if( Auth::user()->mahasiswa['progdi'] != null)
                                             <li class="contacts-block__item">{{Auth::user()->mahasiswa['progdi']}}</li>
                                             @else
@@ -103,20 +103,20 @@
                     </div>
 
                     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
-                        <div class="card" style="border-radius: 10px;">
-                            <div class="card-header d-flex justify-content-center">
-                                <b>Jadwal perkulihan hari</b>
-                            </div>
-                            <div class="card-body text-center">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="6" class="text-center"></th>
-                                                    </tr>
-                                                    <tr>
+                    <div class="card" style="border-radius: 10px;">
+                        <div class="card-header d-flex justify-content-center">
+                            <b>Jadwal Sekolah hari {{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</b>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="6" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
+                                                </tr>
+                                                    <tr class="text-center">
                                                         <td width="1%">No</td>
                                                         <td>Mata kuliah</td>
                                                         <td>Jam</td>
@@ -128,7 +128,7 @@
                                                 <tbody>
                                                     <?php $nomor = 1; ?>
                                                     @foreach($jdw as $val)
-                                                    <tr>
+                                                    <tr class="text-center">
                                                         <td class="text-center" width="1%"><?php echo $nomor++; ?></td>
                                                         <td>{{$val->matkul}}</td>
                                                         <td class="text-center">{{$val->start}}-{{$val->end}}</td>

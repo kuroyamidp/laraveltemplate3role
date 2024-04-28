@@ -14,14 +14,14 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Paper Dashboard 2 by Creative Tim</title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-  <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>Paper Dashboard 2 by Creative Tim</title>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+<!--     Fonts and icons     -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
 <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
 
@@ -50,13 +50,12 @@
 
 <!-- Skrip JavaScript untuk menangani perubahan status aktif -->
 <script>
+    //untuk nampilih gambar
     document.addEventListener("DOMContentLoaded", function() {
         const fileNameDisplay = document.getElementById('fileName');
         const imagePreview = document.getElementById('imagePreview');
         const input = document.querySelector('input[type="file"]'); // Menemukan elemen input file
         const imagePreviewImg = document.createElement('img'); // Membuat elemen img untuk pratinjau gambar
-
-        // Tambahkan elemen img ke dalam elemen dengan ID imagePreview
         imagePreview.appendChild(imagePreviewImg);
 
         input.addEventListener('change', function() {
@@ -95,28 +94,48 @@
             }
         });
     });
+//untuk ubah nama dari masukan gambar ke namafile yang dimasukan
     function previewImage() {
-    var fileInput = document.querySelector('.custom-file-container__custom-file__custom-file-input');
-    var browseText = document.getElementById('browseText');
-    var fileName = document.getElementById('fileName');
-    var preview = document.getElementById('imagePreview');
+        var fileInput = document.querySelector('.custom-file-container__custom-file__custom-file-input');
+        var browseText = document.getElementById('browseText');
+        var fileName = document.getElementById('fileName');
+        var preview = document.getElementById('imagePreview');
 
-    if (fileInput.files && fileInput.files[0]) {
-        var reader = new FileReader();
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
 
-        reader.onload = function(e) {
-            preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
-            fileName.textContent = 'Nama File: ' + fileInput.files[0].name;
-            browseText.textContent = 'Ubah Gambar';
-        };
+            reader.onload = function(e) {
+                preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
+                fileName.textContent = 'Nama File: ' + fileInput.files[0].name;
+                browseText.textContent = 'Ubah Gambar';
+            };
 
-        reader.readAsDataURL(fileInput.files[0]);
-    } else {
-        preview.innerHTML = '';
-        fileName.textContent = 'Tidak ada file yang dipilih';
-        browseText.textContent = 'Browse';
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            preview.innerHTML = '';
+            fileName.textContent = 'Tidak ada file yang dipilih';
+            browseText.textContent = 'Browse';
+        }
     }
-}
+//multiple untuk prodi yang dipilih dosen
+    document.addEventListener("DOMContentLoaded", function() {
+        let selectedProgdis = []; // Array untuk menyimpan progdi yang dipilih
+
+        // Fungsi untuk memperbarui tampilan label dengan data yang dipilih
+        function updateSelectedProgdis() {
+            document.getElementById('selectedProgdis').innerText = selectedProgdis.join(', ');
+        }
+
+        // Event listener untuk memantau perubahan pada dropdown
+        document.querySelector('select[name="progdi[]"]').addEventListener('change', function(event) {
+            const selectedOptions = event.target.selectedOptions;
+            selectedProgdis = []; // Reset array
+            for (let i = 0; i < selectedOptions.length; i++) {
+                selectedProgdis.push(selectedOptions[i].innerText.trim()); // Menambahkan teks opsi yang dipilih ke dalam array
+            }
+            updateSelectedProgdis(); // Memperbarui tampilan label
+        });
+    });
 </script>
 
 

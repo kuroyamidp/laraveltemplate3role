@@ -59,7 +59,8 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Mata kuliah</th>
+                                        <th>Kode Kelas</th>
+                                        <th>Kelas</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,7 +68,8 @@
                                     @foreach($kelas as $key => $value)
                                     <tr style="text-align: center;">
                                         <td width="1%">{{$key + 1}}</td>
-                                        <td>{{$value->nama}} [ {{$value->kode_kelas}} ]</td>
+                                        <td>{{$value->kode_kelas}} </td>
+                                        <td>Kelas : {{$value->nama}}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
 
                                             <a href="{{ route('kelas.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>

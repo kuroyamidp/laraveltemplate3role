@@ -61,6 +61,7 @@ class DaftarkelasController extends Controller
             'dosen' => 'required',
             'kelas' => 'required',
             'mulai' => 'required',
+            'hari' => 'required',
             'selesai' => 'required|after:' . $request->mulai,
         ]);
 
@@ -77,6 +78,7 @@ class DaftarkelasController extends Controller
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
             'semester' => $request->kelas,
+            'hari' => $request->hari,
             'start' => $request->mulai,
             'end' => $request->selesai,
         ]);
@@ -95,6 +97,7 @@ class DaftarkelasController extends Controller
         $data['dosen'] = DosenModel::get();
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
+        $data['kls'] = KelasModel::get();
         $data['kelas'] = DaftarkelasModel::where('uid', $id)->first();
         return view('pages.daftarkelas.editkelas', $data);
     }
@@ -126,9 +129,9 @@ class DaftarkelasController extends Controller
             'progdi' => 'required',
             'kelas' => 'required',
             'dosen' => 'required',
+            'hari' => 'required',
             'mulai' => 'required',
             'selesai' => 'required|after:' . $request->mulai,
-            'limit_mahasiswa' => 'required|numeric|min:0|max:100',
         ]);
 
         // response error validation
@@ -144,8 +147,8 @@ class DaftarkelasController extends Controller
             'ruang_id' => $request->ruang_kelas,
             'start' => $request->mulai,
             'end' => $request->selesai,
-            'limit_mahasiswa' => $request->limit_mahasiswa,
             'semester' => $request->kelas,
+            'hari' => $request->hari,
         ]);
         return redirect('/daftar-kelas')->with('success', 'Berhasil update data');
     }
@@ -172,4 +175,16 @@ class DaftarkelasController extends Controller
 
         return DaftarkelasModel::where('semester', $request->semester)->whereNotIn('id', $kls)->get();
     }
+    public function searchByMatkul(Request $request)
+    {
+        // Ambil nilai pencarian dari input form
+        $search = $request->input('search');
+    
+        // Lakukan pencarian data kelas berdasarkan mata kuliah
+        $kelas = DaftarkelasModel::where('kode_kelas', 'LIKE', "%{$search}%")->get();
+    
+        // Kembalikan hasil pencarian ke tampilan menggunakan response JSON
+        return response()->json($kelas);
+    }
+    
 }

@@ -14,7 +14,7 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-4">
-                                <label for="form-control">Progdi</label>
+                                <label for="form-control">Progdi 1</label>
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
@@ -27,6 +27,38 @@
                                 </div>
                                 @endif
                             </div>
+                            <!-- <div class="col-lg-4">
+                                <label for="form-control">Progdi 2</label>
+                                <select name="progdi" class="form-control">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($progdi as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama_studi}} | <b>{{$value->singkatan_studi}}</b></option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('progdi'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('progdi') }}
+                                </div>
+                                @endif
+                            </div> -->
+                            <!-- <div class="col-lg-4">
+                                <label for="form-control">Progdi</label>
+                                <select name="progdi[]" class="form-control" multiple>
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($progdi as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama_studi}} | <b>{{$value->singkatan_studi}}</b></option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('progdi'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('progdi') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="form-control">Data yang Dipilih</label>
+                                <label id="selectedProgdis"></label>
+                            </div> -->
                             <div class="col-lg-4">
                                 <label for="form-control">NUPTK</label>
                                 <input type="text" class="form-control" name="nidn">

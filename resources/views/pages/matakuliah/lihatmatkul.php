@@ -11,7 +11,8 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Mata kuliah</th>
+                                        <th>Kode Mapel</th>
+                                        <th>Mata Pelajaran</th>
                                         <th>Rincian mata kuliah</th>
                                     </tr>
                                 </thead>
@@ -19,7 +20,8 @@
                                     @foreach($matkul as $key => $value)
                                     <tr>
                                         <td width="1%">{{$key + 1}}</td>
-                                        <td>{{$value->nama}} [ {{$value->kode_mk}} ]</td>
+                                        <td>{{$value->kode_mk}}</td>
+                                        <td>{{$value->nama}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
