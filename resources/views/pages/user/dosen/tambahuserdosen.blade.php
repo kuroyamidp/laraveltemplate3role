@@ -15,7 +15,7 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-12">
-                                <label for="form-control">Dosen</label>
+                                <label for="form-control">Guru</label>
                                 <select class="selectpicker" data-live-search="true" id="dsn" name="dosen" onchange="getnamedosen()">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($dosen as $key => $value)

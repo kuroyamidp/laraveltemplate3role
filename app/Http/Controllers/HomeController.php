@@ -88,20 +88,22 @@ class HomeController extends Controller
             };
             
             $mahasiswaProgdiId = Auth::user()->mahasiswa['progdi_id'];
-
-            $jdw = DaftarkelasModel::join('mahasiswa', function($join) use ($mahasiswaProgdiId, $currentDay) {
+            $mahasiswaSemesterId = Auth::user()->mahasiswa['semester_id'];
+            
+            $jdw = DaftarkelasModel::join('mahasiswa', function($join) use ($mahasiswaProgdiId, $mahasiswaSemesterId, $currentDay) {
                 $join->on('daftar_kelas.progdi_id', '=', 'mahasiswa.progdi_id')
                      ->on('daftar_kelas.semester', '=', 'mahasiswa.semester_id')
                      ->where('mahasiswa.progdi_id', $mahasiswaProgdiId)
+                     ->where('mahasiswa.semester_id', $mahasiswaSemesterId)
                      ->where('daftar_kelas.hari', $currentDay); // Menyesuaikan dengan hari berjalan
             })
             ->distinct() // Hanya ambil hasil unik
             ->get();
-        
-        
+            
             $data['jdw'] = $jdw;
             $data['currentDay'] = $currentDay;
-        return view('pages.dashboard.dashboardmahasiswa', $data);
+            return view('pages.dashboard.dashboardmahasiswa', $data);
+            
         }
     }
 

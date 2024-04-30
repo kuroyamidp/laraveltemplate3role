@@ -19,7 +19,7 @@
                                         <th>No</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>Dosen</th>
+                                        <th>Guru</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>

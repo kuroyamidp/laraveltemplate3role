@@ -16,7 +16,7 @@
                         @method('PUT')
                         <div class="row mb-1">
                             <div class="col-lg-12">
-                                <label for="form-control">Dosen</label>
+                                <label for="form-control">Guru</label>
                                 <input type="hidden" name="userid" value="{{$dsn['uid']}}">
                                 <input type="hidden" name="id" value="{{$dsn['id']}}">
                                 <select class="selectpicker" data-live-search="true" id="dsn" name="dosen" onchange="getnamemadosen()">

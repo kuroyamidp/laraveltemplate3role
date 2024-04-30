@@ -61,7 +61,7 @@
                                         <th>No</th>
                                         <th>NIM</th>
                                         <th>Mahasiswa</th>
-                                        <th>Progdi</th>
+                                        <th>Jurusan</th>
                                         <th>Kelas</th>
                                         <th>Status Awal Siswa</th>
                                         <th>Status</th>
