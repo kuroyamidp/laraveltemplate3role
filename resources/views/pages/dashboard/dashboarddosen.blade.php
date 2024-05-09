@@ -75,7 +75,8 @@
                                             <li class="contacts-block__item">{{Auth::user()->dosen['nama']}}</li>
                                             <li class="badge badge-info">NIM : {{Auth::user()->dosen['nidn']}}</li>
                                             @if( Auth::user()->dosen['progdi'] != null)
-                                            <li class="contacts-block__item">{{Auth::user()->dosen['progdi']}}</li>
+                                            <li class="contacts-block__item">Wali Kelas :</li>
+                                            <li class="contacts-block__item">{{Auth::user()->dosen['progdi']}} {{Auth::user()->dosen['kelas']}} </li>
                                             @else
                                             <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
                                             @endif

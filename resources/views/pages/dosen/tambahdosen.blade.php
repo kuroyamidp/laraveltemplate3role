@@ -14,7 +14,7 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-4">
-                                <label for="form-control">Progdi 1</label>
+                                <label for="form-control">Progdi</label>
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
@@ -26,6 +26,20 @@
                                     {{ $errors->first('progdi') }}
                                 </div>
                                 @endif
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="form-control">kelas</label>
+                                <select class="selectpicker" data-live-search="true" name="kelas">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($kelas as $key => $value)
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endforeach
+                                </select>
+                                @error('kelas')
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <!-- <div class="col-lg-4">
                                 <label for="form-control">Progdi 2</label>
@@ -68,7 +82,9 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                        </div>
+                        <div class="row mb-1">
+                        <div class="col-lg-4">
                                 <label for="form-control">Nama Guru</label>
                                 <input type="text" class="form-control" name="dosen">
                                 @if($errors->has('dosen'))
@@ -77,8 +93,6 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="form-control">
@@ -91,10 +105,6 @@
                                     {{ $errors->first('jenis_kelamin') }}
                                 </div>
                                 @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Jabatan fungsional</label>
-                                <input type="text" class="form-control" name="jabatan_fungsional">
                             </div>
                             <div class="col-lg-4">
                                 <label for="pendidikan_tertinggi">Pendidikan tertinggi</label>
@@ -137,6 +147,10 @@
                                     {{ $errors->first('status') }}
                                 </div>
                                 @endif
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="form-control">Jabatan fungsional</label>
+                                <input type="text" class="form-control" name="jabatan_fungsional">
                             </div>
                         </div>
                         <div class="row mb-1">

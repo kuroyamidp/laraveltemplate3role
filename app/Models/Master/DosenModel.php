@@ -14,6 +14,7 @@ class DosenModel extends Model
     protected $fillable = [
         'uid',
         'progdi_id',
+        'kelas_id',
         'user_id',
         'nama',
         'nidn',
@@ -26,13 +27,24 @@ class DosenModel extends Model
         'image',
     ];
 
-    protected $appends = ['progdi'];
+    protected $appends = ['progdi','kelas'];
     public function getProgdiAttribute()
     {
         if (array_key_exists('progdi_id', $this->attributes)) {
             $kat = DB::table('progdi')->select('nama_studi')->where('id', $this->attributes['progdi_id'])->first();
             if ($kat) {
                 return $kat->nama_studi;
+            }
+        }
+
+        return null;
+    }
+    public function getKelasAttribute()
+    {
+        if (array_key_exists('kelas_id', $this->attributes)) {
+            $kat = DB::table('kelas')->select('nama')->where('id', $this->attributes['kelas_id'])->first();
+            if ($kat) {
+                return $kat->nama;
             }
         }
 

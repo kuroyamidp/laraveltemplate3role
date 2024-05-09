@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\DatadosenImport;
 use App\Models\Master\DosenModel;
 use App\Models\Master\ProgdiModel;
+use App\Models\Master\KelasModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -33,6 +34,7 @@ class DosenController extends Controller
     public function create()
     {
         $data['progdi'] = ProgdiModel::get();
+        $data['kelas'] = KelasModel::get();
         return view('pages.dosen.tambahdosen', $data);
     }
 
@@ -48,6 +50,7 @@ class DosenController extends Controller
             if ($request->hasFile('foto')) {
                 $validator = Validator::make($request->all(), [
                     'progdi' => 'required',
+                    'kelas' => 'required',
                     'dosen' => 'required',
                     'nidn' => 'required',
                     'jenis_kelamin' => 'required',
@@ -74,6 +77,7 @@ class DosenController extends Controller
                     'progdi_id' => $request->progdi,
                     'nama' => $request->dosen,
                     'nidn' => $request->nidn,
+                    'kelas_id' => $request->kelas,
                     'perguruan_tinggi' => 'SMK N 5 KENDAL',
                     'jenis_kelamin' => $request->jenis_kelamin,
                     'jabatan_fungsional' => $request->jabatan_fungsional,
@@ -86,6 +90,7 @@ class DosenController extends Controller
             } else {
                 $validator = Validator::make($request->all(), [
                     'progdi' => 'required',
+                    'kelas' => 'required',
                     'dosen' => 'required',
                     'nidn' => 'required',
                     'jenis_kelamin' => 'required',
@@ -110,6 +115,7 @@ class DosenController extends Controller
 
                 DosenModel::where('uid', $request->uid)->update([
                     'progdi_id' => $request->progdi,
+                    'kelas_id' => $request->kelas,
                     'nama' => $request->dosen,
                     'nidn' => $request->nidn,
                     'perguruan_tinggi' => 'SMK N 5 KENDAL',
@@ -125,6 +131,7 @@ class DosenController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'progdi' => 'required',
+                'kelas' => 'required',
                 'dosen' => 'required',
                 'nidn' => 'required',
                 'jenis_kelamin' => 'required',
@@ -148,6 +155,7 @@ class DosenController extends Controller
             DosenModel::create([
                 'uid' => Str::uuid(),
                 'progdi_id' => $request->progdi,
+                'kelas_id' => $request->kelas,
                 'nama' => $request->dosen,
                 'nidn' => $request->nidn,
                 'perguruan_tinggi' => 'SMK N 5 KENDAL',
@@ -172,6 +180,7 @@ class DosenController extends Controller
     {
         $data['dosen'] = DosenModel::where('uid', $id)->first();
         $data['progdi'] = ProgdiModel::get();
+        $data['kelas'] = KelasModel::get();
         return view('pages.dosen.editdosen', $data);
     }
 

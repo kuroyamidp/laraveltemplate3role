@@ -37,12 +37,7 @@ class HomeController extends Controller
 
         if (Auth::user()->role_id == 0) {
             // $data['krs'] = KrsModel::with('mahasiswa')->get();
-            $data['krs'] = KrsModel::all();
-            $data['mhs'] = MahasiswaModel::all();
-            $data['krs'] = KrsModel::join('mahasiswa', 'krs.mahasiswa_id', '=', 'mahasiswa.id')
-            ->select('krs.*', 'mahasiswa.nama')
-            ->get();
-            return view('pages.dashboard.dashboardadmin', $data);
+            return view('pages.dashboard.dashboardadmin');
 
         } elseif (Auth::user()->role_id == 1) {
 

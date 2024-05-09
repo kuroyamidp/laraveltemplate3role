@@ -63,7 +63,6 @@
                                         <th>Mahasiswa</th>
                                         <th>Jurusan</th>
                                         <th>Kelas</th>
-                                        <th>Status Awal Siswa</th>
                                         <th>Status</th>
                                         <th>Foto</th>
                                         <th>Aksi</th>
@@ -83,7 +82,6 @@
                                             @endif
                                         </td>
                                         <td>{{$value->kelas}}</td>
-                                        <td>{{$value->status_mahasiswa}}</td>
                                         <td>
                                             @if($value->status == 0)
                                             <span class="badge badge-danger">Non aktif</span>

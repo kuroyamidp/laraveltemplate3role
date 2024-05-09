@@ -100,13 +100,7 @@
 
             
     //                 $.each(response, function(key, value) {
-    //                     var actions = `<td class="text-center" style="display: flex; justify-content: center;">
-    //                 <a href="{{ route('daftar-kelas.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>
-    //                 <form action="{{ route('daftar-kelas.destroy', $value->uid) }}" method="post">
-    //                     @method('DELETE')
-    //                     @csrf
-    //                     <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title="Delete" type="submit"><i class="bx bx-trash bx-sm"></i></button>
-    //                 </form>
+    //                    isi form edit dan delet
     //             </td>`;
 
     //                     var row = '<tr>' +

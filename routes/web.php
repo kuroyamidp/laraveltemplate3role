@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalujianController as ControllersJadwalujianController;
 use App\Http\Controllers\Master\DaftarkelasController;
 use App\Http\Controllers\Master\DosenController;
+use App\Http\Controllers\Master\AbsensiController;
 use App\Http\Controllers\DaftarWisudaController;
 use App\Http\Controllers\JadwalujianController;
 use App\Http\Controllers\Master\JadwalkelasController;
@@ -44,6 +45,8 @@ Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth
 Route::get('/search-kelas-matkul', [DaftarKelasController::class, 'searchByMatkul'])
     ->name('search-kelas-matkul')
     ->middleware(['auth', 'is_admin']);
+Route::resource('absensi', AbsensiController::class);
+Route::view('/absen-siswa', 'pages.absen.absensiswa.absensiswa')->name('absen.absensiswa');
 Route::resource('jadwal-kelas', JadwalkelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-mahasiswa', UserMahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('user-dosen', UserDosenController::class)->middleware(['auth', 'is_admin']);

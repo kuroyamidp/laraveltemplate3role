@@ -33,6 +33,25 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
+                                <label for="form-control">kelas</label>
+                                <input type="hidden" name="uid" value="{{$dosen['uid']}}">
+                                <select name="kelas" class="form-control">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($kelas as $key => $value)
+                                    @if($dosen['kelas_id'] == $value->id)
+                                    <option value="{{$value->id}}" selected>{{$value->nama}}</b></option>
+                                    @else
+                                    <option value="{{$value->id}}">{{$value->nama}}</b></option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @if($errors->has('kelas'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('kelas') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-4">
                                 <label for="form-control">NUPTK</label>
                                 <input type="text" class="form-control" name="nidn" value="{{$dosen['nidn']}}">
                                 @if($errors->has('nidn'))

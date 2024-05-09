@@ -7,24 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-class Absensi extends Model
+class AbsensiModel extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = "daftar_kelas";
+    protected $table = "absensis";
     protected $fillable = [
         'uid',
+        'kode_absen',
         'progdi_id',
-        'makul_id',
-        'dosen_id',
-        'ruang_id',
+        'mahasiswa_id',
+        'kelas_id',
+        'status_absensi',
         'hari',
-        'start',
-        'end',
-        'semester',
-        'kode_kelas',
     ];
 
-    protected $appends = ['progdi', 'matkul', 'dosen', 'ruang', 'kelas'];
+    protected $appends = ['progdi', 'mahasiswa', 'kelas'];
     public function getProgdiAttribute()
     {
         if (array_key_exists('progdi_id', $this->attributes)) {
@@ -36,10 +33,10 @@ class Absensi extends Model
 
         return null;
     }
-    public function getMatkulAttribute()
+    public function getMahasiswaAttribute()
     {
-        if (array_key_exists('makul_id', $this->attributes)) {
-            $kat = DB::table('mata_kuliah')->select('nama')->where('id', $this->attributes['makul_id'])->first();
+        if (array_key_exists('mahasiswa_id', $this->attributes)) {
+            $kat = DB::table('mahasiswa')->select('nama')->where('id', $this->attributes['mahasiswa_id'])->first();
             if ($kat) {
                 return $kat->nama;
             }
@@ -47,10 +44,10 @@ class Absensi extends Model
 
         return null;
     }
-    public function getDosenAttribute()
+    public function getKelasAttribute()
     {
-        if (array_key_exists('dosen_id', $this->attributes)) {
-            $kat = DB::table('dosen')->select('nama')->where('id', $this->attributes['dosen_id'])->first();
+        if (array_key_exists('kelas_id', $this->attributes)) {
+            $kat = DB::table('kelas')->select('nama')->where('id', $this->attributes['kelas_id'])->first();
             if ($kat) {
                 return $kat->nama;
             }
@@ -58,4 +55,8 @@ class Absensi extends Model
 
         return null;
     }
+    public function dosen()
+{
+    return $this->belongsTo(DosenModel::class, 'progdi_id', 'progdi_id');
+}
 }

@@ -17,15 +17,12 @@ return new class extends Migration
             $table->id();
             $table->uuid('uid');
             $table->string('kode_absen');
-            $table->unsignedBigInteger('progdi_id');
-            $table->unsignedBigInteger('mahasiswa_id');
-            $table->unsignedBigInteger('kelas_id');
+            $table->string('progdi_id');
+            $table->string('mahasiswa_id');
+            $table->string('kelas_id');
+            $table->integer('status')->default(0)->comment('0 inactive; 1 active; 3 lulus;');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('progdi_id')->references('id')->on('progdi');
-            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
-            $table->foreign('kelas_id')->references('id')->on('kelas');
             $table->index('uid');
         });
     }

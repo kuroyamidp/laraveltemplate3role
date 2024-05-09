@@ -1,4 +1,4 @@
-<div class="footer-wrapper">
+<!-- <div class="footer-wrapper">
     <div class="footer-section f-section-1">
         <p class="">Copyright © 2021 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
     </div>
@@ -30,7 +30,7 @@
       </footer>
     </div>
   </div>
-  </div>
+  </div> -->
   <!-- <footer class="footer footer-black  footer-white ">
   <div class="container-fluid">
     <div class="row">

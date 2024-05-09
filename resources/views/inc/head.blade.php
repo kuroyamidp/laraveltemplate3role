@@ -139,9 +139,6 @@
 </script>
 
 
-
-
-
 <style>
     .layout-px-spacing {
         min-height: calc(100vh - 166px) !important;
