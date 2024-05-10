@@ -1,3 +1,8 @@
+<!-- <style>
+.main-container {
+        background-color: #F0F8FF; /* Warna abu-abu */
+    }
+</style> -->
 <div class="main-panel">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">

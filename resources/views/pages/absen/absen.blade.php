@@ -1,7 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
-
+<style>
+    /* Tambahkan warna latar belakang */
+    .layout-px-spacing {
+        background-color: #f0f0f0; /* Ganti dengan warna yang Anda inginkan */
+    }
+    .row{
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    }
+</style>
 <div class="layout-px-spacing">
     <div class="row">
         <div class="col-lg-12">
@@ -82,9 +90,6 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-
-
-
                             </table>
                         </div>
                     </div>

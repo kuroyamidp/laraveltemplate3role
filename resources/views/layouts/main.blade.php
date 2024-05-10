@@ -18,7 +18,7 @@
         </div>
     </div>
     <!--  END LOADER -->
-    @include('inc.navbar')
+    @include('inc.navbar', ['background' => 'white'])
 
 
 
