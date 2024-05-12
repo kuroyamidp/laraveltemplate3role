@@ -9,7 +9,7 @@
                     <a href="{{ route('absensi.index') }}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('absensi.store') }}" method="post">
+                    <form action="{{ route('absensi.store') }}" method="post" id="absensiForm">
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-3">
@@ -21,7 +21,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" id="jurusanDiv">
                                 <label for="form-control">Jurusan</label>
                                 <input type="text" class="form-control" name="progdi" value="{{ Auth::user()->mahasiswa->progdi_id }}" readonly>
                                 @error('progdi')
@@ -30,16 +30,16 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" id="namaDiv">
                                 <label for="form-control">Nama</label>
-                                <input type="text" class="form-control" name="mahasiswa" value="{{ Auth::user()->mahasiswa->nama }}" readonly>
+                                <input type="text" class="form-control" name="mahasiswa" value="{{ Auth::user()->mahasiswa->id }}" readonly>
                                 @error('mahasiswa')
                                 <div class="error" style="color: red; display:block;">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" id="kelasDiv">
                                 <label for="form-control">Kelas</label>
                                 <input type="text" class="form-control" name="kelas" value="{{ Auth::user()->mahasiswa->semester_id }}" readonly>
                                 @error('kelas')
@@ -48,8 +48,7 @@
                                 </div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row mb-1">
+                    
                             <div class="col-lg-4">
                                 <label for="form-control">Tanggal</label>
                                 <input type="date" name="hari" class="form-control" value="{{ \Carbon\Carbon::now()->toDateString() }}" readonly>
@@ -87,4 +86,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Function to hide elements for students
+    function hideElementsForStudents() {
+        document.getElementById('jurusanDiv').style.display = 'none';
+        document.getElementById('namaDiv').style.display = 'none';
+        document.getElementById('kelasDiv').style.display = 'none';
+    }
+
+    // Call the function when the document is ready
+    document.addEventListener("DOMContentLoaded", function() {
+        hideElementsForStudents();
+    });
+
+    // Validate form before submission
+    document.getElementById('absensiForm').addEventListener('submit', function(event) {
+        // Validate form here if needed
+    });
+</script>
+
 @endsection

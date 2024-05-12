@@ -32,7 +32,7 @@ class AbsensiController extends Controller
         $userRole = Auth::user()->role_id;
         $data = []; // Inisialisasi $data sebagai array kosong
 
-        if ($userRole == 0) {
+        if ($userRole == 0 || Auth::user()->id == 1) {
             $absen = AbsensiModel::all();
             $data['absen'] = $absen;
         } elseif (Auth::user()->role_id == 1) {
@@ -45,25 +45,24 @@ class AbsensiController extends Controller
                     ->where('dosen.kelas_id', $dosenKelas)
                     ->where('absensis.progdi_id', $dosenProgdi);
             })
-                ->distinct()
-                ->get();
-
+            ->distinct()
+            ->get();
+        
             $data['absen'] = $absen;
-            $data['absen'] = $absen;
-            return view('pages.absen.absen', $data);
         } else {
             $mahasiswaNim = Auth::user()->mahasiswa['nim'];
             $absen = AbsensiModel::join('mahasiswa', function ($join) use ($mahasiswaNim) {
                 $join->on('absensis.kode_absen', '=', 'mahasiswa.nim')
                     ->where('absensis.kode_absen', $mahasiswaNim); // Menyesuaikan dengan hari berjalan
             })
-                ->distinct() // Hanya ambil hasil unik
-                ->get();
-
+            ->distinct() // Hanya ambil hasil unik
+            ->get();
+        
             $data['absen'] = $absen;
         }
-
+        
         return view('pages.absen.absen', $data);
+        
     }
 
 
@@ -181,7 +180,7 @@ class AbsensiController extends Controller
             'kelas' => 'required',
             'mahasiswa' => 'required',
             'status' => 'required',
-            'hari' => 'required',
+    
         ]);
 
         // response error validation
@@ -195,7 +194,7 @@ class AbsensiController extends Controller
             'mahasiswa_id' => $request->mahasiswa,
             'kelas_id' => $request->kelas,
             'status_absensi' => $request->status,
-            'hari' => $request->hari,
+          
         ]);
         return redirect('/absensi')->with('success', 'Berhasil update data');
     }
@@ -210,21 +209,7 @@ class AbsensiController extends Controller
     {
         AbsensiModel::where('uid', $id)->delete();
         return redirect('/absensi');
-        // $data['absen'] = AbsensiModel::where('uid', $id)->first();
-
-        // if ($data['absen'] !== null) {
-        //     // Data ditemukan, lakukan sesuatu dengan $data['absen']
-        //     return $data;
-        // } else {
-        //     // Data tidak ditemukan, tangani kasus ini
-        //     return "Data tidak ditemukan";
-        // }
-
     }
-
-
-
-
     public function getkelas(Request $request)
     {
         $avlb = JadwalkelasModel::where('semester', $request->semester)->get();

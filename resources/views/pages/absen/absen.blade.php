@@ -1,15 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<style>
-    /* Tambahkan warna latar belakang */
-    .layout-px-spacing {
-        background-color: #f0f0f0; /* Ganti dengan warna yang Anda inginkan */
-    }
-    .row{
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-    }
-</style>
+
 <div class="layout-px-spacing">
     <div class="row">
         <div class="col-lg-12">
@@ -44,16 +36,17 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Kode absensi</th>
+                                        <th>NISN</th>
                                         <th>Jurusan</th>
                                         <th>Kelas</th>
                                         <th>Siswa</th>
                                         <th>hari</th>
                                         <th>Status</th>
                                         <!-- Pindahkan pengecekan ke sini -->
-                                        @if(Auth::user()->role_id != 2)
+                                        @if(Auth::user()->role_id != 2 && Auth::user()->role_id != 1) <!-- Hanya tampilkan aksi jika pengguna bukan dosen (id 2) atau admin (id 1) -->
                                         <th>aksi</th>
                                         @endif
+
                                     </tr>
                                 </thead>
                                 <tbody class="text-center" id="data-table-body">
@@ -63,7 +56,7 @@
                                         <td>{{ $value->kode_absen }}</td>
                                         <td>{{ $value->progdi}}</td>
                                         <td><b>KELAS </b>{{ $value->kelas }}</td>
-                                        <td>{{ $value->mahasiswa_id }}</td>
+                                        <td>{{ $value->mahasiswa}}</td>
                                         <td>{{ $value->hari }}</td>
                                         <td>
                                             @if($value->status_absensi == 0)
@@ -73,11 +66,11 @@
                                             @elseif($value->status_absensi == 2)
                                             <span class="badge badge-primary">Ijin</span>
                                             @else
-                                            <span class="badge badge-success">Sakit</span>
+                                            <span class="badge badge-danger">Sakit</span>
                                             @endif
                                         </td>
                                         <!-- Pindahkan pengecekan ke sini -->
-                                        @if(Auth::user()->role_id != 2)
+                                        @if(Auth::user()->role_id != 2 && Auth::user()->role_id != 1)
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('absensi.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>
                                             <form action="{{ route('absensi.destroy', $value->uid) }}" method="post">

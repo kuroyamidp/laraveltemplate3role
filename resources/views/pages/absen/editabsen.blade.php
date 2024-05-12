@@ -18,16 +18,16 @@
                         <div class="row mb-1">
                             <div class="col-lg-3">
                                 <label for="form-control">Kode Absen</label>
-                                <input type="text" class="form-control" name="kode_absen" value="{{ $absen['kode_absen'] }}">
+                                <input type="text" class="form-control" name="kode_absen" value="{{ $absen['kode_absen'] }}" readonly>
                                 @if($errors->has('kode_absen'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('kode_absen') }}
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <label for="form-control">Jurusan</label>
-                                <select class="form-control" data-live-search="true" name="progdi">
+                                <select class="form-control" data-live-search="true" name="progdi" readonly>
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
                                     @if($absen['progdi_id'] == $value->id)
@@ -43,9 +43,9 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <label for="form-control">Mahasiswa</label>
-                                <select class="form-control" data-live-search="true" name="mahasiswa">
+                                <select class="form-control" data-live-search="true" name="mahasiswa" readonly>
                                     <option value="">Pilih salah satu</option>
                                     @foreach($mahasiswa as $key => $value)
                                     @if($absen['mahasiswa_id'] == $value->id)
@@ -61,10 +61,10 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label for="form-control">Kelas</label>
-                                <input type="hidden" name="uid" value="{{$absen['uid']}}">
-                                <select name="kelas" class="form-control">
+                                <input type="hidden" name="uid" value="{{$absen['uid']}}" >
+                                <select name="kelas" class="form-control" readonly>
                                     <option value="">Pilih salah satu</option>
                                     @foreach($kelas as $key => $value)
                                     @if($absen['kelas_id'] == $value->id)
