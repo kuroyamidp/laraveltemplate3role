@@ -265,4 +265,24 @@ class MahasiswaController extends Controller
         }
         return redirect('/mahasiswa')->with('success', 'Berhasil upload data mahasiswa');
     }
+    public function searchMahasiswa(Request $request)
+    {
+        $search = $request->input('search');
+        $kelas = MahasiswaModel::all();
+        $result = [];
+        foreach ($kelas as $item) {
+            if (
+                stripos($item->nim, $search) !== false ||
+                $item->nama == $search ||
+                $item->progdi == $search ||
+                $item->kelas == $search ||
+                $item->foto == $search ||
+                stripos($item->status, $search) !== false
+            ) {
+                $result[] = $item;
+            }
+        }
+
+        return response()->json($result);
+    }
 }
