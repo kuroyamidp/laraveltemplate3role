@@ -136,6 +136,44 @@
             updateSelectedProgdis(); // Memperbarui tampilan label
         });
     });
+
+    //pake keyup otomatis jadinya
+    // $(document).ready(function() {
+    //     function updateTable(search) {
+    //         $.ajax({
+    //             url: '{{ route("search-kelas-matkul") }}',
+    //             type: 'GET',
+    //             data: {
+    //                 search: search
+    //             },
+    //             success: function(response) {
+    //                 $('#data-table-body').empty();
+    //                 var nomor = 1;
+
+    //                 $.each(response, function(index, value) {
+    //                     var row = '<tr>' +
+    //                         '<td>' + nomor++ + '</td>' +
+    //                         '<td>' + value.kode_kelas + '</td>' +
+    //                         '<td>' + value.matkul + '</td>' +
+    //                         '<td>' + value.progdi + '</td>' +
+    //                         '<td>' + value.ruang + '</td>' +
+    //                         '<td>' + value.dosen + '</td>' +
+    //                         '<td>' + value.start + ' - ' + value.end + '</td>' +
+    //                         '<td>' + value.hari + '</td>' +
+    //                         '<td>KELAS ' + value.semester + '</td>' +
+    //                         '</tr>';
+    //                     $('#data-table-body').append(row);
+    //                 });
+    //             }
+    //         });
+    //     }
+
+    //     // Panggil fungsi updateTable saat nilai input berubah
+    //     $('#kode_kelas, #makul_id, #ruang_id, #progdi_id, #semester, #dosen_id, #hari').keyup(function() {
+    //         var search = $(this).val();
+    //         updateTable(search);
+    //     });
+    // });
 </script>
 
 

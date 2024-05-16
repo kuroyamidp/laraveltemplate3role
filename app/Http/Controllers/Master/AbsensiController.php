@@ -45,9 +45,9 @@ class AbsensiController extends Controller
                     ->where('dosen.kelas_id', $dosenKelas)
                     ->where('absensis.progdi_id', $dosenProgdi);
             })
-            ->distinct()
-            ->get();
-        
+                ->distinct()
+                ->get();
+
             $data['absen'] = $absen;
         } else {
             $mahasiswaNim = Auth::user()->mahasiswa['nim'];
@@ -55,14 +55,13 @@ class AbsensiController extends Controller
                 $join->on('absensis.kode_absen', '=', 'mahasiswa.nim')
                     ->where('absensis.kode_absen', $mahasiswaNim); // Menyesuaikan dengan hari berjalan
             })
-            ->distinct() // Hanya ambil hasil unik
-            ->get();
-        
+                ->distinct() // Hanya ambil hasil unik
+                ->get();
+
             $data['absen'] = $absen;
         }
-        
+
         return view('pages.absen.absen', $data);
-        
     }
 
 
@@ -180,7 +179,7 @@ class AbsensiController extends Controller
             'kelas' => 'required',
             'mahasiswa' => 'required',
             'status' => 'required',
-    
+
         ]);
 
         // response error validation
@@ -194,7 +193,7 @@ class AbsensiController extends Controller
             'mahasiswa_id' => $request->mahasiswa,
             'kelas_id' => $request->kelas,
             'status_absensi' => $request->status,
-          
+
         ]);
         return redirect('/absensi')->with('success', 'Berhasil update data');
     }
@@ -220,15 +219,24 @@ class AbsensiController extends Controller
 
         return AbsensiModel::where('semester', $request->semester)->whereNotIn('id', $kls)->get();
     }
-    public function searchByMatkul(Request $request)
+    public function searchAbsensi(Request $request)
     {
-        // Ambil nilai pencarian dari input form
         $search = $request->input('search');
+        $kelas = AbsensiModel::all();
+        $result = [];
 
-        // Lakukan pencarian data kelas berdasarkan mata kuliah
-        $kelas = AbsensiModel::where('kode_absen', 'LIKE', "%{$search}%")->get();
+        foreach ($kelas as $item) {
+            if (
+                stripos($item->kode_absen, $search) !== false ||
+                $item->progdi == $search ||
+                $item->kelas == $search ||
+                $item->mahasiswa == $search ||
+                stripos($item->hari, $search) !== false
+            ) {
+                $result[] = $item;
+            }
+        }
 
-        // Kembalikan hasil pencarian ke tampilan menggunakan response JSON
-        return response()->json($kelas);
+        return response()->json($result);
     }
 }

@@ -133,4 +133,5 @@ function getnamedosen() {
     $("#username").val(datadosen.nama)
     // console.log(datamahasiswa.nama)
 }
-
+//Script Khusus Pencarian
+//Penjadwalan/Daftar Kelas

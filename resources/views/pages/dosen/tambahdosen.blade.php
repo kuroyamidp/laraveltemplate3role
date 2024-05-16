@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label for="form-control">kelas</label>
-                                <select class="selectpicker" data-live-search="true" name="kelas">
+                                <select class="form-control" data-live-search="true" name="kelas">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($kelas as $key => $value)
                                     <option value="{{$value->id}}">{{$value->nama}}</option>

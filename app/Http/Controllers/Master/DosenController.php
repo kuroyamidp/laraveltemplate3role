@@ -23,6 +23,7 @@ class DosenController extends Controller
     public function index()
     {
         $data['dosen'] = DosenModel::get();
+        $data['kelas'] = KelasModel::get();
         return view('pages.dosen.dosen', $data);
     }
 
@@ -125,7 +126,7 @@ class DosenController extends Controller
                     'ikatan_kerja' => $request->ikatan_kerja,
                     'status' => $request->status,
                 ]);
-                return redirect('dosen')->with('success', 'Berhasil tambah data');
+                return redirect('dosen')->with('success', 'Berhasil Edit data');
             }
         } else {
 
@@ -218,7 +219,28 @@ class DosenController extends Controller
         DosenModel::where('uid', $id)->delete();
         return redirect('/dosen');
     }
+    public function searchDosen(Request $request)
+    {
+        $search = $request->input('search');
+        $kelas = DosenModel::all();
+        $result = [];
 
+        foreach ($kelas as $item) {
+            if (
+                stripos($item->nidn, $search) !== false ||
+                $item->progdi == $search ||
+                $item->kelas == $search ||
+                $item->nama == $search ||
+                $item->jabatan_fungsional == $search ||
+                $item->ikatan_kerja == $search ||
+                stripos($item->status, $search) !== false
+            ) {
+                $result[] = $item;
+            }
+        }
+
+        return response()->json($result);
+    }
     public function importdatadosen(Request $request)
     {
         $reqarr = Excel::toCollection(new DatadosenImport, $request->file('excel_file'));

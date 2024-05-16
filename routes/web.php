@@ -42,9 +42,7 @@ Route::resource('progdi', ProgdiController::class)->middleware(['auth', 'is_admi
 Route::resource('dosen', DosenController::class)->middleware(['auth', 'is_admin']);
 Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);
-Route::get('/search-kelas-matkul', [DaftarKelasController::class, 'searchByMatkul'])
-    ->name('search-kelas-matkul')
-    ->middleware(['auth', 'is_admin']);
+
 Route::resource('absensi', AbsensiController::class);
 Route::view('/absen-siswa', 'pages.absen.absensiswa.absensiswa')->name('absen.absensiswa');
 Route::resource('jadwal-kelas', JadwalkelasController::class)->middleware(['auth', 'is_admin']);
@@ -66,9 +64,7 @@ Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa'
 Route::resource('lihatjadwalujian', LihatJadwalujianController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
-
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
-
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarsidang', DaftarSidangController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarwisuda', DaftarWisudaController::class)->middleware(['auth', 'is_mahasiswa']);
@@ -84,5 +80,15 @@ Route::get('/cetaklihatjadwal', [LihatJadwalController::class, 'cetaklihatjadwal
 Route::get('/cetakjadwalsemester', [SemesterIniController::class, 'cetakjadwalsemester'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakjadwalujian', [LihatJadwalujianController::class, 'cetakjadwalujian'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
+//Pencarian Linier Search
+Route::get('/search-kelas-matkul', [DaftarKelasController::class, 'searchByMatkul'])
+    ->name('search-kelas-matkul')
+    ->middleware(['auth', 'is_admin']);
+Route::get('/search-absensi', [AbsensiController::class, 'searchAbsensi'])
+    ->name('search-absensi')
+    ->middleware(['auth', 'is_admin']);
+ Route::get('/search-dosen', [DosenController::class, 'searchDosen'])
+    ->name('search-dosen')
+    ->middleware(['auth', 'is_admin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();

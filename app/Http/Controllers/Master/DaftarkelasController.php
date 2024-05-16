@@ -52,7 +52,6 @@ class DaftarkelasController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'kode_kelas' => 'required',
             'mata_kuliah' => 'required',
@@ -62,12 +61,33 @@ class DaftarkelasController extends Controller
             'kelas' => 'required',
             'mulai' => 'required',
             'hari' => 'required',
-            'selesai' => 'required|after:' . $request->mulai,
+            'selesai' => 'required|after:mulai',
         ]);
 
         // response error validation
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
+        }
+
+        // Additional validation to check if dosen's time does not overlap with existing classes on the same day
+        $start = $request->mulai;
+        $end = $request->selesai;
+        $dosen_id = $request->dosen;
+        $hari = $request->hari;
+
+        $overlapCheck = DaftarkelasModel::where('hari', $hari)
+            ->where('dosen_id', $dosen_id)
+            ->where(function ($query) use ($start, $end) {
+                $query->whereBetween('start', [$start, $end])
+                    ->orWhereBetween('end', [$start, $end])
+                    ->orWhere(function ($query) use ($start, $end) {
+                        $query->where('start', '<=', $start)
+                            ->where('end', '>=', $end);
+                    });
+            })->exists();
+
+        if ($overlapCheck) {
+            return Redirect::back()->withErrors(['dosen' => 'Waktu dosen bertabrakan dengan kelas yang sudah ada pada hari yang sama.']);
         }
 
         DaftarkelasModel::create([
@@ -82,8 +102,11 @@ class DaftarkelasController extends Controller
             'start' => $request->mulai,
             'end' => $request->selesai,
         ]);
+
         return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -110,7 +133,6 @@ class DaftarkelasController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -175,16 +197,27 @@ class DaftarkelasController extends Controller
 
         return DaftarkelasModel::where('semester', $request->semester)->whereNotIn('id', $kls)->get();
     }
+
     public function searchByMatkul(Request $request)
     {
-        // Ambil nilai pencarian dari input form
         $search = $request->input('search');
-    
-        // Lakukan pencarian data kelas berdasarkan mata kuliah
-        $kelas = DaftarkelasModel::where('kode_kelas', 'LIKE', "%{$search}%")->get();
-    
-        // Kembalikan hasil pencarian ke tampilan menggunakan response JSON
-        return response()->json($kelas);
+        $kelas = DaftarkelasModel::all();
+        $result = [];
+
+        foreach ($kelas as $item) {
+            if (
+                stripos($item->kode_kelas, $search) !== false ||
+                $item->matkul == $search ||
+                $item->ruang == $search ||
+                $item->progdi == $search ||
+                $item->kelas == $search ||
+                $item->dosen == $search ||
+                stripos($item->hari, $search) !== false
+            ) {
+                $result[] = $item;
+            }
+        }
+
+        return response()->json($result);
     }
-    
 }
