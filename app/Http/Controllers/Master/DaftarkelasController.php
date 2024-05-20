@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+
 
 class DaftarkelasController extends Controller
 {
@@ -222,54 +224,49 @@ class DaftarkelasController extends Controller
     }
     public function optimizeSchedule()
     {
-        // Tentukan jumlah iterasi dan ukuran populasi sesuai kebutuhan
-        $iterations = 100;
-        $populationSize = 50;
+        // Tentukan parameter algoritma ABC
+        $iterations = 100; // Jumlah iterasi
+        $employedBeesCount = 20; // Jumlah lebah pekerja
+        $onlookerBeesCount = 10; // Jumlah lebah pengamat
+        $scoutBeesCount = 5; // Jumlah lebah penjelajah
+        $populationSize = $employedBeesCount + $onlookerBeesCount; // Ukuran populasi
 
-        // Jalankan fungsi optimasi
-        $bestSchedule = $this->optimizeScheduleLogic($iterations, $populationSize);
-
-        // Jika $bestSchedule null, inisialisasi sebagai array kosong
-        if (is_null($bestSchedule)) {
-            $bestSchedule = [];
-        }
-
-        // Render view dengan hasil optimasi
-        return view('pages.daftarkelas.optimized_schedule', ['schedule' => $bestSchedule]);
-    }
-
-    private function optimizeScheduleLogic($iterations, $populationSize)
-    {
-        // Inisialisasi populasi
+        // Inisialisasi populasi awal secara acak
         $population = $this->initializePopulation($populationSize);
 
-        for ($i = 0; $i < $iterations; $i++) {
-            // Evaluasi populasi
-            $population = $this->evaluatePopulation($population);
+        // Logging
+        Log::info('Starting optimization process with ABC');
 
-            // Seleksi
-            $parents = $this->selection($population);
+        // Lakukan iterasi sebanyak yang ditentukan
+        for ($iter = 0; $iter < $iterations; $iter++) {
+            // PHASE 1: Lebah Pekerja (Employed Bees)
+            $employedBees = $this->employedBeesPhase($population, $employedBeesCount);
 
-            // Crossover
-            $offspring = $this->crossover($parents);
+            // PHASE 2: Lebah Pengamat (Onlooker Bees)
+            $onlookerBees = $this->onlookerBeesPhase($employedBees);
 
-            // Mutasi
-            $mutatedOffspring = $this->mutation($offspring);
+            // PHASE 3: Lebah Penjelajah (Scout Bees)
+            $scoutBees = $this->scoutBeesPhase($population, $scoutBeesCount);
 
-            // Menggabungkan offspring ke dalam populasi
-            $population = array_merge($parents, $mutatedOffspring);
+            // Gabungkan hasil dari semua jenis lebah
+            $population = array_merge($employedBees, $onlookerBees, $scoutBees);
 
-            // Seleksi kembali untuk menjaga populasi tetap stabil
-            $population = $this->selectSurvivors($population, $populationSize);
+            // Evaluasi populasi setelah iterasi
+            $this->evaluatePopulation($population);
         }
 
         // Ambil jadwal terbaik dari populasi
         $bestSchedule = $this->getBestSchedule($population);
 
-        // Pastikan mengembalikan array
-        return $bestSchedule;
+        // Logging
+        Log::info('Best schedule obtained using ABC');
+
+        // Render view dengan hasil optimasi
+        return view('pages.daftarkelas.optimized_schedule', ['schedule' => $bestSchedule]);
     }
 
+
+    // Fungsi untuk menginisialisasi populasi awal secara acak
     private function initializePopulation($populationSize)
     {
         $population = [];
@@ -279,20 +276,24 @@ class DaftarkelasController extends Controller
         return $population;
     }
 
+    // Fungsi untuk membuat jadwal acak dari data yang tersedia
     private function createRandomSchedule()
     {
-        // Buat jadwal acak
+        $randomSchedule = DaftarkelasModel::inRandomOrder()->first();
+
+        // Buat jadwal acak dari data yang dipilih
         $schedule = [
-            'kode_kelas' => Str::random(10),
-            'matkul' => 'Matematika',
-            'progdi' => 'Teknik Informatika',
-            'ruang' => 'Ruang 101',
-            'dosen' => 'Dosen A',
-            'start' => '08:00',
-            'end' => '10:00',
-            'hari' => 'Senin',
-            'kelas' => '1'
+            'kode_kelas' => $randomSchedule->kode_kelas,
+            'matkul' => $randomSchedule->matkul,
+            'progdi' => $randomSchedule->progdi,
+            'ruang' => $randomSchedule->ruang,
+            'dosen' => $randomSchedule->dosen,
+            'start' => $randomSchedule->start,
+            'end' => $randomSchedule->end,
+            'hari' => $randomSchedule->hari,
+            'kelas' => $randomSchedule->kelas
         ];
+
         return $schedule;
     }
 
@@ -329,7 +330,7 @@ class DaftarkelasController extends Controller
         // Melakukan crossover untuk menghasilkan offspring
         $parents = array_values($parents); // Mengatur ulang indeks array
         $count = count($parents);
-        
+
         for ($i = 0; $i < $count - 1; $i += 2) { // Ubah batas loop untuk menghindari akses out-of-bounds
             $parent1 = $parents[$i];
             $parent2 = $parents[$i + 1];
@@ -359,7 +360,31 @@ class DaftarkelasController extends Controller
         // Melakukan mutasi pada offspring
         foreach ($offspring as &$child) {
             if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
-                $child['ruang'] = 'Ruang ' . rand(1, 10);
+                $randomMatkul = MatakuliahModel::inRandomOrder()->first();
+                $child['matkul'] = $randomMatkul->nama;
+            }
+        }
+        foreach ($offspring as &$child) {
+            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
+                $randomDosen = DosenModel::inRandomOrder()->first();
+                $child['dosen'] = $randomDosen->nama;
+            }
+        }
+        foreach ($offspring as &$child) {
+            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
+                $randomRuang = RuangModel::inRandomOrder()->first();
+                $child['ruang'] = $randomRuang->nama;
+            }
+        }
+        foreach ($offspring as &$child) {
+            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
+                $randomProgdi = ProgdiModel::inRandomOrder()->first();
+                $child['progdi'] = $randomProgdi->singkatan_studi;
+            }
+        }
+        foreach ($offspring as &$child) {
+            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
+                $child['kode_kelas'] =  rand(1, 10);
             }
         }
         return $offspring;
@@ -382,6 +407,6 @@ class DaftarkelasController extends Controller
             return $b['fitness'] <=> $a['fitness'];
         });
 
-        return $population[0];
+        return $population;
     }
 }
