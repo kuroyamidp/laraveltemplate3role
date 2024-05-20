@@ -220,4 +220,168 @@ class DaftarkelasController extends Controller
 
         return response()->json($result);
     }
+    public function optimizeSchedule()
+    {
+        // Tentukan jumlah iterasi dan ukuran populasi sesuai kebutuhan
+        $iterations = 100;
+        $populationSize = 50;
+
+        // Jalankan fungsi optimasi
+        $bestSchedule = $this->optimizeScheduleLogic($iterations, $populationSize);
+
+        // Jika $bestSchedule null, inisialisasi sebagai array kosong
+        if (is_null($bestSchedule)) {
+            $bestSchedule = [];
+        }
+
+        // Render view dengan hasil optimasi
+        return view('pages.daftarkelas.optimized_schedule', ['schedule' => $bestSchedule]);
+    }
+
+    private function optimizeScheduleLogic($iterations, $populationSize)
+    {
+        // Inisialisasi populasi
+        $population = $this->initializePopulation($populationSize);
+
+        for ($i = 0; $i < $iterations; $i++) {
+            // Evaluasi populasi
+            $population = $this->evaluatePopulation($population);
+
+            // Seleksi
+            $parents = $this->selection($population);
+
+            // Crossover
+            $offspring = $this->crossover($parents);
+
+            // Mutasi
+            $mutatedOffspring = $this->mutation($offspring);
+
+            // Menggabungkan offspring ke dalam populasi
+            $population = array_merge($parents, $mutatedOffspring);
+
+            // Seleksi kembali untuk menjaga populasi tetap stabil
+            $population = $this->selectSurvivors($population, $populationSize);
+        }
+
+        // Ambil jadwal terbaik dari populasi
+        $bestSchedule = $this->getBestSchedule($population);
+
+        // Pastikan mengembalikan array
+        return $bestSchedule;
+    }
+
+    private function initializePopulation($populationSize)
+    {
+        $population = [];
+        for ($i = 0; $i < $populationSize; $i++) {
+            $population[] = $this->createRandomSchedule();
+        }
+        return $population;
+    }
+
+    private function createRandomSchedule()
+    {
+        // Buat jadwal acak
+        $schedule = [
+            'kode_kelas' => Str::random(10),
+            'matkul' => 'Matematika',
+            'progdi' => 'Teknik Informatika',
+            'ruang' => 'Ruang 101',
+            'dosen' => 'Dosen A',
+            'start' => '08:00',
+            'end' => '10:00',
+            'hari' => 'Senin',
+            'kelas' => '1'
+        ];
+        return $schedule;
+    }
+
+    private function evaluatePopulation($population)
+    {
+        // Evaluasi fitness setiap individu dalam populasi
+        foreach ($population as &$individual) {
+            $individual['fitness'] = $this->evaluateSchedule($individual);
+        }
+        return $population;
+    }
+
+    private function evaluateSchedule($schedule)
+    {
+        // Hitung fitness dari jadwal
+        // Misalnya: Semakin kecil konflik, semakin tinggi fitness
+        return rand(1, 100); // Ini adalah placeholder, implementasi asli harus menghitung fitness dengan tepat
+    }
+
+    private function selection($population)
+    {
+        // Seleksi orang tua dari populasi
+        usort($population, function ($a, $b) {
+            return $b['fitness'] <=> $a['fitness'];
+        });
+
+        return array_slice($population, 0, count($population) / 2);
+    }
+
+    private function crossover($parents)
+    {
+        var_dump($parents); // atau dd($parents) untuk Laravel
+
+        // Melakukan crossover untuk menghasilkan offspring
+        $parents = array_values($parents); // Mengatur ulang indeks array
+        $count = count($parents);
+        
+        for ($i = 0; $i < $count - 1; $i += 2) { // Ubah batas loop untuk menghindari akses out-of-bounds
+            $parent1 = $parents[$i];
+            $parent2 = $parents[$i + 1];
+
+            $child1 = $parent1;
+            $child2 = $parent2;
+
+            // Lakukan crossover
+            $child1['kode_kelas'] = $parent2['kode_kelas'];
+            $child2['kode_kelas'] = $parent1['kode_kelas'];
+
+            $offspring[] = $child1;
+            $offspring[] = $child2;
+        }
+
+        // Jika jumlah parents ganjil, tambahkan parent terakhir tanpa crossover
+        if ($count % 2 != 0) {
+            $offspring[] = $parents[$count - 1];
+        }
+
+        return $offspring;
+    }
+
+
+    private function mutation($offspring)
+    {
+        // Melakukan mutasi pada offspring
+        foreach ($offspring as &$child) {
+            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
+                $child['ruang'] = 'Ruang ' . rand(1, 10);
+            }
+        }
+        return $offspring;
+    }
+
+    private function selectSurvivors($population, $populationSize)
+    {
+        // Seleksi individu terbaik untuk bertahan
+        usort($population, function ($a, $b) {
+            return $b['fitness'] <=> $a['fitness'];
+        });
+
+        return array_slice($population, 0, $populationSize);
+    }
+
+    private function getBestSchedule($population)
+    {
+        // Mengambil jadwal terbaik dari populasi
+        usort($population, function ($a, $b) {
+            return $b['fitness'] <=> $a['fitness'];
+        });
+
+        return $population[0];
+    }
 }

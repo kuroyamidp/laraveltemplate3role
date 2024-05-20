@@ -127,6 +127,9 @@
 									<a href="/daftar-kelas"> Jadwal Kelas </a>
 								</li>
 								<li>
+									<a href="{{ route('optimize-schedule') }}"> Optimize Jadwal </a>
+								</li>
+								<li>
 									<a href="/absensi"> Absensi </a>
 								</li>
 								<!-- <li>
