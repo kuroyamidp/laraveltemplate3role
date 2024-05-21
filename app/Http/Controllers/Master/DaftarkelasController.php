@@ -222,66 +222,65 @@ class DaftarkelasController extends Controller
 
         return response()->json($result);
     }
-    public function optimizeSchedule()
+    public function optimizeSchedule($id)
     {
-        // Tentukan parameter algoritma ABC
-        $iterations = 100; // Jumlah iterasi
-        $employedBeesCount = 20; // Jumlah lebah pekerja
-        $onlookerBeesCount = 10; // Jumlah lebah pengamat
-        $scoutBeesCount = 5; // Jumlah lebah penjelajah
-        $populationSize = $employedBeesCount + $onlookerBeesCount; // Ukuran populasi
+        $iterations = 100;
+        $employedBeesCount = 20;
+        $onlookerBeesCount = 10;
+        $scoutBeesCount = 5;
+        $populationSize = $employedBeesCount + $onlookerBeesCount;
 
-        // Inisialisasi populasi awal secara acak
-        $population = $this->initializePopulation($populationSize);
+        $population = $this->initializePopulation($populationSize, $id);
 
-        // Logging
-        Log::info('Starting optimization process with ABC');
+        $statistics = [];
 
-        // Lakukan iterasi sebanyak yang ditentukan
         for ($iter = 0; $iter < $iterations; $iter++) {
-            // PHASE 1: Lebah Pekerja (Employed Bees)
-            $employedBees = $this->employedBeesPhase($population, $employedBeesCount);
+            $employedBees = $this->employedBeesPhase($population, $employedBeesCount, $id);
+            $onlookerBees = $this->onlookerBeesPhase($employedBees, $id);
+            $scoutBees = $this->scoutBeesPhase($population, $scoutBeesCount, $id);
 
-            // PHASE 2: Lebah Pengamat (Onlooker Bees)
-            $onlookerBees = $this->onlookerBeesPhase($employedBees);
-
-            // PHASE 3: Lebah Penjelajah (Scout Bees)
-            $scoutBees = $this->scoutBeesPhase($population, $scoutBeesCount);
-
-            // Gabungkan hasil dari semua jenis lebah
             $population = array_merge($employedBees, $onlookerBees, $scoutBees);
 
-            // Evaluasi populasi setelah iterasi
             $this->evaluatePopulation($population);
+
+            $bestSchedule = $this->getBestSchedule($population);
+
+            // Simpan statistik untuk iterasi ini
+            $fitnessValues = array_column($population, 'fitness');
+            $statistics[] = [
+                'iteration' => $iter + 1,
+                'best_fitness' => $bestSchedule['fitness'],
+                'average_fitness' => array_sum($fitnessValues) / count($fitnessValues),
+                'worst_fitness' => max($fitnessValues),
+            ];
         }
 
-        // Ambil jadwal terbaik dari populasi
         $bestSchedule = $this->getBestSchedule($population);
 
-        // Logging
-        Log::info('Best schedule obtained using ABC');
+        if ($bestSchedule === null) {
+            throw new \Exception('Tidak ada jadwal terbaik yang ditemukan');
+        }
 
-        // Render view dengan hasil optimasi
-        return view('pages.daftarkelas.optimized_schedule', ['schedule' => $bestSchedule]);
+        return view('pages.daftarkelas.optimized_schedule', [
+            'schedule' => [$bestSchedule],
+            'statistics' => $statistics,
+        ]);
     }
 
-
-    // Fungsi untuk menginisialisasi populasi awal secara acak
-    private function initializePopulation($populationSize)
+    // Fungsi untuk inisialisasi populasi awal secara acak
+    private function initializePopulation($populationSize, $id)
     {
         $population = [];
         for ($i = 0; $i < $populationSize; $i++) {
-            $population[] = $this->createRandomSchedule();
+            $population[] = $this->createRandomSchedule($id);
         }
         return $population;
     }
 
-    // Fungsi untuk membuat jadwal acak dari data yang tersedia
-    private function createRandomSchedule()
+    private function createRandomSchedule($id)
     {
-        $randomSchedule = DaftarkelasModel::inRandomOrder()->first();
+        $randomSchedule = DaftarkelasModel::find($id);
 
-        // Buat jadwal acak dari data yang dipilih
         $schedule = [
             'kode_kelas' => $randomSchedule->kode_kelas,
             'matkul' => $randomSchedule->matkul,
@@ -291,122 +290,96 @@ class DaftarkelasController extends Controller
             'start' => $randomSchedule->start,
             'end' => $randomSchedule->end,
             'hari' => $randomSchedule->hari,
-            'kelas' => $randomSchedule->kelas
+            'kelas' => $randomSchedule->kelas,
         ];
 
         return $schedule;
     }
 
-    private function evaluatePopulation($population)
+    // Fungsi untuk mengevaluasi populasi
+    private function evaluatePopulation(&$population)
     {
-        // Evaluasi fitness setiap individu dalam populasi
         foreach ($population as &$individual) {
             $individual['fitness'] = $this->evaluateSchedule($individual);
         }
-        return $population;
     }
 
+    // Fungsi untuk mengevaluasi jadwal individu
     private function evaluateSchedule($schedule)
     {
-        // Hitung fitness dari jadwal
-        // Misalnya: Semakin kecil konflik, semakin tinggi fitness
-        return rand(1, 100); // Ini adalah placeholder, implementasi asli harus menghitung fitness dengan tepat
+        $fitnessScore = 0;
+        $teacherTimeConflicts = [];
+
+        foreach ($schedule as $class) {
+            if (!isset($class['hari'], $class['start'], $class['end'], $class['dosen'])) {
+                continue;
+            }
+
+            $timeSlot = $class['hari'] . $class['start'] . $class['end'];
+            $teacher = $class['dosen'];
+
+            if (!isset($teacherTimeConflicts[$teacher])) {
+                $teacherTimeConflicts[$teacher] = [];
+            }
+            if (!isset($teacherTimeConflicts[$teacher][$timeSlot])) {
+                $teacherTimeConflicts[$teacher][$timeSlot] = 0;
+            }
+            $teacherTimeConflicts[$teacher][$timeSlot]++;
+            if ($teacherTimeConflicts[$teacher][$timeSlot] > 1) {
+                $fitnessScore += 10; // Penalti untuk konflik dosen
+                Log::info('Konflik dosen ditemukan: ' . json_encode($class));
+            }
+        }
+
+        Log::info('Fitness Score: ' . $fitnessScore);
+        return $fitnessScore;
     }
 
-    private function selection($population)
+
+    // Fungsi untuk memilih lebah pekerja
+    private function employedBeesPhase($population, $employedBeesCount, $id)
     {
-        // Seleksi orang tua dari populasi
-        usort($population, function ($a, $b) {
-            return $b['fitness'] <=> $a['fitness'];
-        });
-
-        return array_slice($population, 0, count($population) / 2);
+        $employedBees = [];
+        for ($i = 0; $i < $employedBeesCount; $i++) {
+            $employedBees[] = $this->createRandomSchedule($id);
+        }
+        return $employedBees;
     }
 
-    private function crossover($parents)
+    private function onlookerBeesPhase($employedBees, $id)
     {
-        var_dump($parents); // atau dd($parents) untuk Laravel
-
-        // Melakukan crossover untuk menghasilkan offspring
-        $parents = array_values($parents); // Mengatur ulang indeks array
-        $count = count($parents);
-
-        for ($i = 0; $i < $count - 1; $i += 2) { // Ubah batas loop untuk menghindari akses out-of-bounds
-            $parent1 = $parents[$i];
-            $parent2 = $parents[$i + 1];
-
-            $child1 = $parent1;
-            $child2 = $parent2;
-
-            // Lakukan crossover
-            $child1['kode_kelas'] = $parent2['kode_kelas'];
-            $child2['kode_kelas'] = $parent1['kode_kelas'];
-
-            $offspring[] = $child1;
-            $offspring[] = $child2;
+        $onlookerBees = [];
+        foreach ($employedBees as $bee) {
+            if (rand(0, 1) > 0.5) {
+                $onlookerBees[] = $bee;
+            }
         }
-
-        // Jika jumlah parents ganjil, tambahkan parent terakhir tanpa crossover
-        if ($count % 2 != 0) {
-            $offspring[] = $parents[$count - 1];
-        }
-
-        return $offspring;
+        return $onlookerBees;
     }
 
-
-    private function mutation($offspring)
+    private function scoutBeesPhase($population, $scoutBeesCount, $id)
     {
-        // Melakukan mutasi pada offspring
-        foreach ($offspring as &$child) {
-            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
-                $randomMatkul = MatakuliahModel::inRandomOrder()->first();
-                $child['matkul'] = $randomMatkul->nama;
-            }
+        $scoutBees = [];
+        for ($i = 0; $i < $scoutBeesCount; $i++) {
+            $scoutBees[] = $this->createRandomSchedule($id);
         }
-        foreach ($offspring as &$child) {
-            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
-                $randomDosen = DosenModel::inRandomOrder()->first();
-                $child['dosen'] = $randomDosen->nama;
-            }
-        }
-        foreach ($offspring as &$child) {
-            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
-                $randomRuang = RuangModel::inRandomOrder()->first();
-                $child['ruang'] = $randomRuang->nama;
-            }
-        }
-        foreach ($offspring as &$child) {
-            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
-                $randomProgdi = ProgdiModel::inRandomOrder()->first();
-                $child['progdi'] = $randomProgdi->singkatan_studi;
-            }
-        }
-        foreach ($offspring as &$child) {
-            if (rand(0, 100) / 100 < 0.1) { // 10% chance of mutation
-                $child['kode_kelas'] =  rand(1, 10);
-            }
-        }
-        return $offspring;
+        return $scoutBees;
     }
 
-    private function selectSurvivors($population, $populationSize)
-    {
-        // Seleksi individu terbaik untuk bertahan
-        usort($population, function ($a, $b) {
-            return $b['fitness'] <=> $a['fitness'];
-        });
-
-        return array_slice($population, 0, $populationSize);
-    }
-
+    // Fungsi untuk memilih jadwal terbaik dari populasi
     private function getBestSchedule($population)
     {
-        // Mengambil jadwal terbaik dari populasi
+        // Cek apakah populasi kosong
+        if (empty($population)) {
+            throw new \Exception('Populasi kosong');
+        }
+
+        // Urutkan populasi berdasarkan nilai fitness
         usort($population, function ($a, $b) {
-            return $b['fitness'] <=> $a['fitness'];
+            return $a['fitness'] <=> $b['fitness'];
         });
 
-        return $population;
+        // Kembalikan jadwal dengan nilai fitness terbaik (terendah)
+        return $population[0] ?? null;
     }
 }

@@ -1,6 +1,21 @@
 @extends('layouts.main')
 
 @section('content')
+<style>
+    .btn-optimize {
+        background-color: #28a745;
+        /* Hijau */
+        color: white;
+        border: none;
+    }
+
+    .btn-optimize:hover {
+        background-color: #218838;
+        /* Hijau lebih gelap saat hover */
+        color: white;
+    }
+</style>
+
 
 <div class="layout-px-spacing">
     <div class="row">
@@ -62,6 +77,7 @@
                                         <td><b>KELAS </b>{{ $value->kelas }}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('daftar-kelas.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>
+                                            <a href="{{ route('optimize-schedule', ['id' => $value->id]) }}" class="btn btn-success mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></a>
                                             <form action="{{ route('daftar-kelas.destroy', $value->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
@@ -81,32 +97,34 @@
     </div>
 
 </div>
-<script>
+<!-- <script>
     //tes
     $(document).ready(function() {
-    $('#configform').on('submit', function(event) {
-        event.preventDefault();
-        updateTable($('#daftar_kelas').val());
-    });
-
-    function updateTable(search) {
-        $.ajax({
-            url: '{{ route("search-kelas-matkul") }}',
-            type: 'GET',
-            data: { search },
-            success: function(response) {
-                $('#data-table-body').empty();
-                response.forEach((value, index) => {
-                    $('#data-table-body').append(buildRow(value, index + 1));
-                });
-                $('[data-toggle="tooltip"]').tooltip();
-                addEventListenersToActionButtons();
-            }
+        $('#configform').on('submit', function(event) {
+            event.preventDefault();
+            updateTable($('#daftar_kelas').val());
         });
-    }
 
-    function buildRow(value, nomor) {
-        let row = `<tr>
+        function updateTable(search) {
+            $.ajax({
+                url: '{{ route("search-kelas-matkul") }}',
+                type: 'GET',
+                data: {
+                    search
+                },
+                success: function(response) {
+                    $('#data-table-body').empty();
+                    response.forEach((value, index) => {
+                        $('#data-table-body').append(buildRow(value, index + 1));
+                    });
+                    $('[data-toggle="tooltip"]').tooltip();
+                    addEventListenersToActionButtons();
+                }
+            });
+        }
+
+        function buildRow(value, nomor) {
+            let row = `<tr>
             <td>${nomor}</td>
             <td>${value.kode_kelas}</td>
             <td>${value.matkul}</td>
@@ -117,7 +135,7 @@
             <td>${value.hari}</td>
             <td>Kelas ${value.kelas}</td>
         `;
-      
+
             row += `<td class="text-center" style="display: flex; justify-content: center;">
                 <a href="{{ route('daftar-kelas.show', '') }}/${value.uid}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>
                 <form action="{{ route('daftar-kelas.destroy', '') }}/${value.uid}" method="post" style="display:inline;">
@@ -126,39 +144,38 @@
                     <button class="btn btn-danger mb-1 mr-1 rounded-circle show_confirm" data-toggle="tooltip" title="Delete" type="submit"><i class="bx bx-trash bx-sm"></i></button>
                 </form>
                 </td>`;
-        
-        row += `</tr>`;
-        return row;
-    }
 
-    function addEventListenersToActionButtons() {
-        $('.show_confirm').on('click', function(event) {
-            const form = $(this).closest("form");
-            event.preventDefault();
-            swal({
-                title: `Are you sure you want to delete this record?`,
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
+            row += `</tr>`;
+            return row;
+        }
+
+        function addEventListenersToActionButtons() {
+            $('.show_confirm').on('click', function(event) {
+                const form = $(this).closest("form");
+                event.preventDefault();
+                swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
             });
-        });
-    }
+        }
 
-    window.resetForm = function() {
-        $('#configform').trigger("reset");
+        window.resetForm = function() {
+            $('#configform').trigger("reset");
+            updateTable('');
+        }
+
+        // Initialize the table with all records
         updateTable('');
-    }
-
-    // Initialize the table with all records
-    updateTable('');
-});
-
-</script>
+    });
+</script> -->
 
 
 

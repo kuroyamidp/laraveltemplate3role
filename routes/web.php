@@ -42,7 +42,8 @@ Route::resource('progdi', ProgdiController::class)->middleware(['auth', 'is_admi
 Route::resource('dosen', DosenController::class)->middleware(['auth', 'is_admin']);
 Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);
-Route::get('/optimize-schedule', [DaftarkelasController::class, 'optimizeSchedule'])->name('optimize-schedule');
+Route::get('/optimize-schedule/{id}', [DaftarkelasController::class, 'optimizeSchedule'])->name('optimize-schedule');
+
 
 Route::resource('absensi', AbsensiController::class);
 Route::view('/absen-siswa', 'pages.absen.absensiswa.absensiswa')->name('absen.absensiswa');
