@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers\Master;
 
+use App\Models\Master\WaktuModel;
 use App\Http\Controllers\Controller;
-use App\Imports\DataMatkulImport;
-use App\Models\Master\MatakuliahModel;
+use App\Models\Master\DaftarkelasModel;
+use App\Models\Master\DosenModel;
+use App\Models\Master\JadwalkelasModel;
+use App\Models\Master\ProgdiModel;
+use App\Models\Master\KelasModel;
+use App\Models\Master\RuangModel;
+use Faker\ORM\CakePHP\Populator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
-class MatakuliahController extends Controller
+class WaktuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +26,8 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        $data['matkul'] = MatakuliahModel::get();
-        return view('pages.matakuliah.matkul', $data);
+        $data['waktu'] = WaktuModel::get();
+        return view('pages.waktu.waktu', $data);
     }
 
 
@@ -32,7 +38,7 @@ class MatakuliahController extends Controller
      */
     public function create()
     {
-        return view('pages.matakuliah.tambahmatakuliah');
+        return view('pages.waktu.tambahwaktu');
     }
 
     /**
@@ -45,7 +51,8 @@ class MatakuliahController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'kode' => 'required',
-            'mata_kuliah' => 'required',
+            'jam' => 'required',
+
         ]);
 
         // response error validation
@@ -53,21 +60,14 @@ class MatakuliahController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        // Check if kode_mk already exists
-        $existingMatakuliah = MatakuliahModel::where('kode_mk', $request->kode)->first();
-        if ($existingMatakuliah) {
-            return Redirect::back()->withErrors(['kode' => 'Kode mata pelajaran sudah ada.'])->withInput();
-        }
-
-        MatakuliahModel::create([
+        waktuModel::create([
             'uid' => Str::uuid(),
-            'kode_mk' => $request->kode,
-            'nama' => $request->mata_kuliah,
+            'kode_waktu' => $request->kode,
+            'jam' => $request->jam,
         ]);
 
-        return redirect('/matakuliah')->with('success', 'Berhasil tambah data');
+        return redirect('/waktu')->with('success', 'Berhasil tambah data');
     }
-
 
     /**
      * Display the specified resource.
@@ -77,8 +77,8 @@ class MatakuliahController extends Controller
      */
     public function show($id)
     {
-        $data['matakuliah'] = MatakuliahModel::where('uid', $id)->first();
-        return view('pages.matakuliah.editmatkul', $data);
+        $data['waktu'] = waktuModel::where('uid', $id)->first();
+        return view('pages.waktu.editwaktu', $data);
     }
 
     /**
@@ -103,7 +103,7 @@ class MatakuliahController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'kode' => 'required',
-            'mata_kuliah' => 'required',
+            'jam' => 'required',
 
         ]);
 
@@ -112,12 +112,12 @@ class MatakuliahController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        MatakuliahModel::where('uid', $id)->update([
-            'kode_mk' => $request->kode,
-            'nama' => $request->mata_kuliah,
+        waktuModel::where('uid', $id)->update([
+            'kode_waktu' => $request->kode,
+            'jam' => $request->jam,
         ]);
 
-        return redirect('/matakuliah')->with('success', 'Berhasil update data');
+        return redirect('/waktu')->with('success', 'Berhasil update data');
     }
 
     /**
@@ -128,25 +128,7 @@ class MatakuliahController extends Controller
      */
     public function destroy($id)
     {
-        MatakuliahModel::where('uid', $id)->delete();
-        return redirect('/matakuliah');
-    }
-    public function importdatamatkul(Request $request)
-    {
-        $reqarr = Excel::toCollection(new DataMatkulImport, $request->file('excel_file'));
-        // return $reqarr;
-        foreach ($reqarr as $key => $value) {
-            foreach ($value as $j => $val) {
-                if ($j > 1) {
-                    // return $val[1];
-                    MatakuliahModel::create([
-                        'uid' => Str::uuid(),
-                        'kode_mk' => $val[1],
-                        'nama' => $val[2],
-                    ]);
-                }
-            }
-        }
-        return redirect('/matakuliah')->with('success', 'Berhasil upload data mata kuliah');
+        waktuModel::where('uid', $id)->delete();
+        return redirect('/waktu');
     }
 }

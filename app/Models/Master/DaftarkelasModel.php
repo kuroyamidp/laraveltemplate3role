@@ -24,7 +24,7 @@ class DaftarkelasModel extends Model
         'kode_kelas',
     ];
 
-    protected $appends = ['progdi', 'matkul', 'dosen', 'ruang', 'kelas'];
+    protected $appends = ['progdi', 'matkul', 'dosen', 'ruang', 'kelas','waktu'];
     public function getProgdiAttribute()
     {
         if (array_key_exists('progdi_id', $this->attributes)) {
@@ -78,6 +78,16 @@ class DaftarkelasModel extends Model
             }
         }
 
+        return null;
+    }
+    public function getWaktuAttribute()
+    {
+        if (array_key_exists('start', $this->attributes)) {
+            $kat = DB::table('waktus')->select('jam')->where('id', $this->attributes['start'])->first();
+            if ($kat) {
+                return $kat->jam;
+            }
+        }
         return null;
     }
 }

@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\AccKrsController;
-use App\Http\Controllers\AccSidangController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DaftarsidangController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\JadwalujianController as ControllersJadwalujianController;
 use App\Http\Controllers\Master\DaftarkelasController;
 use App\Http\Controllers\Master\DosenController;
 use App\Http\Controllers\Master\AbsensiController;
@@ -18,10 +16,9 @@ use App\Http\Controllers\Master\MatakuliahController;
 use App\Http\Controllers\Master\KelasController;
 use App\Http\Controllers\master\NilaiUjianController;
 use App\Http\Controllers\Master\ProgdiController;
+use App\Http\Controllers\Master\WaktuController;
 use App\Http\Controllers\LihatJadwalujianController;
 use App\Http\Controllers\KhsController;
-use App\Http\Controllers\Master\LihatJadwalDosenController;
-use App\Http\Controllers\master\LihatJadwalUjianDosenController;
 use App\Http\Controllers\Master\RuangkelasController;
 use App\Http\Controllers\Master\SemesterIniController;
 use App\Http\Controllers\master\UserDosenController;
@@ -29,6 +26,7 @@ use App\Http\Controllers\Master\UserMahasiswaController;
 use App\Http\Controllers\Public\KrsController;
 use App\Http\Controllers\Public\ProfilemhsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -39,6 +37,7 @@ Route::resource('matakuliah', MatakuliahController::class)->middleware(['auth', 
 Route::resource('kelas', KelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('ruangkelas', RuangkelasController::class)->middleware(['auth', 'is_admin']);
 Route::resource('progdi', ProgdiController::class)->middleware(['auth', 'is_admin']);
+Route::resource('waktu', WaktuController::class)->middleware(['auth', 'is_admin']);
 Route::resource('dosen', DosenController::class)->middleware(['auth', 'is_admin']);
 Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);

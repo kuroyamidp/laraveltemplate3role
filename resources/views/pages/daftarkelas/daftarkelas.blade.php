@@ -72,7 +72,7 @@
                                         <td>{{ $value->progdi }}</td>
                                         <td>{{ $value->ruang }}</td>
                                         <td>{{ $value->dosen }}</td>
-                                        <td>{{ $value->start }} - {{ $value->end }}</td>
+                                        <td>{{ $value->waktu }}</td>
                                         <td>{{ $value->hari }}</td>
                                         <td><b>KELAS </b>{{ $value->kelas }}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">

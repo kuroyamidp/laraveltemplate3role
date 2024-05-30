@@ -69,6 +69,7 @@
 								<li><a href="/kelas"> Kelas</a></li>
 								<li><a href="/ruangkelas"> Ruang kelas</a></li>
 								<li><a href="/progdi"> Jurusan </a></li>
+								<li><a href="/waktu"> Waktu </a></li>
 								<!-- <li><a href="/dosen"> Guru </a></li>
       						  <li><a href="/mahasiswa"> Siswa </a></li> -->
 							</ul>

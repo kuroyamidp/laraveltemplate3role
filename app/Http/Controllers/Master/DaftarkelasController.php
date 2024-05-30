@@ -10,6 +10,8 @@ use App\Models\Master\MatakuliahModel;
 use App\Models\Master\ProgdiModel;
 use App\Models\Master\KelasModel;
 use App\Models\Master\RuangModel;
+use App\Models\Master\WaktuModel;
+use Faker\ORM\CakePHP\Populator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -43,6 +45,7 @@ class DaftarkelasController extends Controller
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
         $data['kelas'] = KelasModel::get();
+        $data['waktu'] = WaktuModel::get();
         return view('pages.daftarkelas.tambahkelas', $data);
     }
 
@@ -61,9 +64,8 @@ class DaftarkelasController extends Controller
             'progdi' => 'required',
             'dosen' => 'required',
             'kelas' => 'required',
-            'mulai' => 'required',
+            'waktu' => 'required',
             'hari' => 'required',
-            'selesai' => 'required|after:mulai',
         ]);
 
         // response error validation
@@ -72,25 +74,6 @@ class DaftarkelasController extends Controller
         }
 
         // Additional validation to check if dosen's time does not overlap with existing classes on the same day
-        $start = $request->mulai;
-        $end = $request->selesai;
-        $dosen_id = $request->dosen;
-        $hari = $request->hari;
-
-        $overlapCheck = DaftarkelasModel::where('hari', $hari)
-            ->where('dosen_id', $dosen_id)
-            ->where(function ($query) use ($start, $end) {
-                $query->whereBetween('start', [$start, $end])
-                    ->orWhereBetween('end', [$start, $end])
-                    ->orWhere(function ($query) use ($start, $end) {
-                        $query->where('start', '<=', $start)
-                            ->where('end', '>=', $end);
-                    });
-            })->exists();
-
-        if ($overlapCheck) {
-            return Redirect::back()->withErrors(['dosen' => 'Waktu dosen bertabrakan dengan kelas yang sudah ada pada hari yang sama.']);
-        }
 
         DaftarkelasModel::create([
             'uid' => Str::uuid(),
@@ -101,8 +84,7 @@ class DaftarkelasController extends Controller
             'ruang_id' => $request->ruang_kelas,
             'semester' => $request->kelas,
             'hari' => $request->hari,
-            'start' => $request->mulai,
-            'end' => $request->selesai,
+            'start' => $request->waktu,
         ]);
 
         return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
@@ -123,6 +105,7 @@ class DaftarkelasController extends Controller
         $data['matkul'] = MatakuliahModel::get();
         $data['ruang'] = RuangModel::get();
         $data['kls'] = KelasModel::get();
+        $data['waktu'] = WaktuModel::get();
         $data['kelas'] = DaftarkelasModel::where('uid', $id)->first();
         return view('pages.daftarkelas.editkelas', $data);
     }
@@ -154,8 +137,7 @@ class DaftarkelasController extends Controller
             'kelas' => 'required',
             'dosen' => 'required',
             'hari' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required|after:' . $request->mulai,
+            'waktu' => 'required',
         ]);
 
         // response error validation
@@ -169,8 +151,7 @@ class DaftarkelasController extends Controller
             'makul_id' => $request->mata_kuliah,
             'dosen_id' => $request->dosen,
             'ruang_id' => $request->ruang_kelas,
-            'start' => $request->mulai,
-            'end' => $request->selesai,
+            'start' => $request->waktu,
             'semester' => $request->kelas,
             'hari' => $request->hari,
         ]);
@@ -222,164 +203,62 @@ class DaftarkelasController extends Controller
 
         return response()->json($result);
     }
+
     public function optimizeSchedule($id)
     {
-        $iterations = 100;
-        $employedBeesCount = 20;
-        $onlookerBeesCount = 10;
-        $scoutBeesCount = 5;
-        $populationSize = $employedBeesCount + $onlookerBeesCount;
-
-        $population = $this->initializePopulation($populationSize, $id);
-
-        $statistics = [];
-
-        for ($iter = 0; $iter < $iterations; $iter++) {
-            $employedBees = $this->employedBeesPhase($population, $employedBeesCount, $id);
-            $onlookerBees = $this->onlookerBeesPhase($employedBees, $id);
-            $scoutBees = $this->scoutBeesPhase($population, $scoutBeesCount, $id);
-
-            $population = array_merge($employedBees, $onlookerBees, $scoutBees);
-
-            $this->evaluatePopulation($population);
-
-            $bestSchedule = $this->getBestSchedule($population);
-
-            // Simpan statistik untuk iterasi ini
-            $fitnessValues = array_column($population, 'fitness');
-            $statistics[] = [
-                'iteration' => $iter + 1,
-                'best_fitness' => $bestSchedule['fitness'],
-                'average_fitness' => array_sum($fitnessValues) / count($fitnessValues),
-                'worst_fitness' => max($fitnessValues),
-            ];
+        // Definisikan slot waktu dan hari yang tersedia
+        $timeSlots = [
+            '07:30-09:30', '09:30-11:30', '11:30-13:30', '13:30-15:30'
+        ];
+        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'];
+        $rooms = RuangModel::pluck('nama')->toArray();
+    
+        // Dapatkan daftar kelas yang perlu dijadwalkan
+        $classes = DaftarkelasModel::all();
+    
+        $schedule = [];
+    
+        foreach ($classes as $class) {
+            foreach ($days as $day) {
+                foreach ($timeSlots as $timeSlot) {
+                    foreach ($rooms as $room) {
+                        if ($this->isSlotAvailable($schedule, $day, $timeSlot, $room, $class->dosen_id)) {
+                            // Jadwalkan kelas pada slot waktu yang tersedia
+                            $schedule[] = [
+                                'kode_kelas' => $class->kode_kelas,
+                                'makul_id' => $class->matkul,
+                                'progdi_id' => $class->progdi,
+                                'ruang_id' => $room,
+                                'dosen_id' => $class->dosen,
+                                'waktu' => $timeSlot,
+                                'hari' => $day,
+                                'kelas' => $class->kelas,
+                                'fitness' => 0,
+                                'id' => $id
+                            ];
+                            break 3; // Keluar dari tiga loop dan pindah ke kelas berikutnya
+                        }
+                    }
+                }
+            }
         }
-
-        $bestSchedule = $this->getBestSchedule($population);
-
-        if ($bestSchedule === null) {
-            throw new \Exception('Tidak ada jadwal terbaik yang ditemukan');
-        }
-
+    
+        // Kembalikan jadwal
         return view('pages.daftarkelas.optimized_schedule', [
-            'schedule' => [$bestSchedule],
-            'statistics' => $statistics,
+            'schedule' => $schedule,
         ]);
     }
-
-    // Fungsi untuk inisialisasi populasi awal secara acak
-    private function initializePopulation($populationSize, $id)
+    
+    private function isSlotAvailable($schedule, $day, $timeSlot, $room, $dosen)
     {
-        $population = [];
-        for ($i = 0; $i < $populationSize; $i++) {
-            $population[] = $this->createRandomSchedule($id);
-        }
-        return $population;
-    }
-
-    private function createRandomSchedule($id)
-    {
-        $randomSchedule = DaftarkelasModel::find($id);
-
-        $schedule = [
-            'kode_kelas' => $randomSchedule->kode_kelas,
-            'matkul' => $randomSchedule->matkul,
-            'progdi' => $randomSchedule->progdi,
-            'ruang' => $randomSchedule->ruang,
-            'dosen' => $randomSchedule->dosen,
-            'start' => $randomSchedule->start,
-            'end' => $randomSchedule->end,
-            'hari' => $randomSchedule->hari,
-            'kelas' => $randomSchedule->kelas,
-        ];
-
-        return $schedule;
-    }
-
-    // Fungsi untuk mengevaluasi populasi
-    private function evaluatePopulation(&$population)
-    {
-        foreach ($population as &$individual) {
-            $individual['fitness'] = $this->evaluateSchedule($individual);
-        }
-    }
-
-    // Fungsi untuk mengevaluasi jadwal individu
-    private function evaluateSchedule($schedule)
-    {
-        $fitnessScore = 0;
-        $teacherTimeConflicts = [];
-
-        foreach ($schedule as $class) {
-            if (!isset($class['hari'], $class['start'], $class['end'], $class['dosen'])) {
-                continue;
-            }
-
-            $timeSlot = $class['hari'] . $class['start'] . $class['end'];
-            $teacher = $class['dosen'];
-
-            if (!isset($teacherTimeConflicts[$teacher])) {
-                $teacherTimeConflicts[$teacher] = [];
-            }
-            if (!isset($teacherTimeConflicts[$teacher][$timeSlot])) {
-                $teacherTimeConflicts[$teacher][$timeSlot] = 0;
-            }
-            $teacherTimeConflicts[$teacher][$timeSlot]++;
-            if ($teacherTimeConflicts[$teacher][$timeSlot] > 1) {
-                $fitnessScore += 10; // Penalti untuk konflik dosen
-                Log::info('Konflik dosen ditemukan: ' . json_encode($class));
+        foreach ($schedule as $entry) {
+            if ($entry['hari'] == $day && $entry['waktu'] == $timeSlot) {
+                if ($entry['ruang_id'] == $room || $entry['dosen_id'] == $dosen) {
+                    return false; // Ada konflik
+                }
             }
         }
-
-        Log::info('Fitness Score: ' . $fitnessScore);
-        return $fitnessScore;
+        return true; // Tidak ada konflik
     }
-
-
-    // Fungsi untuk memilih lebah pekerja
-    private function employedBeesPhase($population, $employedBeesCount, $id)
-    {
-        $employedBees = [];
-        for ($i = 0; $i < $employedBeesCount; $i++) {
-            $employedBees[] = $this->createRandomSchedule($id);
-        }
-        return $employedBees;
-    }
-
-    private function onlookerBeesPhase($employedBees, $id)
-    {
-        $onlookerBees = [];
-        foreach ($employedBees as $bee) {
-            if (rand(0, 1) > 0.5) {
-                $onlookerBees[] = $bee;
-            }
-        }
-        return $onlookerBees;
-    }
-
-    private function scoutBeesPhase($population, $scoutBeesCount, $id)
-    {
-        $scoutBees = [];
-        for ($i = 0; $i < $scoutBeesCount; $i++) {
-            $scoutBees[] = $this->createRandomSchedule($id);
-        }
-        return $scoutBees;
-    }
-
-    // Fungsi untuk memilih jadwal terbaik dari populasi
-    private function getBestSchedule($population)
-    {
-        // Cek apakah populasi kosong
-        if (empty($population)) {
-            throw new \Exception('Populasi kosong');
-        }
-
-        // Urutkan populasi berdasarkan nilai fitness
-        usort($population, function ($a, $b) {
-            return $a['fitness'] <=> $b['fitness'];
-        });
-
-        // Kembalikan jadwal dengan nilai fitness terbaik (terendah)
-        return $population[0] ?? null;
-    }
+    
 }
