@@ -30,10 +30,10 @@
                             <tr>
                                 <td>{{ intval($key) + 1 }}</td>
                                 <td>{{ $value['kode_kelas'] }}</td>
-                                <td>{{ $value['makul_id'] }}</td>
-                                <td>{{ $value['progdi_id'] }}</td>
-                                <td>{{ $value['ruang_id'] }}</td>
-                                <td>{{ $value['dosen_id'] }}</td>
+                                <td>{{ $value['matkul'] }}</td>
+                                <td>{{ $value['progdi'] }}</td>
+                                <td>{{ $value['ruang'] }}</td>
+                                <td>{{ $value['dosen'] }}</td>
                                 <td>{{ $value['waktu'] }}</td>
                                 <td>{{ $value['hari'] }}</td>
                                 <td>{{ $value['kelas'] }}</td>
