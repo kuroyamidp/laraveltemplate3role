@@ -67,22 +67,22 @@ class DaftarkelasController extends Controller
             'waktu' => 'required',
             'hari' => 'required',
         ]);
-    
+
         // Response error validation
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-    
+
         // Additional validation to check if the same mata kuliah is already scheduled for the same progdi on the same day
         // $existingClass = DaftarkelasModel::where('progdi_id', $request->progdi)
         //     ->where('makul_id', $request->mata_kuliah)
         //     ->where('hari', $request->hari)
         //     ->first();
-    
+
         // if ($existingClass) {
         //     return Redirect::back()->withErrors(['error' => 'Mata kuliah sudah dijadwalkan untuk program studi ini pada hari yang sama.']);
         // }
-    
+
         DaftarkelasModel::create([
             'uid' => Str::uuid(),
             'kode_kelas' => $request->kode_kelas,
@@ -94,10 +94,10 @@ class DaftarkelasController extends Controller
             'hari' => $request->hari,
             'start' => $request->waktu,
         ]);
-    
+
         return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
     }
-    
+
 
 
 
@@ -215,19 +215,26 @@ class DaftarkelasController extends Controller
 
     public function optimizeSchedule($id)
     {
-        $timeSlots = WaktuModel::pluck('jam')->toArray(); // Get time slots from WaktuModel
-        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'];
-        $rooms = RuangModel::pluck('nama')->toArray();
-        $classes = DaftarkelasModel::all(); // Get all classes without prioritization
-    
-        $schedule = [];
-    
+        // Inisialisasi data yang dibutuhkan
+        $timeSlots = WaktuModel::pluck('jam')->toArray(); // Mengambil slot waktu
+        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat']; // Hari dalam seminggu
+        $rooms = RuangModel::pluck('nama')->toArray(); // Mengambil nama ruangan
+        $classes = DaftarkelasModel::all(); // Mengambil semua data kelas
+
+        $schedule = []; // Inisialisasi jadwal kosong
+
+        // Iterasi melalui setiap kelas
         foreach ($classes as $class) {
             $scheduled = false;
+            // Iterasi melalui setiap hari
             foreach ($days as $day) {
+                // Iterasi melalui setiap slot waktu
                 foreach ($timeSlots as $timeSlot) {
+                    // Iterasi melalui setiap ruangan
                     foreach ($rooms as $room) {
+                        // Memeriksa ketersediaan slot waktu, ruangan, dan dosen
                         if ($this->isSlotAvailable($schedule, $day, $timeSlot, $room, $class->dosen)) {
+                            // Menambahkan kelas ke dalam jadwal
                             $schedule[] = [
                                 'kode_kelas' => $class->kode_kelas,
                                 'matkul' => $class->matkul,
@@ -241,29 +248,30 @@ class DaftarkelasController extends Controller
                                 'id' => $id
                             ];
                             $scheduled = true;
-                            break 3; // Exit three loops and move to the next class
+                            break 3; // Keluar dari tiga loop dan pindah ke kelas berikutnya
                         }
                     }
                 }
-                if ($scheduled) break; // Exit if class is scheduled
+                if ($scheduled) break; // Keluar jika kelas sudah dijadwalkan
             }
         }
-    
+
+        // Mengembalikan tampilan dengan jadwal yang dioptimalkan
         return view('pages.daftarkelas.optimized_schedule', [
             'schedule' => $schedule,
         ]);
     }
-    
+
     private function isSlotAvailable($schedule, $day, $timeSlot, $room, $dosen)
     {
+        // Memeriksa ketersediaan slot waktu, ruangan, dan dosen
         foreach ($schedule as $entry) {
             if ($entry['hari'] == $day && $entry['waktu'] == $timeSlot) {
                 if ($entry['ruang'] == $room || $entry['dosen'] == $dosen) {
-                    return false; // Conflict detected
+                    return false; // Konflik terdeteksi
                 }
             }
         }
-        return true; // No conflict
+        return true; // Tidak ada konflik
     }
-    
 }

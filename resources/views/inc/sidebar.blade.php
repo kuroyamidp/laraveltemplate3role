@@ -28,7 +28,7 @@
 					<div class="logo">
 						<a href="https://www.creative-tim.com" class="simple-text logo-mini">
 							<div class="logo-image-small">
-								<img src="../assets/img/skema.jpeg">
+								<img src="../assets/img/skema.png">
 							</div>
 						</a>
 						<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
@@ -177,7 +177,7 @@
 							<div class="logo">
 								<a href="https://www.creative-tim.com" class="simple-text logo-mini">
 									<div class="logo-image-small">
-										<img src="../assets/img/skema.jpeg">
+										<img src="../assets/img/skema.png">
 									</div>
 								</a>
 								<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
@@ -216,7 +216,7 @@
 											<div class="logo">
 												<a href="https://www.creative-tim.com" class="simple-text logo-mini">
 													<div class="logo-image-small">
-														<img src="../assets/img/skema.jpeg">
+														<img src="../assets/img/skema.png">
 													</div>
 												</a>
 												<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">

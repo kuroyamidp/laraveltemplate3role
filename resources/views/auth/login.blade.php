@@ -1,16 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
+@extends('layouts.app')
+
+@section('content')
+<style>
+    .form-container {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .form-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('../assets/img/bg.jpg') no-repeat center center;
+        background-size: cover;
+        z-index: -1;
+        opacity: 0.5; /* Adjust the opacity as needed */
+    }
+
+    .form-content {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust the background transparency as needed */
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-form-wrap {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .logo-image-small {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .logo-image-small img {
+        max-width: 100px;
+        height: auto;
+    }
+</style>
+
 <div class="form-container">
     <div class="form-form">
         <div class="form-form-wrap">
             <div class="form-container">
                 <div class="form-content">
-
-                    <h1 class="">Login <a href="/login"><span class="brand-name"></span></a></h1>
-                    <br>
-                    <br>
-                    <!-- <p class="signup-link">New Here? <a href="auth_register.html">Create an account</a></p> -->
+                    <div class="logo-image-small">
+                        <img src="../assets/img/skema.png" alt="Logo">
+                    </div>
                     <form class="text-left" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form">
@@ -89,25 +139,12 @@
                         </div>
                     </form>
                     <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <p class="terms-conditions text-center">© {{ \Carbon\Carbon::now()->year }} All Rights Reserved <br> support By CV. Anugrah Karya Indonesia <a href="https://akarindo.id/">AKARINDO.ID</a>.</p>
-
+                  
+                   
                 </div>
             </div>
         </div>
     </div>
-    <div class="form-image">
-        <div class="l-image">
-        </div>
-    </div>
+    <div class="form-background"></div>
 </div>
 @endsection
