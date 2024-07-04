@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class DaftarkelasModel extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = "daftar_kelas";
+    protected $table = "daftarkelas_models";
     protected $fillable = [
         'uid',
         'progdi_id',

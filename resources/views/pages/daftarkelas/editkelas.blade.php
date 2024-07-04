@@ -25,21 +25,21 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-3">
-                                <label for="form-control">Jam mulai kelas</label>
-                                <input type="time" name="mulai" class="form-control" value="{{$kelas['start']}}">
-                                @if($errors->has('mulai'))
+                            <div class="col-lg-6">
+                                <label for="form-control">Waktu {{$kelas['start']}}</label>
+                                <select class="selectpicker" data-live-search="true" name="waktu">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($waktu as $key => $value)
+                                    @if($kelas['start'] == $value->id)
+                                    <option value="{{$value->id}}" selected>{{$value->jam}}</option>
+                                    @else
+                                    <option value="{{$value->id}}">{{$value->jam}}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @if($errors->has('waktu'))
                                 <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('mulai') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="form-control">Jam selesai kelas</label>
-                                <input type="time" name="selesai" class="form-control" value="{{$kelas['end']}}">
-                                @if($errors->has('selesai'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('selesai') }}
+                                    {{ $errors->first('waktu') }}
                                 </div>
                                 @endif
                             </div>

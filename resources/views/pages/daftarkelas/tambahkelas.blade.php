@@ -121,7 +121,7 @@
                                 <select class="selectpicker" data-live-search="true" name="waktu">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($waktu as $key => $value)
-                                    <option value="{{$value->id}}">{{$value->jam}}</option>
+                                    <option value="{{$value->jam}}">{{$value->jam}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('waktu'))

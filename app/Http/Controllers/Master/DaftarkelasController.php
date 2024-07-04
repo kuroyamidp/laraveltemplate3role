@@ -73,23 +73,14 @@ class DaftarkelasController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        // Additional validation to check if the same mata kuliah is already scheduled for the same progdi on the same day
-        // $existingClass = DaftarkelasModel::where('progdi_id', $request->progdi)
-        //     ->where('makul_id', $request->mata_kuliah)
-        //     ->where('hari', $request->hari)
-        //     ->first();
-
-        // if ($existingClass) {
-        //     return Redirect::back()->withErrors(['error' => 'Mata kuliah sudah dijadwalkan untuk program studi ini pada hari yang sama.']);
-        // }
 
         DaftarkelasModel::create([
             'uid' => Str::uuid(),
             'kode_kelas' => $request->kode_kelas,
-            'progdi' => $request->progdi,
-            'matkul' => $request->mata_kuliah,
-            'dosen' => $request->dosen,
-            'ruang' => $request->ruang_kelas,
+            'progdi_id' => $request->progdi,
+            'makul_id' => $request->mata_kuliah,
+            'dosen_id' => $request->dosen,
+            'ruang_id' => $request->ruang_kelas,
             'semester' => $request->kelas,
             'hari' => $request->hari,
             'start' => $request->waktu,
@@ -212,53 +203,72 @@ class DaftarkelasController extends Controller
 
         return response()->json($result);
     }
-
     public function optimizeSchedule($id)
     {
         // Inisialisasi data yang dibutuhkan
         $timeSlots = WaktuModel::pluck('jam')->toArray(); // Mengambil slot waktu
-        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat']; // Hari dalam seminggu
-        $rooms = RuangModel::pluck('nama')->toArray(); // Mengambil nama ruangan
+        $rooms = RuangModel::pluck('nama', 'id')->toArray();
         $classes = DaftarkelasModel::all(); // Mengambil semua data kelas
 
         $schedule = []; // Inisialisasi jadwal kosong
 
+        // Hapus data lama sebelum memulai penjadwalan ulang
+        DaftarkelasModel::truncate();
+
         // Iterasi melalui setiap kelas
         foreach ($classes as $class) {
             $scheduled = false;
-            // Iterasi melalui setiap hari
-            foreach ($days as $day) {
-                // Iterasi melalui setiap slot waktu
-                foreach ($timeSlots as $timeSlot) {
-                    // Iterasi melalui setiap ruangan
-                    foreach ($rooms as $room) {
-                        // Memeriksa ketersediaan slot waktu, ruangan, dan dosen
-                        if ($this->isSlotAvailable($schedule, $day, $timeSlot, $room, $class->dosen)) {
-                            // Menambahkan kelas ke dalam jadwal
-                            $schedule[] = [
-                                'kode_kelas' => $class->kode_kelas,
-                                'matkul' => $class->matkul,
-                                'progdi' => $class->progdi,
-                                'ruang' => $room,
-                                'dosen' => $class->dosen,
-                                'waktu' => $timeSlot,
-                                'hari' => $day,
-                                'kelas' => $class->kelas,
-                                'fitness' => 0,
-                                'id' => $id
-                            ];
-                            $scheduled = true;
-                            break 3; // Keluar dari tiga loop dan pindah ke kelas berikutnya
-                        }
+
+            // Ambil hari dari model DaftarkelasModel
+            $day = $class->hari;
+            // Mengambil ruangan yang tersedia untuk program studi kelas ini
+            $availableRooms = array_filter($rooms, function ($roomId) use ($class) {
+                return $roomId == $class->ruang_id; // Sesuaikan dengan cara Anda menyimpan ruangan untuk setiap kelas
+            }, ARRAY_FILTER_USE_KEY);
+
+            // Iterasi melalui setiap slot waktu
+            foreach ($timeSlots as $timeSlot) {
+                // Iterasi melalui setiap ruangan yang tersedia untuk program studi ini
+                foreach ($availableRooms as $roomId => $roomName) {
+                    // Memeriksa ketersediaan slot waktu dan dosen
+                    if ($this->isSlotAvailable($schedule, $day, $timeSlot, $roomName, $class->dosen)) {
+                        // Menambahkan kelas ke dalam jadwal
+                        $schedule[] = [
+                            'kode_kelas' => $class->kode_kelas,
+                            'makul_id' => $class->matkul,
+                            'progdi_id' => $class->progdi,
+                            'ruang' => $roomName,
+                            'dosen_id' => $class->dosen,
+                            'waktu' => $timeSlot,
+                            'hari' => $day,
+                            'kelas' => $class->kelas,
+                            'fitness' => 0,
+                            'id' => $id // Variabel $id yang digunakan untuk menambahkan ke jadwal
+                        ];
+
+                        // Simpan langsung ke database
+                        DaftarkelasModel::create([
+                            'uid' => Str::uuid(),
+                            'kode_kelas' => $class->kode_kelas,
+                            'progdi_id' => $class->progdi_id,
+                            'makul_id' => $class->makul_id,
+                            'dosen_id' => $class->dosen_id,
+                            'ruang_id' => $class->ruang_id,
+                            'semester' => $class->semester,
+                            'hari' => $day,
+                            'start' => $timeSlot,
+                        ]);
+
+                        $scheduled = true;
+                        break 2; // Keluar dari dua loop dan pindah ke kelas berikutnya
                     }
                 }
-                if ($scheduled) break; // Keluar jika kelas sudah dijadwalkan
             }
         }
 
-        // Mengembalikan tampilan dengan jadwal yang dioptimalkan
+        // Mengembalikan tampilan dengan data yang akan ditampilkan pada pop-up
         return view('pages.daftarkelas.optimized_schedule', [
-            'schedule' => $schedule,
+            'changes' => $schedule,
         ]);
     }
 
@@ -267,11 +277,25 @@ class DaftarkelasController extends Controller
         // Memeriksa ketersediaan slot waktu, ruangan, dan dosen
         foreach ($schedule as $entry) {
             if ($entry['hari'] == $day && $entry['waktu'] == $timeSlot) {
-                if ($entry['ruang'] == $room || $entry['dosen'] == $dosen) {
+                if ($entry['ruang'] == $room || $entry['dosen_id'] == $dosen) {
                     return false; // Konflik terdeteksi
                 }
             }
         }
         return true; // Tidak ada konflik
+    }
+
+    public function saveChanges(Request $request)
+    {
+        // Decode JSON string to array
+        $changes = json_decode($request->input('changes'), true);
+
+        // Check if changes is not null and is an array
+        if (!is_array($changes)) {
+            return redirect()->back()->withErrors(['error' => 'Invalid data format']);
+        }
+
+        // Redirect back or to a specific route after saving
+        return redirect('/daftar-kelas')->with('success', 'Data Berhasil Diubah');
     }
 }

@@ -42,6 +42,7 @@ Route::resource('dosen', DosenController::class)->middleware(['auth', 'is_admin'
 Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'is_admin']);
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);
 Route::get('/optimize-schedule/{id}', [DaftarkelasController::class, 'optimizeSchedule'])->name('optimize-schedule');
+Route::post('/save-changes', [DaftarKelasController::class, 'saveChanges'])->name('save-changes');
 
 
 Route::resource('absensi', AbsensiController::class);

@@ -43,6 +43,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('daftar-kelas.create') }}" class="btn btn-primary btn-sm">Tambah</a>
+                    
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -69,10 +70,10 @@
                                         <td width="1%">{{ $nomor++ }}</td> <!-- Gunakan variabel nomor yang diberikan oleh PHP -->
                                         <td>{{ $value->kode_kelas }}</td>
                                         <td>{{ $value->matkul }}</td>
-                                        <td>{{ $value->progdi }}</td>
-                                        <td>{{ $value->ruang }}</td>
+                                        <td>{{ $value->progdi}}</td>
+                                        <td>{{ $value->ruang}}</td>
                                         <td>{{ $value->dosen }}</td>
-                                        <td>{{ $value->waktu }}</td>
+                                        <td>{{ $value->start }}</td>
                                         <td>{{ $value->hari }}</td>
                                         <td><b>KELAS </b>{{ $value->kelas }}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
