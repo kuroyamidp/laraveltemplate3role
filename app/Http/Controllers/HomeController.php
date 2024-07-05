@@ -56,9 +56,9 @@ class HomeController extends Controller
             $dosenNama = Auth::user()->dosen['id'];
 
             $dos = DaftarkelasModel::join('dosen', function($join) use ($dosenNama, $currentDay) {
-                $join->on('daftar_kelas.dosen_id', '=', 'dosen.id')
+                $join->on('daftarkelas_models.dosen_id', '=', 'dosen.id')
                      ->where('dosen.id', $dosenNama)
-                     ->where('daftar_kelas.hari', $currentDay); // Menyesuaikan dengan hari berjalan
+                     ->where('daftarkelas_models.hari', $currentDay); // Menyesuaikan dengan hari berjalan
                     })
                      ->distinct() // Hanya ambil hasil unik
                      ->get();
@@ -86,11 +86,11 @@ class HomeController extends Controller
             $mahasiswaSemesterId = Auth::user()->mahasiswa['semester_id'];
             
             $jdw = DaftarkelasModel::join('mahasiswa', function($join) use ($mahasiswaProgdiId, $mahasiswaSemesterId, $currentDay) {
-                $join->on('daftar_kelas.progdi_id', '=', 'mahasiswa.progdi_id')
-                     ->on('daftar_kelas.semester', '=', 'mahasiswa.semester_id')
+                $join->on('daftarkelas_models.progdi_id', '=', 'mahasiswa.progdi_id')
+                     ->on('daftarkelas_models.semester', '=', 'mahasiswa.semester_id')
                      ->where('mahasiswa.progdi_id', $mahasiswaProgdiId)
                      ->where('mahasiswa.semester_id', $mahasiswaSemesterId)
-                     ->where('daftar_kelas.hari', $currentDay); // Menyesuaikan dengan hari berjalan
+                     ->where('daftarkelas_models.hari', $currentDay); // Menyesuaikan dengan hari berjalan
             })
             ->distinct() // Hanya ambil hasil unik
             ->get();
