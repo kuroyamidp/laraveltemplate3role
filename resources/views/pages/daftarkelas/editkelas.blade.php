@@ -31,9 +31,9 @@
                                     <option value="">Pilih salah satu</option>
                                     @foreach($waktu as $key => $value)
                                     @if($kelas['start'] == $value->id)
-                                    <option value="{{$value->id}}" selected>{{$value->jam}}</option>
+                                    <option value="{{$value->jam}}" selected>{{$value->jam}}</option>
                                     @else
-                                    <option value="{{$value->id}}">{{$value->jam}}</option>
+                                    <option value="{{$value->jam}}">{{$value->jam}}</option>
                                     @endif
                                     @endforeach
                                 </select>

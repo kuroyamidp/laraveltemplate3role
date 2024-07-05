@@ -13,9 +13,6 @@
  
 }
 
-/* Untuk menyesuaikan warna teks di dalam sidebar */
-
-
 </style>
 
 <div class="sidebar-wrapper1 sidebar-theme">
@@ -127,9 +124,9 @@
 								<li>
 									<a href="/daftar-kelas"> Jadwal Kelas </a>
 								</li>
-								<li>
+								<!-- <li>
 									<a href=""> Optimize Jadwal </a>
-								</li>
+								</li> -->
 								<li>
 									<a href="/absensi"> Absensi </a>
 								</li>
