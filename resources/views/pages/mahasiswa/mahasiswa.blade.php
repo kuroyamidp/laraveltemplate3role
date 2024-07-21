@@ -9,8 +9,8 @@
                 @csrf
                 <div class="row mb-1 mt-1">
                     <div class="col-lg-3">
-                        <label for="mahasiswa">Mahasiswa</label>
-                        <input type="text" class="form-control" name="mahasiswa" id="mahasiswa" placeholder="Cari Mahasiswa">
+                        <label for="mahasiswa">siswa</label>
+                        <input type="text" class="form-control" name="mahasiswa" id="mahasiswa" placeholder="Cari siswa">
                         <button type="submit" class="btn btn-primary btn-sm">Cari</button>
                         <button type="button" onclick="resetForm()" class="btn btn-warning btn-sm">Reset</button>
                     </div>
@@ -75,7 +75,7 @@
                                     <tr class="text-center">
                                         <th>No</th>
                                         <th>NIM</th>
-                                        <th>Mahasiswa</th>
+                                        <th>siswa</th>
                                         <th>Jurusan</th>
                                         <th>Kelas</th>
                                         <th>Status</th>

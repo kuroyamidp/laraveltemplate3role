@@ -8,11 +8,11 @@
 		transition: background-color 1s ease;
 		/* Atur transisi untuk background-color */
 	}
-	.sidebar-wrapper1.sidebar-theme {
-  background-color: black;
- 
-}
 
+	.sidebar-wrapper1.sidebar-theme {
+		background-color: black;
+
+	}
 </style>
 
 <div class="sidebar-wrapper1 sidebar-theme">
@@ -95,52 +95,31 @@
 								</div>
 							</a>
 						</li>
-
-
 						<li class="menu">
-							<a href="#app" data-toggle="collapse1" aria-expanded="false" class="dropdown-toggle">
-								<div class="">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
-										<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-										<rect x="9" y="9" width="6" height="6"></rect>
-										<line x1="9" y1="1" x2="9" y2="4"></line>
-										<line x1="15" y1="1" x2="15" y2="4"></line>
-										<line x1="9" y1="20" x2="9" y2="23"></line>
-										<line x1="15" y1="20" x2="15" y2="23"></line>
-										<line x1="20" y1="9" x2="23" y2="9"></line>
-										<line x1="20" y1="14" x2="23" y2="14"></line>
-										<line x1="1" y1="9" x2="4" y2="9"></line>
-										<line x1="1" y1="14" x2="4" y2="14"></line>
-									</svg>
-									<span>Penjadwalan</span>
-								</div>
+							<a href="/daftar-kelas" aria-expanded="false" class="dropdown-toggle">
 								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-										<polyline points="9 18 15 12 9 6"></polyline>
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+										<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+										<line x1="16" y1="2" x2="16" y2="6"></line>
+										<line x1="8" y1="2" x2="8" y2="6"></line>
+										<line x1="3" y1="10" x2="21" y2="10"></line>
 									</svg>
+									<span>Jadwal Kelas</span>
 								</div>
 							</a>
-							<ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
-								<li>
-									<a href="/daftar-kelas"> Jadwal Kelas </a>
-								</li>
-								<!-- <li>
-									<a href=""> Optimize Jadwal </a>
-								</li> -->
-								<li>
-									<a href="/absensi"> Absensi </a>
-								</li>
-								<!-- <li>
-									<a href="/jadwal-kelas"> Jadwal kelas </a>
-								</li>
-								<li>
-									<a href="/jadwalujian"> Jadwal Ujian </a>
-								</li>
-								<li>
-									<a href="/nilaiujian"> Nilai Ujian </a>
-								</li> -->
-							</ul>
 						</li>
+						<li class="menu">
+							<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
+								<div>
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
+										<polyline points="9 11 12 14 22 4"></polyline>
+										<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+									</svg>
+									<span>Absen Siswa</span>
+								</div>
+							</a>
+						</li>
+
 						<li class="menu">
 							<a href="#users" data-toggle="collapse1" aria-expanded="false" class="dropdown-toggle">
 								<div class="">
@@ -194,73 +173,56 @@
 										</div>
 									</a>
 								</li>
-								<div class="sidebar-wrapper">
-									<li class="menu">
-										<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
-											<div>
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-													<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-													<polyline points="9 22 9 12 15 12 15 22"></polyline>
-												</svg>
-												<span>Absen</span>
-											</div>
-										</a>
-									</li>
-									@endIsMahasiswa
-									@IsDosen
-									<div class="wrapper">
-										<div class="sidebar" data-color="white" data-active-color="danger">
-											<div class="logo">
-												<a href="https://www.creative-tim.com" class="simple-text logo-mini">
-													<div class="logo-image-small">
-														<img src="../assets/img/skema.png">
+								<li class="menu">
+									<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
+										<div>
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
+												<polyline points="9 11 12 14 22 4"></polyline>
+												<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+											</svg>
+											<span>Absen Siswa</span>
+										</div>
+									</a>
+								</li>
+								@endIsMahasiswa
+								@IsDosen
+								<div class="wrapper">
+									<div class="sidebar" data-color="white" data-active-color="danger">
+										<div class="logo">
+											<a href="https://www.creative-tim.com" class="simple-text logo-mini">
+												<div class="logo-image-small">
+													<img src="../assets/img/skema.png">
+												</div>
+											</a>
+											<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
+												SISKEMA
+											</a>
+
+										</div>
+										<div class="sidebar-wrapper">
+											<li class="menu">
+												<a href="/home" aria-expanded="false" class="dropdown-toggle">
+													<div>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+															<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+															<polyline points="9 22 9 12 15 12 15 22"></polyline>
+														</svg>
+														<span>Dashboard</span>
 													</div>
 												</a>
-												<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
-													SISKEMA
+											</li>
+											<li class="menu">
+												<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
+													<div>
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
+															<polyline points="9 11 12 14 22 4"></polyline>
+															<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+														</svg>
+														<span>Absen Siswa</span>
+													</div>
 												</a>
-
-											</div>
-											<div class="sidebar-wrapper">
-												<li class="menu">
-													<a href="/home" aria-expanded="false" class="dropdown-toggle">
-														<div>
-															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-																<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-																<polyline points="9 22 9 12 15 12 15 22"></polyline>
-															</svg>
-															<span>Dashboard</span>
-														</div>
-													</a>
-												</li>
-												<li class="menu">
-													<a href="#app" data-toggle="collapse1" aria-expanded="false" class="dropdown-toggle">
-														<div class="">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu">
-																<rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-																<rect x="9" y="9" width="6" height="6"></rect>
-																<line x1="9" y1="1" x2="9" y2="4"></line>
-																<line x1="15" y1="1" x2="15" y2="4"></line>
-																<line x1="9" y1="20" x2="9" y2="23"></line>
-																<line x1="15" y1="20" x2="15" y2="23"></line>
-																<line x1="20" y1="9" x2="23" y2="9"></line>
-																<line x1="20" y1="14" x2="23" y2="14"></line>
-																<line x1="1" y1="9" x2="4" y2="9"></line>
-																<line x1="1" y1="14" x2="4" y2="14"></line>
-															</svg>
-															<span>Penjadwalan</span>
-														</div>
-														<div>
-															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-																<polyline points="9 18 15 12 9 6"></polyline>
-															</svg>
-														</div>
-													</a>
-													<ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
-														<li>
-															<a href="/absensi"> Absensi </a>
-														</li>
-														@endIsDosen
+											</li>
+											@endIsDosen
 	</nav>
 </div>
 <script>

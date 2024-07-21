@@ -242,7 +242,6 @@ class DaftarkelasController extends Controller
                             'waktu' => $timeSlot,
                             'hari' => $day,
                             'kelas' => $class->kelas,
-                            'fitness' => 0,
                             'id' => $id // Variabel $id yang digunakan untuk menambahkan ke jadwal
                         ];
 

@@ -6,7 +6,7 @@ use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
 use App\Models\Master\DaftarkelasModel;
 use App\Models\Master\DosenModel;
-use App\Models\Master\MahasiswaModel; 
+use App\Models\Master\MahasiswaModel;
 use App\Models\Master\MatakuliahModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,37 +38,7 @@ class HomeController extends Controller
         if (Auth::user()->role_id == 0) {
             // $data['krs'] = KrsModel::with('mahasiswa')->get();
             return view('pages.dashboard.dashboardadmin');
-
         } elseif (Auth::user()->role_id == 1) {
-
-             $currentDay = Carbon::now()->locale('id')->dayName;
-
-            // Mengonversi hari dalam Bahasa Indonesia menjadi format yang diinginkan
-            $currentDay = match ($currentDay) {
-                'Senin' => 'Senin',
-                'Selasa' => 'Selasa',
-                'Rabu' => 'Rabu',
-                'Kamis' => 'Kamis',
-                'Jumat' => 'Jumat',
-                'Sabtu' => 'Sabtu',
-                'Minggu' => 'Minggu',
-            };
-            $dosenNama = Auth::user()->dosen['id'];
-
-            $dos = DaftarkelasModel::join('dosen', function($join) use ($dosenNama, $currentDay) {
-                $join->on('daftarkelas_models.dosen_id', '=', 'dosen.id')
-                     ->where('dosen.id', $dosenNama)
-                     ->where('daftarkelas_models.hari', $currentDay); // Menyesuaikan dengan hari berjalan
-                    })
-                     ->distinct() // Hanya ambil hasil unik
-                     ->get();
-                 
-            $data['dos'] = $dos;
-            $data['currentDay'] = $currentDay;
-
-        return view('pages.dashboard.dashboarddosen', $data);
-        } else {
-            
             $currentDay = Carbon::now()->locale('id')->dayName;
 
             // Mengonversi hari dalam Bahasa Indonesia menjadi format yang diinginkan
@@ -81,41 +51,71 @@ class HomeController extends Controller
                 'Sabtu' => 'Sabtu',
                 'Minggu' => 'Minggu',
             };
-            
+
+            $dosenNama = Auth::user()->dosen['id'];
+
+            $dos = DaftarkelasModel::join('dosen', function ($join) use ($dosenNama, $currentDay) {
+                $join->on('daftarkelas_models.dosen_id', '=', 'dosen.id')
+                    ->where('dosen.id', $dosenNama)
+                    ->where('daftarkelas_models.hari', $currentDay);
+            })
+                ->select('daftarkelas_models.*')
+                ->distinct()
+                ->get();
+
+            $data['dos'] = $dos;
+            $data['currentDay'] = $currentDay;
+
+            return view('pages.dashboard.dashboarddosen', $data);
+        } else {
+            $currentDay = Carbon::now()->locale('id')->dayName;
+
+            // Mengonversi hari dalam Bahasa Indonesia menjadi format yang diinginkan
+            $currentDay = match ($currentDay) {
+                'Senin' => 'Senin',
+                'Selasa' => 'Selasa',
+                'Rabu' => 'Rabu',
+                'Kamis' => 'Kamis',
+                'Jumat' => 'Jumat',
+                'Sabtu' => 'Sabtu',
+                'Minggu' => 'Minggu',
+            };
+
             $mahasiswaProgdiId = Auth::user()->mahasiswa['progdi_id'];
             $mahasiswaSemesterId = Auth::user()->mahasiswa['semester_id'];
-            
-            $jdw = DaftarkelasModel::join('mahasiswa', function($join) use ($mahasiswaProgdiId, $mahasiswaSemesterId, $currentDay) {
+
+            $jdw = DaftarkelasModel::join('mahasiswa', function ($join) use ($mahasiswaProgdiId, $mahasiswaSemesterId, $currentDay) {
                 $join->on('daftarkelas_models.progdi_id', '=', 'mahasiswa.progdi_id')
-                     ->on('daftarkelas_models.semester', '=', 'mahasiswa.semester_id')
-                     ->where('mahasiswa.progdi_id', $mahasiswaProgdiId)
-                     ->where('mahasiswa.semester_id', $mahasiswaSemesterId)
-                     ->where('daftarkelas_models.hari', $currentDay); // Menyesuaikan dengan hari berjalan
+                    ->on('daftarkelas_models.semester', '=', 'mahasiswa.semester_id')
+                    ->where('mahasiswa.progdi_id', $mahasiswaProgdiId)
+                    ->where('mahasiswa.semester_id', $mahasiswaSemesterId)
+                    ->where('daftarkelas_models.hari', $currentDay);
             })
-            ->distinct() // Hanya ambil hasil unik
-            ->get();
-            
+                ->select('daftarkelas_models.*')
+                ->distinct()
+                ->get();
+
             $data['jdw'] = $jdw;
             $data['currentDay'] = $currentDay;
             return view('pages.dashboard.dashboardmahasiswa', $data);
-            
         }
     }
 
-    public function updateHome(Request $request, $id) {
+    public function updateHome(Request $request, $id)
+    {
         // Validasi input dari form
         $request->validate([
-            'jadwal_id' =>'required',
+            'jadwal_id' => 'required',
             'kode_mk' => 'required',
         ]);
-    
+
         // Ambil data KRS yang ingin diubah
         $krs = KrsModel::find($id);
-    
+
         // Update data KRS
         $krs->mata_kuliah = $request->input('jadwal_id');
         $krs->save();
-    
+
         // Redirect ke halaman KRS
         return redirect('/krs');
     }
@@ -124,6 +124,5 @@ class HomeController extends Controller
         $krs = KrsModel::find($id);
         $krs->delete();
         return redirect('/dashboard');
-
     }
 }

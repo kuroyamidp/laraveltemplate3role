@@ -11,12 +11,17 @@
     <html>
 
     <head>
-        <style>
+    <style>
+            .bg {
+                background-color: F1EAFF;
+            }
+
             .custom-file-container__image-preview {
                 box-shadow: none;
                 max-width: 250px;
                 max-height: 400px;
-                margin-top: -43px;
+                margin-top: -10px;
+                background-color: transparent;
 
                 /* or any other height you want to set */
             }

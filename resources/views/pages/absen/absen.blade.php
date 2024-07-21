@@ -27,7 +27,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
+                @if(Auth::user()->role_id != 1)
                     <a href="{{ route('absensi.create') }}" class="btn btn-primary btn-sm">Tambah</a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -93,7 +95,7 @@
 
 </div>
 <div>
-<script>
+<!-- <script>
    $(document).ready(function() {
     $('#configform').on('submit', function(event) {
         event.preventDefault();
@@ -179,7 +181,7 @@
     updateTable('');
 });
 
-</script>
+</script> -->
 
 
     @endsection

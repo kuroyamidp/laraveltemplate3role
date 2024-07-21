@@ -9,8 +9,8 @@
                 @csrf
                 <div class="row mb-1 mt-1">
                     <div class="col-lg-3">
-                        <label for="dosen">Dosen</label>
-                        <input type="text" class="form-control" name="dosen" id="dosen" placeholder="Cari dosen">
+                        <label for="dosen">Guru</label>
+                        <input type="text" class="form-control" name="dosen" id="dosen" placeholder="Cari Guru">
                         <button type="submit" class="btn btn-primary btn-sm">Cari</button>
                         <button type="button" onclick="resetForm()" class="btn btn-warning btn-sm">Reset</button>
                     </div>
