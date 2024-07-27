@@ -19,6 +19,8 @@ class AbsensiModel extends Model
         'kelas_id',
         'status_absensi',
         'hari',
+        'longitude',
+        'latitude',
     ];
 
     protected $appends = ['progdi', 'mahasiswa', 'kelas'];

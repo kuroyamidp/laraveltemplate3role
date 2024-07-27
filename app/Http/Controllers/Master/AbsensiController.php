@@ -104,6 +104,8 @@ class AbsensiController extends Controller
             'kelas' => 'required',
             'status' => 'required',
             'hari' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         // response error validation
@@ -132,6 +134,9 @@ class AbsensiController extends Controller
             'mahasiswa_id' => $request->mahasiswa,
             'status_absensi' => $request->status,
             'hari' => $hari, // Menggunakan tanggal saat ini
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+
         ]);
 
         return redirect('/absensi')->with('success', 'Berhasil tambah data');
