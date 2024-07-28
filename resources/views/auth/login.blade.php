@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@extends('layouts.app')
-
-@section('content')
 <style>
     .form-container {
         position: relative;

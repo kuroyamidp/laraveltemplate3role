@@ -9,7 +9,7 @@
                     <a href="{{ route('absensi.index') }}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('absensi.store') }}" method="post" id="absensiForm">
+                    <form action="{{ route('absensi.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-3">
@@ -73,7 +73,7 @@
                                 </div>
                                 @enderror
                             </div>
-                         
+
                             <!-- Field untuk latitude -->
                             <div class="col-lg-4" id="latitudeDiv">
                                 <label for="form-control">Latitude</label>
@@ -95,7 +95,28 @@
                                 </div>
                                 @enderror
                             </div>
-                           
+
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <div class="custom-file-container" data-upload-id="myFirstImage">
+                                    <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                    <label class="custom-file-container__custom-file">
+                                        <input type="file" class="custom-file-container__custom-file__custom-file-input" name="foto" accept="image/*">
+                                        <!-- <input type="hidden" name="MAX_FILE_SIZE" value="10485760" /> -->
+                                        <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                        <span class="custom-file-container__custom-file__custom-file-control custom-file-container__custom-file__custom-file-control--browse">Browse</span>
+                                    </label>
+                                    <div class="custom-file-container__image-preview" id="imagePreview">
+                                        <p>Nama File: <span id="fileName">Tidak ada file yang dipilih</span></p>
+                                    </div>
+                                </div>
+                                @if($errors->has('foto'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('foto') }}
+                                </div>
+                                @endif
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 d-flex justify-content-end">
@@ -133,7 +154,7 @@
     }
 
     function showError(error) {
-        switch(error.code) {
+        switch (error.code) {
             case error.PERMISSION_DENIED:
                 alert("User denied the request for Geolocation.");
                 break;

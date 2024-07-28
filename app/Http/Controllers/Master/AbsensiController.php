@@ -28,39 +28,7 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
-        $userRole = Auth::user()->role_id;
-        $data = []; // Inisialisasi $data sebagai array kosong
-
-        if ($userRole == 0 || Auth::user()->id == 1) {
-            $absen = AbsensiModel::all();
-            $data['absen'] = $absen;
-        } elseif (Auth::user()->role_id == 1) {
-            $absen = AbsensiModel::all();
-            $dosenProgdi = Auth::user()->dosen['progdi_id'];
-            $dosenKelas = Auth::user()->dosen['kelas_id'];
-            $absen = AbsensiModel::join('dosen', function ($join) use ($dosenProgdi, $dosenKelas) {
-                $join->on('absensis.progdi_id', '=', 'dosen.progdi_id')
-                    ->on('absensis.kelas_id', '=', 'dosen.kelas_id')
-                    ->where('dosen.kelas_id', $dosenKelas)
-                    ->where('absensis.progdi_id', $dosenProgdi);
-            })
-                ->distinct()
-                ->get();
-
-            $data['absen'] = $absen;
-        } else {
-            $mahasiswaNim = Auth::user()->mahasiswa['nim'];
-            $absen = AbsensiModel::join('mahasiswa', function ($join) use ($mahasiswaNim) {
-                $join->on('absensis.kode_absen', '=', 'mahasiswa.nim')
-                    ->where('absensis.kode_absen', $mahasiswaNim); // Menyesuaikan dengan hari berjalan
-            })
-                ->distinct() // Hanya ambil hasil unik
-                ->get();
-
-            $data['absen'] = $absen;
-        }
-
+        $data['absen'] = AbsensiModel::all();
         return view('pages.absen.absen', $data);
     }
 
@@ -82,7 +50,7 @@ class AbsensiController extends Controller
         if ($userRole == 0) {
             return view('pages.absen.tambahabsen', $data);
         } elseif ($userRole == 1) {
-            return view('pages.absen.tambahabsendosen', $data);
+            return view('pages.absen.tambahabsen', $data);
         } else {
             return view('pages.absen.tambahabsensiswa', $data);
         }
@@ -106,6 +74,7 @@ class AbsensiController extends Controller
             'hari' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // response error validation
@@ -113,6 +82,13 @@ class AbsensiController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
+        // Check if there is a file uploaded
+        if ($request->hasFile('foto')) {
+            $name = $request->file('foto')->getClientOriginalName();
+            $filename = time() . '-' . $name;
+            $file = $request->file('foto');
+            $file->move(public_path('Image'), $filename);
+        }
         // Ambil tanggal saat ini menggunakan Carbon
         $hari = Carbon::now()->toDateString();
 
@@ -136,6 +112,7 @@ class AbsensiController extends Controller
             'hari' => $hari, // Menggunakan tanggal saat ini
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
+            'image' => isset($filename) ? $filename : null,
 
         ]);
 

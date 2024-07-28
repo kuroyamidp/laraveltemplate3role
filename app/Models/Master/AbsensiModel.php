@@ -21,6 +21,7 @@ class AbsensiModel extends Model
         'hari',
         'longitude',
         'latitude',
+        'image',
     ];
 
     protected $appends = ['progdi', 'mahasiswa', 'kelas'];
