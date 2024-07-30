@@ -43,6 +43,10 @@ Route::resource('mahasiswa', MahasiswaController::class)->middleware(['auth', 'i
 Route::resource('daftar-kelas', DaftarkelasController::class)->middleware(['auth', 'is_admin']);
 Route::get('/optimize-schedule/{id}', [DaftarkelasController::class, 'optimizeSchedule'])->name('optimize-schedule');
 Route::post('/save-changes', [DaftarKelasController::class, 'saveChanges'])->name('save-changes');
+// routes/web.php
+
+Route::post('/home/updateKeterangan/{id}', [App\Http\Controllers\HomeController::class, 'updateKeterangan'])->name('home.updateKeterangan');
+Route::get('/export-pdf', [HomeController::class, 'exportPDF'])->name('export.pdf');
 
 
 Route::resource('absensi', AbsensiController::class);
@@ -63,24 +67,20 @@ Route::get('/getkelas', [DaftarkelasController::class, 'getkelas'])->name('getke
 Route::post('/status', [AccKrsController::class, 'status'])->name('status')->middleware(['auth', 'is_mahasiswa']);
 
 Route::resource('krs', KrsController::class)->middleware(['auth', 'is_mahasiswa']);
-Route::resource('lihatjadwalujian', LihatJadwalujianController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('profile', ProfilemhsController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('home', HomeController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('lihatjadwal', LihatJadwalController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('semesterini', SemesterIniController::class)->middleware(['auth', 'is_mahasiswa']);
-Route::resource('daftarsidang', DaftarSidangController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('daftarwisuda', DaftarWisudaController::class)->middleware(['auth', 'is_mahasiswa']);
 Route::resource('khs', KhsController::class)->middleware(['auth', 'is_mahasiswa']);
 // Route::resource('lihatjadwaldosen', LihatJadwalDosenController::class)->middleware(['auth', 'is_dosen']);
 
 //cetak krs
 Route::get('/cetakkrs', [KrsController::class, 'cetakkrs'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
-Route::get('/cetakdaftarsidang', [DaftarsidangController::class, 'cetakdaftarsidang'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetaknilaiujian', [KhsController::class, 'cetaknilaiujian'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakdaftarwisuda', [DaftarWisudaController::class, 'cetakdaftarwisuda'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetaklihatjadwal', [LihatJadwalController::class, 'cetaklihatjadwal'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 Route::get('/cetakjadwalsemester', [SemesterIniController::class, 'cetakjadwalsemester'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
-Route::get('/cetakjadwalujian', [LihatJadwalujianController::class, 'cetakjadwalujian'])->name('cetakkrs')->middleware(['auth','is_mahasiswa']);
 
 //Pencarian Linier Search
 Route::get('/search-kelas-matkul', [DaftarKelasController::class, 'searchByMatkul'])

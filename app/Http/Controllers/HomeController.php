@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\KrsModel;
 use App\Models\Master\DaftarkelasModel;
+use App\Models\Master\KeteranganGuruModel;
 use App\Models\Master\DosenModel;
 use App\Models\Master\MahasiswaModel;
 use App\Models\Master\MatakuliahModel;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use DateTime;
+use PDF;
+use App\Models\Master\AbsensiModel;
 
 class HomeController extends Controller
 {
@@ -34,13 +37,14 @@ class HomeController extends Controller
     public function index()
     {
         // return view('home');
-
+    
         if (Auth::user()->role_id == 0) {
             // $data['krs'] = KrsModel::with('mahasiswa')->get();
             return view('pages.dashboard.dashboardadmin');
         } elseif (Auth::user()->role_id == 1) {
             $currentDay = Carbon::now()->locale('id')->dayName;
-
+            $currentDate = Carbon::now()->toDateString();
+    
             // Mengonversi hari dalam Bahasa Indonesia menjadi format yang diinginkan
             $currentDay = match ($currentDay) {
                 'Senin' => 'Senin',
@@ -51,21 +55,22 @@ class HomeController extends Controller
                 'Sabtu' => 'Sabtu',
                 'Minggu' => 'Minggu',
             };
-
-            $dosenNama = Auth::user()->dosen['id'];
-
-            $dos = DaftarkelasModel::join('dosen', function ($join) use ($dosenNama, $currentDay) {
+    
+            $dosenId = Auth::user()->dosen['id'];
+    
+            $dos = DaftarkelasModel::join('dosen', function ($join) use ($dosenId, $currentDay) {
                 $join->on('daftarkelas_models.dosen_id', '=', 'dosen.id')
-                    ->where('dosen.id', $dosenNama)
+                    ->where('dosen.id', $dosenId)
                     ->where('daftarkelas_models.hari', $currentDay);
             })
                 ->select('daftarkelas_models.*')
                 ->distinct()
                 ->get();
-
+    
             $data['dos'] = $dos;
             $data['currentDay'] = $currentDay;
-
+            $data['currentDate'] = $currentDate;
+    
             return view('pages.dashboard.dashboarddosen', $data);
         } else {
             $currentDay = Carbon::now()->locale('id')->dayName;
@@ -100,6 +105,34 @@ class HomeController extends Controller
             return view('pages.dashboard.dashboardmahasiswa', $data);
         }
     }
+    
+    
+    public function updateKeterangan(Request $request, $daftarkelas_id)
+{
+    $request->validate([
+        'keterangan' => 'required|string',
+        'image' => 'nullable|image|max:2048',
+    ]);
+
+    $keteranganDosen = new KeteranganGuruModel();
+    $keteranganDosen->dosen_id = Auth::user()->dosen['id'];
+    $keteranganDosen->daftarkelas_id = $daftarkelas_id;
+    $keteranganDosen->tanggal = Carbon::now()->toDateString();
+    $keteranganDosen->keterangan = $request->input('keterangan');
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+        $keteranganDosen->image = $imagePath;
+    }
+
+    if ($keteranganDosen->save()) {
+        return redirect('/home')->with('success', 'Keterangan dan gambar berhasil diperbarui.');
+    } else {
+        return redirect('/home')->with('error', 'Terjadi kesalahan saat memperbarui keterangan.');
+    }
+}
+
+    
 
     public function updateHome(Request $request, $id)
     {
@@ -125,4 +158,38 @@ class HomeController extends Controller
         $krs->delete();
         return redirect('/dashboard');
     }
+    public function exportPDF()
+{
+    $dosenId = Auth::user()->dosen['id'];
+    $currentDay = Carbon::now()->locale('id')->dayName;
+    
+    // Ambil data jadwal
+    $dos = DaftarkelasModel::join('dosen', function ($join) use ($dosenId, $currentDay) {
+        $join->on('daftarkelas_models.dosen_id', '=', 'dosen.id')
+            ->where('dosen.id', $dosenId)
+            ->where('daftarkelas_models.hari', $currentDay);
+    })
+    ->select('daftarkelas_models.*')
+    ->distinct()
+    ->get();
+
+    // Ambil data keterangan
+    $keterangan = KeteranganGuruModel::where('dosen_id', $dosenId)
+        ->whereDate('tanggal', Carbon::now()->toDateString())
+        ->get();
+
+    // Ambil data absensi
+    // $absensi = AbsensiModel::where('dosen_id', $dosenId)
+    //     ->whereDate('tanggal', Carbon::now()->toDateString())
+    //     ->get();
+
+    $pdf = PDF::loadView('pdf.jadwal', [
+        'dos' => $dos,
+        'keterangan' => $keterangan,
+        // 'absensi' => $absensi,
+        'currentDay' => $currentDay,
+    ]);
+
+    return $pdf->download('laporan_perkulihan_' . Carbon::now()->format('Y_m_d') . '.pdf');
+}
 }

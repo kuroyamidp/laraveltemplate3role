@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <label for="form-control">Nama</label>
-                                <input type="text" class="form-control" name="nama" value="{{$mahasiswa['nama']}}">
+                                <input type="text" class="form-control" name="nama" value="{{$mahasiswa['nama']}}" readonly>
                                 @if($errors->has('nama'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('nama') }}

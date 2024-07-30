@@ -16,7 +16,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row mb-1">
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <label for="form-control">Kode kelas</label>
                                 <input type="text" class="form-control" name="kode_kelas" value="{{$kelas['kode_kelas']}}">
                                 @if($errors->has('kode_kelas'))
@@ -26,24 +26,6 @@
                                 @endif
                             </div>
                             <div class="col-lg-6">
-                                <label for="form-control">Waktu {{$kelas['start']}}</label>
-                                <select class="selectpicker" data-live-search="true" name="waktu">
-                                    <option value="">Pilih salah satu</option>
-                                    @foreach($waktu as $key => $value)
-                                    @if($kelas['start'] == $value->id)
-                                    <option value="{{$value->jam}}" selected>{{$value->jam}}</option>
-                                    @else
-                                    <option value="{{$value->jam}}">{{$value->jam}}</option>
-                                    @endif
-                                    @endforeach
-                                </select>
-                                @if($errors->has('waktu'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('waktu') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-3">
                                 <label for="hari">Hari</label>
                                 <select name="hari" class="form-control">
                                     <option value="">Pilih salah satu</option>
@@ -63,15 +45,15 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <label for="form-control">Jurusan</label>
                                 <select class="selectpicker" data-live-search="true" name="progdi">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
                                     @if($kelas['progdi_id'] == $value->id)
-                                    <option value="{{$value->id}}" selected>{{$value->nama_studi}}</option>
+                                    <option value="{{$value->id}}" selected>{{$value->singkatan_studi}}</option>
                                     @else
-                                    <option value="{{$value->id}}">{{$value->nama_studi}}</option>
+                                    <option value="{{$value->id}}">{{$value->singkatan_studi}}</option>
                                     @endif
                                     @endforeach
                                 </select>
@@ -81,7 +63,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <label for="form-control">Guru</label>
                                 <select class="selectpicker" data-live-search="true" name="dosen">
                                     <option value="">Pilih salah satu</option>
@@ -99,9 +81,27 @@
                                 </div>
                                 @endif
                             </div>
+                            <div class="col-lg-4">
+                                <label for="form-control">Waktu</label>
+                                <select class="selectpicker" data-live-search="true" name="waktu" >
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($waktu as $key => $value)
+                                    @if($kelas['start'] == $value->id)
+                                    <option  value="{{$value->jam}}" selected>{{$value->jam}}</option>
+                                    @else
+                                    <option  value="{{$value->jam}}">{{$value->jam}}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @if($errors->has('waktu'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('waktu') }}
+                                </div>
+                                @endif
+                            </div>
                         </div>
                         <div class="row mb-1">
-                        <div class="col-lg-4">
+                            <div class="col-lg-4">
                                 <label for="form-control">Kelas</label>
                                 <select class="selectpicker" data-live-search="true" name="kelas">
                                     <option value="">Pilih salah satu</option>

@@ -90,7 +90,7 @@ class AbsensiController extends Controller
             $file->move(public_path('Image'), $filename);
         }
         // Ambil tanggal saat ini menggunakan Carbon
-        $hari = Carbon::now()->toDateString();
+        $hari = Carbon::now();
 
         // Cek apakah sudah ada absensi untuk mahasiswa tertentu pada tanggal ini
         $existingAbsensi = AbsensiModel::where('mahasiswa_id', $request->mahasiswa)
@@ -159,27 +159,44 @@ class AbsensiController extends Controller
             'kode_absen' => 'required',
             'progdi' => 'required',
             'kelas' => 'required',
-            'mahasiswa' => 'required',
             'status' => 'required',
-
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+    
         // response error validation
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-
-        AbsensiModel::where('uid', $id)->update([
-            'kode_absen' => $request->kode_absen,
-            'progdi_id' => $request->progdi,
-            'mahasiswa_id' => $request->mahasiswa,
-            'kelas_id' => $request->kelas,
-            'status_absensi' => $request->status,
-
-        ]);
+    
+        $absensi = AbsensiModel::where('uid', $id)->first();
+    
+        // Check if there is a file uploaded
+        if ($request->hasFile('foto')) {
+            // Delete old file if it exists
+            if ($absensi->image && file_exists(public_path('Image/'.$absensi->image))) {
+                unlink(public_path('Image/'.$absensi->image));
+            }
+    
+            $name = $request->file('foto')->getClientOriginalName();
+            $filename = time() . '-' . $name;
+            $file = $request->file('foto');
+            $file->move(public_path('Image'), $filename);
+    
+            // Update image
+            $absensi->image = $filename;
+        }
+    
+        $absensi->kode_absen = $request->kode_absen;
+        $absensi->progdi_id = $request->progdi;
+        $absensi->mahasiswa_id = $request->mahasiswa;
+        $absensi->kelas_id = $request->kelas;
+        $absensi->status_absensi = $request->status;
+    
+        $absensi->save();
+    
         return redirect('/absensi')->with('success', 'Berhasil update data');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

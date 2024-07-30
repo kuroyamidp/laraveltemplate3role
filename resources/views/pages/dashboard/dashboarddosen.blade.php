@@ -2,16 +2,23 @@
 
 @section('content')
 <div class="container">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
     @if(session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
     </div>
     @endif
+
     <!DOCTYPE html>
     <html>
 
     <head>
-    <style>
+        <style>
             .bg {
                 background-color: F1EAFF;
             }
@@ -46,9 +53,7 @@
             }
 
             /* styles for screens larger than 1200px (extra large devices) */
-            @media (min-width: 1200px) {
-                /* your CSS styles for extra large devices here */
-            }
+            @media (min-width: 1200px) {}
         </style>
 
         <div class="layout-px-spacing">
@@ -72,10 +77,10 @@
                                 @else
                                 <img src="{{asset('admin/assets/img/90x90.jpg')}}" alt="avatar" class="custom-file-container__image-preview">
                                 @endif
-                              
-                                    
+
+
                                 <div class="user-info-list d-flex justify-content-center text-center">
-                                <div class="text-center">
+                                    <div class="text-center">
                                         <ul class="contacts-block list-unstyled">
                                             <li class="contacts-block__item">{{Auth::user()->dosen['nama']}}</li>
                                             <li class="badge badge-info">NIM : {{Auth::user()->dosen['nidn']}}</li>
@@ -111,111 +116,87 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="6" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
+                                                    <th colspan="7" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
                                                 </tr>
                                                 <tr class="text-center">
-                                                        <td width="1%">No</td>
-                                                        <td>Mata kuliah</td>
-                                                        <td>Jam</td>
-                                                        <td>Jurusan</td>
-                                                        <td>Guru</td>
-                                                        <td>Ruang</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="text-center">
-                                                    <?php $nomor = 1; ?>
-                                                    @foreach($dos as $val)
-                                                    <tr>
-                                                        <td class="text-center" width="1%"><?php echo $nomor++; ?></td>
-                                                        <td>{{$val->matkul}}</td>
-                                                        <td class="text-center">{{$val->start}}-{{$val->end}}</td>
-                                                        <td>{{$val->progdi}}</td>
-                                                        <td>{{$val->dosen}}</td>
-                                                        <td>{{$val->ruang}}</td>
-                                                    </tr>
-                                                    @endforeach
+                                                    <td width="1%">No</td>
+                                                    <th>Mata Kuliah</th>
+                                                    <th>Jam</th>
+                                                    <th>Jurusan</th>
+                                                    <th>Guru</th>
+                                                    <th>Ruang</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($dos as $val)
+                                                <tr>
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td class="text-center">{{ $val->matkul }}</td>
+                                                    <td class="text-center">{{ $val->start }}-{{ $val->end }}</td>
+                                                    <td class="text-center">{{ $val->progdi }}</td>
+                                                    <td class="text-center">{{ $val->dosen }}</td>
+                                                    <td class="text-center">{{ $val->ruang }}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#updateModal{{ $val->id }}">
+                                                            <i class="fa fa-book"></i>
+                                                        </button>
+                                                        <a href="{{ route('export.pdf') }}" class="btn btn-primary">Export PDF</a>
+
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="updateModal{{ $val->id }}" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel{{ $val->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="updateModalLabel{{ $val->id }}">Tambah Keterangan</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <form action="{{ route('home.updateKeterangan', $val->id) }}" method="POST" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <label for="keterangan">Keterangan</label>
+                                                                                <input type="text" class="form-control" id="keterangan{{ $val->id }}" name="keterangan">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="image-upload{{ $val->id }}" class="btn btn-primary">Browse</label>
+                                                                                <input type="file" class="form-control-file" id="image-upload{{ $val->id }}" name="image" style="display: none;">
+                                                                                <small id="file-name{{ $val->id }}" class="form-text text-muted">No file chosen</small>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- <div class="bio layout-spacing ">
-                <div class="widget-content widget-content-area">
-                    <h3 class="">Bio</h3>
-                    <p>I'm Web Developer from California. I code and design websites worldwide. Mauris varius tellus vitae tristique sagittis. Sed aliquet, est nec auctor aliquet, orci ex vestibulum ex, non pharetra lacus erat ac nulla.</p>
-
-                    <p>Sed vulputate, ligula eget mollis auctor, lectus elit feugiat urna, eget euismod turpis lectus sed ex. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc ut velit finibus, scelerisque sapien vitae, pharetra est. Nunc accumsan ligula vehicula scelerisque vulputate.</p>
-
-                    <div class="bio-skill-box">
-
-                        <div class="row">
-
-                            <div class="col-12 col-xl-6 col-lg-12 mb-xl-5 mb-5 ">
-
-                                <div class="d-flex b-skills">
-                                    <div>
-                                    </div>
-                                    <div class="">
-                                        <h5>Sass Applications</h5>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse eu fugiat nulla pariatur.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-12 col-xl-6 col-lg-12 mb-xl-5 mb-5 ">
-
-                                <div class="d-flex b-skills">
-                                    <div>
-                                    </div>
-                                    <div class="">
-                                        <h5>Github Countributer</h5>
-                                        <p>Ut enim ad minim veniam, quis nostrud exercitation aliquip ex ea commodo consequat.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-12 col-xl-6 col-lg-12 mb-xl-0 mb-5 ">
-
-                                <div class="d-flex b-skills">
-                                    <div>
-                                    </div>
-                                    <div class="">
-                                        <h5>Photograhpy</h5>
-                                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia anim id est laborum.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-12 col-xl-6 col-lg-12 mb-xl-0 mb-0 ">
-
-                                <div class="d-flex b-skills">
-                                    <div>
-                                    </div>
-                                    <div class="">
-                                        <h5>Mobile Apps</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div> -->
-
-                </div>
-
-            </div>
+                        <script>
+                            document.querySelectorAll('input[type="file"]').forEach(function(input) {
+                                input.addEventListener('change', function(event) {
+                                    const fileInput = event.target;
+                                    const fileId = fileInput.id;
+                                    const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+                                    document.getElementById('file-name' + fileId.replace('image-upload', '')).textContent = fileName;
+                                });
+                            });
+                        </script>
 
 
-        </div>
-        @endsection
+
+                        @endsection

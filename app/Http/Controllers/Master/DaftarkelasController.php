@@ -56,38 +56,49 @@ class DaftarkelasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'kode_kelas' => 'required',
-            'mata_kuliah' => 'required',
-            'ruang_kelas' => 'required',
-            'progdi' => 'required',
-            'dosen' => 'required',
-            'kelas' => 'required',
-            'waktu' => 'required',
-            'hari' => 'required',
-        ]);
+{
+    // Validasi inputan selain kode_kelas yang sudah terdaftar
+    $validator = Validator::make($request->all(), [
+        'kode_kelas' => 'required',
+        'mata_kuliah' => 'required',
+        'ruang_kelas' => 'required',
+        'progdi' => 'required',
+        'dosen' => 'required',
+        'kelas' => 'required',
+        'waktu' => 'required',
+        'hari' => 'required',
+    ]);
 
-        // Response error validation
-        if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator);
-        }
-
-
-        DaftarkelasModel::create([
-            'uid' => Str::uuid(),
-            'kode_kelas' => $request->kode_kelas,
-            'progdi_id' => $request->progdi,
-            'makul_id' => $request->mata_kuliah,
-            'dosen_id' => $request->dosen,
-            'ruang_id' => $request->ruang_kelas,
-            'semester' => $request->kelas,
-            'hari' => $request->hari,
-            'start' => $request->waktu,
-        ]);
-
-        return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
+    // Response error validation
+    if ($validator->fails()) {
+        return Redirect::back()->withErrors($validator);
     }
+
+    // Cek apakah kode_kelas sudah ada di database
+    $existingKelas = DaftarkelasModel::where('kode_kelas', $request->kode_kelas)->exists();
+
+    if ($existingKelas) {
+        // Jika kode_kelas sudah ada, kirim kembali dengan pesan error
+        return Redirect::back()->withErrors(['kode_kelas' => 'Kode kelas sudah digunakan.'])->withInput();
+    }
+
+    // Simpan data baru jika kode_kelas unik
+    DaftarkelasModel::create([
+        'uid' => Str::uuid(),
+        'kode_kelas' => $request->kode_kelas,
+        'progdi_id' => $request->progdi,
+        'makul_id' => $request->mata_kuliah,
+        'dosen_id' => $request->dosen,
+        'ruang_id' => $request->ruang_kelas,
+        'semester' => $request->kelas,
+        'hari' => $request->hari,
+        'start' => $request->waktu,
+    ]);
+
+    return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
+}
+
+    
 
 
 

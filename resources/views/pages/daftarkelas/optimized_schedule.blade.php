@@ -44,7 +44,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+            <a href="{{route('daftar-kelas.index')}}" class="btn btn-secondary" >Kembali</a>
                 <form action="{{ route('save-changes') }}" method="POST">
                     @csrf
                     <input type="hidden" name="changes" value="{{ json_encode($changes) }}">

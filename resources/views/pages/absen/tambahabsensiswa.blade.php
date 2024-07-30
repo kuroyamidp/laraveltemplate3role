@@ -50,14 +50,15 @@
                             </div>
 
                             <div class="col-lg-4">
-                                <label for="form-control">Tanggal</label>
-                                <input type="date" name="hari" class="form-control" value="{{ \Carbon\Carbon::now()->toDateString() }}" readonly>
+                                <label for="form-control">Tanggal dan Waktu</label>
+                                <input type="datetime-local" name="hari" class="form-control" value="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" readonly>
                                 @error('hari')
                                 <div class="error" style="color: red; display:block;">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
+
                             <div class="col-lg-4">
                                 <label for="form-control">Absen</label>
                                 <select name="status" class="form-control">
