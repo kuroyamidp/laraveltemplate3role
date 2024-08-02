@@ -230,6 +230,7 @@ class AbsensiController extends Controller
                 $item->progdi == $search ||
                 $item->kelas == $search ||
                 $item->mahasiswa == $search ||
+                $item->image == $search ||
                 stripos($item->hari, $search) !== false
             ) {
                 $result[] = $item;

@@ -28,10 +28,20 @@ class DaftarkelasController extends Controller
      */
     public function index()
     {
+        // Ambil semua data kelas
         $data['kelas'] = DaftarkelasModel::get();
-        // return $data;
+
+        // Optimasi jadwal dan deteksi tabrakan
+        $conflicts = $this->detectScheduleConflicts($data['kelas']);
+
+        // Jika ada tabrakan, tambahkan pesan alert
+        if (!empty($conflicts)) {
+            $data['conflicts'] = $conflicts;
+        }
+
         return view('pages.daftarkelas.daftarkelas', $data);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -56,53 +66,47 @@ class DaftarkelasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    // Validasi inputan selain kode_kelas yang sudah terdaftar
-    $validator = Validator::make($request->all(), [
-        'kode_kelas' => 'required',
-        'mata_kuliah' => 'required',
-        'ruang_kelas' => 'required',
-        'progdi' => 'required',
-        'dosen' => 'required',
-        'kelas' => 'required',
-        'waktu' => 'required',
-        'hari' => 'required',
-    ]);
+    {
+        // Validasi inputan selain kode_kelas yang sudah terdaftar
+        $validator = Validator::make($request->all(), [
+            'kode_kelas' => 'required',
+            'mata_kuliah' => 'required',
+            'ruang_kelas' => 'required',
+            'progdi' => 'required',
+            'dosen' => 'required',
+            'kelas' => 'required',
+            'waktu' => 'required',
+            'hari' => 'required',
+        ]);
 
-    // Response error validation
-    if ($validator->fails()) {
-        return Redirect::back()->withErrors($validator);
+        // Response error validation
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
+        // Cek apakah kode_kelas sudah ada di database
+        $existingKelas = DaftarkelasModel::where('kode_kelas', $request->kode_kelas)->exists();
+
+        if ($existingKelas) {
+            // Jika kode_kelas sudah ada, kirim kembali dengan pesan error
+            return Redirect::back()->withErrors(['kode_kelas' => 'Kode kelas sudah digunakan.'])->withInput();
+        }
+
+        // Simpan data baru jika kode_kelas unik
+        DaftarkelasModel::create([
+            'uid' => Str::uuid(),
+            'kode_kelas' => $request->kode_kelas,
+            'progdi_id' => $request->progdi,
+            'makul_id' => $request->mata_kuliah,
+            'dosen_id' => $request->dosen,
+            'ruang_id' => $request->ruang_kelas,
+            'semester' => $request->kelas,
+            'hari' => $request->hari,
+            'start' => $request->waktu,
+        ]);
+
+        return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
     }
-
-    // Cek apakah kode_kelas sudah ada di database
-    $existingKelas = DaftarkelasModel::where('kode_kelas', $request->kode_kelas)->exists();
-
-    if ($existingKelas) {
-        // Jika kode_kelas sudah ada, kirim kembali dengan pesan error
-        return Redirect::back()->withErrors(['kode_kelas' => 'Kode kelas sudah digunakan.'])->withInput();
-    }
-
-    // Simpan data baru jika kode_kelas unik
-    DaftarkelasModel::create([
-        'uid' => Str::uuid(),
-        'kode_kelas' => $request->kode_kelas,
-        'progdi_id' => $request->progdi,
-        'makul_id' => $request->mata_kuliah,
-        'dosen_id' => $request->dosen,
-        'ruang_id' => $request->ruang_kelas,
-        'semester' => $request->kelas,
-        'hari' => $request->hari,
-        'start' => $request->waktu,
-    ]);
-
-    return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
-}
-
-    
-
-
-
-
     /**
      * Display the specified resource.
      *
@@ -307,5 +311,39 @@ class DaftarkelasController extends Controller
 
         // Redirect back or to a specific route after saving
         return redirect('/daftar-kelas')->with('success', 'Data Berhasil Diubah');
+    }
+    private function detectScheduleConflicts($classes)
+    {
+        $schedule = [];
+        $conflicts = [];
+
+        foreach ($classes as $class) {
+            $day = $class->hari;
+            $timeSlot = $class->start;
+            $room = $class->ruang_id;
+            $dosen = $class->dosen_id;
+
+            // Cek ketersediaan slot waktu, ruangan, dan dosen
+            if (!$this->isSlotAvailable($schedule, $day, $timeSlot, $room, $dosen)) {
+                $conflicts[] = [
+                    'kode_kelas' => $class->kode_kelas,
+                    'progdi' => $class->progdia, // Pastikan model Progdi memiliki relasi
+                    'mata_kuliah' => $class->matkul, // Pastikan model Matakuliah memiliki relasi
+                    'ruang' => $class->ruang, // Pastikan model Ruang memiliki relasi
+                    'dosen' => $class->dosen, // Pastikan model Dosen memiliki relasi
+                    'hari' => $day,
+                    'waktu' => $timeSlot,
+                ];
+            } else {
+                $schedule[] = [
+                    'hari' => $day,
+                    'waktu' => $timeSlot,
+                    'ruang' => $room,
+                    'dosen_id' => $dosen,
+                ];
+            }
+        }
+
+        return $conflicts;
     }
 }

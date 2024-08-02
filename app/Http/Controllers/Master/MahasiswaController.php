@@ -270,13 +270,13 @@ class MahasiswaController extends Controller
         $search = $request->input('search');
         $kelas = MahasiswaModel::all();
         $result = [];
+
         foreach ($kelas as $item) {
             if (
                 stripos($item->nim, $search) !== false ||
-                $item->nama == $search ||
                 $item->progdi == $search ||
                 $item->kelas == $search ||
-                $item->foto == $search ||
+                $item->nama == $search ||
                 stripos($item->status, $search) !== false
             ) {
                 $result[] = $item;

@@ -93,7 +93,6 @@ Route::get('/search-dosen', [DosenController::class, 'searchDosen'])
     ->name('search-dosen')
     ->middleware(['auth', 'is_admin']);
 Route::get('/search-mahasiswa', [MahasiswaController::class, 'searchMahasiswa'])
-    ->name('search-mahasiswa')
-    ->middleware(['auth', 'is_admin']);
+    ->name('search-mahasiswa');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Auth::routes();

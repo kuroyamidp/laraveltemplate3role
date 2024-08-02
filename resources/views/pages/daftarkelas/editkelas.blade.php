@@ -82,7 +82,7 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Waktu</label>
+                                <label for="form-control">Waktu Sebelumnya adalah : {{$kelas['start']}}</label>
                                 <select class="selectpicker" data-live-search="true" name="waktu" >
                                     <option value="">Pilih salah satu</option>
                                     @foreach($waktu as $key => $value)

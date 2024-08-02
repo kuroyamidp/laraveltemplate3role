@@ -44,26 +44,6 @@
             padding: 8px;
             text-align: left;
         }
-
-        .compact {
-            margin-bottom: 20px;
-        }
-
-        .row {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 2px;
-        }
-
-        .row .label {
-            min-width: 150px;
-            font-weight: bold;
-        }
-
-        .row .value::before {
-            content: ": ";
-            margin-right: 5px;
-        }
     </style>
 </head>
 
@@ -74,43 +54,39 @@
             DINAS PENDIDIKAN DAN KEBUDAYAAN<br>
             SEKOLAH MENENGAH KEJURUAN NEGERI 5 KENDAL
         </h4>
+        <h5 style="text-align: center;">Gg. Bogosari, Bogosari, Tambahrejo, Kec. Pagerruyung, Kabupaten Kendal, Jawa Tengah 51361</h5>
+        <hr>
     </div>
-    <h2 style="text-align: center;">LAPORAN PEMBELAJARAN</h2>
-    @foreach($dos as $val)
-    <div class="compact">
-        <div class="row">
-            <div class="label">No</div>
-            <div class="value">{{ $loop->iteration }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Nama Guru</div>
-            <div class="value">{{ $val->dosen }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Nama Mata Pelajaran</div>
-            <div class="value">{{ $val->matkul }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Jam</div>
-            <div class="value">{{ $val->start }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Jurusan</div>
-            <div class="value">{{ $val->progdi }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Kelas</div>
-            <div class="value">{{ $val->kelas }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Hari</div>
-            <div class="value">{{ $currentDay }}</div>
-        </div>
-        <div class="row">
-            <div class="label">Ruang</div>
-            <div class="value">{{ $val->ruang }}</div>
-        </div>
-    </div>
+    <h2 style="text-align: center;">Laporan Pembelajaran</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Mata Pelajaran</th>
+                <th>Hari</th>
+                <th>Jam</th>
+                <th>Jurusan</th>
+                <th>Kelas</th>
+                <th>Guru</th>
+                <th>Ruang</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($dos as $val)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $val->matkul }}</td>
+                <td>{{ $currentDay }}</td>
+                <td>{{ $val->start }}</td>
+                <td>{{ $val->progdi }}</td>
+                <td>{{ $val->kelas }}</td>
+                <td>{{ $val->dosen }}</td>
+                <td>{{ $val->ruang }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
     <h2>Keterangan</h2>
     <table>
         <thead>
@@ -138,7 +114,50 @@
             @endforeach
         </tbody>
     </table>
-    @endforeach
+
+    <h2>Absensi</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Mahasiswa</th>
+                <th>Status</th>
+                <th>Hari</th>
+                <!-- <th>Longitude</th>
+                <th>Latitude</th> -->
+                <!-- <th>Gambar</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($absensi as $absen)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $absen->mahasiswa }}</td>
+                <td>
+                    @if($absen->status_absensi == 0)
+                    <span class="badge badge-danger">Alpha</span>
+                    @elseif($absen->status_absensi == 1)
+                    <span class="badge badge-primary">Masuk</span>
+                    @elseif($absen->status_absensi == 2)
+                    <span class="badge badge-primary">Ijin</span>
+                    @else
+                    <span class="badge badge-danger">Sakit</span>
+                    @endif
+                </td>
+                <td>{{ $absen->hari }}</td>
+                <!-- <td>{{ $absen->longitude }}</td>
+                <td>{{ $absen->latitude }}</td> -->
+                <!-- <td style="text-align: center;">
+                    @if($absen->image)
+                    <img src="{{ url('Image/'.$absen->image) }}" alt="Image-{{ $absen->mahasiswa_id }}" style="width: 50px; height: 50px;">
+                    @else
+                    -
+                    @endif
+                </td> -->
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 
 </html>
