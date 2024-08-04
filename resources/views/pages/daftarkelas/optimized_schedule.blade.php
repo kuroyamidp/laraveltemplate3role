@@ -6,13 +6,13 @@
     <div class="modal-dialog modal-lg" role="document"> <!-- Gunakan modal-lg untuk membuat modal lebih besar -->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmChangesModalLabel">Konfirmasi Perubahan Jadwal</h5>
+                <h5 class="modal-title" id="confirmChangesModalLabel">Jadwal Berhasil Di Optimalkan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Berikut adalah perubahan yang akan dilakukan:</p>
+                <p style="text-align: center;">Berikut Adalah Perubahan Jadwal Yang Telah Di Lakukan:</p>
                 <div class="table-responsive"> <!-- Gunakan table-responsive untuk memastikan tabel dapat digulir jika terlalu besar -->
                     <table class="table">
                     <thead>

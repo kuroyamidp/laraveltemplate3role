@@ -73,9 +73,9 @@
                                         <th>NUPTK</th>
                                         <th>Guru</th>
                                         <th>Wali Kelas</th>
-                                        <th>Ikatan kerja</th>
+                              
                                         <th>Jabatan Fungsional</th>
-                                        <th>Status</th>
+                       
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -92,9 +92,7 @@
                                             <span class="badge badge-success">{{$value->progdi}} | {{$value->kelas}}</span>
                                             @endif
                                         </td>
-                                        <td>{{$value->ikatan_kerja}}</td>
                                         <td>{{$value->jabatan_fungsional}}</td>
-                                        <td>{{$value->status}}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('dosen.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
                                             <form action="{{ route('dosen.destroy', $value->uid) }}" method="post">
@@ -138,9 +136,7 @@
                             '<td>' + value.nidn + '</td>' +
                             '<td>' + value.nama + '</td>' +
                             '<td>' + (value.progdi ? '<span class="badge badge-success">' + value.progdi + ' | ' + value.kelas + '</span>' : '<span class="badge badge-warning">Progdi belum ditentukan</span>') + '</td>' +
-                            '<td>' + value.ikatan_kerja + '</td>' +
                             '<td>' + value.jabatan_fungsional + '</td>' +
-                            '<td>' + value.status + '</td>' +
                             '<td class="text-center" style="display: flex; justify-content: center;">' +
                                 '<a href="' + showUrlBase + '/' + value.uid + '" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>' +
                                 '<form action="' + destroyUrlBase + '/' + value.uid + '" method="post" style="display:inline;">' +

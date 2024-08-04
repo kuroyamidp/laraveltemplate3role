@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <label for="form-control">Jurusan</label>
                                 <select class="selectpicker" data-live-search="true" name="progdi">
                                     <option value="">Pilih salah satu</option>
@@ -72,7 +72,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-2">
                                 <label for="form-control">kelas</label>
                                 <select class="selectpicker" data-live-search="true" name="kelas">
                                     <option value="">Pilih salah satu</option>
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                                 <label for="form-control">Mata kuliah</label>
                                 <select class="selectpicker" data-live-search="true" name=" mata_kuliah">
                                     <option value="">Pilih salah satu</option>
@@ -102,7 +102,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-2">
                                 <label for="form-control">Ruang kelas</label>
                                 <select class="selectpicker" data-live-search="true" name="ruang_kelas">
                                     <option value="">Pilih salah satu</option>

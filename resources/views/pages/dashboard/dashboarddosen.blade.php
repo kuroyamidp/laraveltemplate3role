@@ -90,8 +90,6 @@
                                             @else
                                             <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
                                             @endif
-                                            <li class="contacts-block__item">Sebagai : {{Auth::user()->dosen['status']}}</li>
-                                            <li class="contacts-block__item">Ikatan Kerja : {{Auth::user()->dosen['ikatan_kerja']}}</li>
                                             <li class="contacts-block__item">jabatan : {{Auth::user()->dosen['jabatan_fungsional']}}</li>
                                             <li class="contacts-block__item">{{Auth::user()->email}}</li>
                                             <li class="contacts-block__item">{{Auth::user()->perguruan_tinggi}}</li>

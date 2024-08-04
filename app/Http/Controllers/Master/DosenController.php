@@ -56,9 +56,8 @@ class DosenController extends Controller
                     'nidn' => 'required',
                     'jenis_kelamin' => 'required',
                     'perguruan_tinggi' => 'required',
-                    'pendidikan_tertinggi' => 'required',
-                    'ikatan_kerja' => 'required',
-                    'status' => 'required',
+             
+         
                     'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
                 ]);
 
@@ -82,9 +81,8 @@ class DosenController extends Controller
                     'perguruan_tinggi' => 'SMK N 5 KENDAL',
                     'jenis_kelamin' => $request->jenis_kelamin,
                     'jabatan_fungsional' => $request->jabatan_fungsional,
-                    'pendidikan_tertinggi' => $request->pendidikan_tertinggi,
-                    'ikatan_kerja' => $request->ikatan_kerja,
-                    'status' => $request->status,
+               
+                 
                     'image' => isset($filename) ? $filename : null,
                 ]);
                 return redirect('dosen')->with('success', 'Berhasil tambah data');
@@ -95,9 +93,8 @@ class DosenController extends Controller
                     'dosen' => 'required',
                     'nidn' => 'required',
                     'jenis_kelamin' => 'required',
-                    'pendidikan_tertinggi' => 'required',
-                    'ikatan_kerja' => 'required',
-                    'status' => 'required',
+                 
+                
                     'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
                 ]);
 
@@ -122,9 +119,8 @@ class DosenController extends Controller
                     'perguruan_tinggi' => 'SMK N 5 KENDAL',
                     'jenis_kelamin' => $request->jenis_kelamin,
                     'jabatan_fungsional' => $request->jabatan_fungsional,
-                    'pendidikan_tertinggi' => $request->pendidikan_tertinggi,
-                    'ikatan_kerja' => $request->ikatan_kerja,
-                    'status' => $request->status,
+                 
+                 
                 ]);
                 return redirect('dosen')->with('success', 'Berhasil Edit data');
             }
@@ -136,9 +132,8 @@ class DosenController extends Controller
                 'dosen' => 'required',
                 'nidn' => 'required',
                 'jenis_kelamin' => 'required',
-                'pendidikan_tertinggi' => 'required',
-                'ikatan_kerja' => 'required',
-                'status' => 'required',
+            
+            
                 'foto' => 'image|mimes:jpeg,png,jpg|max:2048|required',
             ]);
 
@@ -162,9 +157,7 @@ class DosenController extends Controller
                 'perguruan_tinggi' => 'SMK N 5 KENDAL',
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'jabatan_fungsional' => $request->jabatan_fungsional,
-                'pendidikan_tertinggi' => $request->pendidikan_tertinggi,
-                'ikatan_kerja' => $request->ikatan_kerja,
-                'status' => $request->status,
+               
                 'image' => isset($filename) ? $filename : null,
             ]);
             return redirect('dosen')->with('success', 'Berhasil tambah data');
@@ -229,11 +222,9 @@ class DosenController extends Controller
             if (
                 stripos($item->nidn, $search) !== false ||
                 $item->progdi == $search ||
-                $item->kelas == $search ||
                 $item->nama == $search ||
                 $item->jabatan_fungsional == $search ||
-                $item->ikatan_kerja == $search ||
-                stripos($item->status, $search) !== false
+                stripos($item->kelas, $search) !== false
             ) {
                 $result[] = $item;
             }

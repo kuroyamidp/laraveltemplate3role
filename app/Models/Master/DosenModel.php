@@ -21,9 +21,6 @@ class DosenModel extends Model
         'perguruan_tinggi',
         'jenis_kelamin',
         'jabatan_fungsional',
-        'pendidikan_tertinggi',
-        'ikatan_kerja',
-        'status',
         'image',
     ];
 

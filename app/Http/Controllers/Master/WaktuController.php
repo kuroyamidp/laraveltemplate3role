@@ -27,6 +27,7 @@ class WaktuController extends Controller
     public function index()
     {
         $data['waktu'] = WaktuModel::get();
+        // return $data;
         return view('pages.waktu.waktu', $data);
     }
 

@@ -14,7 +14,7 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-4">
-                                <label for="form-control">Progdi</label>
+                                <label for="form-control">Wali Kelas Jurusan</label>
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
                                     @foreach($progdi as $key => $value)
@@ -106,48 +106,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
-                                <label for="pendidikan_tertinggi">Pendidikan tertinggi</label>
-                                <select class="form-control" name="pendidikan_tertinggi">
-                                    <option value="">Pilih pendidikan tertinggi</option>
-                                    <option value="SD">Tamatan SD</option>
-                                    <option value="SMP">Tamatan SMP</option>
-                                    <option value="SMA/SMK">Tamatan SMA/SMK</option>
-                                    <option value="D1">Diploma 1 (D1)</option>
-                                    <option value="D2">Diploma 2 (D2)</option>
-                                    <option value="D3">Diploma 3 (D3)</option>
-                                    <option value="D4">Diploma 4 (D4)</option>
-                                    <option value="S1">Sarjana (S1)</option>
-                                    <option value="S2">Magister (S2)</option>
-                                    <option value="S3">Doktor (S3)</option>
-                                </select>
-                                @if($errors->has('pendidikan_tertinggi'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('pendidikan_tertinggi') }}
-                                </div>
-                                @endif
-                            </div>
-
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col-lg-4">
-                                <label for="form-control">Ikatan kerja</label>
-                                <input type="text" class="form-control" name="ikatan_kerja">
-                                @if($errors->has('ikatan_kerja'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('ikatan_kerja') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Status</label>
-                                <input type="text" class="form-control" name="status">
-                                @if($errors->has('status'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('status') }}
-                                </div>
-                                @endif
-                            </div>
+                           
                             <div class="col-lg-4">
                                 <label for="form-control">Jabatan fungsional</label>
                                 <input type="text" class="form-control" name="jabatan_fungsional">

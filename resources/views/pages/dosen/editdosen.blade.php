@@ -104,35 +104,6 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-4">
-                                <label for="form-control">Pendidikan tertinggi</label>
-                                <input type="text" class="form-control" name="pendidikan_tertinggi" value="{{$dosen['pendidikan_tertinggi']}}">
-                                @if($errors->has('pendidikan_tertinggi'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('pendidikan_tertinggi') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Ikatan kerja</label>
-                                <input type="text" class="form-control" name="ikatan_kerja" value="{{$dosen['ikatan_kerja']}}">
-                                @if($errors->has('ikatan_kerja'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('ikatan_kerja') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Status</label>
-                                <input type="text" class="form-control" name="status" value="{{$dosen['status']}}">
-                                @if($errors->has('status'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('status') }}
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row mb-1">
                         <div class="col-lg-12">
                                 <div class="custom-file-container" data-upload-id="myFirstImage">
                                     <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>

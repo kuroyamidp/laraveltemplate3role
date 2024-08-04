@@ -4,14 +4,12 @@
 <style>
     .btn-optimize {
         background-color: #28a745;
-        /* Hijau */
         color: white;
         border: none;
     }
 
     .btn-optimize:hover {
         background-color: #218838;
-        /* Hijau lebih gelap saat hover */
         color: white;
     }
 </style>
@@ -27,9 +25,6 @@
                         <input type="text" class="form-control" name="daftar_kelas" id="daftar_kelas" placeholder="Cari Jadwal">
                         <button type="submit" class="btn btn-primary btn-sm">Cari</button>
                         <button type="button" onclick="resetForm()" class="btn btn-warning btn-sm">Reset</button>
-                    </div>
-
-                    <div class="col-lg-3">
                     </div>
                 </div>
             </form>
@@ -79,22 +74,22 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center" id="data-table-body"> <!-- Tambahkan ID untuk dapat menambahkan baris -->
-                                    @php $nomor = 1; @endphp <!-- Gunakan PHP untuk inisialisasi nomor -->
+                                <tbody class="text-center" id="data-table-body">
+                                    @php $nomor = 1; @endphp
                                     @foreach($kelas as $key => $value)
                                     <tr>
-                                        <td width="1%">{{ $nomor++ }}</td> <!-- Gunakan variabel nomor yang diberikan oleh PHP -->
+                                        <td width="1%">{{ $nomor++ }}</td>
                                         <td>{{ $value->kode_kelas }}</td>
-                                        <td>{{ $value->matkul }}</td> <!-- Pastikan model Matakuliah memiliki relasi -->
-                                        <td>{{ $value->progdi }}</td> <!-- Pastikan model Progdi memiliki relasi -->
-                                        <td>{{ $value->ruang }}</td> <!-- Pastikan model Ruang memiliki relasi -->
-                                        <td>{{ $value->dosen }}</td> <!-- Pastikan model Dosen memiliki relasi -->
+                                        <td>{{ $value->matkul }}</td>
+                                        <td>{{ $value->progdi }}</td>
+                                        <td>{{ $value->ruang }}</td>
+                                        <td>{{ $value->dosen }}</td>
                                         <td>{{ $value->start }}</td>
                                         <td>{{ $value->hari }}</td>
                                         <td><b>KELAS </b>{{ $value->kelas }}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('daftar-kelas.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>
-                                            <button onclick="confirmOptimize('{{ route('optimize-schedule', ['id' => $value->id]) }}')" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>
+                                            <button onclick="showOptimizeModal('{{ route('optimize-schedule', ['id' => $value->id]) }}')" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>
                                             <form action="{{ route('daftar-kelas.destroy', $value->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
@@ -113,21 +108,61 @@
     </div>
 </div>
 
+<div class="modal fade" id="optimizeModal" tabindex="-1" role="dialog" aria-labelledby="optimizeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="optimizeModalLabel">Konfirmasi Optimalisasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin mengoptimalkan jadwal?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="confirmOptimizeButton">Ya, Optimalkan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-function confirmOptimize(optimizeUrl) {
-    if (confirm("Apakah Anda yakin ingin mengoptimalkan jadwal?")) {
-        window.location.href = optimizeUrl;
-    }
+function showOptimizeModal(optimizeUrl) {
+    $('#optimizeModal').modal('show');
+    $('#confirmOptimizeButton').data('url', optimizeUrl);
 }
+
+$('#confirmOptimizeButton').click(function() {
+    var optimizeUrl = $(this).data('url');
+    
+    // Mengirim permintaan AJAX ke server
+    $.ajax({
+        url: optimizeUrl,
+        type: 'GET',
+        success: function(response) {
+            // Handle response if needed
+            alert('Jadwal berhasil dioptimalkan');
+            window.location.reload(); // Muat ulang halaman setelah optimasi
+        },
+        error: function(xhr) {
+            // Handle error if needed
+            alert('Terjadi kesalahan saat mengoptimalkan jadwal');
+        }
+    });
+
+    $('#optimizeModal').modal('hide');
+});
+
 function resetForm() {
     document.getElementById("configform").reset();
 }
 
-// Initialization and event handling
 $(document).ready(function() {
     var showUrlBase = "{{ route('daftar-kelas.show', '') }}";
     var destroyUrlBase = "{{ route('daftar-kelas.destroy', '') }}";
-    var optimizeUrlBase = "{{ route('optimize-schedule', '') }}"; // Define the base URL for optimization
+    var optimizeUrlBase = "{{ route('optimize-schedule', '') }}";
 
     function updateTable(search) {
         $.ajax({
@@ -151,7 +186,7 @@ $(document).ready(function() {
                         '<td>' + value.kelas + '</td>' +
                         '<td class="text-center" style="display: flex; justify-content: center;">' +
                             '<a href="' + showUrlBase + '/' + value.uid + '" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>' +
-                            '<button onclick="confirmOptimize(\'' + optimizeUrlBase + '/' + value.uid + '\')" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>' +
+                            '<button onclick="showOptimizeModal(\'' + optimizeUrlBase + '/' + value.uid + '\')" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>' +
                             '<form action="' + destroyUrlBase + '/' + value.uid + '" method="post" style="display:inline;">' +
                             '@method("DELETE")' +
                             '@csrf' +
@@ -163,7 +198,6 @@ $(document).ready(function() {
                     $('#data-table-body').append(row);
                 });
 
-                // Re-initialize tooltips and confirmation dialogs after updating the table
                 $('[data-toggle="tooltip"]').tooltip();
                 addEventListenersToActionButtons();
             }
@@ -176,29 +210,6 @@ $(document).ready(function() {
         updateTable(search);
     });
 
-    // Function to add event listeners to action buttons
-    // function addEventListenersToActionButtons() {
-    //     $('.show_confirm').click(function(event) {
-    //         var form = $(this).closest("form");
-    //         event.preventDefault();
-    //         swal({
-    //             title: `Are you sure you want to delete this record?`,
-    //             text: "If you delete this, it will be gone forever.",
-    //             icon: "warning",
-    //             buttons: true,
-    //             dangerMode: true,
-    //         }).then((willDelete) => {
-    //             if (willDelete) {
-    //                 form.submit();
-    //             }
-    //         });
-    //     });
-    // }
-
-    // // Call the function to add event listeners when the page loads
-    // addEventListenersToActionButtons();
-
-    // Function to reset the form and reload the page
     window.resetForm = function() {
         document.getElementById("configform").reset();
         window.location = "{{ route('daftar-kelas.index') }}";
@@ -206,5 +217,4 @@ $(document).ready(function() {
 });
 </script>
 
-
-@endsection
+@endsection 
