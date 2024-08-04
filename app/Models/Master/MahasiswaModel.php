@@ -15,13 +15,12 @@ class MahasiswaModel extends Model
         'uid',
         'progdi_id',
         'user_id',
+        'nis',
         'nim',
         'nama',
         'jenis_kelamin',
         'perguruan_tinggi',
-        'status_mahasiswa',
         'semester_id',
-        'status',
         'image',
     ];
     protected $appends = ['progdi','kelas'];

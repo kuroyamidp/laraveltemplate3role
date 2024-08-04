@@ -168,26 +168,26 @@
         });
 
         // Function to add event listeners to action buttons
-        function addEventListenersToActionButtons() {
-            $('.show_confirm').click(function(event) {
-                var form = $(this).closest("form");
-                event.preventDefault();
-                swal({
-                    title: `Are you sure you want to delete this record?`,
-                    text: "If you delete this, it will be gone forever.",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    }
-                });
-            });
-        }
+        // function addEventListenersToActionButtons() {
+        //     $('.show_confirm').click(function(event) {
+        //         var form = $(this).closest("form");
+        //         event.preventDefault();
+        //         swal({
+        //             title: `Are you sure you want to delete this record?`,
+        //             text: "If you delete this, it will be gone forever.",
+        //             icon: "warning",
+        //             buttons: true,
+        //             dangerMode: true,
+        //         }).then((willDelete) => {
+        //             if (willDelete) {
+        //                 form.submit();
+        //             }
+        //         });
+        //     });
+        // }
 
-        // Call the function to add event listeners when the page loads
-        addEventListenersToActionButtons();
+        // // Call the function to add event listeners when the page loads
+        // addEventListenersToActionButtons();
 
         // Function to reset the form and reload the page
         window.resetForm = function() {

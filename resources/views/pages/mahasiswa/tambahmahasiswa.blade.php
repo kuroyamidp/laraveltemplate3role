@@ -15,6 +15,15 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-3">
+                                <label for="form-control">NIS</label>
+                                <input type="text" class="form-control" name="nis">
+                                @error('nis')
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="col-lg-3">
                                 <label for="form-control">NIM</label>
                                 <input type="text" class="form-control" name="nim">
                                 @error('nim')
@@ -60,8 +69,6 @@
                                 </div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="form-control">
@@ -70,29 +77,6 @@
                                     <option value="2">Perempuan</option>
                                 </select>
                                 @error('jenis_kelamin')
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Status Siswa</label>
-                                <input type="text" class="form-control" name="status_awal">
-                                @error('status_awal')
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Status Siswa saat ini</label>
-                                <select name="status" class="form-control">
-                                    <option value="">Pilih salah satu</option>
-                                    <option value="0">Tidak aktif</option>
-                                    <option value="1">Aktif</option>
-                                    <option value="2">Lulus</option>
-                                </select>
-                                @error('status')
                                 <div class="error" style="color: red; display:block;">
                                     {{ $message }}
                                 </div>

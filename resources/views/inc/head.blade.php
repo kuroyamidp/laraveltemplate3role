@@ -49,6 +49,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Skrip JavaScript untuk menangani perubahan status aktif -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     //untuk nampilih gambar
     document.addEventListener("DOMContentLoaded", function() {

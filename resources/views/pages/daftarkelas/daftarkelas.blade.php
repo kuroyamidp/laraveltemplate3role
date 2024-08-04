@@ -119,15 +119,14 @@ function confirmOptimize(optimizeUrl) {
         window.location.href = optimizeUrl;
     }
 }
-
 function resetForm() {
     document.getElementById("configform").reset();
 }
 
 // Initialization and event handling
 $(document).ready(function() {
-    var showUrlBase = "{{ route('dosen.show', '') }}";
-    var destroyUrlBase = "{{ route('dosen.destroy', '') }}";
+    var showUrlBase = "{{ route('daftar-kelas.show', '') }}";
+    var destroyUrlBase = "{{ route('daftar-kelas.destroy', '') }}";
     var optimizeUrlBase = "{{ route('optimize-schedule', '') }}"; // Define the base URL for optimization
 
     function updateTable(search) {
@@ -178,26 +177,26 @@ $(document).ready(function() {
     });
 
     // Function to add event listeners to action buttons
-    function addEventListenersToActionButtons() {
-        $('.show_confirm').click(function(event) {
-            var form = $(this).closest("form");
-            event.preventDefault();
-            swal({
-                title: `Are you sure you want to delete this record?`,
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-        });
-    }
+    // function addEventListenersToActionButtons() {
+    //     $('.show_confirm').click(function(event) {
+    //         var form = $(this).closest("form");
+    //         event.preventDefault();
+    //         swal({
+    //             title: `Are you sure you want to delete this record?`,
+    //             text: "If you delete this, it will be gone forever.",
+    //             icon: "warning",
+    //             buttons: true,
+    //             dangerMode: true,
+    //         }).then((willDelete) => {
+    //             if (willDelete) {
+    //                 form.submit();
+    //             }
+    //         });
+    //     });
+    // }
 
-    // Call the function to add event listeners when the page loads
-    addEventListenersToActionButtons();
+    // // Call the function to add event listeners when the page loads
+    // addEventListenersToActionButtons();
 
     // Function to reset the form and reload the page
     window.resetForm = function() {

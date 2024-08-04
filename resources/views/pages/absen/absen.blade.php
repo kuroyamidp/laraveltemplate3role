@@ -160,25 +160,25 @@
             updateTable(search);
         });
 
-        function addEventListenersToActionButtons() {
-            $('.show_confirm').click(function(event) {
-                var form = $(this).closest("form");
-                event.preventDefault();
-                swal({
-                    title: "Are you sure you want to delete this record?",
-                    text: "If you delete this, it will be gone forever.",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        form.submit(); // Submit the form if user confirms
-                    }
-                });
-            });
-        }
+        // function addEventListenersToActionButtons() {
+        //     $('.show_confirm').click(function(event) {
+        //         var form = $(this).closest("form");
+        //         event.preventDefault();
+        //         swal({
+        //             title: "Are you sure you want to delete this record?",
+        //             text: "If you delete this, it will be gone forever.",
+        //             icon: "warning",
+        //             buttons: true,
+        //             dangerMode: true,
+        //         }).then((willDelete) => {
+        //             if (willDelete) {
+        //                 form.submit(); // Submit the form if user confirms
+        //             }
+        //         });
+        //     });
+        // }
 
-        addEventListenersToActionButtons();
+        // addEventListenersToActionButtons();
 
         window.resetForm = function() {
             document.getElementById("configform").reset();

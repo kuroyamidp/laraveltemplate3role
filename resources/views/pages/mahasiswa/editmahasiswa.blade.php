@@ -15,7 +15,17 @@
                         @csrf
                         <div class="row mb-1">
                             <div class="col-lg-3">
-                                <label for="form-control">NIM</label>
+                                <label for="form-control">NIS</label>
+                                <input type="text" class="form-control" name="nis" value="{{$mahasiswa['nis']}}">
+                                <input type="hidden" class="form-control" name="uid" value="{{$mahasiswa['uid']}}">
+                                @if($errors->has('nis'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('nis') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="form-control">NISN</label>
                                 <input type="text" class="form-control" name="nim" value="{{$mahasiswa['nim']}}">
                                 <input type="hidden" class="form-control" name="uid" value="{{$mahasiswa['uid']}}">
                                 @if($errors->has('nim'))
@@ -26,7 +36,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <label for="form-control">Nama</label>
-                                <input type="text" class="form-control" name="nama" value="{{$mahasiswa['nama']}}" readonly>
+                                <input type="text" class="form-control" name="nama" value="{{$mahasiswa['nama']}}">
                                 @if($errors->has('nama'))
                                 <div class="error" style="color: red; display:block;">
                                     {{ $errors->first('nama') }}
@@ -69,8 +79,6 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="form-control">
@@ -89,42 +97,9 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Status Awal Mahasiswa</label>
-                                <input type="text" class="form-control" name="status_awal" value="{{$mahasiswa['status_mahasiswa']}}">
-                                @if($errors->has('status_awal'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('status_awal') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Status Siswa saat ini</label>
-                                <select name="status" class="form-control">
-                                    <option value="">Pilih salah satu</option>
-                                    @if($mahasiswa['status'] == 0)
-                                    <option value="0" selected>Tidak aktif</option>
-                                    <option value="1">Aktif</option>
-                                    <option value="2">Lulus</option>
-                                    @elseif($mahasiswa['status'] == 1)
-                                    <option value="0">Tidak aktif</option>
-                                    <option value="1" selected>Aktif</option>
-                                    <option value="2">Lulus</option>
-                                    @else
-                                    <option value="0">Tidak aktif</option>
-                                    <option value="1">Aktif</option>
-                                    <option value="2" selected>Lulus</option>
-                                    @endif
-                                </select>
-                                @if($errors->has('status'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('status') }}
-                                </div>
-                                @endif
-                            </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-12">
+                        <div class="col-lg-12">
                                 <div class="custom-file-container" data-upload-id="myFirstImage">
                                     <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                     <label class="custom-file-container__custom-file">
