@@ -30,6 +30,30 @@ class AbsensiController extends Controller
     {
         $data['absen'] = AbsensiModel::all();
         return view('pages.absen.absen', $data);
+    //     $userId = Auth::id(); // Mendapatkan ID pengguna yang sedang masuk
+    //     $userRole = Auth::user()->role_id; // Mendapatkan peran (role) pengguna yang sedang masuk
+    //     $data = []; // Inisialisasi $data sebagai array kosong
+    
+    //     if ($userRole == 0 || $userRole == 1) {
+           
+    //         $absen = AbsensiModel::all(); 
+    //         $data['absen'] = $absen; 
+    //     } 
+    //     else {
+    //         // Jika pengguna memiliki peran selain "0" (admin) dan "1" (dosen), diasumsikan sebagai mahasiswa
+    //         $mahasiswaNim = Auth::user()->mahasiswa['nim']; // Mendapatkan NIM mahasiswa yang sedang masuk
+    //         $absen = AbsensiModel::join('mahasiswa', function ($join) use ($mahasiswaNim) {
+    //             $join->on('absensis.kode_absen', '=', 'mahasiswa.nim')
+    //                 ->where('absensis.kode_absen', $mahasiswaNim); // Menyesuaikan dengan NIM mahasiswa yang sedang masuk
+    //         })
+    //         ->distinct() // Mengambil hasil unik
+    //         ->get(); // Mendapatkan data absensi berdasarkan NIM mahasiswa
+            
+    //         $data['absen'] = $absen; // Menyimpan data absensi ke dalam $data
+    //     }
+    
+    //     return view('pages.absen.absen', $data); // Menampilkan halaman absen dengan data yang telah diambil
+    // }
     }
 
 

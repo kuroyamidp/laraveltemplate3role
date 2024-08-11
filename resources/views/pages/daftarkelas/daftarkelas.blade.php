@@ -59,6 +59,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
+                        <div class="table-responsive">
                             <table class="table table-hover" id="kelas-table">
                                 <thead>
                                     <tr class="text-center">
@@ -89,7 +90,7 @@
                                         <td><b>KELAS </b>{{ $value->kelas }}</td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('daftar-kelas.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>
-                                            <button onclick="showOptimizeModal('{{ route('optimize-schedule', ['id' => $value->id]) }}')" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>
+                                            <button onclick="window.location.href='{{ route('optimize-schedule', ['id' => $value->id]) }}'" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>
                                             <form action="{{ route('daftar-kelas.destroy', $value->uid) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
@@ -108,57 +109,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="optimizeModal" tabindex="-1" role="dialog" aria-labelledby="optimizeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="optimizeModalLabel">Konfirmasi Optimalisasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda yakin ingin mengoptimalkan jadwal?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary" id="confirmOptimizeButton">Ya, Optimalkan</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-function showOptimizeModal(optimizeUrl) {
-    $('#optimizeModal').modal('show');
-    $('#confirmOptimizeButton').data('url', optimizeUrl);
-}
-
-$('#confirmOptimizeButton').click(function() {
-    var optimizeUrl = $(this).data('url');
-    
-    // Mengirim permintaan AJAX ke server
-    $.ajax({
-        url: optimizeUrl,
-        type: 'GET',
-        success: function(response) {
-            // Handle response if needed
-            alert('Jadwal berhasil dioptimalkan');
-            window.location.reload(); // Muat ulang halaman setelah optimasi
-        },
-        error: function(xhr) {
-            // Handle error if needed
-            alert('Terjadi kesalahan saat mengoptimalkan jadwal');
-        }
-    });
-
-    $('#optimizeModal').modal('hide');
-});
-
-function resetForm() {
-    document.getElementById("configform").reset();
-}
-
 $(document).ready(function() {
     var showUrlBase = "{{ route('daftar-kelas.show', '') }}";
     var destroyUrlBase = "{{ route('daftar-kelas.destroy', '') }}";
@@ -186,7 +137,7 @@ $(document).ready(function() {
                         '<td>' + value.kelas + '</td>' +
                         '<td class="text-center" style="display: flex; justify-content: center;">' +
                             '<a href="' + showUrlBase + '/' + value.uid + '" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>' +
-                            '<button onclick="showOptimizeModal(\'' + optimizeUrlBase + '/' + value.uid + '\')" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>' +
+                            '<button onclick="window.location.href=\'' + optimizeUrlBase + '/' + value.uid + '\'" class="btn btn-success mb-1 mr-1 rounded-circle btn-optimize" data-toggle="tooltip" title="Optimize"><i class="bx bx-cog bx-sm"></i></button>' +
                             '<form action="' + destroyUrlBase + '/' + value.uid + '" method="post" style="display:inline;">' +
                             '@method("DELETE")' +
                             '@csrf' +
@@ -217,4 +168,4 @@ $(document).ready(function() {
 });
 </script>
 
-@endsection 
+@endsection

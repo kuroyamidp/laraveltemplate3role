@@ -15,15 +15,15 @@
                         <div class="col-lg-12">
                             <table class="table table-bordered" id="default-ordering">
                                 <thead>
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <th>No</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>Mahasiswa</th>
+                                        <th>Siswa</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="text-align: center;">
                                     @foreach($user_mhs as $ky => $value)
                                     <tr>
                                         <td width="1%">{{$ky + 1}}</td>

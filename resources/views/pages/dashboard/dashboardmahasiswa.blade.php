@@ -12,6 +12,10 @@
 
     <head>
         <style>
+            .transparent-icon {
+                opacity: 0;
+            }
+
             .bg {
                 background-color: F1EAFF;
             }
@@ -60,11 +64,12 @@
                             <div class="widget-content widget-content-area">
                                 <div class="d-flex justify-content-end">
                                     <!-- <h3 class="">Profile</h3> -->
-                                    <a href="/profile" class="mt-2 edit-profile ml-1 mr-1" data-toggle="tooltip" title='Update'> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
-
+                                    <a href="/profile" class="mt-2 edit-profile ml-1 mr-1 transparent-icon" data-toggle="tooltip" title='Update'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
                                             <path d="M12 20h9"></path>
                                             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                                        </svg></a>
+                                        </svg>
+                                    </a>
                                 </div>
                                 <!-- userinfo mbuat box shadow -->
                                 <div class="text-center">
@@ -85,15 +90,8 @@
                                             <li class="contacts-block__item">PROGDI BELUM DITENTUKAN</li>
                                             @endif
                                             <li class="contacts-block__item">Kelas : {{Auth::user()->mahasiswa['kelas']}}</li>
-                                            @if(Auth::user()->mahasiswa['status'] == 0)
-                                            <li class="contacts-block__item"><span class="badge badge-danger">Siswa non aktif</span></li>
-                                            @elseif(Auth::user()->mahasiswa['status'] == 1)
-                                            <li class="contacts-block__item"><span class="badge badge-primary">Siswa aktif</span></li>
-                                            @else
-                                            <li class="contacts-block__item"><span class="badge badge-success">Siswa lulus</span></li>
-                                            @endif
                                             <li class="contacts-block__item">{{Auth::user()->email}}</li>
-                                            <li class="contacts-block__item">{{Auth::user()->perguruan_tinggi}}</li>
+                                            <!-- <li class="contacts-block__item">{{Auth::user()->perguruan_tinggi}}</li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -103,19 +101,19 @@
                     </div>
 
                     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
-                    <div class="card" style="border-radius: 10px;">
-                        <div class="card-header d-flex justify-content-center">
-                            <b>Jadwal Sekolah hari {{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</b>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="6" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
-                                                </tr>
+                        <div class="card" style="border-radius: 10px;">
+                            <div class="card-header d-flex justify-content-center">
+                                <b>Jadwal Sekolah hari {{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="6" class="text-center">{{ \Carbon\Carbon::now()->isoFormat('dddd') }}</th>
+                                                    </tr>
                                                     <tr class="text-center">
                                                         <td width="1%">No</td>
                                                         <td>Mata kuliah</td>
@@ -131,7 +129,7 @@
                                                     <tr class="text-center">
                                                         <td class="text-center" width="1%"><?php echo $nomor++; ?></td>
                                                         <td>{{$val->matkul}}</td>
-                                                        <td class="text-center">{{$val->start}}-{{$val->end}}</td>
+                                                        <td class="text-center">{{$val->start}}</td>
                                                         <td>{{$val->progdi}}</td>
                                                         <td>{{$val->dosen}}</td>
                                                         <td>{{$val->ruang}}</td>

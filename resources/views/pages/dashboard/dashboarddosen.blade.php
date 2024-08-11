@@ -19,6 +19,9 @@
 
     <head>
         <style>
+                .transparent-icon {
+                opacity: 0;
+            }
             .bg {
                 background-color: F1EAFF;
             }
@@ -64,11 +67,12 @@
                     <div class="user-profile layout-spacing">
                         <div class="widget-content widget-content-area">
                             <div class="d-flex justify-content-end">
-                                <!-- <h3 class="">Profile</h3> -->
-                                <!-- <a href="/profile" class="mt-2 edit-profile ml-1 mr-1"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
-                                        <path d="M12 20h9"></path>
-                                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                                    </svg></a> -->
+                            <a href="/profile" class="mt-2 edit-profile ml-1 mr-1 transparent-icon" data-toggle="tooltip" title='Update'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
+                                            <path d="M12 20h9"></path>
+                                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                        </svg>
+                                    </a>
                             </div>
                             <!-- userinfo mbuat box shadow -->
                             <div class="text-center">
@@ -118,7 +122,7 @@
                                                 </tr>
                                                 <tr class="text-center">
                                                     <td width="1%">No</td>
-                                                    <th>Mata Kuliah</th>
+                                                    <th>Mata Pelajaran</th>
                                                     <th>Jam</th>
                                                     <th>Jurusan</th>
                                                     <th>Guru</th>
@@ -131,7 +135,7 @@
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td class="text-center">{{ $val->matkul }}</td>
-                                                    <td class="text-center">{{ $val->start }}-{{ $val->end }}</td>
+                                                    <td class="text-center">{{ $val->start }}</td>
                                                     <td class="text-center">{{ $val->progdi }}</td>
                                                     <td class="text-center">{{ $val->dosen }}</td>
                                                     <td class="text-center">{{ $val->ruang }}</td>

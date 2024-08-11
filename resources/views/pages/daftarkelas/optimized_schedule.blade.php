@@ -18,26 +18,26 @@
                     <thead>
                         <tr class="text-center">
                             <th>Kode Kelas</th>
-                            <th>Mata Kuliah</th>
-                            <th>Program Studi</th>
+                            <!-- <th>Mata Kuliah</th>
+                            <th>Program Studi</th> -->
                             <th>Ruang</th>
                             <th>Dosen</th>
                             <th>Waktu</th>
                             <th>Hari</th>
-                            <th>Kelas</th>
+                            <!-- <th>Kelas</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($changes as $change)
                         <tr class="text-center">
                             <td>{{ $change['kode_kelas'] }}</td>
-                            <td>{{ $change['makul_id'] }}</td>
-                            <td>{{ $change['progdi_id'] }}</td>
+                            <!-- <td>{{ $change['makul_id'] }}</td>
+                            <td>{{ $change['progdi_id'] }}</td> -->
                             <td>{{ $change['ruang'] }}</td>
-                            <td>{{ $change['dosen_id'] }}</td>
+                            <td>{{ $change['dosen_name'] }}</td> <!-- Tampilkan nama dosen -->
                             <td>{{ $change['waktu'] }}</td>
                             <td>{{ $change['hari'] }}</td>
-                            <td>{{ $change['kelas'] }}</td>
+                            <!-- <td>{{ $change['semester'] }}</td> -->
                         </tr>
                         @endforeach
                     </tbody>

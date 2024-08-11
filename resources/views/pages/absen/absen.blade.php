@@ -8,6 +8,7 @@
 <div class="layout-px-spacing">
     <div class="row">
         <div class="col-lg-12">
+        @if(Auth::user()->role_id != 1 || Auth::user()->role_id == 2)
             <form id="configform" action="{{ route('search-absensi') }}" method="get">
                 @csrf
                 <div class="row mb-1 mt-1">
@@ -22,13 +23,15 @@
             </form>
         </div>
     </div>
-
+    @endif
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
+            @if(Auth::user()->role_id != 1)
                 <div class="card-header">
                     <a href="{{ route('absensi.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                 </div>
+                @endif
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">

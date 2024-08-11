@@ -11,30 +11,18 @@ use App\Models\Master\ProgdiModel;
 use App\Models\Master\KelasModel;
 use App\Models\Master\RuangModel;
 use App\Models\Master\WaktuModel;
-use Faker\ORM\CakePHP\Populator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
-
 
 class DaftarkelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // Ambil semua data kelas
         $data['kelas'] = DaftarkelasModel::get();
-
-        // Optimasi jadwal dan deteksi tabrakan
         $conflicts = $this->detectScheduleConflicts($data['kelas']);
 
-        // Jika ada tabrakan, tambahkan pesan alert
         if (!empty($conflicts)) {
             $data['conflicts'] = $conflicts;
         }
@@ -42,12 +30,6 @@ class DaftarkelasController extends Controller
         return view('pages.daftarkelas.daftarkelas', $data);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $data['progdi'] = ProgdiModel::get();
@@ -59,15 +41,8 @@ class DaftarkelasController extends Controller
         return view('pages.daftarkelas.tambahkelas', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // Validasi inputan selain kode_kelas yang sudah terdaftar
         $validator = Validator::make($request->all(), [
             'kode_kelas' => 'required',
             'mata_kuliah' => 'required',
@@ -79,20 +54,16 @@ class DaftarkelasController extends Controller
             'hari' => 'required',
         ]);
 
-        // Response error validation
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
 
-        // Cek apakah kode_kelas sudah ada di database
         $existingKelas = DaftarkelasModel::where('kode_kelas', $request->kode_kelas)->exists();
 
         if ($existingKelas) {
-            // Jika kode_kelas sudah ada, kirim kembali dengan pesan error
             return Redirect::back()->withErrors(['kode_kelas' => 'Kode kelas sudah digunakan.'])->withInput();
         }
 
-        // Simpan data baru jika kode_kelas unik
         DaftarkelasModel::create([
             'uid' => Str::uuid(),
             'kode_kelas' => $request->kode_kelas,
@@ -107,12 +78,7 @@ class DaftarkelasController extends Controller
 
         return redirect('/daftar-kelas')->with('success', 'Berhasil tambah data');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $data['progdi'] = ProgdiModel::get();
@@ -125,23 +91,11 @@ class DaftarkelasController extends Controller
         return view('pages.daftarkelas.editkelas', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        // Implement if needed
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -155,7 +109,6 @@ class DaftarkelasController extends Controller
             'waktu' => 'required',
         ]);
 
-        // response error validation
         if ($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
@@ -170,15 +123,10 @@ class DaftarkelasController extends Controller
             'semester' => $request->kelas,
             'hari' => $request->hari,
         ]);
+
         return redirect('/daftar-kelas')->with('success', 'Berhasil update data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DaftarkelasModel::where('uid', $id)->delete();
@@ -189,7 +137,7 @@ class DaftarkelasController extends Controller
     {
         $avlb = JadwalkelasModel::where('semester', $request->semester)->get();
         $kls = [];
-        foreach ($avlb as $key => $value) {
+        foreach ($avlb as $value) {
             $kls[] = $value->kelas_id;
         }
 
@@ -220,98 +168,101 @@ class DaftarkelasController extends Controller
     }
     public function optimizeSchedule($id)
     {
-        // Inisialisasi data yang dibutuhkan
-        $timeSlots = WaktuModel::pluck('jam')->toArray(); // Mengambil slot waktu
+        $timeSlots = WaktuModel::pluck('jam')->toArray();
         $rooms = RuangModel::pluck('nama', 'id')->toArray();
-        $classes = DaftarkelasModel::all(); // Mengambil semua data kelas
+        $dosen = DosenModel::pluck('nama', 'id')->toArray();
+        $classes = DaftarkelasModel::all();
 
-        $schedule = []; // Inisialisasi jadwal kosong
+        $schedule = $this->generateSchedule($classes, $timeSlots, $rooms, $dosen);
 
-        // Hapus data lama sebelum memulai penjadwalan ulang
-        DaftarkelasModel::truncate();
+        session(['optimized_schedule' => $schedule]);
 
-        // Iterasi melalui setiap kelas
+        return view('pages.daftarkelas.optimized_schedule', [
+            'changes' => $schedule,
+        ]);
+    }
+    public function generateSchedule($classes, $timeSlots, $rooms, $dosen)
+    {
+        $schedule = [];
+
         foreach ($classes as $class) {
             $scheduled = false;
-
-            // Ambil hari dari model DaftarkelasModel
             $day = $class->hari;
-            // Mengambil ruangan yang tersedia untuk program studi kelas ini
+
             $availableRooms = array_filter($rooms, function ($roomId) use ($class) {
-                return $roomId == $class->ruang_id; // Sesuaikan dengan cara Anda menyimpan ruangan untuk setiap kelas
+                return $roomId == $class->ruang_id;
             }, ARRAY_FILTER_USE_KEY);
 
-            // Iterasi melalui setiap slot waktu
             foreach ($timeSlots as $timeSlot) {
-                // Iterasi melalui setiap ruangan yang tersedia untuk program studi ini
                 foreach ($availableRooms as $roomId => $roomName) {
-                    // Memeriksa ketersediaan slot waktu dan dosen
-                    if ($this->isSlotAvailable($schedule, $day, $timeSlot, $roomName, $class->dosen)) {
-                        // Menambahkan kelas ke dalam jadwal
+                    if ($this->isSlotAvailable($schedule, $day, $timeSlot, $roomName, $class->dosen_id)) {
                         $schedule[] = [
                             'kode_kelas' => $class->kode_kelas,
-                            'makul_id' => $class->matkul,
-                            'progdi_id' => $class->progdi,
+                            'makul_id' => $class->makul_id,
+                            'progdi_id' => $class->progdi_id,
                             'ruang' => $roomName,
-                            'dosen_id' => $class->dosen,
+                            'ruang_id' => $roomId,
+                            'dosen_id' => $class->dosen_id,
+                            'dosen_name' => $dosen[$class->dosen_id],
                             'waktu' => $timeSlot,
                             'hari' => $day,
-                            'kelas' => $class->kelas,
-                            'id' => $id // Variabel $id yang digunakan untuk menambahkan ke jadwal
+                            'semester' => $class->semester,
                         ];
 
-                        // Simpan langsung ke database
-                        DaftarkelasModel::create([
-                            'uid' => Str::uuid(),
-                            'kode_kelas' => $class->kode_kelas,
-                            'progdi_id' => $class->progdi_id,
-                            'makul_id' => $class->makul_id,
-                            'dosen_id' => $class->dosen_id,
-                            'ruang_id' => $class->ruang_id,
-                            'semester' => $class->semester,
-                            'hari' => $day,
-                            'start' => $timeSlot,
-                        ]);
-
                         $scheduled = true;
-                        break 2; // Keluar dari dua loop dan pindah ke kelas berikutnya
+                        break 2;
                     }
                 }
             }
         }
 
-        // Mengembalikan tampilan dengan data yang akan ditampilkan pada pop-up
-        return view('pages.daftarkelas.optimized_schedule', [
-            'changes' => $schedule,
-        ]);
+        return $schedule;
     }
 
     private function isSlotAvailable($schedule, $day, $timeSlot, $room, $dosen)
     {
-        // Memeriksa ketersediaan slot waktu, ruangan, dan dosen
         foreach ($schedule as $entry) {
             if ($entry['hari'] == $day && $entry['waktu'] == $timeSlot) {
                 if ($entry['ruang'] == $room || $entry['dosen_id'] == $dosen) {
-                    return false; // Konflik terdeteksi
+                    return false;
                 }
             }
         }
-        return true; // Tidak ada konflik
+        return true;
     }
 
     public function saveChanges(Request $request)
     {
-        // Decode JSON string to array
         $changes = json_decode($request->input('changes'), true);
 
-        // Check if changes is not null and is an array
         if (!is_array($changes)) {
             return redirect()->back()->withErrors(['error' => 'Invalid data format']);
         }
 
-        // Redirect back or to a specific route after saving
+        $timeSlots = WaktuModel::pluck('jam')->toArray();
+        $rooms = RuangModel::pluck('nama', 'id')->toArray();
+        $dosen = DosenModel::pluck('nama', 'id')->toArray();
+        $classes = DaftarkelasModel::all();
+
+        $schedule = $this->generateSchedule($classes, $timeSlots, $rooms, $dosen);
+        DaftarkelasModel::truncate();
+        foreach ($schedule as $change) {
+            DaftarkelasModel::create([
+                'uid' => Str::uuid(),
+                'kode_kelas' => $change['kode_kelas'],
+                'progdi_id' => $change['progdi_id'],
+                'makul_id' => $change['makul_id'],
+                'dosen_id' => $change['dosen_id'],
+                'ruang_id' => $change['ruang_id'],
+                'semester' => $change['semester'],
+                'hari' => $change['hari'],
+                'start' => $change['waktu'],
+            ]);
+        }
+
         return redirect('/daftar-kelas')->with('success', 'Data Berhasil Diubah');
     }
+
     private function detectScheduleConflicts($classes)
     {
         $schedule = [];
@@ -323,14 +274,13 @@ class DaftarkelasController extends Controller
             $room = $class->ruang_id;
             $dosen = $class->dosen_id;
 
-            // Cek ketersediaan slot waktu, ruangan, dan dosen
             if (!$this->isSlotAvailable($schedule, $day, $timeSlot, $room, $dosen)) {
                 $conflicts[] = [
                     'kode_kelas' => $class->kode_kelas,
-                    'progdi' => $class->progdia, // Pastikan model Progdi memiliki relasi
-                    'mata_kuliah' => $class->matkul, // Pastikan model Matakuliah memiliki relasi
-                    'ruang' => $class->ruang, // Pastikan model Ruang memiliki relasi
-                    'dosen' => $class->dosen, // Pastikan model Dosen memiliki relasi
+                    'progdi' => $class->progdi, 
+                    'mata_kuliah' => $class->matakuliah, 
+                    'ruang' => $class->ruang, 
+                    'dosen' => $class->dosen, 
                     'hari' => $day,
                     'waktu' => $timeSlot,
                 ];
