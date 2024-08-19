@@ -56,7 +56,13 @@
                                             @endif
                                         </td>
                                         <td>{{ $value->kelas }}</td>
-                                        <td>{{ $value->image }}</td>
+                                        <td>
+                                            @if($value->image)
+                                            <img src="{{ url('Image/'.$value->image) }}" alt="Image-{{ $value->mahasiswa_id }}" style="width: 50px; height: 50px;">
+                                            @else
+                                            No Image
+                                            @endif
+                                        </td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('mahasiswa.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
                                             <form action="{{ route('mahasiswa.destroy', $value->uid) }}" method="post">

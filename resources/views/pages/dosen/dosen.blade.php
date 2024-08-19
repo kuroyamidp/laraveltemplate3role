@@ -65,6 +65,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                    <div class="table-responsive">
                         <div class="col-lg-12">
                             <table class="table table-hover" id="default-ordering">
                                 <thead>
@@ -73,9 +74,8 @@
                                         <th>NUPTK</th>
                                         <th>Guru</th>
                                         <th>Wali Kelas</th>
-                              
                                         <th>Jabatan Fungsional</th>
-                       
+                                        <th>Foto</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -93,6 +93,13 @@
                                             @endif
                                         </td>
                                         <td>{{$value->jabatan_fungsional}}</td>
+                                        <td>
+                                            @if($value->image)
+                                            <img src="{{ url('Image/'.$value->image) }}" alt="Image-{{ $value->mahasiswa_id }}" style="width: 50px; height: 50px;">
+                                            @else
+                                            No Image
+                                            @endif
+                                        </td>
                                         <td class="text-center" style="display: flex; justify-content: center;">
                                             <a href="{{ route('dosen.show', $value->uid) }}" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title='Update'><i class="bx bx-edit bx-sm"></i></a>
                                             <form action="{{ route('dosen.destroy', $value->uid) }}" method="post">

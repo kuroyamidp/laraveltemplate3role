@@ -101,25 +101,7 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                            <div class="col-lg-4">
-                                <label for="form-control">Kelas</label>
-                                <select class="selectpicker" data-live-search="true" name="kelas">
-                                    <option value="">Pilih salah satu</option>
-                                    @foreach($kls as $key => $value)
-                                    @if($kelas['semester'] == $value->id)
-                                    <option value="{{$value->id}}" selected>{{$value->nama}}</option>
-                                    @else
-                                    <option value="{{$value->id}}">{{$value->nama}}</option>
-                                    @endif
-                                    @endforeach
-                                </select>
-                                @if($errors->has('kelas'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('kelas') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-8">
                                 <label for="form-control">Mata kuliah</label>
                                 <select class="selectpicker" data-live-search="true" name=" mata_kuliah">
                                     <option value="">Pilih salah satu</option>
@@ -137,7 +119,25 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-2">
+                                <label for="form-control">Kelas</label>
+                                <select class="selectpicker" data-live-search="true" name="kelas">
+                                    <option value="">Pilih salah satu</option>
+                                    @foreach($kls as $key => $value)
+                                    @if($kelas['semester'] == $value->id)
+                                    <option value="{{$value->id}}" selected>{{$value->nama}}</option>
+                                    @else
+                                    <option value="{{$value->id}}">{{$value->nama}}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @if($errors->has('kelas'))
+                                <div class="error" style="color: red; display:block;">
+                                    {{ $errors->first('kelas') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-2">
                                 <label for="form-control">Ruang kelas</label>
                                 <select class="selectpicker" data-live-search="true" name="ruang_kelas">
                                     <option value="">Pilih salah satu</option>

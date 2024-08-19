@@ -6,7 +6,7 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header d-flex justify-content">
+                <div class="card-header">
                     <a href="{{route('dosen.index')}}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
@@ -17,6 +17,7 @@
                                 <label for="form-control">Wali Kelas Jurusan</label>
                                 <select name="progdi" class="form-control">
                                     <option value="">Pilih salah satu</option>
+                                    <!-- <option value="0">Guru bukan wali kelas</option>  -->
                                     @foreach($progdi as $key => $value)
                                     <option value="{{$value->id}}">{{$value->nama_studi}} | <b>{{$value->singkatan_studi}}</b></option>
                                     @endforeach
@@ -27,6 +28,7 @@
                                 </div>
                                 @endif
                             </div>
+
                             <div class="col-lg-4">
                                 <label for="form-control">kelas</label>
                                 <select class="form-control" data-live-search="true" name="kelas">
@@ -84,7 +86,7 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                        <div class="col-lg-4">
+                            <div class="col-lg-4">
                                 <label for="form-control">Nama Guru</label>
                                 <input type="text" class="form-control" name="dosen">
                                 @if($errors->has('dosen'))
@@ -106,11 +108,15 @@
                                 </div>
                                 @endif
                             </div>
-                           
+
                             <div class="col-lg-4">
-                                <label for="form-control">Jabatan fungsional</label>
-                                <input type="text" class="form-control" name="jabatan_fungsional">
+                                <label for="jabatan_fungsional">Jabatan Fungsional</label>
+                                <select class="form-control" name="jabatan_fungsional">
+                                    <option value="Guru">Guru</option>
+                                    <option value="Kepala Sekolah">Kepala Sekolah</option>
+                                </select>
                             </div>
+
                         </div>
                         <div class="row mb-1">
                             <div class="col-lg-12">

@@ -75,7 +75,7 @@
                             <div class="col-lg-2">
                                 <label for="form-control">kelas</label>
                                 <select class="selectpicker" data-live-search="true" name="kelas">
-                                    <option value="">Pilih salah satu</option>
+                                    <option value="">Pilih</option>
                                     @foreach($kelas as $key => $value)
                                     <option value="{{$value->id}}">{{$value->nama}}</option>
                                     @endforeach
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="row mb-1">
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                                 <label for="form-control">Mata kuliah</label>
                                 <select class="selectpicker" data-live-search="true" name=" mata_kuliah">
                                     <option value="">Pilih salah satu</option>
@@ -105,7 +105,7 @@
                             <div class="col-lg-2">
                                 <label for="form-control">Ruang kelas</label>
                                 <select class="selectpicker" data-live-search="true" name="ruang_kelas">
-                                    <option value="">Pilih salah satu</option>
+                                    <option value="">Pilih</option>
                                     @foreach($ruang as $key => $value)
                                     <option value="{{$value->id}}">{{$value->nama}}</option>
                                     @endforeach
@@ -116,10 +116,10 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-2">
                                 <label for="form-control">Jam</label>
                                 <select class="selectpicker" data-live-search="true" name="waktu">
-                                    <option value="">Pilih salah satu</option>
+                                    <option value="">Pilih</option>
                                     @foreach($waktu as $key => $value)
                                     <option value="{{$value->jam}}">{{$value->jam}}</option>
                                     @endforeach

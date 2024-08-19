@@ -6,7 +6,7 @@
     <div class="row layout-top-spacing">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-end">
+                <div class="card-header">
                     <a href="{{route('dosen.index')}}" class="btn btn-dark btn-sm">Kembali</a>
                 </div>
                 <div class="card-body">
@@ -69,8 +69,6 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="row mb-1">
                             <div class="col-lg-4">
                                 <label for="form-control">Jenis kelamin</label>
                                 <select name="jenis_kelamin" class="form-control">
@@ -90,21 +88,16 @@
                                 @endif
                             </div>
                             <div class="col-lg-4">
-                                <label for="form-control">Perguruan tinggi</label>
-                                <input type="text" class="form-control" name="perguruan_tinggi" value="{{$dosen['perguruan_tinggi']}}">
-                                @if($errors->has('perguruan_tinggi'))
-                                <div class="error" style="color: red; display:block;">
-                                    {{ $errors->first('perguruan_tinggi') }}
-                                </div>
-                                @endif
+                                <label for="jabatan_fungsional">Jabatan Fungsional</label>
+                                <select class="form-control" name="jabatan_fungsional">
+                                    <option value="Guru" {{ $dosen['jabatan_fungsional'] == 'Guru' ? 'selected' : '' }}>Guru</option>
+                                    <option value="Kepala Sekolah" {{ $dosen['jabatan_fungsional'] == 'Kepala Sekolah' ? 'selected' : '' }}>Kepala Sekolah</option>
+                                </select>
                             </div>
-                            <div class="col-lg-4">
-                                <label for="form-control">Jabatan fungsional</label>
-                                <input type="text" class="form-control" name="jabatan_fungsional" value="{{$dosen['jabatan_fungsional']}}">
-                            </div>
+
                         </div>
                         <div class="row mb-1">
-                        <div class="col-lg-12">
+                            <div class="col-lg-12">
                                 <div class="custom-file-container" data-upload-id="myFirstImage">
                                     <label>Foto <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                     <label class="custom-file-container__custom-file">
@@ -120,19 +113,19 @@
                                 @endif
                             </div>
                         </div>
-                            <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                                <img src="/Image/{{$dosen['image']}}" style="width: 300px; height: 300px !important" class="img-thumbnail" alt="Image-{{$dosen['nama']}}">
-                            </div>
+                        <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                            <img src="/Image/{{$dosen['image']}}" style="width: 300px; height: 300px !important" class="img-thumbnail" alt="Image-{{$dosen['nama']}}">
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12 d-flex justify-content-end">
-                                <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-end">
+                        <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

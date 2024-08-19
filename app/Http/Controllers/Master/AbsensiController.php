@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use App\Models\Master\AbsensiModel;
 use App\Models\Master\MahasiswaModel;
+use App\Models\Master\DosenModel;
 use App\Models\Master\JadwalkelasModel;
 use App\Models\Master\MatakuliahModel;
 use App\Models\Master\ProgdiModel;
@@ -30,30 +31,42 @@ class AbsensiController extends Controller
     {
         $data['absen'] = AbsensiModel::all();
         return view('pages.absen.absen', $data);
-    //     $userId = Auth::id(); // Mendapatkan ID pengguna yang sedang masuk
-    //     $userRole = Auth::user()->role_id; // Mendapatkan peran (role) pengguna yang sedang masuk
-    //     $data = []; // Inisialisasi $data sebagai array kosong
+        $userId = Auth::id(); 
+        $userRole = Auth::user()->role_id;
+        $data = [];
+        
+        if ($userRole == 0 || $userRole == 1) {
+            if ($userRole == 1) {
+                // Mendapatkan dosen dengan progdi_id dan kelas_id terkait dosen yang sedang masuk
+                $dosen = DosenModel::where('user_id', $userId)->first(); // Asumsikan DosenModel terkait dengan user_id
+                // Pastikan dosen ditemukan sebelum query
+                if ($dosen) {
+                    $absen = AbsensiModel::where('progdi_id', $dosen->progdi_id)
+                                         ->where('kelas_id', $dosen->kelas_id)
+                                         ->get();
+                    $data['absen'] = $absen; // Menyimpan data absensi ke dalam $data
+                } else {
+                    $data['absen'] = []; // Jika tidak ada dosen terkait, kosongkan data absensi
+                }
+            } else {
+                // Admin (role 0) dapat melihat semua data absensi
+                $absen = AbsensiModel::all(); 
+                $data['absen'] = $absen;
+            }
+        } else {
+            // Jika pengguna memiliki peran selain "0" (admin) dan "1" (dosen), diasumsikan sebagai mahasiswa
+            $mahasiswaNim = Auth::user()->mahasiswa['nim']; // Mendapatkan NIM mahasiswa yang sedang masuk
+            $absen = AbsensiModel::join('mahasiswa', 'absensis.kode_absen', '=', 'mahasiswa.nim')
+            ->select('absensis.image as absensi_image', 'mahasiswa.image as mahasiswa_image', 'absensis.*', 'mahasiswa.*')
+            ->where('absensis.kode_absen', $mahasiswaNim)
+            ->distinct()
+            ->get();        
     
-    //     if ($userRole == 0 || $userRole == 1) {
-           
-    //         $absen = AbsensiModel::all(); 
-    //         $data['absen'] = $absen; 
-    //     } 
-    //     else {
-    //         // Jika pengguna memiliki peran selain "0" (admin) dan "1" (dosen), diasumsikan sebagai mahasiswa
-    //         $mahasiswaNim = Auth::user()->mahasiswa['nim']; // Mendapatkan NIM mahasiswa yang sedang masuk
-    //         $absen = AbsensiModel::join('mahasiswa', function ($join) use ($mahasiswaNim) {
-    //             $join->on('absensis.kode_absen', '=', 'mahasiswa.nim')
-    //                 ->where('absensis.kode_absen', $mahasiswaNim); // Menyesuaikan dengan NIM mahasiswa yang sedang masuk
-    //         })
-    //         ->distinct() // Mengambil hasil unik
-    //         ->get(); // Mendapatkan data absensi berdasarkan NIM mahasiswa
-            
-    //         $data['absen'] = $absen; // Menyimpan data absensi ke dalam $data
-    //     }
-    
-    //     return view('pages.absen.absen', $data); // Menampilkan halaman absen dengan data yang telah diambil
-    // }
+            $data['absen'] = $absen; // Menyimpan data absensi ke dalam $data
+        }
+        
+        return view('pages.absen.absen', $data); // Menampilkan halaman absen dengan data yang telah diambil
+        
     }
 
 
