@@ -32,14 +32,20 @@ var App = function() {
     };
     
     var toggleFunction = {
-        sidebar: function($recentSubmenu) {
-            $('.sidebarCollapse').on('click', function (sidebar) {
-                sidebar.preventDefault();
-                $(Selector.mainContainer).toggleClass("sidebar-closed");
-                $(Selector.mainHeader).toggleClass('expand-header');
-                $(Selector.mainContainer).toggleClass("sbar-open");
+        sidebar: function() {
+            // Toggle sidebar on main toggle button click
+            $('.sidebarCollapse').on('click', function(e) {
+                e.preventDefault();
+                $('.sidebar').toggleClass("sidebar-closed");
+                // Adjust main content and overlay as necessary
                 $('.overlay').toggleClass('show');
-                $('html,body').toggleClass('sidebar-noneoverflow');
+                $('html, body').toggleClass('sidebar-noneoverflow');
+            });
+    
+            // Toggle submenu on click
+            $('.sidebar-nav .nav-link.collapsed').on('click', function() {
+                var $submenu = $(this).next('.nav-content');
+                $submenu.collapse('toggle'); // Use Bootstrap's collapse method
             });
         },
         overlay: function() {
@@ -148,7 +154,9 @@ var App = function() {
         }
         */
     }
-
+    $(document).ready(function() {
+        toggleFunction.sidebar();
+    });
     function sidebarFunctionality() {
         function sidebarCloser() {
 
