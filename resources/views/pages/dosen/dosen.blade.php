@@ -136,6 +136,7 @@
                 success: function(response) {
                     $('#data-table-body').empty();
                     var nomor = 1;
+                    var imageUrlBase = '{{ url("Image") }}/';
 
                     $.each(response, function(index, value) {
                         var row = '<tr style="text-align: center;">' +
@@ -144,6 +145,7 @@
                             '<td>' + value.nama + '</td>' +
                             '<td>' + (value.progdi ? '<span class="badge badge-success">' + value.progdi + ' | ' + value.kelas + '</span>' : '<span class="badge badge-warning">Progdi belum ditentukan</span>') + '</td>' +
                             '<td>' + value.jabatan_fungsional + '</td>' +
+                            '<td>' + (value.image ? '<img src="' + imageUrlBase + value.image + '" alt="Image-' + value.dosen_id + '" style="width: 50px; height: 50px;">' : 'No Image') + '</td>' +
                             '<td class="text-center" style="display: flex; justify-content: center;">' +
                                 '<a href="' + showUrlBase + '/' + value.uid + '" class="btn btn-warning mb-1 mr-1 rounded-circle" data-toggle="tooltip" title="Update"><i class="bx bx-edit bx-sm"></i></a>' +
                                 '<form action="' + destroyUrlBase + '/' + value.uid + '" method="post" style="display:inline;">' +

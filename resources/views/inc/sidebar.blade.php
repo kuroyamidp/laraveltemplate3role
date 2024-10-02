@@ -1,234 +1,113 @@
-<style>
-	.nav .active {
-		background-color: rgba(0, 0, 0, 0.3);
-		/* Warna latar belakang untuk item aktif dengan opasitas 50% */
-	}
+ <!-- Vendor JS Files -->
+ <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+ <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="assets/vendor/chart.js/chart.umd.js"></script>
+ <script src="assets/vendor/echarts/echarts.min.js"></script>
+ <script src="assets/vendor/quill/quill.js"></script>
+ <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+ <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+ <script src="assets/vendor/php-email-form/validate.js"></script>
 
-	.nav .nav-item.active .nav-link {
-		transition: background-color 1s ease;
-		/* Atur transisi untuk background-color */
-	}
+ <!-- Template Main JS File -->
+ <script src="assets/js/main.js"></script>
+ <!-- ======= Sidebar ======= -->
 
-	.sidebar-wrapper1.sidebar-theme {
-		background-color: black;
+ <aside id="sidebar" class="sidebar">
+ 	<ul class="sidebar-nav" id="sidebar-nav">
+ 		@if (Auth::check() && Auth::user()->role_id == 0)
+ 		<li class="nav-item">
+ 			<a class="nav-link" data-bs-target="#forms-nav" href="/home">
+ 				<i class="bi bi-grid"></i>
+ 				<span>Dashboard</span>
+ 			</a>
+ 		</li>
 
-	}
-</style>
+ 		<li class="nav-item">
+ 			<a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+ 				<i class="bi bi-journal-text"></i><span>Master Data</span><i class="bi bi-chevron-down ms-auto"></i>
+ 			</a>
+ 			<ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+ 				<li>
+ 					<a href="/mahasiswa">
+ 						<i class="bi bi-circle"></i><span>Mahasiswa</span>
+ 					</a>
+ 				</li>
+ 				<li>
+ 					<a href="/dosen">
+ 						<i class="bi bi-circle"></i><span>Dosen</span>
+ 					</a>
+ 				</li>
 
-<div class="sidebar-wrapper1 sidebar-theme">
-	<nav id="sidebar">
-		<div class="shadow-bottom"></div>
-		<ul class="list-unstyled menu-categories" id="accordionExample">
-			@IsAdmin
-			<div class="wrapper">
-				<div class="sidebar" data-color="white" data-active-color="danger">
-					<div class="logo">
-						<a href="https://www.creative-tim.com" class="simple-text logo-mini">
-							<div class="logo-image-small">
-								<img src="../assets/img/skema.png">
-							</div>
-						</a>
-						<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
-							SISKEMA
-						</a>
+ 				<li>
+ 					<a href="forms-validation.html">
+ 						<i class="bi bi-circle"></i><span>Form Validation</span>
+ 					</a>
+ 				</li>
+ 			</ul>
+ 		</li><!-- End Forms Nav -->
 
-					</div>
-					<div class="sidebar-wrapper">
-						<li class="menu">
-							<a href="/home" aria-expanded="false" class="dropdown-toggle">
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-										<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-										<polyline points="9 22 9 12 15 12 15 22"></polyline>
-									</svg>
-									<span>Dashboard</span>
-								</div>
-							</a>
-						</li>
-						<li class="menu">
-							<a href="#components" data-toggle="collapse1" aria-expanded="false" class="dropdown-toggle">
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
-										<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-										<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-										<line x1="12" y1="22.08" x2="12" y2="12"></line>
-									</svg>
-									<span>Master data</span>
-								</div>
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-										<polyline points="9 18 15 12 9 6"></polyline>
-									</svg>
-								</div>
-							</a>
-							<ul class="collapse submenu list-unstyled" id="components" data-parent="#accordionExample">
-								<li><a href="/matakuliah"> Mapel</a></li>
-								<li><a href="/kelas"> Kelas</a></li>
-								<li><a href="/ruangkelas"> Ruang kelas</a></li>
-								<li><a href="/progdi"> Konsentrasi Keahlian </a></li>
-								<li><a href="/waktu"> Waktu </a></li>
-								<!-- <li><a href="/dosen"> Guru </a></li>
-      						  <li><a href="/mahasiswa"> Siswa </a></li> -->
-							</ul>
-						</li>
+ 		<li class="nav-item">
+ 			<a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+ 				<i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+ 			</a>
+ 			<ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+ 				<li>
+ 					<a href="tables-general.html">
+ 						<i class="bi bi-circle"></i><span>General Tables</span>
+ 					</a>
+ 				</li>
+ 				<li>
+ 					<a href="tables-data.html">
+ 						<i class="bi bi-circle"></i><span>Data Tables</span>
+ 					</a>
+ 				</li>
+ 			</ul>
+ 		</li><!-- End Tables Nav -->
 
-						<li class="menu">
-							<a href="/mahasiswa" aria-expanded="false" class="dropdown-toggle">
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-										<path d="M17 8a4 4 0 0 1 4-4M2 15s3-1 5-1c2 0 5 1 5 1M6 9a7.5 7.5 0 0 1 9 0"></path>
-										<circle cx="12" cy="4" r="2"></circle>
-										<circle cx="12" cy="15" r="9"></circle>
-									</svg>
-									<span>Siswa</span>
-								</div>
-							</a>
-						</li>
-						<li class="menu">
-							<a href="/dosen" aria-expanded="false" class="dropdown-toggle">
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
-										<circle cx="12" cy="7" r="4"></circle>
-										<path d="M5 22h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-4l-3-3-3 3H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"></path>
-									</svg>
-									<span>Guru</span>
-								</div>
-							</a>
-						</li>
-						<li class="menu">
-							<a href="/daftar-kelas" aria-expanded="false" class="dropdown-toggle">
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-										<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-										<line x1="16" y1="2" x2="16" y2="6"></line>
-										<line x1="8" y1="2" x2="8" y2="6"></line>
-										<line x1="3" y1="10" x2="21" y2="10"></line>
-									</svg>
-									<span>Jadwal Kelas</span>
-								</div>
-							</a>
-						</li>
-						<li class="menu">
-							<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
-										<polyline points="9 11 12 14 22 4"></polyline>
-										<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-									</svg>
-									<span>Absen Siswa</span>
-								</div>
-							</a>
-						</li>
+ 		<li class="nav-heading">Pages</li>
 
-						<li class="menu">
-							<a href="#users" data-toggle="collapse1" aria-expanded="false" class="dropdown-toggle">
-								<div class="">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle">
-										<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-										<polyline points="22 4 12 14.01 9 11.01"></polyline>
-									</svg>
-									<span>Data pengguna</span>
-								</div>
-								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
-										<polyline points="9 18 15 12 9 6"></polyline>
-									</svg>
-								</div>
-							</a>
-							<ul class="collapse submenu list-unstyled" id="users" data-parent="#accordionExample">
-								<li>
-									<a href="/user-mahasiswa"> User Siswa </a>
-								</li>
-								<li>
-									<a href="/user-dosen"> User Guru </a>
-								</li>
-							</ul>
-						</li>
+ 		<li class="nav-item">
+ 			<a class="nav-link collapsed" href="users-profile.html">
+ 				<i class="bi bi-person"></i>
+ 				<span>Profile</span>
+ 			</a>
+ 		</li><!-- End Profile Page Nav -->
 
-					</div>
-					@endIsAdmin
-					@IsMahasiswa
-					<div class="wrapper">
-						<div class="sidebar" data-color="white" data-active-color="danger">
-							<div class="logo">
-								<a href="https://www.creative-tim.com" class="simple-text logo-mini">
-									<div class="logo-image-small">
-										<img src="../assets/img/skema.png">
-									</div>
-								</a>
-								<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
-									SISKEMA
-								</a>
+ 		<li class="nav-item">
+ 			<a class="nav-link collapsed" href="pages-register.html">
+ 				<i class="bi bi-card-list"></i>
+ 				<span>Register</span>
+ 			</a>
+ 		</li><!-- End Register Page Nav -->
 
-							</div>
-							<div class="sidebar-wrapper">
-								<li class="menu">
-									<a href="/home" aria-expanded="false" class="dropdown-toggle">
-										<div>
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-												<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-												<polyline points="9 22 9 12 15 12 15 22"></polyline>
-											</svg>
-											<span>Dashboard</span>
-										</div>
-									</a>
-								</li>
-								<li class="menu">
-									<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
-										<div>
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
-												<polyline points="9 11 12 14 22 4"></polyline>
-												<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-											</svg>
-											<span>Absen Siswa</span>
-										</div>
-									</a>
-								</li>
-								@endIsMahasiswa
-								@IsDosen
-								<div class="wrapper">
-									<div class="sidebar" data-color="white" data-active-color="danger">
-										<div class="logo">
-											<a href="https://www.creative-tim.com" class="simple-text logo-mini">
-												<div class="logo-image-small">
-													<img src="../assets/img/skema.png">
-												</div>
-											</a>
-											<a href="/home" class="simple-text logo-normal" style="font-weight: bold;">
-												SISKEMA
-											</a>
+ 		<li class="nav-item">
+ 			<a class="nav-link collapsed" href="pages-login.html">
+ 				<i class="bi bi-box-arrow-in-right"></i>
+ 				<span>Login</span>
+ 			</a>
+ 		</li><!-- End Login Page Nav -->
+ 		@endif
+ 	</ul>
+ </aside><!-- End Sidebar -->
+ <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script>
+	// Jalankan setelah DOM sepenuhnya dimuat
+	document.addEventListener('DOMContentLoaded', function() {
+		// Ambil URL saat ini, hanya bagian pathname untuk menghindari query string atau hash
+		const currentPath = window.location.pathname;
+		const menuItems = document.querySelectorAll('#sidebar-nav a');
 
-										</div>
-										<div class="sidebar-wrapper">
-											<li class="menu">
-												<a href="/home" aria-expanded="false" class="dropdown-toggle">
-													<div>
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-															<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-															<polyline points="9 22 9 12 15 12 15 22"></polyline>
-														</svg>
-														<span>Dashboard</span>
-													</div>
-												</a>
-											</li>
-											<li class="menu">
-												<a href="/absensi" aria-expanded="false" class="dropdown-toggle">
-													<div>
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square">
-															<polyline points="9 11 12 14 22 4"></polyline>
-															<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-														</svg>
-														<span>Absen Siswa</span>
-													</div>
-												</a>
-											</li>
-											@endIsDosen
-	</nav>
-</div>
-<script>
-	$(document).ready(function() {
-		$('.menu a[data-toggle="collapse1"]').click(function() {
-			$($(this).attr('href')).collapse('toggle');
+		menuItems.forEach(item => {
+			// Periksa apakah path dari item sesuai dengan currentPath
+			if (item.pathname === currentPath) {
+				item.classList.add('active'); // Tambahkan kelas active pada item yang sesuai
+				let parentCollapse = item.closest('.collapse'); // Cari elemen induk collapse
+				if (parentCollapse) {
+					parentCollapse.classList.add('show'); // Buka collapse jika item ada di dalamnya
+				}
+			} else {
+				item.classList.remove('active'); // Pastikan item lain tidak memiliki kelas active
+			}
 		});
 	});
 </script>
