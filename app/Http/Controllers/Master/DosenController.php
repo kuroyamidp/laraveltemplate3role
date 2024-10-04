@@ -23,6 +23,7 @@ class DosenController extends Controller
     public function index()
     {
         $data['dosen'] = DosenModel::get();
+        $data['kelas'] = KelasModel::get();
         return view('pages.dosen.dosen', $data);
     }
 
@@ -33,7 +34,9 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('pages.dosen.tambahdosen');
+        $data['progdi'] = ProgdiModel::get();
+        $data['kelas'] = KelasModel::get();
+        return view('pages.dosen.tambahdosen', $data);
     }
 
     /**
@@ -169,7 +172,10 @@ class DosenController extends Controller
      */
     public function show($id)
     {
-        return view('pages.dosen.editdosen');
+        $data['dosen'] = DosenModel::where('uid', $id)->first();
+        $data['progdi'] = ProgdiModel::get();
+        $data['kelas'] = KelasModel::get();
+        return view('pages.dosen.editdosen', $data);
     }
 
     /**
