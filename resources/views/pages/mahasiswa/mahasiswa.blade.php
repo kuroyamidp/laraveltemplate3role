@@ -70,25 +70,4 @@
     </div>
   </div>
 </section>
-
-<style>
-    .table th, .table td {
-        vertical-align: middle; /* Center align content vertically */
-    }
-    .table thead th {
-        background-color: #f8f9fa; /* Light background for header */
-        color: #343a40; /* Dark text for header */
-    }
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f2f2f2; /* Light gray for odd rows */
-    }
-    .btn {
-        transition: background-color 0.3s, color 0.3s;
-        font-size: 14px; /* Adjust font size */
-    }
-    .btn:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-        color: white; /* White text on hover */
-    }
-</style>
 @endsection

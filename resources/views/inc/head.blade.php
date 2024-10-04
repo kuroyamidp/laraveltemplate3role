@@ -26,34 +26,34 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Preload non-essential CSS and fonts -->
-    <link rel="preload" href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="{{ asset('assets/vendor/quill/quill.snow.css') }}" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="{{ asset('assets/vendor/simple-datatables/style.css') }}" as="style" onload="this.rel='stylesheet'">
+  <!-- Preload non-essential CSS and fonts -->
+  <link rel="preload" href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="{{ asset('assets/vendor/quill/quill.snow.css') }}" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="{{ asset('assets/vendor/simple-datatables/style.css') }}" as="style" onload="this.rel='stylesheet'">
 
-    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -62,4 +62,36 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    .table th,
+    .table td {
+      vertical-align: middle;
+      /* Center align content vertically */
+    }
+
+    .table thead th {
+      background-color: #f8f9fa;
+      /* Light background for header */
+      color: #343a40;
+      /* Dark text for header */
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #f2f2f2;
+      /* Light gray for odd rows */
+    }
+
+    .btn {
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 14px;
+      /* Adjust font size */
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+      color: white;
+      /* White text on hover */
+    }
+  </style>
 </head>

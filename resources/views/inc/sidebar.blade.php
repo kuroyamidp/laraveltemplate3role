@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/ruang">
+                    <a href="/ruangkelas">
                         <i class="bi bi-circle"></i><span>Ruang</span>
                     </a>
                 </li>
